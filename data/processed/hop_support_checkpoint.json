@@ -1,0 +1,12 @@
+{
+  "input": "data/raw/wikidata_ontology.hop_discovery_run2.json",
+  "output_jsonl": "data/processed/hop_support.jsonl",
+  "done": 1703,
+  "ok": 1619,
+  "err": 84,
+  "total_tasks": 1703,
+  "elapsed_sec": 17933.344005823135,
+  "rate_per_sec": 0.09496276876454379,
+  "finished": true,
+  "updated_at": 1770011439.4582198
+}
