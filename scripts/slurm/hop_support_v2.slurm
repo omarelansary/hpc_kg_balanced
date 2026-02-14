@@ -2,7 +2,7 @@
 #SBATCH --job-name=hop_support_v2
 #SBATCH --output=logs/hop_support_v2_%j.out
 #SBATCH --error=logs/hop_support_v2_%j.err
-#SBATCH --time=24:00:00
+#SBATCH --time=168:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
@@ -33,10 +33,10 @@ CHECKPOINT="${WORK_DIR}/data/processed/hop_support_v2_checkpoint.json"
 
 # WDQS parameters (conservative to avoid 429)
 CHUNK_SIZE=30
-QPS=0.5
-WORKERS=8
-MAX_INFLIGHT=3
-TIMEOUT_SEC=90
+QPS=0.03
+WORKERS=2
+MAX_INFLIGHT=1
+TIMEOUT_SEC=180
 MAX_RETRIES=5
 TOPK=50
 
