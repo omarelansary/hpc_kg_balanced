@@ -1,0 +1,12 @@
+{
+  "input": "data/processed/hop_discovery_failed_only.jsonl",
+  "output_jsonl": "data/processed/hop_support_failed_rerun.jsonl",
+  "done": 83,
+  "ok": 25,
+  "err": 58,
+  "total_tasks": 83,
+  "elapsed_sec": 34801.049865722656,
+  "rate_per_sec": 0.0023849855196969496,
+  "finished": true,
+  "updated_at": 1771016357.1771674
+}

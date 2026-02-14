@@ -1,0 +1,53 @@
+{
+  "inputs": {
+    "base": "data/processed/hop_support.jsonl",
+    "rerun": "data/archived/hop_support_failed_rerun.jsonl"
+  },
+  "loader_stats": {
+    "base": {
+      "total_lines": 1703,
+      "valid_records": 1703,
+      "unique_r1": 1703,
+      "duplicate_r1_overwrites": 0
+    },
+    "rerun": {
+      "total_lines": 83,
+      "valid_records": 83,
+      "unique_r1": 83,
+      "duplicate_r1_overwrites": 0
+    }
+  },
+  "left_join_stats": {
+    "total_rerun_r1": 83,
+    "matched_in_base": 83,
+    "missing_in_base": 0
+  },
+  "status_comparison": {
+    "improved_to_success": 25,
+    "regressed_from_success": 0,
+    "unchanged_status": 34,
+    "changed_status": 49
+  },
+  "status_counts_on_joined_set": {
+    "original": {
+      "ERROR": 73,
+      "PARTIAL_SUCCESS": 10
+    },
+    "rerun": {
+      "SUCCESS": 25,
+      "ERROR": 31,
+      "PARTIAL_SUCCESS": 27
+    }
+  },
+  "transitions": {
+    "ERROR=>ERROR": 31,
+    "ERROR=>PARTIAL_SUCCESS": 24,
+    "ERROR=>SUCCESS": 18,
+    "PARTIAL_SUCCESS=>PARTIAL_SUCCESS": 3,
+    "PARTIAL_SUCCESS=>SUCCESS": 7
+  },
+  "outputs": {
+    "joined": "data/processed/hop_support_rerun_joined.jsonl",
+    "summary": "data/processed/hop_support_rerun_joined_summary.json"
+  }
+}
