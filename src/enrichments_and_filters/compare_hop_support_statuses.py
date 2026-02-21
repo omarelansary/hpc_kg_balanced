@@ -181,6 +181,8 @@ def main() -> None:
     ap.add_argument("--rerun", required=True, help="Rerun hop_support JSONL (left side)")
     ap.add_argument("--out_joined", required=True, help="Output JSONL for joined comparison")
     ap.add_argument("--out_summary", required=True, help="Output JSON for summary statistics")
+    ap.add_argument("--out_patched_base",default=None,help="If set: write a patched copy of base where ERROR->SUCCESS rows are replaced by rerun records")
+
     args = ap.parse_args()
 
     base = load_jsonl_latest(args.base)
@@ -208,77 +210,95 @@ def main() -> None:
     support_exact = 0
     support_same_keys = 0
     support_near = 0
+    
+    patched_f = open(args.out_patched_base, "w", encoding="utf-8") if args.out_patched_base else None
+    try:
 
-    with open(args.out_joined, "w", encoding="utf-8") as out:
-        for r1 in rerun.order:
-            rerun_rec = rerun.latest_by_r1[r1]
-            base_rec = base.latest_by_r1.get(r1)
+        with open(args.out_joined, "w", encoding="utf-8") as out:
+            for r1 in rerun.order:
+                rerun_rec = rerun.latest_by_r1[r1]
+                base_rec = base.latest_by_r1.get(r1)
 
-            old_status = status_of(base_rec)
-            new_status = status_of(rerun_rec)
+                old_status = status_of(base_rec)
+                new_status = status_of(rerun_rec)
 
-            transitions[(old_status, new_status)] += 1
-            base_status_counts[old_status] += 1
-            rerun_status_counts[new_status] += 1
+                transitions[(old_status, new_status)] += 1
+                base_status_counts[old_status] += 1
+                rerun_status_counts[new_status] += 1
 
-            if base_rec is None:
-                missing_in_base += 1
-            else:
-                matched += 1
-
-            if old_status == new_status:
-                unchanged += 1
-            elif old_status != "SUCCESS" and new_status == "SUCCESS":
-                improved += 1
-            elif old_status == "SUCCESS" and new_status != "SUCCESS":
-                regressed += 1
-
-            norm_base = normalize_record(base_rec)
-            norm_rerun = normalize_record(rerun_rec)
-            same_nonvolatile = (norm_base == norm_rerun)
-            if same_nonvolatile:
-                identical_except_volatile += 1
-
-            old_error = error_str(base_rec)
-            new_error = error_str(rerun_rec)
-            old_has_error = bool(old_error)
-            new_has_error = bool(new_error)
-
-            if old_has_error and new_has_error:
-                error_both_present += 1
-                if old_error == new_error:
-                    error_same += 1
+                if base_rec is None:
+                    missing_in_base += 1
                 else:
-                    error_changed += 1
-            elif old_has_error and not new_has_error:
-                error_resolved += 1
-            elif not old_has_error and new_has_error:
-                error_new += 1
+                    matched += 1
 
-            support_cmp = compare_support(extract_support_map(base_rec), extract_support_map(rerun_rec))
-            if support_cmp.get("comparable"):
-                support_comparable += 1
-                if support_cmp.get("exact_match"):
-                    support_exact += 1
-                if support_cmp.get("same_keys"):
-                    support_same_keys += 1
-                if support_cmp.get("near_match_delta_le_1"):
-                    support_near += 1
+                if old_status == new_status:
+                    unchanged += 1
+                elif old_status != "SUCCESS" and new_status == "SUCCESS":
+                    improved += 1
+                elif old_status == "SUCCESS" and new_status != "SUCCESS":
+                    regressed += 1
 
-            joined = {
-                "r1": r1,
-                "original_status": old_status,
-                "rerun_status": new_status,
-                "status_changed": old_status != new_status,
-                "original_mode": (base_rec or {}).get("mode"),
-                "rerun_mode": rerun_rec.get("mode"),
-                "original_error": old_error,
-                "rerun_error": new_error,
-                "error_changed": old_error != new_error,
-                "same_except_volatile_fields": same_nonvolatile,
-                "support_comparison": support_cmp,
-            }
-            out.write(json.dumps(joined, ensure_ascii=False) + "\n")
+                norm_base = normalize_record(base_rec)
+                norm_rerun = normalize_record(rerun_rec)
+                same_nonvolatile = (norm_base == norm_rerun)
+                if same_nonvolatile:
+                    identical_except_volatile += 1
+
+                old_error = error_str(base_rec)
+                new_error = error_str(rerun_rec)
+                old_has_error = bool(old_error)
+                new_has_error = bool(new_error)
+
+                if old_has_error and new_has_error:
+                    error_both_present += 1
+                    if old_error == new_error:
+                        error_same += 1
+                    else:
+                        error_changed += 1
+                elif old_has_error and not new_has_error:
+                    error_resolved += 1
+                elif not old_has_error and new_has_error:
+                    error_new += 1
+
+                support_cmp = compare_support(extract_support_map(base_rec), extract_support_map(rerun_rec))
+                if support_cmp.get("comparable"):
+                    support_comparable += 1
+                    if support_cmp.get("exact_match"):
+                        support_exact += 1
+                    if support_cmp.get("same_keys"):
+                        support_same_keys += 1
+                    if support_cmp.get("near_match_delta_le_1"):
+                        support_near += 1
+
+                joined = {
+                    "r1": r1,
+                    "original_status": old_status,
+                    "rerun_status": new_status,
+                    "status_changed": old_status != new_status,
+                    "original_mode": (base_rec or {}).get("mode"),
+                    "rerun_mode": rerun_rec.get("mode"),
+                    "original_error": old_error,
+                    "rerun_error": new_error,
+                    "error_changed": old_error != new_error,
+                    "same_except_volatile_fields": same_nonvolatile,
+                    "support_comparison": support_cmp,
+                }
+                out.write(json.dumps(joined, ensure_ascii=False) + "\n")
+
+        # Write patched base: iterate base, replace where rerun fixed ERROR->SUCCESS for same r1
+        if patched_f:
+            for r1 in base.order:
+                base_rec = base.latest_by_r1[r1]
+                rerun_rec = rerun.latest_by_r1.get(r1)
+
+                if rerun_rec is not None and status_of(base_rec) != "SUCCESS" and status_of(rerun_rec) == "SUCCESS":
+                    patched_f.write(json.dumps(rerun_rec, ensure_ascii=False) + "\n")
+                else:
+                    patched_f.write(json.dumps(base_rec, ensure_ascii=False) + "\n")
+
+    finally:
+        if patched_f:
+            patched_f.close()
 
     summary = {
         "inputs": {
@@ -338,6 +358,7 @@ def main() -> None:
         "outputs": {
             "joined": args.out_joined,
             "summary": args.out_summary,
+            "patched_base": args.out_patched_base,
         },
     }
 

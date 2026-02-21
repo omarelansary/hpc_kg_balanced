@@ -135,24 +135,40 @@ def load_constraints(properties_file: str, pids: List[str]) -> Dict[str, Tuple[O
 
 def extract_pairs_from_doc(doc: Dict[str, Any]) -> List[Tuple[str, str, int]]:
     """
-    Extract (r1, r2, support) triples from the nested format.
-    Handles both 'topk_support' (discover_topk mode) and 'top_support' (values_chunked mode).
-    Deduplicates r2 within a single document.
+    Supports:
+      - old format: topk_support / top_support lists of {"r2":..., "support":...}
+      - new format: support_data dict: {r2: {"total":..., ...}, ...}
+    Returns (r1, r2, support_total).
     """
     r1 = doc["r1"]
     seen: Set[str] = set()
     pairs: List[Tuple[str, str, int]] = []
 
+    # New format
+    sd = doc.get("support_data")
+    if isinstance(sd, dict):
+        for r2, stats in sd.items():
+            if not r2 or r2 in seen:
+                continue
+            support = 0
+            if isinstance(stats, dict):
+                # prefer "total" if present
+                support = int(stats.get("total", 0) or 0)
+            pairs.append((r1, r2, support))
+            seen.add(r2)
+        return pairs
+
+    # Old formats
     for entry in doc.get("topk_support", []):
         r2 = entry.get("r2")
         if r2 and r2 not in seen:
-            pairs.append((r1, r2, entry.get("support", 0)))
+            pairs.append((r1, r2, int(entry.get("support", 0) or 0)))
             seen.add(r2)
 
     for entry in doc.get("top_support", []):
         r2 = entry.get("r2")
         if r2 and r2 not in seen:
-            pairs.append((r1, r2, entry.get("support", 0)))
+            pairs.append((r1, r2, int(entry.get("support", 0) or 0)))
             seen.add(r2)
 
     return pairs
@@ -229,12 +245,18 @@ def main():
         if doc.get("input_status", "UNKNOWN") not in args.input_statuses:
             continue
         all_r1.add(doc["r1"])
-        for entry in doc.get("topk_support", []):
-            if entry.get("r2"):
-                all_r2.add(entry["r2"])
-        for entry in doc.get("top_support", []):
-            if entry.get("r2"):
-                all_r2.add(entry["r2"])
+
+        sd = doc.get("support_data")
+        if isinstance(sd, dict):
+            for r2 in sd.keys():
+                all_r2.add(r2)
+        else:
+            for entry in doc.get("topk_support", []):
+                if entry.get("r2"):
+                    all_r2.add(entry["r2"])
+            for entry in doc.get("top_support", []):
+                if entry.get("r2"):
+                    all_r2.add(entry["r2"])
 
     needed_pids = sorted(set(targets).union(all_r1).union(all_r2))
 
@@ -351,5 +373,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # we may also remove --store_targets to not store the full list of targets
-    # python src/enrichments_and_filters/enrich_pairs_with_targets_dom_rng_based.py --pairs_file data/processed/hop_support.jsonl --targets_file data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json --properties_file data/raw/wikidata_ontology.properties.json --out_file data/processed/pairs_with_compatible_targets_dom_rng_v1.jsonl --checkpoint_file data/processed/enrich_pairs_dom_rng.checkpoint_v1.json --min_support 0 --modes discover_topk values_chunked --input_statuses SUCCESS ERROR NOT_FOUND --checkpoint_every 1 --store_targets
+    # we may also remove --store_targets to not store the full list of targets 
+    # python src/enrichments_and_filters/enrich_pairs_with_targets_dom_rng_based.py --pairs_file data/processed/hop_support_v2_w_failed_statuses.wikibase_item_only_w_target_enrichment.jsonl --targets_file data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json --properties_file data/raw/wikidata_ontology.properties.json --out_file data/processed/pairs_with_compatible_targets_dom_rng_v1.jsonl --checkpoint_file data/processed/enrich_pairs_dom_rng.checkpoint_v1.json --min_support 0 --modes values_chunked_v2 discover_topk_v2 --input_statuses SUCCESS ERROR NOT_FOUND --checkpoint_every 1 --store_targets
