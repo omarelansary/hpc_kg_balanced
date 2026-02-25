@@ -272,7 +272,7 @@ LIMIT {int(topk)}
 """.strip()
 
 
-def build_discover_total_topk_query(r1: str, topk: int) -> str:
+def build_discover_total_topk_query(r1: str, topk: int) -> str: #causing errors
     """Discover top-K r2 by total support."""
     return f"""
 SELECT ?r2 (COUNT(DISTINCT ?y) AS ?support) WHERE {{
