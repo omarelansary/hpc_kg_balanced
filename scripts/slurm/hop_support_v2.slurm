@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=hop_support_v2
-#SBATCH --output=logs/hop_support_v2_%j.out
-#SBATCH --error=logs/hop_support_v2_%j.err
+#SBATCH --job-name=extended_rerun_hop_support_v2
+#SBATCH --output=logs/normalized_hop_support_v2_rerun%j.out
+#SBATCH --error=logs/normalized_hop_support_v2_rerun%j.err
 #SBATCH --time=168:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -27,14 +27,14 @@ USER_AGENT="hop_support/2.0 (mailto:${EMAIL})"
 
 WORK_DIR="/data/horse/ws/omel305g-omel305g-new/hpc_kg_balanced"
 SCRIPT="${WORK_DIR}/src/hop_support_and_sym_anti_verification/hop_support_v2.py"
-INPUT="${WORK_DIR}/data/raw/wikidata_ontology.hop_discovery_run2.json"
-OUTPUT="${WORK_DIR}/data/processed/hop_support_v2.jsonl"
-CHECKPOINT="${WORK_DIR}/data/processed/hop_support_v2_checkpoint.json"
+INPUT="${WORK_DIR}/data/processed/hop_support_v2_from_hop_discovery_from_json_and_support_v2_rerun.normalized.jsonl"
+OUTPUT="${WORK_DIR}/data/processed/output_hop_support_v2_from_hop_discovery_from_json_and_support_v2_rerun.normalized.jsonl"
+CHECKPOINT="${WORK_DIR}/data/processed/hop_support_v2_from_hop_discovery_from_json_and_support_v2_rerun.normalized_checkpoint.json"
 
 # WDQS parameters (conservative to avoid 429)
-CHUNK_SIZE=30
+CHUNK_SIZE=10
 QPS=0.03
-WORKERS=2
+WORKERS=4
 MAX_INFLIGHT=1
 TIMEOUT_SEC=180
 MAX_RETRIES=5
