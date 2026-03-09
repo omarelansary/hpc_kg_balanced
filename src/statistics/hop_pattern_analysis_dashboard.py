@@ -898,24 +898,52 @@ def main() -> None:
         st.warning("No pair counts loaded. Check file path or status filter.")
         return
 
-    st.sidebar.header("Filters")
-    min_total = int(st.sidebar.number_input("Min total support", min_value=0, value=8, step=1))
-    max_total = int(st.sidebar.number_input("Max total support", min_value=0, value=int(df["total"].max()), step=1))
-    min_conf = float(st.sidebar.slider("Min confidence", 0.0, 1.0, 0.5, 0.01))
-    min_reverse_conf = float(st.sidebar.slider("Min reverse confidence (inverse only)", 0.0, 1.0, 0.0, 0.01))
+    st.sidebar.header("Phase 1 - Base pair universe")
+    base_min_total = int(st.sidebar.number_input("Base min total support", min_value=0, value=0, step=1))
+    base_max_total = int(
+        st.sidebar.number_input("Base max total support", min_value=0, value=int(df["total"].max()), step=1)
+    )
+
+    st.sidebar.header("Phase 1 - Pattern thresholds")
+    sym_min_support = int(st.sidebar.number_input("Symmetric min support", min_value=0, value=8, step=1))
+    sym_min_conf = float(st.sidebar.slider("Symmetric min confidence", 0.0, 1.0, 0.5, 0.01))
+
+    anti_min_support = int(st.sidebar.number_input("Anti-symmetric min support", min_value=0, value=8, step=1))
+    anti_min_conf = float(st.sidebar.slider("Anti-symmetric min confidence", 0.0, 1.0, 0.5, 0.01))
+
+    inv_min_support = int(
+        st.sidebar.number_input(
+            "Inverse min two-way support",
+            min_value=0,
+            value=8,
+            step=1,
+            help="Uses min(total(r1,r2), total(r2,r1)).",
+        )
+    )
+    inv_min_conf = float(
+        st.sidebar.slider(
+            "Inverse min bidirectional confidence",
+            0.0,
+            1.0,
+            0.5,
+            0.01,
+            help="Uses min(conf(r1,r2), conf(r2,r1)).",
+        )
+    )
+
     topn = int(st.sidebar.slider("Top-N rows", 5, 200, 30, 5))
     sort_by = st.sidebar.selectbox(
         "Sort inverse by",
-        options=["conf_loop", "bidirectional_conf_min", "bidirectional_conf_mean", "total"],
-        index=1,
+        options=["bidirectional_conf_min", "bidirectional_conf_mean", "two_way_support_min", "conf_loop", "total"],
+        index=0,
     )
     relation_query = st.sidebar.text_input("Focus relation PID (optional)", "").strip()
 
-    if max_total < min_total:
-        st.sidebar.error("Max total support must be >= min total support.")
+    if base_max_total < base_min_total:
+        st.sidebar.error("Base max total support must be >= base min total support.")
         return
 
-    df_f = df[(df["total"] >= min_total) & (df["total"] <= max_total)].copy()
+    df_f = df[(df["total"] >= base_min_total) & (df["total"] <= base_max_total)].copy()
     if relation_query:
         df_f = df_f[(df_f["r1"] == relation_query) | (df_f["r2"] == relation_query)]
 
@@ -927,16 +955,27 @@ def main() -> None:
 
     # Symmetric + anti-symmetric (r1 == r2)
     sym = df_f[df_f["r1"] == df_f["r2"]].copy()
-    sym = sym[sym["conf_loop"] >= min_conf]
+    sym = sym[(sym["total"] >= sym_min_support) & (sym["conf_loop"] >= sym_min_conf)]
     sym = sym.sort_values(["conf_loop", "total", "r1"], ascending=[False, False, True])
     anti = df_f[df_f["r1"] == df_f["r2"]].copy()
-    anti = anti[anti["conf_nonloop"] >= min_conf]
+    anti = anti[(anti["total"] >= anti_min_support) & (anti["conf_nonloop"] >= anti_min_conf)]
     anti = anti.sort_values(["conf_nonloop", "total", "r1"], ascending=[False, False, True])
 
     # Inverse (r1 != r2)
     inv = prepare_inverse_table(df_f)
-    inv = inv[(inv["conf_loop"] >= min_conf) & (inv["reverse_conf_loop"] >= min_reverse_conf)]
+    inv["two_way_support_min"] = inv[["total", "reverse_total"]].min(axis=1)
+    inv = inv[(inv["two_way_support_min"] >= inv_min_support) & (inv["bidirectional_conf_min"] >= inv_min_conf)]
     inv = inv.sort_values([sort_by, "total"], ascending=[False, False])
+    if inv.empty:
+        inverse_per_r1 = pd.DataFrame(columns=["r1", "inverse_count"])
+        inv_exactly_1 = 0
+        inv_gt_1 = 0
+        inv_gt_1_value = 0
+    else:
+        inverse_per_r1 = inv.groupby("r1", as_index=False).agg(inverse_count=("r2", "nunique"))
+        inv_exactly_1 = int((inverse_per_r1["inverse_count"] == 1).sum())
+        inv_gt_1 = int((inverse_per_r1["inverse_count"] > 1).sum())
+        inv_gt_1_value = int(inverse_per_r1["inverse_count"].max())
 
     m1, m2, m3, m4 = st.columns(4)
     with m1:
@@ -971,10 +1010,19 @@ def main() -> None:
             "reverse_conf_loop",
             "bidirectional_conf_min",
             "bidirectional_conf_mean",
+            "two_way_support_min",
             "reverse_total",
         ]
     ].head(topn)
     st.dataframe(show_inv, use_container_width=True, hide_index=True)
+    st.markdown("### Inverse multiplicity (filtered)")
+    i1, i2, i3 = st.columns(3)
+    with i1:
+        st.metric("Exactly 1 inverse", inv_exactly_1)
+    with i2:
+        st.metric("more than 1 inverse", inv_gt_1)
+    with i3:
+        st.metric("max inverse count", inv_gt_1_value)
 
     st.caption(
         "Interpretation: high `conf_loop` supports symmetric/inverse behavior; high `conf_nonloop` supports anti-symmetric behavior."
@@ -1169,12 +1217,14 @@ def main() -> None:
         "Matrix is built from filtered hop-support pairs."
     )
 
-    linked_min_support = int(max(min_total, comp_min_support))
+    linked_min_support = int(
+        max(base_min_total, sym_min_support, anti_min_support, inv_min_support, comp_min_support)
+    )
     use_custom_matrix_min_support = bool(
         st.checkbox(
             "Use custom matrix min support (Phase 3)",
             value=True,
-            help="By default, Phase 3 follows max(Phase1 min total support, Phase2 min (r1,r2) support).",
+            help="By default, Phase 3 follows max(Phase 1 pattern min supports, Phase 2 min (r1,r2) support).",
         )
     )
     if use_custom_matrix_min_support:
@@ -1190,7 +1240,9 @@ def main() -> None:
     else:
         alloc_min_support = linked_min_support
         st.caption(
-            f"Matrix min support is auto-linked to Phase 1/2 filters: max({min_total}, {comp_min_support}) = {alloc_min_support}."
+            "Matrix min support is auto-linked to Phase 1/2 filters: "
+            f"max({base_min_total}, {sym_min_support}, {anti_min_support}, {inv_min_support}, {comp_min_support}) "
+            f"= {alloc_min_support}."
         )
 
     a1, a2, a3 = st.columns(3)
@@ -1289,15 +1341,6 @@ def main() -> None:
         integerize=integerize,
     )
 
-    matrix_preview_n = min(20, len(relations_universe))
-    matrix_preview = pd.DataFrame(
-        W[:matrix_preview_n, :matrix_preview_n],
-        index=relations_universe[:matrix_preview_n],
-        columns=relations_universe[:matrix_preview_n],
-    )
-    st.markdown(f"### Weight matrix preview ({matrix_preview_n}x{matrix_preview_n})")
-    st.dataframe(matrix_preview, use_container_width=True)
-
     if not alloc_results:
         st.warning("No non-empty groups to allocate.")
         return
@@ -1359,6 +1402,82 @@ def main() -> None:
     )
     view_df = alloc_df[alloc_df["eta_integer"] > 0].copy() if show_nonzero_only else alloc_df.copy()
     st.caption(f"Displaying {len(view_df)} rows out of {len(alloc_df)} total allocation rows.")
+
+    heatmap_relations_all = _unique_preserve(view_df["relation"].tolist())
+    r_total = len(heatmap_relations_all)
+    st.markdown(f"### Allocation weight heatmap ({r_total}x{r_total})")
+    st.caption("Heatmap uses relations from the current allocation view (after the filters above).")
+    if r_total:
+        auto_render_limit = int(
+            st.number_input(
+                "Heatmap auto-render max R",
+                min_value=20,
+                max_value=2000,
+                value=120,
+                step=20,
+                help="Prevents UI freeze for very large RxR heatmaps.",
+            )
+        )
+        force_large_heatmap = bool(
+            st.checkbox(
+                "Render full RxR heatmap even if R exceeds the limit",
+                value=False,
+                help="Can be slow for large R.",
+            )
+        )
+
+        if r_total > auto_render_limit and not force_large_heatmap:
+            st.warning(
+                f"Skipped rendering heatmap for responsiveness (R={r_total}, cells={r_total * r_total:,}). "
+                "Increase the limit, narrow filters, or enable full render."
+            )
+        else:
+            rel_to_idx = {r: i for i, r in enumerate(relations_universe)}
+            heatmap_relations = [r for r in heatmap_relations_all if r in rel_to_idx]
+            heat_idx = [rel_to_idx[r] for r in heatmap_relations]
+            if not heatmap_relations:
+                st.info("No heatmap relations are present in the current matrix universe.")
+            else:
+                W_view = W[np.ix_(heat_idx, heat_idx)]
+                heat_df = (
+                    pd.DataFrame(W_view, index=heatmap_relations, columns=heatmap_relations)
+                    .rename_axis("r_from")
+                    .reset_index()
+                    .melt(id_vars="r_from", var_name="r_to", value_name="weight")
+                )
+                heatmap_size = int(min(max(320, 14 * len(heatmap_relations)), 1600))
+                st.vega_lite_chart(
+                    heat_df,
+                    {
+                        "mark": {"type": "rect"},
+                        "width": "container",
+                        "height": heatmap_size,
+                        "encoding": {
+                            "x": {
+                                "field": "r_to",
+                                "type": "nominal",
+                                "sort": heatmap_relations,
+                                "axis": {"labelAngle": -45},
+                            },
+                            "y": {"field": "r_from", "type": "nominal", "sort": heatmap_relations},
+                            "color": {
+                                "field": "weight",
+                                "type": "quantitative",
+                                "scale": {"scheme": "viridis"},
+                                "legend": {"title": "Weight"},
+                            },
+                            "tooltip": [
+                                {"field": "r_from", "type": "nominal", "title": "From"},
+                                {"field": "r_to", "type": "nominal", "title": "To"},
+                                {"field": "weight", "type": "quantitative", "title": "Weight", "format": ".6g"},
+                            ],
+                        },
+                    },
+                    use_container_width=True,
+                )
+    else:
+        st.info("No relations remain after current allocation filters, so heatmap is empty.")
+
     st.markdown("### Allocation results")
     alloc_display = view_df.copy()
     for col in ["forward_score", "backward_score", "p_forward", "p_backward", "p_avg", "eta_expected"]:
@@ -1367,11 +1486,16 @@ def main() -> None:
 
     result_payload = {
         "config": {
-            "min_total": min_total,
-            "max_total": max_total,
-            "min_conf": min_conf,
-            "min_reverse_conf": min_reverse_conf,
+            "base_min_total": base_min_total,
+            "base_max_total": base_max_total,
+            "sym_min_support": sym_min_support,
+            "sym_min_conf": sym_min_conf,
+            "anti_min_support": anti_min_support,
+            "anti_min_conf": anti_min_conf,
+            "inv_min_support": inv_min_support,
+            "inv_min_conf": inv_min_conf,
             "comp_min_support": comp_min_support,
+            "comp_min_conf": comp_min_conf,
             "matrix_min_support": alloc_min_support,
             "matrix_mode": matrix_mode,
             "temperature": temperature,
