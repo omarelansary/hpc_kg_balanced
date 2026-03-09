@@ -1,7 +1,28 @@
+#IDE
+.vscode/
+.idea/
+
 .venv/
 __pycache__/
 *.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
 
 # Runtime outputs
 *.out
 *.err
+*.log
+*.pid
+.env
+
+# Generated graph artifacts
+*.graph.dot
+*.graph.png
+*.graph.svg
+*.graph.viz.html
+
+# Temporary exports
+data/**/temp_exports/
+
