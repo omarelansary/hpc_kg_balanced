@@ -1,12 +1,14 @@
 #!/bin/bash
 #SBATCH --job-name=composition_min8_jsonl
-#SBATCH --output=logs/composition_min8_jsonl_%j.out
-#SBATCH --error=logs/composition_min8_jsonl_%j.err
-#SBATCH --time=72:00:00
+#SBATCH --output=logs/composition_hop_support_v3_min8_jsonl_%j.out
+#SBATCH --error=logs/composition_hop_support_v3_min8_jsonl_%j.err
+#SBATCH --time=168:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=16G
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=omar_essameldeen_ahmad.elansary@mailbox.tu-dresden.de
 
 set -euo pipefail
 
@@ -16,17 +18,25 @@ set -euo pipefail
 WORK_DIR="/data/horse/ws/omel305g-omel305g-new/hpc_kg_balanced"
 SCRIPT_PATH="${WORK_DIR}/src/composition_verification/composition_range_domain_improved.py"
 
-INPUT_JSONL="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.jsonl"
-OUTPUT_JSONL="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition_verified.jsonl"
-OUTPUT_COMPACT_JSONL="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl"
-CHECKPOINT_JSON="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition.checkpoint.json"
-STATS_JSON="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition.stats.json"
-REPORT_JSONL="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition.report.jsonl"
+# First RUN 
+# INPUT_JSONL="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.jsonl"
+# OUTPUT_JSONL="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition_verified.jsonl"
+# OUTPUT_COMPACT_JSONL="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl"
+# CHECKPOINT_JSON="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition.checkpoint.json"
+# STATS_JSON="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition.stats.json"
+# REPORT_JSONL="${WORK_DIR}/data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition.report.jsonl"
+
+INPUT_JSONL="${WORK_DIR}/data/processed/hop_support_v3/new_pairs_composition_in_v3_only.jsonl"
+OUTPUT_JSONL="${WORK_DIR}/data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.jsonl"
+OUTPUT_COMPACT_JSONL="${WORK_DIR}/data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl"
+CHECKPOINT_JSON="${WORK_DIR}/data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition.checkpoint.json"
+STATS_JSON="${WORK_DIR}/data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition.stats.json"
+REPORT_JSONL="${WORK_DIR}/data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition.report.jsonl"
 
 # ----------------------------
 # Runtime config
 # ----------------------------
-USER_AGENT="CompositionChecker/2.0 (contact: omaransary@gmail.com)"
+USER_AGENT="CompositionChecker/2.0 (contact: omar.ansary@gmail.com)"
 ENDPOINT="https://query.wikidata.org/sparql"
 
 TIMEOUT_S=60
