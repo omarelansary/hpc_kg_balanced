@@ -498,6 +498,26 @@ def rcl_pick(items: List[Tuple[str, float]], rcl_size: int) -> Optional[str]:
     return random.choice(rcl)[0]
 
 
+def chunk_backoff_schedule(target_n: int) -> List[int]:
+    """Return a descending chunk schedule that backs off toward 1.
+
+    Example: 10 -> [10, 5, 3, 2, 1]
+    """
+    if target_n <= 0:
+        return []
+    schedule: List[int] = []
+    current = int(target_n)
+    while current > 1:
+        schedule.append(current)
+        next_current = max(1, (current + 1) // 2)
+        if next_current == current:
+            break
+        current = next_current
+    if not schedule or schedule[-1] != 1:
+        schedule.append(1)
+    return schedule
+
+
 def sample_n_triples_for_relation_connected(
     ts: TripleSource,
     pid: str,
@@ -541,7 +561,9 @@ def sample_n_triples_for_relation_connected(
     if n <= 0:
         return []
     chosen: List[Dict] = []
-    local_used = used_keys if used_keys is not None else set()
+    v_working = set(v)
+    local_used = set(used_keys or set())
+    new_keys: Set[Tuple[str, str, str]] = set()
 
     def add_tr(tr: Dict) -> bool:
         h, t = endpoints(tr, mcfg)
@@ -550,11 +572,12 @@ def sample_n_triples_for_relation_connected(
             return False
         chosen.append({mcfg.field_head: h, mcfg.field_rel: pid, mcfg.field_tail: t})
         local_used.add(key)
-        v.add(h)
-        v.add(t)
+        new_keys.add(key)
+        v_working.add(h)
+        v_working.add(t)
         return True
 
-    if not v:
+    if not v_working:
         seeds = ts.sample_triples_any(pid, 1)
         if not seeds:
             return None
@@ -590,35 +613,35 @@ def sample_n_triples_for_relation_connected(
         if needed_anchor > 0 and len(chosen) < needed_anchor:
             need_k = max((needed_anchor - len(chosen)) * 3, needed_anchor - len(chosen))
             if stage_name == "untyped":
-                anchored = ts.sample_triples_attach_to_v(pid, v, need_k)
+                anchored = ts.sample_triples_attach_to_v(pid, v_working, need_k)
             else:
                 anchored = ts.sample_triples_attach_to_v_typed(
                     pid=pid,
-                    v=v,
+                    v=v_working,
                     n=need_k,
                     subject_types=subj_types if use_subj else [],
                     object_types=obj_types if use_obj else [],
                 )
             anchored.sort(
-                key=lambda tr: (endpoints(tr, mcfg)[0] not in v) or (endpoints(tr, mcfg)[1] not in v),
+                key=lambda tr: (endpoints(tr, mcfg)[0] not in v_working) or (endpoints(tr, mcfg)[1] not in v_working),
                 reverse=True,
             )
             for tr in anchored:
                 if len(chosen) >= needed_anchor:
                     break
                 h, t = endpoints(tr, mcfg)
-                if (h in v) or (t in v):
+                if (h in v_working) or (t in v_working):
                     add_tr(tr)
 
         while len(chosen) < n:
             remaining = n - len(chosen)
             fetch_n = max(remaining * 3, 50)
             if stage_name == "untyped":
-                candidates = ts.sample_triples_attach_to_v(pid, v, fetch_n)
+                candidates = ts.sample_triples_attach_to_v(pid, v_working, fetch_n)
             else:
                 candidates = ts.sample_triples_attach_to_v_typed(
                     pid=pid,
-                    v=v,
+                    v=v_working,
                     n=fetch_n,
                     subject_types=subj_types if use_subj else [],
                     object_types=obj_types if use_obj else [],
@@ -626,7 +649,7 @@ def sample_n_triples_for_relation_connected(
             if not candidates:
                 break
             candidates.sort(
-                key=lambda tr: (endpoints(tr, mcfg)[0] not in v) or (endpoints(tr, mcfg)[1] not in v),
+                key=lambda tr: (endpoints(tr, mcfg)[0] not in v_working) or (endpoints(tr, mcfg)[1] not in v_working),
                 reverse=True,
             )
             progress = 0
@@ -634,12 +657,15 @@ def sample_n_triples_for_relation_connected(
                 if len(chosen) >= n:
                     break
                 h, t = endpoints(tr, mcfg)
-                if (h in v) or (t in v):
+                if (h in v_working) or (t in v_working):
                     if add_tr(tr):
                         progress += 1
             if progress == 0:
                 break
         if len(chosen) >= n:
+            if used_keys is not None:
+                used_keys.update(new_keys)
+            v.update(v_working)
             if stage_cb is not None:
                 stage_cb(
                     "stage_success",
@@ -698,6 +724,65 @@ def _load_checkpoint(path: str) -> Optional[Dict]:
         return json.load(f)
 
 
+def _append_jsonl(path: str, payload: Dict) -> None:
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(payload, ensure_ascii=False) + "\n")
+
+
+def _write_jsonl_records(path: str, rows: Iterable[Dict]) -> None:
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False, dir=os.path.dirname(path) or ".") as tf:
+        for row in rows:
+            tf.write(json.dumps(row, ensure_ascii=False) + "\n")
+        tmp = tf.name
+    os.replace(tmp, path)
+
+
+def build_relation_progress_rows(
+    quotas: Dict[str, int],
+    feasible: Dict[str, int],
+    achieved_counts: Dict[str, int],
+    remaining: Dict[str, int],
+    fail_counts: Dict[str, int],
+    deferral_counts: Dict[str, int],
+    skipped_relations: Dict[str, str],
+) -> List[Dict]:
+    rows: List[Dict] = []
+    for relation, expected in quotas.items():
+        expected_i = int(expected)
+        feasible_i = relation in feasible
+        achieved_i = int(achieved_counts.get(relation, 0))
+        remaining_i = max(0, int(remaining.get(relation, expected_i if feasible_i else expected_i)))
+        skip_reason = str(skipped_relations.get(relation, "") or "")
+        if not feasible_i:
+            status = "unavailable"
+        elif skip_reason:
+            status = "skipped"
+        elif achieved_i <= 0:
+            status = "not_started"
+        elif achieved_i >= expected_i:
+            status = "completed"
+        else:
+            status = "in_progress"
+        rows.append(
+            {
+                "relation": relation,
+                "expected_triples": expected_i,
+                "achieved_triples": achieved_i,
+                "remaining_triples": remaining_i,
+                "appeared_in_graph": bool(achieved_i > 0),
+                "status": status,
+                "is_feasible": bool(feasible_i),
+                "progress_ratio": (float(achieved_i) / float(expected_i)) if expected_i > 0 else 0.0,
+                "fail_count": int(fail_counts.get(relation, 0)),
+                "deferral_count": int(deferral_counts.get(relation, 0)),
+                "skip_reason": skip_reason,
+            }
+        )
+    return rows
+
+
 def realize_connected_graph(
     quotas: Dict[str, int],
     ts,
@@ -722,6 +807,11 @@ def realize_connected_graph(
     bridge_seed_new_entities_target: int = 25,
     capacity_probe_rounds: int = 3,
     zero_triple_force_bootstrap_rounds: int = 5,
+    attempt_log_path: Optional[str] = None,
+    best_partial_path: Optional[str] = None,
+    best_partial_triples_path: Optional[str] = None,
+    relation_report_path: Optional[str] = None,
+    relation_report_history_path: Optional[str] = None,
 ) -> Tuple[List[Dict], Dict[str, int]]:
     """Realize relation quotas into a connected triple set.
 
@@ -767,6 +857,144 @@ def realize_connected_graph(
                 # Progress reporting must never break realization.
                 pass
 
+    if not attempt_log_path and checkpoint_path:
+        attempt_log_path = f"{checkpoint_path}.attempts.jsonl"
+    if not best_partial_path and checkpoint_path:
+        best_partial_path = f"{checkpoint_path}.best_partial.json"
+    if not best_partial_triples_path and checkpoint_path:
+        best_partial_triples_path = f"{checkpoint_path}.best_partial.triples.jsonl"
+    if not relation_report_path and checkpoint_path:
+        relation_report_path = f"{checkpoint_path}.relation_report.current.json"
+    if not relation_report_history_path and checkpoint_path:
+        relation_report_history_path = f"{checkpoint_path}.relation_report.history.jsonl"
+
+    def persist_attempt_record(record: Dict) -> None:
+        if not attempt_log_path:
+            return
+        _append_jsonl(attempt_log_path, record)
+        emit(
+            "attempt_record_saved",
+            {
+                "path": attempt_log_path,
+                "attempt": int(record.get("attempt", -1)),
+                "event": str(record.get("event", "")),
+            },
+        )
+
+    best_partial: Tuple[List[Dict], Dict[str, int]] = ([], {})
+    best_partial_attempt = 0
+    best_partial_doc = _load_checkpoint(best_partial_path) if best_partial_path else None
+    if isinstance(best_partial_doc, dict) and best_partial_doc.get("quotas") == quotas:
+        raw_triples = best_partial_doc.get("triples", [])
+        raw_achieved = best_partial_doc.get("achieved", {})
+        if isinstance(raw_triples, list) and isinstance(raw_achieved, dict):
+            best_partial = (
+                list(raw_triples),
+                {str(k): int(v) for k, v in raw_achieved.items()},
+            )
+            best_partial_attempt = int(best_partial_doc.get("attempt", 0) or 0)
+            emit(
+                "best_partial_loaded",
+                {
+                    "path": best_partial_path,
+                    "attempt": best_partial_attempt,
+                    "triples_total": len(best_partial[0]),
+                },
+            )
+
+    def persist_best_partial(
+        attempt_idx: int,
+        triples: List[Dict],
+        achieved: Dict[str, int],
+        connected: bool,
+        reason: str,
+    ) -> None:
+        payload = {
+            "status": "best_partial",
+            "attempt": int(attempt_idx),
+            "reason": reason,
+            "connected": bool(connected),
+            "quotas": quotas,
+            "triples": triples,
+            "achieved": achieved,
+        }
+        if best_partial_path:
+            _dump_checkpoint(best_partial_path, payload)
+        if best_partial_triples_path:
+            _write_jsonl_records(best_partial_triples_path, triples)
+        emit(
+            "best_partial_saved",
+            {
+                "path": best_partial_path or best_partial_triples_path,
+                "attempt": int(attempt_idx),
+                "triples_total": len(triples),
+                "reason": reason,
+            },
+        )
+
+    def persist_relation_report(
+        *,
+        attempt_idx: int,
+        reason: str,
+        feasible: Dict[str, int],
+        achieved_counts: Dict[str, int],
+        remaining: Dict[str, int],
+        fail_counts: Dict[str, int],
+        deferral_counts: Dict[str, int],
+        skipped_relations: Dict[str, str],
+        status: str,
+        triples_total: int,
+        resume_loaded: bool,
+        resume_reason: str,
+        seed_info: Dict[str, object],
+        final: bool = False,
+    ) -> None:
+        if not relation_report_path and not relation_report_history_path:
+            return
+        rows = build_relation_progress_rows(
+            quotas=quotas,
+            feasible=feasible,
+            achieved_counts=achieved_counts,
+            remaining=remaining,
+            fail_counts=fail_counts,
+            deferral_counts=deferral_counts,
+            skipped_relations=skipped_relations,
+        )
+        status_counts: Dict[str, int] = defaultdict(int)
+        for row in rows:
+            status_counts[str(row["status"])] += 1
+        payload = {
+            "event": "relation_report",
+            "attempt": int(attempt_idx),
+            "reason": reason,
+            "status": status,
+            "final": bool(final),
+            "resume_loaded": bool(resume_loaded),
+            "resume_reason": resume_reason,
+            "triples_total": int(triples_total),
+            "relations_total": len(rows),
+            "appeared_relations": int(sum(1 for row in rows if row["appeared_in_graph"])),
+            "not_appeared_relations": int(sum(1 for row in rows if not row["appeared_in_graph"])),
+            "status_counts": dict(status_counts),
+            "seed_source": str(seed_info.get("source", "")),
+            "seed_relation": str(seed_info.get("relation", "")),
+            "seed_entity_count_start": int(seed_info.get("entity_count_start", 0) or 0),
+            "relations": rows,
+        }
+        if relation_report_path:
+            _dump_checkpoint(relation_report_path, payload)
+        if relation_report_history_path:
+            _append_jsonl(relation_report_history_path, payload)
+        emit(
+            "relation_report_saved",
+            {
+                "path": relation_report_path or relation_report_history_path,
+                "attempt": int(attempt_idx),
+                "reason": reason,
+                "relations_total": len(rows),
+            },
+        )
+
     positive_items = [(pid, q) for pid, q in quotas.items() if q > 0]
     emit_count_total = len(positive_items)
     emit("feasibility_start", {"relations_total": emit_count_total})
@@ -794,17 +1022,6 @@ def realize_connected_graph(
             "relations_feasible": len(feasible),
         },
     )
-    if checkpoint_path:
-        _dump_checkpoint(
-            checkpoint_path,
-            {
-                "status": "precheck_done",
-                "quotas": quotas,
-                "relations_total": emit_count_total,
-                "relations_feasible": len(feasible),
-            },
-        )
-        emit("checkpoint_saved", {"path": checkpoint_path, "attempt": 0, "triples_so_far": 0})
     if rcfg.strict_quotas and len(feasible) != len(quotas):
         missing = sorted(set(quotas) - set(feasible))
         if checkpoint_path:
@@ -839,7 +1056,17 @@ def realize_connected_graph(
             elif cp.get("status") == "in_progress":
                 emit("checkpoint_ignored", {"reason": "quota_mismatch", "path": checkpoint_path})
 
-    best_partial: Tuple[List[Dict], Dict[str, int]] = ([], {})
+    if checkpoint_path and resume_state is None:
+        _dump_checkpoint(
+            checkpoint_path,
+            {
+                "status": "precheck_done",
+                "quotas": quotas,
+                "relations_total": emit_count_total,
+                "relations_feasible": len(feasible),
+            },
+        )
+        emit("checkpoint_saved", {"path": checkpoint_path, "attempt": 0, "triples_so_far": 0})
 
     for attempt in range(1, rcfg.attempts + 1):
         logger.info("Attempt %d/%d", attempt, rcfg.attempts)
@@ -851,27 +1078,47 @@ def realize_connected_graph(
                 "relations_total": len(feasible),
             },
         )
-        if checkpoint_path:
-            _dump_checkpoint(
-                checkpoint_path,
-                {
-                    "status": "in_progress",
-                    "attempt": attempt,
-                    "quotas": quotas,
-                    "remaining": dict(feasible),
-                    "triples_out": [],
-                    "V": sorted(set(str(x) for x in (initial_entities or []) if x)),
-                    "achieved_counts": {},
-                    "used_by_relation": {},
-                },
-            )
-            emit("checkpoint_saved", {"path": checkpoint_path, "attempt": attempt, "triples_so_far": 0})
+        resumed_this_attempt = False
+        resume_reason = ""
+        remaining = dict(feasible)
+        triples_out: List[Dict] = []
+        V = set(str(x) for x in (initial_entities or []) if x)
+        achieved_counts = defaultdict(int)
+        used_by_relation: Dict[str, Set[Tuple[str, str, str]]] = defaultdict(set)
+        checkpoint_counter = 0
+        stall_rounds = 0
+        fail_counts: Dict[str, int] = defaultdict(int)
+        deferral_counts: Dict[str, int] = defaultdict(int)
+        deferred_relations: Set[str] = set()
+        seed_info: Dict[str, object] = {
+            "source": "initial_entities" if V else "pending_seed",
+            "relation": "",
+            "entity_count_start": len(V),
+        }
+        seed_validation_info: Dict[str, int] = {}
+        attempt_metrics: Dict[str, int] = {
+            "seed_expansion_rounds": 0,
+            "bridge_seed_events": 0,
+            "bridge_seed_new_entities": 0,
+            "force_bootstrap_events": 0,
+            "capacity_checks": 0,
+            "capacity_none": 0,
+            "relation_failed_events": 0,
+            "relation_deferred_events": 0,
+            "chunk_backoff_events": 0,
+            "chunk_backoff_successes": 0,
+            "stall_rounds_total": 0,
+            "stall_rounds_max": 0,
+        }
+        skipped_relations: Dict[str, str] = {}
+        skipped_reason_counts: Dict[str, int] = defaultdict(int)
         if resume_state is not None and int(resume_state.get("attempt", -1)) == attempt:
+            resumed_this_attempt = True
+            resume_reason = str(resume_state.get("reason", "") or "")
             remaining = {str(k): int(v) for k, v in resume_state.get("remaining", {}).items()}
             triples_out = list(resume_state.get("triples_out", []))
             V = set(str(x) for x in resume_state.get("V", []))
             achieved_counts = defaultdict(int, {str(k): int(v) for k, v in resume_state.get("achieved_counts", {}).items()})
-            used_by_relation: Dict[str, Set[Tuple[str, str, str]]] = defaultdict(set)
             raw_used = resume_state.get("used_by_relation", {})
             if isinstance(raw_used, dict):
                 for rel, items in raw_used.items():
@@ -879,6 +1126,32 @@ def realize_connected_graph(
                         used_by_relation[str(rel)] = set(
                             tuple(x) for x in items if isinstance(x, (list, tuple)) and len(x) == 3
                         )
+            fail_counts = defaultdict(int, {str(k): int(v) for k, v in resume_state.get("fail_counts", {}).items()})
+            deferral_counts = defaultdict(int, {str(k): int(v) for k, v in resume_state.get("deferral_counts", {}).items()})
+            deferred_relations = set(str(x) for x in resume_state.get("deferred_relations", []))
+            stall_rounds = int(resume_state.get("stall_rounds", 0) or 0)
+            raw_seed_info = resume_state.get("seed_info", {})
+            if isinstance(raw_seed_info, dict):
+                seed_info = {
+                    "source": str(raw_seed_info.get("source", seed_info["source"]) or seed_info["source"]),
+                    "relation": str(raw_seed_info.get("relation", "") or ""),
+                    "entity_count_start": int(raw_seed_info.get("entity_count_start", len(V)) or len(V)),
+                }
+            raw_seed_validation = resume_state.get("seed_validation_info", {})
+            if isinstance(raw_seed_validation, dict):
+                seed_validation_info = {
+                    str(k): int(v) for k, v in raw_seed_validation.items() if isinstance(v, (int, float))
+                }
+            raw_attempt_metrics = resume_state.get("attempt_metrics", {})
+            if isinstance(raw_attempt_metrics, dict):
+                for key in attempt_metrics:
+                    attempt_metrics[key] = int(raw_attempt_metrics.get(key, attempt_metrics[key]) or attempt_metrics[key])
+            raw_skipped = resume_state.get("skipped_relations", {})
+            if isinstance(raw_skipped, dict):
+                skipped_relations = {str(k): str(v) for k, v in raw_skipped.items()}
+            raw_skip_counts = resume_state.get("skipped_reason_counts", {})
+            if isinstance(raw_skip_counts, dict):
+                skipped_reason_counts = defaultdict(int, {str(k): int(v) for k, v in raw_skip_counts.items()})
             emit(
                 "checkpoint_resumed",
                 {
@@ -889,12 +1162,87 @@ def realize_connected_graph(
                 },
             )
             resume_state = None
-        else:
-            remaining = dict(feasible)
-            triples_out = []
-            V = set(str(x) for x in (initial_entities or []) if x)
-            achieved_counts = defaultdict(int)
-            used_by_relation = defaultdict(set)
+
+        def save_checkpoint(reason: str) -> None:
+            nonlocal checkpoint_counter
+            if not checkpoint_path:
+                if relation_report_path or relation_report_history_path:
+                    persist_relation_report(
+                        attempt_idx=attempt,
+                        reason=reason,
+                        feasible=feasible,
+                        achieved_counts=dict(achieved_counts),
+                        remaining=remaining,
+                        fail_counts=dict(fail_counts),
+                        deferral_counts=dict(deferral_counts),
+                        skipped_relations=skipped_relations,
+                        status="in_progress",
+                        triples_total=len(triples_out),
+                        resume_loaded=resumed_this_attempt,
+                        resume_reason=resume_reason,
+                        seed_info=seed_info,
+                        final=False,
+                    )
+                checkpoint_counter = 0
+                return
+            payload = {
+                "status": "in_progress",
+                "attempt": attempt,
+                "reason": reason,
+                "quotas": quotas,
+                "remaining": remaining,
+                "triples_out": triples_out,
+                "V": sorted(V),
+                "achieved_counts": dict(achieved_counts),
+                "used_by_relation": {k: [list(t) for t in vset] for k, vset in used_by_relation.items()},
+                "fail_counts": dict(fail_counts),
+                "deferral_counts": dict(deferral_counts),
+                "deferred_relations": sorted(deferred_relations),
+                "stall_rounds": int(stall_rounds),
+                "seed_info": dict(seed_info),
+                "seed_validation_info": dict(seed_validation_info),
+                "attempt_metrics": dict(attempt_metrics),
+                "skipped_relations": dict(skipped_relations),
+                "skipped_reason_counts": dict(skipped_reason_counts),
+                "best_partial_attempt": int(best_partial_attempt),
+                "best_partial_triples_total": len(best_partial[0]),
+            }
+            _dump_checkpoint(checkpoint_path, payload)
+            persist_relation_report(
+                attempt_idx=attempt,
+                reason=reason,
+                feasible=feasible,
+                achieved_counts=dict(achieved_counts),
+                remaining=remaining,
+                fail_counts=dict(fail_counts),
+                deferral_counts=dict(deferral_counts),
+                skipped_relations=skipped_relations,
+                status="in_progress",
+                triples_total=len(triples_out),
+                resume_loaded=resumed_this_attempt,
+                resume_reason=resume_reason,
+                seed_info=seed_info,
+                final=False,
+            )
+            emit("checkpoint_saved", {"path": checkpoint_path, "attempt": attempt, "triples_so_far": len(triples_out)})
+            checkpoint_counter = 0
+
+        if checkpoint_path:
+            save_checkpoint("checkpoint_resumed" if resumed_this_attempt else "attempt_start")
+        persist_attempt_record(
+            {
+                "event": "attempt_start",
+                "attempt": attempt,
+                "attempts_total": rcfg.attempts,
+                "resume_loaded": resumed_this_attempt,
+                "resume_reason": resume_reason,
+                "relations_total": len(feasible),
+                "seed_source": str(seed_info.get("source", "")),
+                "seed_relation": str(seed_info.get("relation", "")),
+                "seed_entity_count_start": int(seed_info.get("entity_count_start", len(V)) or len(V)),
+                "triples_so_far": len(triples_out),
+            }
+        )
         if V:
             emit(
                 "seed_entities_ready",
@@ -903,9 +1251,6 @@ def realize_connected_graph(
                     "seed_entity_count": len(V),
                 },
             )
-        checkpoint_counter = 0
-        stall_rounds = 0
-        fail_counts: Dict[str, int] = defaultdict(int)
 
         if not V:
             # Fallback seed from highest-demand relations when no initial entity anchors are provided.
@@ -924,6 +1269,9 @@ def realize_connected_graph(
                     triples_out.append({mcfg.field_head: h0, mcfg.field_rel: pid, mcfg.field_tail: t0})
                     achieved_counts[pid] += 1
                     remaining[pid] -= 1
+                    seed_info["source"] = "seed_triple"
+                    seed_info["relation"] = pid
+                    seed_info["entity_count_start"] = len(V)
                     done_rel = sum(1 for qv in remaining.values() if qv <= 0)
                     emit(
                         "seed_done",
@@ -946,29 +1294,41 @@ def realize_connected_graph(
                         "triples_so_far": len(triples_out),
                     },
                 )
+                persist_relation_report(
+                    attempt_idx=attempt,
+                    reason="no_seed",
+                    feasible=feasible,
+                    achieved_counts=dict(achieved_counts),
+                    remaining=remaining,
+                    fail_counts=dict(fail_counts),
+                    deferral_counts=dict(deferral_counts),
+                    skipped_relations=skipped_relations,
+                    status="failed",
+                    triples_total=len(triples_out),
+                    resume_loaded=resumed_this_attempt,
+                    resume_reason=resume_reason,
+                    seed_info=seed_info,
+                    final=True,
+                )
+                persist_attempt_record(
+                    {
+                        "event": "attempt_end",
+                        "attempt": attempt,
+                        "status": "failed",
+                        "reason": "no_seed",
+                        "connected": False,
+                        "triples_total": len(triples_out),
+                        "achieved_total": int(sum(achieved_counts.values())),
+                        "remaining_total": int(sum(max(0, int(v)) for v in remaining.values())),
+                        "resume_loaded": resumed_this_attempt,
+                        "resume_reason": resume_reason,
+                        "seed_source": str(seed_info.get("source", "")),
+                        "seed_relation": str(seed_info.get("relation", "")),
+                        "seed_entity_count_start": int(seed_info.get("entity_count_start", len(V)) or len(V)),
+                        "seed_entity_count_end": len(V),
+                    }
+                )
                 continue
-
-        def save_checkpoint(reason: str) -> None:
-            nonlocal checkpoint_counter
-            if not checkpoint_path:
-                return
-            _dump_checkpoint(
-                checkpoint_path,
-                {
-                    "status": "in_progress",
-                    "attempt": attempt,
-                    "reason": reason,
-                    "quotas": quotas,
-                    "remaining": remaining,
-                    "triples_out": triples_out,
-                    "V": sorted(V),
-                    "achieved_counts": dict(achieved_counts),
-                    "used_by_relation": {k: [list(t) for t in vset] for k, vset in used_by_relation.items()},
-                    "fail_counts": dict(fail_counts),
-                },
-            )
-            emit("checkpoint_saved", {"path": checkpoint_path, "attempt": attempt, "triples_so_far": len(triples_out)})
-            checkpoint_counter = 0
 
         def attachable_summary(
             pending_items: List[Tuple[str, int]],
@@ -989,10 +1349,68 @@ def realize_connected_graph(
                     probe_rounds=capacity_probe_rounds,
                 )
                 cap_i = int(cap)
+                attempt_metrics["capacity_checks"] += 1
+                if cap_i <= 0:
+                    attempt_metrics["capacity_none"] += 1
                 caps[rel_pid] = cap_i
                 if cap_i > 0:
                     attachable += 1
             return attachable, caps
+
+        def build_attempt_summary(status: str, reason: str, connected: bool) -> Dict:
+            achieved_snapshot = {pid: int(achieved_counts.get(pid, 0)) for pid in quotas}
+            remaining_snapshot = {pid: int(remaining.get(pid, 0)) for pid in quotas}
+            relations_full = 0
+            relations_partial = 0
+            relations_zero = 0
+            top_unmet = []
+            for pid, quota in quotas.items():
+                achieved_i = int(achieved_snapshot.get(pid, 0))
+                remaining_i = max(0, int(remaining_snapshot.get(pid, 0)))
+                if achieved_i >= int(quota):
+                    relations_full += 1
+                elif achieved_i > 0:
+                    relations_partial += 1
+                else:
+                    relations_zero += 1
+                if remaining_i > 0 or skipped_relations.get(pid) or int(fail_counts.get(pid, 0)) > 0:
+                    top_unmet.append(
+                        {
+                            "relation": pid,
+                            "quota": int(quota),
+                            "achieved": achieved_i,
+                            "remaining": remaining_i,
+                            "fail_count": int(fail_counts.get(pid, 0)),
+                            "deferral_count": int(deferral_counts.get(pid, 0)),
+                            "skip_reason": skipped_relations.get(pid, ""),
+                        }
+                    )
+            top_unmet = sorted(top_unmet, key=lambda row: (row["remaining"], row["quota"]), reverse=True)[:20]
+            return {
+                "event": "attempt_end",
+                "attempt": attempt,
+                "status": status,
+                "reason": reason,
+                "connected": bool(connected),
+                "triples_total": len(triples_out),
+                "achieved_total": int(sum(achieved_snapshot.values())),
+                "remaining_total": int(sum(max(0, int(v)) for v in remaining_snapshot.values())),
+                "relations_total": len(quotas),
+                "relations_fully_met": relations_full,
+                "relations_partial": relations_partial,
+                "relations_zero": relations_zero,
+                "resume_loaded": resumed_this_attempt,
+                "resume_reason": resume_reason,
+                "seed_source": str(seed_info.get("source", "")),
+                "seed_relation": str(seed_info.get("relation", "")),
+                "seed_entity_count_start": int(seed_info.get("entity_count_start", len(V)) or len(V)),
+                "seed_entity_count_end": len(V),
+                "seed_validation": dict(seed_validation_info),
+                "attempt_metrics": dict(attempt_metrics),
+                "skipped_reason_counts": dict(skipped_reason_counts),
+                "skipped_relations": dict(skipped_relations),
+                "top_unmet_relations": top_unmet,
+            }
 
         # Phase-1 style seed validation: if current anchors cannot attach enough relations,
         # expand V using untyped probes from high-demand pending relations.
@@ -1014,6 +1432,12 @@ def realize_connected_graph(
                     "seed_entities": len(V),
                 },
             )
+            seed_validation_info = {
+                "attachable_relations": int(attachable0),
+                "pending_relations": int(len(pending0)),
+                "target_min_attachable": int(target_attachable),
+                "seed_entities": int(len(V)),
+            }
             if attachable0 < target_attachable:
                 ranked_for_seed = sorted(pending0, key=lambda x: x[1], reverse=True)
                 for sround in range(1, max(1, int(seed_expand_rounds)) + 1):
@@ -1039,6 +1463,10 @@ def realize_connected_graph(
                             "target_min_attachable": int(target_attachable),
                         },
                     )
+                    attempt_metrics["seed_expansion_rounds"] = int(sround)
+                    seed_validation_info["attachable_relations"] = int(attachable_now)
+                    seed_validation_info["pending_relations"] = int(len(pending_now))
+                    seed_validation_info["seed_entities"] = int(after_v)
                     if checkpoint_path:
                         save_checkpoint("seed_expansion")
                     if attachable_now >= target_attachable:
@@ -1049,10 +1477,22 @@ def realize_connected_graph(
             pending = [(pid, q) for pid, q in remaining.items() if q > 0]
             if not pending:
                 break
+            active_pending = [(pid, q) for pid, q in pending if pid not in deferred_relations]
+            if not active_pending and deferred_relations:
+                emit(
+                    "deferred_relations_released",
+                    {
+                        "attempt": attempt,
+                        "released_relations": len(deferred_relations),
+                        "reason": "active_set_exhausted",
+                    },
+                )
+                deferred_relations.clear()
+                active_pending = pending
 
             scored = []
             zero_cap_relations = []
-            for pid, q in pending:
+            for pid, q in active_pending:
                 ov = compute_overlap_score(ts, pid, V, rcfg.overlap_probe_triples, mcfg)
                 cap, cap_stage = estimate_attach_capacity(
                     ts,
@@ -1063,6 +1503,7 @@ def realize_connected_graph(
                     use_controlled_relaxation=use_controlled_relaxation,
                     probe_rounds=capacity_probe_rounds,
                 )
+                attempt_metrics["capacity_checks"] += 1
                 emit(
                     "relation_capacity",
                     {
@@ -1074,6 +1515,7 @@ def realize_connected_graph(
                     },
                 )
                 if cap <= 0:
+                    attempt_metrics["capacity_none"] += 1
                     zero_cap_relations.append((pid, q))
                     continue
                 # Primary: immediate yield, then yield-to-demand ratio, then overlap/connectability.
@@ -1084,12 +1526,15 @@ def realize_connected_graph(
 
             if not scored:
                 stall_rounds += 1
+                attempt_metrics["stall_rounds_total"] += 1
+                attempt_metrics["stall_rounds_max"] = max(int(attempt_metrics["stall_rounds_max"]), int(stall_rounds))
                 emit(
                     "stall_round",
                     {
                         "attempt": attempt,
                         "stall_rounds": stall_rounds,
                         "pending_relations": len(pending),
+                        "active_pending_relations": len(active_pending),
                         "triples_so_far": len(triples_out),
                     },
                 )
@@ -1115,6 +1560,8 @@ def realize_connected_graph(
                         break
                 if new_entities > 0:
                     bridge_seeded = True
+                    attempt_metrics["bridge_seed_events"] += 1
+                    attempt_metrics["bridge_seed_new_entities"] += int(new_entities)
                     emit(
                         "bridge_seed",
                         {
@@ -1125,6 +1572,16 @@ def realize_connected_graph(
                             "seeded_relations": int(seeded_relations),
                         },
                     )
+                    if deferred_relations:
+                        emit(
+                            "deferred_relations_released",
+                            {
+                                "attempt": attempt,
+                                "released_relations": len(deferred_relations),
+                                "reason": "bridge_seed",
+                            },
+                        )
+                        deferred_relations.clear()
                 if bridge_seeded:
                     checkpoint_counter += 1
                     if checkpoint_counter >= max(1, checkpoint_every_relations):
@@ -1152,6 +1609,7 @@ def realize_connected_graph(
                             achieved_counts[boot_pid] += 1
                             remaining[boot_pid] = max(0, int(remaining.get(boot_pid, 0)) - 1)
                             V.update([h0, t0])
+                            attempt_metrics["force_bootstrap_events"] += 1
                             emit(
                                 "force_bootstrap",
                                 {
@@ -1164,6 +1622,16 @@ def realize_connected_graph(
                             )
                             if checkpoint_path:
                                 save_checkpoint("force_bootstrap")
+                            if deferred_relations:
+                                emit(
+                                    "deferred_relations_released",
+                                    {
+                                        "attempt": attempt,
+                                        "released_relations": len(deferred_relations),
+                                        "reason": "force_bootstrap",
+                                    },
+                                )
+                                deferred_relations.clear()
                             stall_rounds = 0
                             continue
                     else:
@@ -1181,8 +1649,11 @@ def realize_connected_graph(
                     break
                 # Non-strict: after repeated stalls, skip one hardest pending relation to unblock loop.
                 if stall_rounds >= max(1, stall_max_rounds):
-                    skip_pid = max(pending, key=lambda x: x[1])[0]
+                    skip_pid = max(active_pending, key=lambda x: x[1])[0]
                     remaining[skip_pid] = 0
+                    deferred_relations.discard(skip_pid)
+                    skipped_relations[skip_pid] = "stall_unblock"
+                    skipped_reason_counts["stall_unblock"] += 1
                     emit(
                         "relation_skipped",
                         {
@@ -1204,28 +1675,56 @@ def realize_connected_graph(
 
             stall_rounds = 0
             pid = rcl_pick(scored, rcfg.rcl_size) or max(scored, key=lambda x: x[1])[0]
-            need = min(int(remaining[pid]), max(1, int(micro_fill_chunk_size)))
-            anchor_n = max(1, int(rcfg.anchor_fraction * need))
-            sampled = sample_n_triples_for_relation_connected(
-                ts=ts,
-                pid=pid,
-                n=need,
-                v=V,
-                mcfg=mcfg,
-                anchor_n=anchor_n,
-                used_keys=used_by_relation[pid],
-                relation_type_constraints=(relation_type_constraints or {}).get(pid, {}),
-                use_controlled_relaxation=use_controlled_relaxation,
-                stage_cb=lambda ev, pl: emit(
-                    f"relation_{ev}",
-                    {
-                        "attempt": attempt,
-                        **pl,
-                    },
-                ),
-            )
+            requested_need = min(int(remaining[pid]), max(1, int(micro_fill_chunk_size)))
+            sampled = None
+            chunk_schedule = chunk_backoff_schedule(requested_need)
+            for idx, need in enumerate(chunk_schedule):
+                anchor_n = max(1, int(rcfg.anchor_fraction * need))
+                sampled = sample_n_triples_for_relation_connected(
+                    ts=ts,
+                    pid=pid,
+                    n=need,
+                    v=V,
+                    mcfg=mcfg,
+                    anchor_n=anchor_n,
+                    used_keys=used_by_relation[pid],
+                    relation_type_constraints=(relation_type_constraints or {}).get(pid, {}),
+                    use_controlled_relaxation=use_controlled_relaxation,
+                    stage_cb=lambda ev, pl: emit(
+                        f"relation_{ev}",
+                        {
+                            "attempt": attempt,
+                            **pl,
+                        },
+                    ),
+                )
+                if sampled is not None:
+                    if need != requested_need:
+                        attempt_metrics["chunk_backoff_successes"] += 1
+                        emit(
+                            "relation_chunk_backoff_success",
+                            {
+                                "attempt": attempt,
+                                "relation": pid,
+                                "requested_chunk_size": int(requested_need),
+                                "realized_chunk_size": int(need),
+                            },
+                        )
+                    break
+                if idx + 1 < len(chunk_schedule):
+                    attempt_metrics["chunk_backoff_events"] += 1
+                    emit(
+                        "relation_chunk_backoff",
+                        {
+                            "attempt": attempt,
+                            "relation": pid,
+                            "failed_chunk_size": int(need),
+                            "next_chunk_size": int(chunk_schedule[idx + 1]),
+                        },
+                    )
             if sampled is None:
                 fail_counts[pid] += 1
+                attempt_metrics["relation_failed_events"] += 1
                 emit(
                     "relation_failed",
                     {
@@ -1244,29 +1743,67 @@ def realize_connected_graph(
                     break
                 # Non-strict: only skip after repeated failures for this relation.
                 if fail_counts[pid] >= max(1, max_fail_per_relation):
-                    remaining[pid] = 0
-                    emit(
-                        "relation_skipped",
-                        {
-                            "attempt": attempt,
-                            "relation": pid,
-                            "relations_done": sum(1 for qv in remaining.values() if qv <= 0),
-                            "relations_total": len(feasible),
-                            "triples_so_far": len(triples_out),
-                            "reason": "max_fail_reached",
-                        },
-                    )
-                    checkpoint_counter += 1
-                    if checkpoint_counter >= max(1, checkpoint_every_relations):
-                        save_checkpoint("relation_skip")
-                    elif checkpoint_path:
-                        save_checkpoint("relation_skip")
+                    can_defer = deferral_counts[pid] < 1 and any(other_pid != pid for other_pid, _q in pending)
+                    if can_defer:
+                        deferral_counts[pid] += 1
+                        fail_counts[pid] = 0
+                        deferred_relations.add(pid)
+                        attempt_metrics["relation_deferred_events"] += 1
+                        emit(
+                            "relation_deferred",
+                            {
+                                "attempt": attempt,
+                                "relation": pid,
+                                "relations_done": sum(1 for qv in remaining.values() if qv <= 0),
+                                "relations_total": len(feasible),
+                                "triples_so_far": len(triples_out),
+                                "deferral_count": int(deferral_counts[pid]),
+                                "reason": "max_fail_reached",
+                            },
+                        )
+                        checkpoint_counter += 1
+                        if checkpoint_counter >= max(1, checkpoint_every_relations):
+                            save_checkpoint("relation_deferred")
+                        elif checkpoint_path:
+                            save_checkpoint("relation_deferred")
+                    else:
+                        remaining[pid] = 0
+                        deferred_relations.discard(pid)
+                        skip_reason = "max_fail_after_deferral" if deferral_counts[pid] > 0 else "max_fail_reached"
+                        skipped_relations[pid] = skip_reason
+                        skipped_reason_counts[skip_reason] += 1
+                        emit(
+                            "relation_skipped",
+                            {
+                                "attempt": attempt,
+                                "relation": pid,
+                                "relations_done": sum(1 for qv in remaining.values() if qv <= 0),
+                                "relations_total": len(feasible),
+                                "triples_so_far": len(triples_out),
+                                "reason": skip_reason,
+                            },
+                        )
+                        checkpoint_counter += 1
+                        if checkpoint_counter >= max(1, checkpoint_every_relations):
+                            save_checkpoint("relation_skip")
+                        elif checkpoint_path:
+                            save_checkpoint("relation_skip")
                 elif checkpoint_path:
                     save_checkpoint("relation_failed")
                 continue
             triples_out.extend(sampled)
             achieved_counts[pid] += len(sampled)
             fail_counts[pid] = 0
+            if deferred_relations:
+                emit(
+                    "deferred_relations_released",
+                    {
+                        "attempt": attempt,
+                        "released_relations": len(deferred_relations),
+                        "reason": "graph_growth",
+                    },
+                )
+                deferred_relations.clear()
             remaining[pid] = max(0, int(remaining[pid]) - len(sampled))
             if remaining[pid] <= 0:
                 emit(
@@ -1298,6 +1835,14 @@ def realize_connected_graph(
         connected = is_connected_undirected(triples_out, mcfg)
         if ok and connected:
             logger.info("Connected realization succeeded on attempt %d. triples=%d", attempt, len(triples_out))
+            persist_best_partial(
+                attempt_idx=attempt,
+                triples=triples_out,
+                achieved=achieved,
+                connected=True,
+                reason="success",
+            )
+            best_partial_attempt = attempt
             if checkpoint_path:
                 _dump_checkpoint(
                     checkpoint_path,
@@ -1318,19 +1863,62 @@ def realize_connected_graph(
                     "triples_total": len(triples_out),
                 },
             )
+            persist_relation_report(
+                attempt_idx=attempt,
+                reason="connected_success",
+                feasible=feasible,
+                achieved_counts=achieved,
+                remaining=remaining,
+                fail_counts=dict(fail_counts),
+                deferral_counts=dict(deferral_counts),
+                skipped_relations=skipped_relations,
+                status="success",
+                triples_total=len(triples_out),
+                resume_loaded=resumed_this_attempt,
+                resume_reason=resume_reason,
+                seed_info=seed_info,
+                final=True,
+            )
+            persist_attempt_record(build_attempt_summary(status="success", reason="connected_success", connected=True))
             return triples_out, achieved
 
         if len(triples_out) > len(best_partial[0]):
-            best_partial = (triples_out, achieved)
+            best_partial = (list(triples_out), dict(achieved))
+            best_partial_attempt = attempt
+            persist_best_partial(
+                attempt_idx=attempt,
+                triples=best_partial[0],
+                achieved=best_partial[1],
+                connected=connected,
+                reason="attempt_improved",
+            )
+        failure_reason = "connectivity_or_quota" if rcfg.strict_quotas else "strict_off_partial_attempt"
         emit(
             "attempt_failed",
             {
                 "attempt": attempt,
-                "reason": "connectivity_or_quota" if rcfg.strict_quotas else "strict_off_partial_attempt",
+                "reason": failure_reason,
                 "triples_so_far": len(triples_out),
                 "connected": connected,
             },
         )
+        persist_relation_report(
+            attempt_idx=attempt,
+            reason=failure_reason,
+            feasible=feasible,
+            achieved_counts=achieved,
+            remaining=remaining,
+            fail_counts=dict(fail_counts),
+            deferral_counts=dict(deferral_counts),
+            skipped_relations=skipped_relations,
+            status="failed",
+            triples_total=len(triples_out),
+            resume_loaded=resumed_this_attempt,
+            resume_reason=resume_reason,
+            seed_info=seed_info,
+            final=True,
+        )
+        persist_attempt_record(build_attempt_summary(status="failed", reason=failure_reason, connected=connected))
 
     if rcfg.strict_quotas:
         if checkpoint_path and best_partial[0]:
@@ -1338,6 +1926,7 @@ def realize_connected_graph(
                 checkpoint_path,
                 {
                     "status": "partial",
+                    "attempt": int(best_partial_attempt),
                     "quotas": quotas,
                     "triples": best_partial[0],
                     "achieved": best_partial[1],
@@ -1354,6 +1943,7 @@ def realize_connected_graph(
             checkpoint_path,
             {
                 "status": "partial",
+                "attempt": int(best_partial_attempt),
                 "quotas": quotas,
                 "triples": best_partial[0],
                 "achieved": best_partial[1],

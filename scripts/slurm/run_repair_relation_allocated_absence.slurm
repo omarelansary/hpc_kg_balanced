@@ -23,12 +23,12 @@ fi
 # -----------------------------
 # Inputs (override via env vars)
 # -----------------------------
-GRAPH_JSONL="${GRAPH_JSONL:-data/connectedgraph/trial9/repair_apply_top100/graph_output.jsonl}"
+GRAPH_JSONL="${GRAPH_JSONL:-data/connectedgraph/trial9/repair_relation_allocated_absence_eta_expected_trial2/repaired_graph.jsonl}"
 HOP_SUPPORT_JSONL="${HOP_SUPPORT_JSONL:-data/archived/hop_support_v2_w_failed_statuses.wikibase_item_only_before_target_enrichment.jsonl}"
 ALLOCATION_JSON="${ALLOCATION_JSON:-data/connectedgraph/bidirectional_allocation_results_allsupp50_conf97_compconf90.json}"
 ABSENT_STATE_JSON="${ABSENT_STATE_JSON:-data/connectedgraph/trial9/absent_allocated_relation_before_repair_filtered/state.json}"
 
-OUT_DIR="${OUT_DIR:-data/connectedgraph/trial9/repair_relation_allocated_absence_eta_expected}"
+OUT_DIR="${OUT_DIR:-data/connectedgraph/trial9/repair_relation_allocated_absence_eta_expected_trial2}"
 mkdir -p "${OUT_DIR}"
 
 MISSING_RELATIONS_FILE="${MISSING_RELATIONS_FILE:-${OUT_DIR}/runtime_missing_relations.txt}"
@@ -44,7 +44,7 @@ PRIORITY_FIELD="${PRIORITY_FIELD:-eta_expected}"
 ALLOCATION_ETA_FIELD="${ALLOCATION_ETA_FIELD:-eta_expected}"
 ALLOCATION_ETA_ROUNDING="${ALLOCATION_ETA_ROUNDING:-ceil}"
 TOP_PAIR_CANDIDATES="${TOP_PAIR_CANDIDATES:-3}"
-MAX_RECONSIDER_PASSES="${MAX_RECONSIDER_PASSES:-0}"
+MAX_RECONSIDER_PASSES="${MAX_RECONSIDER_PASSES:-3}"
 MAX_ACCEPTS_PER_ANCHOR="${MAX_ACCEPTS_PER_ANCHOR:-2}"
 VALUES_CHUNK_SIZE="${VALUES_CHUNK_SIZE:-50}"
 QUERY_LIMIT="${QUERY_LIMIT:-200}"
