@@ -429,6 +429,103 @@ def compute_overlap_score(ts: TripleSource, pid: str, v: Set[str], probe_n: int,
     return hit / max(1, len(probes))
 
 
+def build_relation_unlock_graph(
+    relations: Iterable[str],
+    relation_type_constraints: Optional[Dict[str, Dict[str, List[str]]]],
+) -> Dict[str, Dict[str, float]]:
+    """Build a cheap structural-compatibility graph between relations.
+
+    This is a proxy for "future unlock" value. It uses subject/object type
+    compatibility already available in Phase 4, so it adds no extra WDQS load.
+
+    A directed edge ``r_i -> r_j`` is weighted when either:
+    - ``object_types(r_i)`` overlaps ``subject_types(r_j)``, or
+    - ``subject_types(r_i)`` overlaps ``object_types(r_j)``.
+    """
+    if not relation_type_constraints:
+        return {}
+
+    rels = [str(r) for r in relations if str(r)]
+    subj_map: Dict[str, Set[str]] = {}
+    obj_map: Dict[str, Set[str]] = {}
+    for rel in rels:
+        rel_info = relation_type_constraints.get(rel, {}) if relation_type_constraints else {}
+        subj_map[rel] = {str(x) for x in rel_info.get("subject", []) if str(x)}
+        obj_map[rel] = {str(x) for x in rel_info.get("object", []) if str(x)}
+
+    unlock_graph: Dict[str, Dict[str, float]] = {}
+    for rel in rels:
+        rel_subj = subj_map.get(rel, set())
+        rel_obj = obj_map.get(rel, set())
+        row: Dict[str, float] = {}
+        if not rel_subj and not rel_obj:
+            continue
+        for other in rels:
+            if other == rel:
+                continue
+            other_subj = subj_map.get(other, set())
+            other_obj = obj_map.get(other, set())
+            score = 0.0
+            if rel_obj and other_subj:
+                inter = rel_obj & other_subj
+                if inter:
+                    score += float(len(inter)) / float(max(1, len(rel_obj | other_subj)))
+            if rel_subj and other_obj:
+                inter = rel_subj & other_obj
+                if inter:
+                    score += float(len(inter)) / float(max(1, len(rel_subj | other_obj)))
+            if score > 0.0:
+                row[other] = score
+        if row:
+            unlock_graph[rel] = row
+    return unlock_graph
+
+
+def compute_future_unlock_score(
+    pid: str,
+    remaining: Dict[str, int],
+    achieved_counts: Dict[str, int],
+    relation_unlock_graph: Dict[str, Dict[str, float]],
+) -> float:
+    """Estimate how much a relation may help unlock unmet future work.
+
+    The score favors relations that connect, via type compatibility, to many
+    still-pending relations, especially those that have not appeared yet.
+    """
+    score = 0.0
+    for other, compat in relation_unlock_graph.get(pid, {}).items():
+        rem = max(0, int(remaining.get(other, 0)))
+        if rem <= 0:
+            continue
+        uncovered_factor = 1.5 if int(achieved_counts.get(other, 0)) <= 0 else 1.0
+        quota_factor = 1.0 + (float(min(rem, 10)) / 10.0)
+        score += float(compat) * uncovered_factor * quota_factor
+    return score
+
+
+def compute_protected_potential_threshold(potential_scores: Dict[str, float]) -> float:
+    """Return a dynamic threshold for protecting high-potential relations."""
+    positive = sorted(float(v) for v in potential_scores.values() if float(v) > 0.0)
+    if not positive:
+        return float("inf")
+    top_bucket = max(1, (len(positive) + 2) // 3)
+    idx = max(0, len(positive) - top_bucket)
+    return positive[idx]
+
+
+def is_structurally_protected(
+    pid: str,
+    achieved_counts: Dict[str, int],
+    potential_scores: Dict[str, float],
+    protected_threshold: float,
+) -> bool:
+    """Return True when a relation should be protected from easy skipping."""
+    if int(achieved_counts.get(pid, 0)) <= 0:
+        return True
+    pot = float(potential_scores.get(pid, 0.0))
+    return pot > 0.0 and pot >= float(protected_threshold)
+
+
 def estimate_attach_capacity(
     ts,
     pid: str,
@@ -1043,6 +1140,18 @@ def realize_connected_graph(
     if not feasible:
         raise RuntimeError("No feasible relations found with available triples.")
 
+    relation_unlock_graph = build_relation_unlock_graph(
+        relations=feasible.keys(),
+        relation_type_constraints=relation_type_constraints,
+    )
+    emit(
+        "relation_unlock_graph_ready",
+        {
+            "relations_total": len(feasible),
+            "relations_with_unlock_edges": len(relation_unlock_graph),
+        },
+    )
+
     resume_state = None
     if resume_from_checkpoint and checkpoint_path:
         cp = _load_checkpoint(checkpoint_path)
@@ -1105,8 +1214,10 @@ def realize_connected_graph(
             "capacity_none": 0,
             "relation_failed_events": 0,
             "relation_deferred_events": 0,
+            "protected_relation_deferrals": 0,
             "chunk_backoff_events": 0,
             "chunk_backoff_successes": 0,
+            "coverage_first_picks": 0,
             "stall_rounds_total": 0,
             "stall_rounds_max": 0,
         }
@@ -1490,7 +1601,18 @@ def realize_connected_graph(
                 deferred_relations.clear()
                 active_pending = pending
 
+            future_unlock_scores = {
+                pid: compute_future_unlock_score(
+                    pid=pid,
+                    remaining=remaining,
+                    achieved_counts=achieved_counts,
+                    relation_unlock_graph=relation_unlock_graph,
+                )
+                for pid, _q in active_pending
+            }
+            protected_potential_threshold = compute_protected_potential_threshold(future_unlock_scores)
             scored = []
+            uncovered_scored = []
             zero_cap_relations = []
             for pid, q in active_pending:
                 ov = compute_overlap_score(ts, pid, V, rcfg.overlap_probe_triples, mcfg)
@@ -1512,6 +1634,7 @@ def realize_connected_graph(
                         "capacity": int(cap),
                         "capacity_stage": cap_stage,
                         "remaining_quota": int(q),
+                        "future_unlock_score": float(future_unlock_scores.get(pid, 0.0)),
                     },
                 )
                 if cap <= 0:
@@ -1521,8 +1644,17 @@ def realize_connected_graph(
                 # Primary: immediate yield, then yield-to-demand ratio, then overlap/connectability.
                 cap_eff = min(int(cap), int(q))
                 cap_ratio = float(cap_eff) / float(max(1, int(q)))
-                score = (1000.0 * float(cap_eff)) + (100.0 * cap_ratio) + (10.0 * float(ov))
+                future_unlock = float(future_unlock_scores.get(pid, 0.0))
+                score = (
+                    (1000.0 * float(cap_eff))
+                    + (100.0 * cap_ratio)
+                    + (10.0 * float(ov))
+                    + (35.0 * future_unlock)
+                )
                 scored.append((pid, score))
+                if int(achieved_counts.get(pid, 0)) <= 0:
+                    coverage_score = score + (200.0 / float(max(1, int(q))))
+                    uncovered_scored.append((pid, coverage_score))
 
             if not scored:
                 stall_rounds += 1
@@ -1540,7 +1672,15 @@ def realize_connected_graph(
                 )
                 # Controlled bridge reseed: expand V via relation-any probe without adding triple.
                 bridge_seeded = False
-                bridge_candidates = sorted(zero_cap_relations, key=lambda x: x[1], reverse=True)
+                bridge_candidates = sorted(
+                    zero_cap_relations,
+                    key=lambda x: (
+                        int(achieved_counts.get(x[0], 0) <= 0),
+                        float(future_unlock_scores.get(x[0], 0.0)),
+                        float(min(int(x[1]), 10)),
+                    ),
+                    reverse=True,
+                )
                 before_total = len(V)
                 new_entities = 0
                 seeded_relations = 0
@@ -1649,7 +1789,21 @@ def realize_connected_graph(
                     break
                 # Non-strict: after repeated stalls, skip one hardest pending relation to unblock loop.
                 if stall_rounds >= max(1, stall_max_rounds):
-                    skip_pid = max(active_pending, key=lambda x: x[1])[0]
+                    skip_pid = min(
+                        active_pending,
+                        key=lambda x: (
+                            1
+                            if is_structurally_protected(
+                                x[0],
+                                achieved_counts=achieved_counts,
+                                potential_scores=future_unlock_scores,
+                                protected_threshold=protected_potential_threshold,
+                            )
+                            else 0,
+                            float(future_unlock_scores.get(x[0], 0.0)),
+                            -int(x[1]),
+                        ),
+                    )[0]
                     remaining[skip_pid] = 0
                     deferred_relations.discard(skip_pid)
                     skipped_relations[skip_pid] = "stall_unblock"
@@ -1663,6 +1817,15 @@ def realize_connected_graph(
                             "relations_total": len(feasible),
                             "triples_so_far": len(triples_out),
                             "reason": "stall_unblock",
+                            "protected_relation": bool(
+                                is_structurally_protected(
+                                    skip_pid,
+                                    achieved_counts=achieved_counts,
+                                    potential_scores=future_unlock_scores,
+                                    protected_threshold=protected_potential_threshold,
+                                )
+                            ),
+                            "future_unlock_score": float(future_unlock_scores.get(skip_pid, 0.0)),
                         },
                     )
                     checkpoint_counter += 1
@@ -1674,8 +1837,28 @@ def realize_connected_graph(
                 continue
 
             stall_rounds = 0
-            pid = rcl_pick(scored, rcfg.rcl_size) or max(scored, key=lambda x: x[1])[0]
-            requested_need = min(int(remaining[pid]), max(1, int(micro_fill_chunk_size)))
+            selection_pool = scored
+            selection_mode = "quota_fill"
+            if uncovered_scored:
+                selection_pool = uncovered_scored
+                selection_mode = "coverage_first"
+            pid = rcl_pick(selection_pool, rcfg.rcl_size) or max(selection_pool, key=lambda x: x[1])[0]
+            if selection_mode == "coverage_first":
+                requested_need = 1
+                attempt_metrics["coverage_first_picks"] += 1
+            else:
+                requested_need = min(int(remaining[pid]), max(1, int(micro_fill_chunk_size)))
+            emit(
+                "relation_selected",
+                {
+                    "attempt": attempt,
+                    "relation": pid,
+                    "selection_mode": selection_mode,
+                    "future_unlock_score": float(future_unlock_scores.get(pid, 0.0)),
+                    "remaining_quota": int(remaining[pid]),
+                    "requested_chunk_size": int(requested_need),
+                },
+            )
             sampled = None
             chunk_schedule = chunk_backoff_schedule(requested_need)
             for idx, need in enumerate(chunk_schedule):
@@ -1743,12 +1926,24 @@ def realize_connected_graph(
                     break
                 # Non-strict: only skip after repeated failures for this relation.
                 if fail_counts[pid] >= max(1, max_fail_per_relation):
-                    can_defer = deferral_counts[pid] < 1 and any(other_pid != pid for other_pid, _q in pending)
+                    protected_relation = is_structurally_protected(
+                        pid,
+                        achieved_counts=achieved_counts,
+                        potential_scores=future_unlock_scores,
+                        protected_threshold=protected_potential_threshold,
+                    )
+                    max_deferrals_for_pid = 2 if protected_relation else 1
+                    can_defer = (
+                        deferral_counts[pid] < max_deferrals_for_pid
+                        and any(other_pid != pid for other_pid, _q in pending)
+                    )
                     if can_defer:
                         deferral_counts[pid] += 1
                         fail_counts[pid] = 0
                         deferred_relations.add(pid)
                         attempt_metrics["relation_deferred_events"] += 1
+                        if protected_relation:
+                            attempt_metrics["protected_relation_deferrals"] += 1
                         emit(
                             "relation_deferred",
                             {
@@ -1759,6 +1954,8 @@ def realize_connected_graph(
                                 "triples_so_far": len(triples_out),
                                 "deferral_count": int(deferral_counts[pid]),
                                 "reason": "max_fail_reached",
+                                "protected_relation": bool(protected_relation),
+                                "future_unlock_score": float(future_unlock_scores.get(pid, 0.0)),
                             },
                         )
                         checkpoint_counter += 1
@@ -1781,6 +1978,8 @@ def realize_connected_graph(
                                 "relations_total": len(feasible),
                                 "triples_so_far": len(triples_out),
                                 "reason": skip_reason,
+                                "protected_relation": bool(protected_relation),
+                                "future_unlock_score": float(future_unlock_scores.get(pid, 0.0)),
                             },
                         )
                         checkpoint_counter += 1

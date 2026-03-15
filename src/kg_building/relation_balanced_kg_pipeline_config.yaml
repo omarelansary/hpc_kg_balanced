@@ -1,0 +1,72 @@
+# Low-memory default config for kg_builder.py on an 8 GB machine.
+# Update the input paths below to match your files before running.
+
+run_root: runs
+seed: 7
+
+# Keep candidate collection single-threaded to minimize peak RAM use.
+max_workers: 1
+use_threads_for_local_stages: false
+
+# Required inputs
+allocated_relations_path: src/kg_builder/bidirectional_allocation_results_hop_v3_patchedby_v2_allsup50_60sym_99anti_90inv_95comp.json
+candidate_input_path: null
+candidate_source_mode: wdqs
+
+# Stream candidates directly from WDQS when no local candidate file is available.
+wdqs_endpoint: https://query.wikidata.org/sparql
+wdqs_user_agent: kg_builder/1.0 (Codex relation-balanced pipeline)
+wdqs_timeout_sec: 60
+wdqs_page_size: 250
+wdqs_order_results: false
+wdqs_overfetch_factor: 3.0
+wdqs_max_raw_candidates_per_relation: 15000
+wdqs_pause_between_pages_sec: 0.25
+wdqs_max_retries: 5
+wdqs_backoff_base_sec: 2.0
+wdqs_backoff_cap_sec: 30.0
+wdqs_require_entity_targets: true
+
+# Optional inputs
+support_matrix_path: null
+ontology_compatibility_path: null
+auxiliary_repair_relations_path: null
+
+generic_manual_risk_relations:
+  - P31
+  - P279
+  - P131
+  - P17
+
+genericity_support_threshold: 1.0e-12
+genericity_coverage_threshold: 0.80
+genericity_top_mass_quantile: 0.90
+
+# Candidate freezing bounds
+candidate_alpha: 5
+candidate_beta: 20
+candidate_floor: 40
+candidate_hard_cap_per_relation: 5000
+small_relation_full_retrieval_threshold: 200
+
+# Graph size / selection
+global_triple_budget: 2000
+bridge_seed_count: 10
+hard_relation_seed_count: 20
+per_relation_seed_cap: 2
+
+weight_relation_need: 3.0
+weight_first_realization_bonus: 8.0
+weight_attachability: 2.0
+weight_bridge: 2.0
+weight_component_merge: 3.0
+weight_hub_penalty: 1.5
+weight_genericity_penalty: 1.25
+weight_noise_penalty: 1.25
+
+# Weak-component filtering
+weak_component_min_triples: 3
+weak_component_min_entities: 3
+
+# Auxiliary repair is still off in this scaffold.
+allow_auxiliary_last_resort_repair: false
