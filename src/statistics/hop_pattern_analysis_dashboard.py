@@ -36,6 +36,28 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
+_TABLE_FALLBACK_WARNED = False
+_TABLE_BACKEND_BROKEN = False
+_TABLE_BACKEND_ERROR = ""
+MATRIX_MODE_OPTIONS = [
+    "log1p_balanced_norm",
+    "log1p_row_norm",
+    "log1p_col_norm",
+    "adjacency_log1p",
+    "adjacency_support",
+    "two_hop_log1p",
+]
+GENERICITY_MATRIX_MODE_OPTIONS = [
+    "adjacency_support",
+    "adjacency_log1p",
+    "log1p_balanced_norm",
+]
+GENERICITY_MATRIX_MODE_DESCRIPTIONS = {
+    "adjacency_support": "Direct raw support totals between exported relations. Best match for pipeline genericity scoring.",
+    "adjacency_log1p": "Direct support totals after log1p compression. Preserves direct links while shrinking extreme hubs.",
+    "log1p_balanced_norm": "Average of row- and column-normalized log1p support. Emphasizes relative connectivity and reduces hub dominance.",
+}
+
 try:
     from src.kg_building.bidirectional_triple_allocation import allocate_for_patterns
 except ModuleNotFoundError:
@@ -229,6 +251,48 @@ def load_property_domain_range_types_map(json_path: str) -> dict[str, dict[str, 
         obj_list = [str(x) for x in obj] if isinstance(obj, list) else []
         out[pid] = {"subject": subj_list, "object": obj_list}
     return out
+
+
+def _coerce_table_data(data) -> pd.DataFrame:
+    """Normalize table-like inputs before rendering a fallback HTML table."""
+    if isinstance(data, pd.DataFrame):
+        return data
+    if isinstance(data, pd.Series):
+        return data.to_frame()
+    return pd.DataFrame(data)
+
+
+def render_dataframe(
+    data,
+    *,
+    use_container_width: bool = True,
+    hide_index: bool = False,
+    max_fallback_rows: int = 500,
+) -> None:
+    """Render a dataframe, falling back to HTML when Streamlit Arrow is broken."""
+    global _TABLE_BACKEND_BROKEN, _TABLE_BACKEND_ERROR, _TABLE_FALLBACK_WARNED
+
+    if not _TABLE_BACKEND_BROKEN:
+        try:
+            st.dataframe(data, use_container_width=use_container_width, hide_index=hide_index)
+            return
+        except Exception as exc:
+            _TABLE_BACKEND_BROKEN = True
+            _TABLE_BACKEND_ERROR = f"{type(exc).__name__}: {exc}"
+
+    if not _TABLE_FALLBACK_WARNED:
+        st.warning(
+            "Interactive tables are unavailable in this environment because "
+            "the Streamlit Arrow backend failed to load. Falling back to plain HTML tables."
+        )
+        st.caption(f"Arrow backend error: `{_TABLE_BACKEND_ERROR}`")
+        _TABLE_FALLBACK_WARNED = True
+
+    df = _coerce_table_data(data)
+    if max_fallback_rows > 0 and len(df) > max_fallback_rows:
+        st.caption(f"Fallback table showing first {max_fallback_rows:,} of {len(df):,} rows.")
+        df = df.head(max_fallback_rows)
+    st.markdown(df.to_html(index=not hide_index), unsafe_allow_html=True)
 
 
 def prepare_inverse_table(df_pairs: pd.DataFrame) -> pd.DataFrame:
@@ -529,6 +593,60 @@ def build_square_adjacency_matrix(
     return relations_universe, A
 
 
+def build_weight_matrix(adjacency: np.ndarray, *, matrix_mode: str) -> np.ndarray:
+    """Build the Phase 3 relation-weight matrix from adjacency counts."""
+
+    def _row_normalize(X: np.ndarray) -> np.ndarray:
+        s = X.sum(axis=1, keepdims=True)
+        return np.divide(X, s, out=np.zeros_like(X), where=s > 0)
+
+    def _col_normalize(X: np.ndarray) -> np.ndarray:
+        s = X.sum(axis=0, keepdims=True)
+        return np.divide(X, s, out=np.zeros_like(X), where=s > 0)
+
+    if matrix_mode == "adjacency_support":
+        return adjacency.copy()
+    if matrix_mode == "adjacency_log1p":
+        return np.log1p(adjacency)
+    if matrix_mode == "two_hop_log1p":
+        return np.log1p(adjacency @ adjacency)
+    if matrix_mode == "log1p_row_norm":
+        return _row_normalize(np.log1p(adjacency))
+    if matrix_mode == "log1p_col_norm":
+        return _col_normalize(np.log1p(adjacency))
+    if matrix_mode == "log1p_balanced_norm":
+        W0 = np.log1p(adjacency)
+        return 0.5 * (_row_normalize(W0) + _col_normalize(W0))
+    raise ValueError(f"Unknown matrix_mode: {matrix_mode}")
+
+
+def extract_relation_submatrix(
+    W: np.ndarray,
+    relations_universe: list[str],
+    relations: list[str],
+) -> tuple[list[str], np.ndarray]:
+    """Slice a square matrix down to a relation subset while preserving order."""
+    rel_to_idx = {r: i for i, r in enumerate(relations_universe)}
+    rels = [r for r in _unique_preserve(relations) if r in rel_to_idx]
+    if not rels:
+        return [], np.zeros((0, 0), dtype=float)
+    idx = [rel_to_idx[r] for r in rels]
+    return rels, W[np.ix_(idx, idx)]
+
+
+def matrix_to_nested_json_dict(relations: list[str], W: np.ndarray) -> dict[str, dict[str, float]]:
+    """Serialize a square matrix into the JSON format expected by Stage 1."""
+    out: dict[str, dict[str, float]] = {}
+    for i, r_from in enumerate(relations):
+        row: dict[str, float] = {}
+        for j, r_to in enumerate(relations):
+            value = float(W[i, j])
+            if value != 0.0:
+                row[r_to] = value
+        out[r_from] = row
+    return out
+
+
 def run_phase3_allocation(
     pattern_groups: dict[str, list[str]],
     eta_per_group: dict[str, int],
@@ -541,29 +659,7 @@ def run_phase3_allocation(
     integerize: bool,
 ) -> tuple[np.ndarray, dict]:
     """Run allocation over all non-empty groups and return selected W plus results."""
-    def _row_normalize(X: np.ndarray) -> np.ndarray:
-        s = X.sum(axis=1, keepdims=True)
-        return np.divide(X, s, out=np.zeros_like(X), where=s > 0)
-
-    def _col_normalize(X: np.ndarray) -> np.ndarray:
-        s = X.sum(axis=0, keepdims=True)
-        return np.divide(X, s, out=np.zeros_like(X), where=s > 0)
-
-    if matrix_mode == "adjacency_support":
-        W = adjacency.copy()
-    elif matrix_mode == "adjacency_log1p":
-        W = np.log1p(adjacency)
-    elif matrix_mode == "two_hop_log1p":
-        W = np.log1p(adjacency @ adjacency)
-    elif matrix_mode == "log1p_row_norm":
-        W = _row_normalize(np.log1p(adjacency))
-    elif matrix_mode == "log1p_col_norm":
-        W = _col_normalize(np.log1p(adjacency))
-    elif matrix_mode == "log1p_balanced_norm":
-        W0 = np.log1p(adjacency)
-        W = 0.5 * (_row_normalize(W0) + _col_normalize(W0))
-    else:
-        raise ValueError(f"Unknown matrix_mode: {matrix_mode}")
+    W = build_weight_matrix(adjacency, matrix_mode=matrix_mode)
 
     non_empty_groups = {k: v for k, v in pattern_groups.items() if len(v) > 0}
     non_empty_eta = {k: int(eta_per_group.get(k, 0)) for k in non_empty_groups}
@@ -868,7 +964,7 @@ def main() -> None:
     top_left, top_mid, top_right = st.columns([1, 1, 2])
     with top_left:
         st.subheader("Input doc statuses")
-        st.dataframe(status_counts, use_container_width=True, hide_index=True)
+        render_dataframe(status_counts, use_container_width=True, hide_index=True)
     with top_mid:
         st.subheader("Load summary")
         st.metric("Unique (r1,r2)", int(len(df)))
@@ -991,12 +1087,12 @@ def main() -> None:
     with c1:
         st.markdown(f"### Symmetric candidates (r1 == r2), top {topn}")
         show_sym = sym[["r1", "loop", "nonloop", "total", "conf_loop", "conf_nonloop"]].head(topn)
-        st.dataframe(show_sym, use_container_width=True, hide_index=True)
+        render_dataframe(show_sym, use_container_width=True, hide_index=True)
 
     with c2:
         st.markdown(f"### Anti-symmetric candidates (r1 == r2), top {topn}")
         show_anti = anti[["r1", "loop", "nonloop", "total", "conf_nonloop", "conf_loop"]].head(topn)
-        st.dataframe(show_anti, use_container_width=True, hide_index=True)
+        render_dataframe(show_anti, use_container_width=True, hide_index=True)
 
     st.markdown(f"### Inverse candidates (r1 != r2), top {topn}")
     show_inv = inv[
@@ -1014,7 +1110,7 @@ def main() -> None:
             "reverse_total",
         ]
     ].head(topn)
-    st.dataframe(show_inv, use_container_width=True, hide_index=True)
+    render_dataframe(show_inv, use_container_width=True, hide_index=True)
     st.markdown("### Inverse multiplicity (filtered)")
     i1, i2, i3 = st.columns(3)
     with i1:
@@ -1046,7 +1142,7 @@ def main() -> None:
             .reset_index()
             .sort_values("count", ascending=False)
         )
-        st.dataframe(comp_status, use_container_width=True, hide_index=True)
+        render_dataframe(comp_status, use_container_width=True, hide_index=True)
     with comp_mid:
         st.subheader("Composition load summary")
         st.metric("Rows (r1,r2,r3)", int(len(comp_df)))
@@ -1157,10 +1253,10 @@ def main() -> None:
             comp_f["composition_class"].value_counts().rename_axis("composition_class").reset_index(name="count")
         )
         st.markdown("### Composition class counts")
-        st.dataframe(class_counts, use_container_width=True, hide_index=True)
+        render_dataframe(class_counts, use_container_width=True, hide_index=True)
 
         st.markdown(f"### Top composition triples (r1, r2, r3), top {comp_topn}")
-        st.dataframe(
+        render_dataframe(
             comp_f[
                 [
                     "r1",
@@ -1190,7 +1286,7 @@ def main() -> None:
             .sort_values(["conf_composition_sample", "chain_pairs_with_shortcut"], ascending=[False, False])
         )
         st.markdown(f"### Best target r3 per (r1, r2), top {comp_topn}")
-        st.dataframe(
+        render_dataframe(
             best_per_pair[
                 [
                     "r1",
@@ -1251,15 +1347,8 @@ def main() -> None:
     with a2:
         matrix_mode = st.selectbox(
             "Weight matrix mode",
-            options=[
-                "log1p_balanced_norm",
-                "log1p_row_norm",
-                "log1p_col_norm",
-                "adjacency_log1p",
-                "adjacency_support",
-                "two_hop_log1p",
-            ],
-            index=0,
+            options=MATRIX_MODE_OPTIONS,
+            index=MATRIX_MODE_OPTIONS.index("log1p_balanced_norm"),
             help="Recommended default is log1p_balanced_norm: preserves log-support weighting while reducing hub dominance.",
         )
     with a3:
@@ -1302,7 +1391,7 @@ def main() -> None:
     group_preview_rows = []
     for pat, rels in pattern_groups.items():
         group_preview_rows.append({"pattern": pat, "size": len(rels), "relations": ", ".join(rels[:20])})
-    st.dataframe(pd.DataFrame(group_preview_rows), use_container_width=True, hide_index=True)
+    render_dataframe(pd.DataFrame(group_preview_rows), use_container_width=True, hide_index=True)
 
     eta_per_group = {
         "symmetric": eta_sym,
@@ -1391,7 +1480,7 @@ def main() -> None:
     alloc_df["relation_dom_rng_class"] = alloc_df["relation"].map(lambda r: rel_dom_rng_class.get(str(r), "UNKNOWN"))
     diag_df = pd.DataFrame(diag_rows).sort_values(["pattern"])
     st.markdown("### Allocation diagnostics")
-    st.dataframe(diag_df, use_container_width=True, hide_index=True)
+    render_dataframe(diag_df, use_container_width=True, hide_index=True)
 
     show_nonzero_only = bool(
         st.checkbox(
@@ -1482,7 +1571,35 @@ def main() -> None:
     alloc_display = view_df.copy()
     for col in ["forward_score", "backward_score", "p_forward", "p_backward", "p_avg", "eta_expected"]:
         alloc_display[col] = alloc_display[col].map(lambda v: _fmt_sci(v, digits=6))
-    st.dataframe(alloc_display, use_container_width=True, hide_index=True)
+    render_dataframe(alloc_display, use_container_width=True, hide_index=True)
+
+    genericity_relations = _unique_preserve(alloc_df.loc[alloc_df["eta_integer"] > 0, "relation"].tolist())
+    genericity_matrix_mode = st.selectbox(
+        "Genericity Matrix Mode",
+        options=GENERICITY_MATRIX_MODE_OPTIONS,
+        index=GENERICITY_MATRIX_MODE_OPTIONS.index("adjacency_support"),
+        help=(
+            "Exports the matrix used by pipeline genericity scoring over the current positive-eta relation set. "
+            "It shares the current Phase 1/2/3 filters, but can use a different matrix mode than the Phase 3 "
+            "allocation above."
+        ),
+    )
+    st.markdown(
+        "**Genericity mode guide**\n\n"
+        f"- `adjacency_support`: {GENERICITY_MATRIX_MODE_DESCRIPTIONS['adjacency_support']}\n"
+        f"- `adjacency_log1p`: {GENERICITY_MATRIX_MODE_DESCRIPTIONS['adjacency_log1p']}\n"
+        f"- `log1p_balanced_norm`: {GENERICITY_MATRIX_MODE_DESCRIPTIONS['log1p_balanced_norm']}"
+    )
+    genericity_export_relations, genericity_export_adjacency = extract_relation_submatrix(
+        adjacency,
+        relations_universe,
+        genericity_relations,
+    )
+    genericity_export_matrix = build_weight_matrix(genericity_export_adjacency, matrix_mode=genericity_matrix_mode)
+    st.caption(
+        f"Genericity export uses the current positive-eta allocation relation set "
+        f"({len(genericity_export_relations)} relations) with matrix mode `{genericity_matrix_mode}`."
+    )
 
     result_payload = {
         "config": {
@@ -1508,6 +1625,11 @@ def main() -> None:
         "allocations": alloc_df.to_dict(orient="records"),
     }
     result_json = json.dumps(result_payload, indent=2)
+    genericity_matrix_json = json.dumps(
+        matrix_to_nested_json_dict(genericity_export_relations, genericity_export_matrix),
+        indent=2,
+        sort_keys=True,
+    )
     st.download_button(
         label="Download allocation JSON",
         data=result_json,
@@ -1519,6 +1641,12 @@ def main() -> None:
         data=alloc_df.to_csv(index=False),
         file_name="bidirectional_allocation_results.csv",
         mime="text/csv",
+    )
+    st.download_button(
+        label="Download Genericity Matrix JSON",
+        data=genericity_matrix_json,
+        file_name=f"genericity_support_matrix.{genericity_matrix_mode}.json",
+        mime="application/json",
     )
 
     st.divider()
@@ -1944,11 +2072,11 @@ def main() -> None:
                 .sort_values(["achieved", "target_quota", "relation"], ascending=[False, False, True])
             )
             st.markdown("### Per-relation realization")
-            st.dataframe(achieved_df, use_container_width=True, hide_index=True)
+            render_dataframe(achieved_df, use_container_width=True, hide_index=True)
 
             preview_n = min(200, len(triples_out))
             st.markdown(f"### Triple preview (first {preview_n})")
-            st.dataframe(pd.DataFrame(triples_out[:preview_n]), use_container_width=True, hide_index=True)
+            render_dataframe(pd.DataFrame(triples_out[:preview_n]), use_container_width=True, hide_index=True)
 
             viz_edge_cap = min(150, len(triples_out))
             if viz_edge_cap > 0:
