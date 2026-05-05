@@ -1,0 +1,140 @@
+relation,symmetric,anti_symmetric,inverse,composition,label,description
+P16,0,1,0,1,transport network,network the infrastructure is a part of
+P31,0,0,0,1,instance of,type to which this subject corresponds/belongs. Different from P279 (subclass of); for example: K2 is an instance of mountain; volcano is a subclass of mountain
+P127,0,0,0,1,owned by,owner of the subject
+P131,0,0,0,1,located in the administrative territorial entity,the item is located on the territory of the following administrative entity. Use P276 for specifying locations that are non-administrative places and for items about events. Use P1382 if the item falls only partially into the administrative entity
+P163,0,0,1,0,flag,subject's flag
+P167,0,0,1,0,structure replaced by,"the item which replaced this building or structure, at the same geographic location"
+P279,0,0,0,1,subclass of,"this item is a subclass (subset) of that item; ALL instances of this item are instances of that item; different from P31 (instance of), e.g.: volcano is a subclass of mountain; Everest is an instance of mountain"
+P355,0,1,0,0,child organization/unit,"child organization/unit of a organization/unit; for companies, generally a fully owned separate corp., see business division (P199); opposite of parent org./unit (P749); use instance of (P31) to distinguish org. (Q43229) and org. unit (Q10387680)"
+P361,0,0,0,1,part of,"object of which the subject is a part (if this subject is already part of object A which is a part of object B, then please only make the subject part of object A), inverse property of ""has part"" (P527, see also ""has parts of the class"" (P2670))"
+P366,0,0,0,1,has use,main use of the subject (includes current and former usage)
+P399,1,0,0,0,companion of,two or more astronomic bodies of the same type relating to each other
+P406,0,0,1,0,soundtrack release,music release that incorporates music directly recorded from the soundtrack of an audiovisual work
+P414,0,1,0,0,stock exchange,exchange on which this company is traded
+P457,0,1,0,0,foundational text,text through which an institution or object has been created or established
+P461,1,0,0,1,opposite of,item that is in some way the opposite of this item
+P466,0,0,0,1,occupant,person or organization occupying property
+P514,1,0,0,0,interleaves with,stratigraphic relation in which two units overlap each other marginally
+P527,0,1,0,0,has part(s),"part of this subject; inverse property of ""part of"" (P361). See also ""has parts of the class"" (P2670)."
+P567,0,1,1,0,underlies,stratigraphic unit that this unit lies under (i.e. the overlying unit)
+P568,0,1,1,0,overlies,stratigraphic unit that this unit lies over (i.e. the underlying unit)
+P612,0,1,0,0,mother house,principal house or community for a religious institute
+P694,0,0,1,0,replaced synonym (for nom. nov.),"previously published name on which a replacement name (avowed substitute, nomen novum) is based"
+P748,0,1,0,0,appointed by,"who appointed the person to the position, can be used as a qualifier"
+P793,0,1,0,1,significant event,significant or notable events associated with the subject
+P814,0,0,0,1,IUCN protected areas category,protected areas category by the World Commission on Protected Areas. Used with dedicated items for each category.
+P816,0,1,0,0,decays to,what isotope does this radioactive isotope decay to
+P822,0,0,1,0,mascot,"mascot of an organization, e.g. a sports team or university"
+P828,0,1,0,0,has cause,"underlying cause, entity that ultimately resulted in this effect"
+P837,0,1,0,0,day in year for periodic occurrence,when a specific holiday or periodic event occurs. It can be used as statement or qualifier
+P880,0,1,0,0,CPU,central processing unit found within the subject item
+P927,0,1,0,0,anatomical location,where in the body or cell does this feature or condition lie or happen
+P931,0,0,0,1,place served by transport hub,"territorial entity or entities served by this transport hub (airport, train station, etc.)"
+P1001,0,0,0,1,applies to jurisdiction,"the item (institution, law, public office, public register, etc) or statement belongs to or has power over or applies to the value (a territorial jurisdiction: a country, state, municipality, etc)"
+P1002,0,1,0,0,engine configuration,configuration of an engine's cylinders
+P1142,0,1,0,0,political ideology,political ideology of an organization or person or of a work (such as a newspaper)
+P1151,0,0,1,0,topic's main Wikimedia portal,Wikimedia portal associated with this topic
+P1158,0,0,0,1,location of landing,location where the craft landed
+P1204,0,0,1,0,Wikimedia portal's main topic,primary topic of this Wikimedia portal
+P1268,0,0,1,1,represents,"organization, individual, or concept that an entity represents"
+P1290,0,1,0,0,godparent,person who is the godparent of a given person
+P1312,0,1,0,0,has facet polytope,"facet of a polytope, in the next-lower dimension"
+P1322,1,0,0,0,dual to,"dual of a polytope, graph or curve"
+P1398,0,0,1,0,structure replaces,"the item this building or structure replaced, at the same geographic location"
+P1403,0,0,1,0,original combination,for animals: the combination (binomen or trinomen) where the species-group name used in this taxon name was first published
+P1414,0,1,0,0,GUI toolkit or framework,framework or toolkit a program uses to display the graphical user interface
+P1420,1,0,0,0,taxon synonym,name listed as synonym of this item's taxon name
+P1434,0,0,1,0,takes place in fictional universe,"the subject is a work describing a fictional universe, i.e. whose plot occurs in this universe"
+P1445,0,0,1,0,fictional universe described in,"to link a fictional universe with a work that describes it: <universe> ""described in the work:"" <work>"
+P1531,0,1,0,0,hybrid of,parent of this hybrid breed or cultivar
+P1537,0,1,0,0,contributing factor of,"thing that is significantly influenced by this cause, but does not directly result from it. See 'Help:Modeling causes' for examples and discussion."
+P1542,0,1,0,0,has effect,effect of this item
+P1560,1,0,0,0,given name version for other gender,"equivalent name (with respect to the meaning of the name) in the same language: female version of a male first name, male version of a female first name. Add primarily the closest matching one"
+P1589,0,1,0,0,lowest point,point with lowest elevation in a region or path
+P1625,0,1,1,0,has melody,this work has the melody of the following work
+P1639,1,0,0,0,pendant of,"other work in a pair of opposing artworks, such as wedding portraits, commissioned together, but not always"
+P1654,0,1,0,0,wing configuration,configuration of wing(s) used by an aircraft
+P1678,0,1,0,0,has vertex figure,the figure exposed when a corner of a polytope is sliced off
+P1753,0,0,1,0,list related to category,Wikimedia list equivalent to a Wikimedia category
+P1754,0,0,1,0,category related to list,Wikimedia category that matches the Wikimedia list
+P1889,0,0,0,1,different from,"item that is different from another item, with which it may be confused"
+P2098,0,0,1,0,substitute/deputy/replacement of office/officeholder,function that serves as deputy/replacement of this function/office (scope/conditions vary depending on office)
+P2152,1,0,0,0,antiparticle,particle with the same rest mass and opposite charges
+P2155,1,0,0,0,solid solution series with,"the mineral forms a continous (true) or discontinous ""solid solution series"" with another mineral"
+P2283,0,1,0,0,uses,item or concept used by the subject or in the operation (see also instrument [P1303] and armament [P520])
+P2289,0,1,0,0,venous drainage,vein draining the anatomical structure
+P2353,0,0,0,1,statistical unit used,base item of this database or statistical set
+P2388,0,0,1,0,position held by head of the organization,position of the head of this item
+P2389,0,0,1,0,organization directed by the office or position,organization or project which is directed by this office
+P2499,0,1,0,0,league level above,the league above this sports league
+P2500,0,1,0,0,league level below,the league below this sports league
+P2567,0,1,0,0,amended by,document is amended by specified other document
+P2568,0,1,0,0,repealed by,document is repealed/inactived by specified other document
+P2670,0,0,0,1,has part(s) of the class,the subject has one or more parts of the object class
+P2673,0,1,1,0,next crossing upstream,"next crossing of this river, canal, etc. upstream of this subject"
+P2674,0,1,1,0,next crossing downstream,"next crossing of this river, canal, etc. downstream of this subject"
+P2681,0,0,1,0,is recto of,the two-dimensional artwork that is on the back (verso) side of this artwork
+P2682,0,0,1,0,is verso of,the two-dimensional artwork that is on the front (recto) side of this artwork
+P2743,1,0,1,0,this zoological name is coordinate with,links coordinate zoological names
+P2935,0,1,0,0,connector,physical connectors which the device has/supports
+P2959,1,0,0,0,permanent duplicated item,"this item duplicates another item and the two can't be merged, as one Wikimedia project includes two pages, e.g. in different scripts or languages (only applies to some wikis, e.g.: cdowiki, gomwiki, nanwiki). Use P31=Q17362920 for other wikis."
+P3032,1,0,0,0,adjacent building,building adjacent to the item
+P3075,0,1,0,0,official religion,official religion in this administrative entity
+P3085,0,1,0,0,qualifies for event,this event qualifies for that event
+P3094,0,1,0,0,develops from,this class of items develops from another class of items (biology)
+P3137,0,1,0,0,parent peak,"higher peak whose territory this peak resides in, where the territory is defined by a contour line through a key col, which can be selected based on several competing approaches"
+P3148,0,1,0,0,repeals,this document or act repeals that other document or act
+P3261,0,1,0,0,anatomical branch of,"main stem of this blood vessel, lymphatic vessel or nerve"
+P3262,0,1,0,0,has anatomical branch,"branches of this blood vessel, lymphatic vessel or nerve"
+P3403,1,0,0,0,coextensive with,this item has the same boundary as the target item; area associated with (this) entity is identical with the area associated with that entity
+P3461,0,1,0,0,designated as terrorist by,"country or organization that has officially designated a given group as a terrorist organization (e.g. for India, listed on http://mha.nic.in/BO )"
+P3729,0,1,1,0,next lower rank,"lower rank or level in a ranked hierarchy like sport league, military ranks. If there are several possible, list each one and qualify with ""criterion used"" (P1013), avoid using ranks and date qualifiers. For sports leagues/taxa, use specific properties instead."
+P3730,0,1,1,0,next higher rank,"higher rank or level in a ranked hierarchy like sport league, military ranks. If there are several possible, list each one and qualify with ""criterion used"" (P1013), avoid using ranks and date qualifiers. For sports leagues/taxa, use specific properties instead."
+P3833,0,0,0,1,diaspora,diaspora that a cultural group belongs to
+P4147,0,1,1,0,conjugate acid,species formed by accepting a proton (H⁺)
+P4149,0,0,1,0,conjugate base,species formed by losing a proton (H⁺)
+P4151,0,1,0,0,game mechanics,constructs of rules or methods designed for interaction with the game state
+P4329,0,0,1,0,category populated by,"software component (template, module, extension, MediaWiki core) populating the category"
+P4353,0,0,0,1,nominated by,who nominated a person for an office or award; can be used as a qualifier
+P4545,1,0,0,0,sexually homologous with,body part that originates from the same tissue or cell during fetal development in the opposing sex
+P4661,0,0,1,0,reservoir created,reservoir created upstream of a dam by this dam
+P4688,0,1,0,0,geomorphological unit,topographic or bathymetric feature to which this geographical item belongs
+P4792,0,0,1,0,created by dam,construction impounding this watercourse or creating this reservoir
+P4967,0,1,0,0,prerequisite,"prior event or achievement that a person or team needs to complete before joining or obtaining the item topic, e.g. a qualifying round of a sports event, a lower-level course in an educational program, or a lower level of a professional qualification"
+P5135,0,1,0,0,greater than,"instances of the item have a greater value than corresponding instances of the object, for the given measure"
+P5277,0,0,0,1,grade of kanji,degree of difficulty of kanji
+P5278,1,0,0,0,surname for other gender,"gender inflection of surname, patronymic or matronymic"
+P5607,0,1,1,0,located in the religious territorial entity,the item is located on the territory of the following religious entity. Use P708 (diocese) for dioceses
+P5642,0,1,0,0,risk factor,"factor associated with a high prevalence of a particular gene, disease or characteristic. These factors can be country of origin, country of citizenship, race, gender, occupation, anamnesis, etc."
+P5998,0,1,0,0,distributary,stream that branches off and flows away from the river
+P6185,1,0,0,0,tautomer of,target item is a tautomer of this one
+P6291,0,0,1,0,advertises,"cause, organization or product targeted by the advertising campaign, character, jingle or slogan"
+P6439,0,0,1,0,has lyrics,work whose text is used as the lyrics of this work
+P7209,0,0,0,1,ordeal by,manner of judicial practice by which the guilt or innocence of the accused was determined
+P7604,0,0,1,0,supervised by,natural person who has the authority of giving instructions and/or orders to subordinates and is held responsible for the work and actions of subordinates
+P7938,0,1,0,0,associated electoral district,constituencies/electoral districts in which a place is located or is part of. If a municipality/county is split into or part of several districts: add several values. Use only if distinct from administrative entities (P131) in predefined countries
+P8058,0,0,1,0,symbol of,item of which the image is a symbol
+P8138,0,1,0,0,located in the statistical territorial entity,statistical territorial entity in which a place is located or is part of. If a municipality or county is split into or part of several regions: add several values
+P8225,0,1,0,0,is metaclass for,all instances of the subject are subclasses of the object
+P8263,0,1,0,0,curriculum topics,topic or subject included in the curriculum
+P8289,0,0,1,0,parish church(es),church(es) which acts as the religious center of a parish
+P8308,0,0,0,1,has column,"columns for entries in the appendix, list or table"
+P8571,0,1,0,0,external auditor,"external company or person appointed to audit a business' or an organization's books, requirement for many companies"
+P8865,1,0,0,0,mathematical inverse,inverse element with respect to binary operation given as a qualifier using P2210
+P9059,0,1,0,0,subdivision of this unit,name of subdivision of this unit/currency
+P9234,0,0,1,0,supplement to,subject work or edition updates or otherwise complements the object work or edition
+P9926,0,0,1,0,populates category,"Wikimedia category which is populated by this template, module or extension"
+P10254,0,1,0,0,associated cadastral district,cadastral district in which a place is located or is part of. Use only if distinct from administrative entities (P131) in predefined countries
+P10374,0,0,0,1,computational complexity,"the most specific complexity class this computational problem has been proved to belong to; if available, provide the tight complexity, otherwise both hardness and membership can be specified"
+P10449,0,1,0,0,trained by,"person who trained the subject, a human or an animal"
+P10607,0,0,1,0,athletics program,"the name of a school's athletics program, as opposed to individual teams in particular sports"
+P10624,0,1,0,0,official observer status in organization,organization by which the subject is granted observer status
+P12363,0,1,0,0,clerked for,this person has held a clerkship with the judge
+P12452,0,1,0,0,appeals to,court or other body that hears appeals from subject's decisions
+P12764,0,0,1,0,replaced synonym of,taxon item which replaced this taxon name (now only a synonym) - inverse property of replaced synonym (for nom. nov.) (P694)
+P12765,0,0,1,0,protonym of,"taxon item of which this taxon name is a protonym (original name, for zoological taxa) - inverse property of original combination"
+P12994,0,0,0,1,class of agent(s) of action,"class of animate items that may initiate this action or class of actions (for roles of agents, use P12993)"
+P13177,1,0,1,0,homonymous taxon,taxon item of which the taxon name is an exact homonym
+P13210,0,0,0,1,organisation tax status,jurisdiction specific tax status of organisations like non-profits
+P13478,0,1,0,0,nomenclatural type of,"taxon item of which this item is the taxonomic type (name-bearing type), e.g. the family for which this genus is the type, the genus for which this species is the type, the taxon for which this type specimen is the type, ect..."

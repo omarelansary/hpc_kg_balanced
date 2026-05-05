@@ -9,7 +9,9 @@ max_workers: 1
 use_threads_for_local_stages: false
 
 # Required inputs
-allocated_relations_path: src/kg_builder/bidirectional_allocation_results_hop_v3_patchedby_v2_allsup50_60sym_99anti_90inv_95comp.json
+# Export this from the dashboard via "Download allocation JSON".
+# Keep it paired with the genericity matrix from the same dashboard run.
+allocated_relations_path: data/processed/hop_support_v3/bidirectional_allocation_results_hop_v3_patchedby_v2_allsup50_60sym_99anti_90inv_95comp.json
 candidate_input_path: null
 candidate_source_mode: wdqs
 
@@ -28,7 +30,10 @@ wdqs_backoff_cap_sec: 30.0
 wdqs_require_entity_targets: true
 
 # Optional inputs
-support_matrix_path: null
+# Export this from the dashboard via "Download Genericity Matrix JSON".
+# Recommended mode: adjacency_support. Keep it paired with allocated_relations_path
+# from the same dashboard run so both files reflect the same filtered relation set.
+support_matrix_path: data/processed/hop_support_v3/genericity_support_matrix.adjacency_support.json
 ontology_compatibility_path: null
 auxiliary_repair_relations_path: null
 

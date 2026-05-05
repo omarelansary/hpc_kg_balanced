@@ -99,6 +99,14 @@ class RelationScopeInfo:
     relation_dom_rng_class: Optional[str] = None
 
 
+@dataclass(frozen=True)
+class BalanceSelectionPolicy:
+    relation_to_patterns: Dict[str, Tuple[str, ...]]
+    pattern_targets: Dict[str, int]
+    relation_targets: Dict[str, int]
+    protected_patterns: Set[str]
+
+
 @dataclass
 class BridgeCandidate:
     component_rank: int
@@ -111,6 +119,8 @@ class BridgeCandidate:
     reason: str
     depth_hops: int
     query_direction: str
+    selection_score: Optional[float] = None
+    selection_reasons: List[str] = None
 
 
 # -----------------------------------------------------------------------------
@@ -432,6 +442,160 @@ def load_relation_scope_manifest(path: Path) -> Dict[str, RelationScopeInfo]:
     return scope
 
 
+def load_balance_selection_policy(path: Path, protected_patterns: Optional[Iterable[str]] = None) -> Optional[BalanceSelectionPolicy]:
+    data = _load_json(path)
+    if not isinstance(data, dict):
+        return None
+
+    pattern_groups = data.get("pattern_groups")
+    allocations = data.get("allocations")
+    if not isinstance(pattern_groups, dict) or not isinstance(allocations, list):
+        return None
+
+    relation_to_patterns: Dict[str, Set[str]] = defaultdict(set)
+    pattern_targets: Dict[str, int] = {}
+    relation_targets: Dict[str, int] = defaultdict(int)
+
+    for pattern_name, rels in pattern_groups.items():
+        if pattern_name in {"universe", "relations_universe"}:
+            continue
+        if not isinstance(rels, list):
+            continue
+        for rel in rels:
+            if isinstance(rel, str):
+                relation_to_patterns[rel].add(str(pattern_name))
+
+    eta_per_group = data.get("eta_per_group")
+    if isinstance(eta_per_group, dict):
+        for pattern_name, value in eta_per_group.items():
+            try:
+                pattern_targets[str(pattern_name)] = int(value)
+            except (TypeError, ValueError):
+                continue
+
+    fallback_pattern_targets: Dict[str, int] = {}
+    for row in allocations:
+        if not isinstance(row, dict):
+            continue
+        relation = row.get("relation")
+        if not isinstance(relation, str):
+            continue
+
+        pattern = row.get("pattern")
+        if isinstance(pattern, str) and pattern:
+            relation_to_patterns[relation].add(pattern)
+
+        try:
+            eta_integer = int(row.get("eta_integer", row.get("target", 0)) or 0)
+        except (TypeError, ValueError):
+            eta_integer = 0
+        relation_targets[relation] += eta_integer
+
+        if isinstance(pattern, str) and pattern:
+            eta_total = row.get("eta_total")
+            if eta_total is not None:
+                try:
+                    fallback_pattern_targets[pattern] = max(fallback_pattern_targets.get(pattern, 0), int(eta_total))
+                except (TypeError, ValueError):
+                    pass
+
+    if not pattern_targets:
+        pattern_targets.update(fallback_pattern_targets)
+
+    if not relation_to_patterns or not pattern_targets:
+        return None
+
+    return BalanceSelectionPolicy(
+        relation_to_patterns={rel: tuple(sorted(patterns)) for rel, patterns in relation_to_patterns.items()},
+        pattern_targets=dict(pattern_targets),
+        relation_targets=dict(relation_targets),
+        protected_patterns=set(protected_patterns or {"symmetric"}),
+    )
+
+
+def compute_balance_observed_counts(
+    edge_counts: EdgeCounts,
+    policy: BalanceSelectionPolicy,
+) -> Tuple[Dict[str, int], Dict[str, int]]:
+    relation_counts: Dict[str, int] = defaultdict(int)
+    pattern_counts: Dict[str, int] = defaultdict(int)
+    for (_h, relation, _t), count in edge_counts.items():
+        relation_counts[relation] += count
+        for pattern in policy.relation_to_patterns.get(relation, tuple()):
+            pattern_counts[pattern] += count
+    return dict(relation_counts), dict(pattern_counts)
+
+
+def score_balance_aware_core_candidate(
+    *,
+    candidate: BridgeCandidate,
+    policy: Optional[BalanceSelectionPolicy],
+    current_relation_counts: Mapping[str, int],
+    current_pattern_counts: Mapping[str, int],
+) -> Tuple[float, List[str]] | None:
+    if policy is None:
+        return 0.0, []
+
+    relation_adds: Dict[str, int] = defaultdict(int)
+    pattern_adds: Dict[str, int] = defaultdict(int)
+    for _h, relation, _t in candidate.bridge_triples:
+        relation_adds[relation] += 1
+        for pattern in policy.relation_to_patterns.get(relation, tuple()):
+            pattern_adds[pattern] += 1
+
+    reasons: List[str] = []
+    score = 0.0
+
+    for relation, add_count in relation_adds.items():
+        cap = policy.relation_targets.get(relation)
+        if cap is None:
+            continue
+        projected = current_relation_counts.get(relation, 0) + add_count
+        if projected > cap:
+            return None
+
+    for pattern, add_count in pattern_adds.items():
+        target = policy.pattern_targets.get(pattern)
+        if target is None:
+            continue
+        current = current_pattern_counts.get(pattern, 0)
+        projected = current + add_count
+        if projected > target:
+            return None
+
+        deficit_before = max(0, target - current)
+        deficit_after = max(0, target - projected)
+        deficit_improvement = deficit_before - deficit_after
+        if deficit_improvement > 0:
+            score += 50.0 * deficit_improvement
+            reasons.append(f"helps_deficit:{pattern}:{deficit_improvement}")
+            if pattern in policy.protected_patterns:
+                score += 25.0 * deficit_improvement
+                reasons.append(f"helps_protected_deficit:{pattern}:{deficit_improvement}")
+
+    score -= 5.0 * max(0, candidate.depth_hops - 1)
+    if candidate.bridge_nodes_new:
+        score -= 2.0 * len(candidate.bridge_nodes_new)
+        reasons.append(f"new_entities:{len(candidate.bridge_nodes_new)}")
+
+    return score, reasons
+
+
+def is_better_core_candidate(candidate: BridgeCandidate, incumbent: Optional[BridgeCandidate]) -> bool:
+    if incumbent is None:
+        return True
+
+    candidate_score = candidate.selection_score if candidate.selection_score is not None else float("-inf")
+    incumbent_score = incumbent.selection_score if incumbent.selection_score is not None else float("-inf")
+    if candidate_score != incumbent_score:
+        return candidate_score > incumbent_score
+    if candidate.depth_hops != incumbent.depth_hops:
+        return candidate.depth_hops < incumbent.depth_hops
+    if len(candidate.bridge_nodes_new) != len(incumbent.bridge_nodes_new):
+        return len(candidate.bridge_nodes_new) < len(incumbent.bridge_nodes_new)
+    return tuple(candidate.bridge_triples) < tuple(incumbent.bridge_triples)
+
+
 # -----------------------------------------------------------------------------
 # Graph helpers
 # -----------------------------------------------------------------------------
@@ -743,6 +907,7 @@ def initial_state(original_stats: Dict[str, Any], dry_run: bool) -> Dict[str, An
             },
             "candidate_outcomes": {
                 "applied_core": 0,
+                "rejected_balance_policy": 0,
                 "duplicate_core_candidate": 0,
                 "dry_run_not_applied": 0,
                 "rejected_pattern_only": 0,
@@ -787,6 +952,7 @@ def ensure_state_defaults(state: Dict[str, Any]) -> None:
     counters["candidate_counts"].setdefault("repair_pattern_only", 0)
     counters["candidate_counts"].setdefault("repair_auxiliary", 0)
     counters["candidate_outcomes"].setdefault("applied_core", 0)
+    counters["candidate_outcomes"].setdefault("rejected_balance_policy", 0)
     counters["candidate_outcomes"].setdefault("duplicate_core_candidate", 0)
     counters["candidate_outcomes"].setdefault("dry_run_not_applied", 0)
     counters["candidate_outcomes"].setdefault("rejected_pattern_only", 0)
@@ -868,7 +1034,7 @@ def finalize_component_outcome(state: Dict[str, Any], component_state: Dict[str,
 
 
 def candidate_to_event_payload(candidate: BridgeCandidate) -> Dict[str, Any]:
-    return {
+    payload = {
         "component_rank": candidate.component_rank,
         "anchor_node": candidate.anchor_node,
         "query_depth": candidate.depth_hops,
@@ -880,6 +1046,11 @@ def candidate_to_event_payload(candidate: BridgeCandidate) -> Dict[str, Any]:
         "accepted_into_core": candidate.accepted_into_core,
         "reason": candidate.reason,
     }
+    if candidate.selection_score is not None:
+        payload["selection_score"] = candidate.selection_score
+    if candidate.selection_reasons:
+        payload["selection_reasons"] = list(candidate.selection_reasons)
+    return payload
 
 
 def record_candidate(
@@ -902,10 +1073,9 @@ def record_candidate(
             paths,
             "candidate_classified",
             **candidate_to_event_payload(candidate),
-            acceptance_decision="accepted_into_core",
-            final_outcome="pending_core_application",
+            acceptance_decision="eligible_for_core_scoring",
+            final_outcome="pending_core_scoring",
         )
-        emit_event(paths, "core_bridge_selected", **candidate_to_event_payload(candidate))
         return
 
     if label == "repair_pattern_only":
@@ -1032,6 +1202,7 @@ def build_manifest(args: argparse.Namespace, relation_scope_source: str, paths: 
             "pattern_only_policy": "relation in pattern_groups but not positively allocated",
             "auxiliary_policy": "relation outside pattern relation universe",
             "graph_mutation_policy": "only repair_core triples may update graph, and never in dry_run",
+            "core_selection_policy": "balance-aware best-core ranking when relation_scope_manifest is provided, unless --disable_balance_aware_core_selection is set",
             "non_core_retention_policy": "non-core discoveries are always persisted as events",
             "resume_policy": "resume from component/anchor/stage checkpoints where possible",
         },
@@ -1080,6 +1251,8 @@ def validate_resume_compatibility(args: argparse.Namespace, manifest: Dict[str, 
         "anchor_nodes_per_component",
         "query_limit",
         "timeout_sec",
+        "disable_balance_aware_core_selection",
+        "protected_pattern",
         "dry_run",
     ]
     for key in must_match:
@@ -1136,11 +1309,16 @@ def find_one_hop_bridge(
     anchor: str,
     main_nodes: Set[str],
     relation_scope: Dict[str, RelationScopeInfo],
+    balance_policy: Optional[BalanceSelectionPolicy],
+    current_relation_counts: Mapping[str, int],
+    current_pattern_counts: Mapping[str, int],
     user_agent: str,
     timeout_sec: int,
     query_limit: int,
     collect_noncore: bool,
 ) -> Optional[BridgeCandidate]:
+    best_candidate: Optional[BridgeCandidate] = None
+    best_score: Optional[float] = None
     for direction in ("out", "in"):
         triples = get_neighbors_cached(
             state=state,
@@ -1185,9 +1363,40 @@ def find_one_hop_bridge(
                 candidate=candidate,
                 collect_noncore=collect_noncore,
             )
-            if candidate.accepted_into_core:
-                return candidate
-    return None
+            if not candidate.accepted_into_core:
+                continue
+
+            scored = score_balance_aware_core_candidate(
+                candidate=candidate,
+                policy=balance_policy,
+                current_relation_counts=current_relation_counts,
+                current_pattern_counts=current_pattern_counts,
+            )
+            if scored is None:
+                state["counters"]["candidate_outcomes"]["rejected_balance_policy"] += 1
+                emit_event(
+                    paths,
+                    "candidate_balance_rejected",
+                    **candidate_to_event_payload(candidate),
+                    final_outcome="rejected_balance_policy",
+                )
+                continue
+
+            score, reasons = scored
+            candidate.selection_score = score
+            candidate.selection_reasons = reasons
+            emit_event(
+                paths,
+                "candidate_scored_for_core",
+                **candidate_to_event_payload(candidate),
+            )
+            if best_score is None or score > best_score:
+                best_candidate = candidate
+                best_score = score
+
+    if best_candidate is not None:
+        emit_event(paths, "core_bridge_selected", **candidate_to_event_payload(best_candidate))
+    return best_candidate
 
 
 def find_two_hop_bridge(
@@ -1199,11 +1408,16 @@ def find_two_hop_bridge(
     anchor: str,
     main_nodes: Set[str],
     relation_scope: Dict[str, RelationScopeInfo],
+    balance_policy: Optional[BalanceSelectionPolicy],
+    current_relation_counts: Mapping[str, int],
+    current_pattern_counts: Mapping[str, int],
     user_agent: str,
     timeout_sec: int,
     query_limit: int,
     collect_noncore: bool,
 ) -> Optional[BridgeCandidate]:
+    best_candidate: Optional[BridgeCandidate] = None
+    best_score: Optional[float] = None
     for direction1 in ("out", "in"):
         first_hop = get_neighbors_cached(
             state=state,
@@ -1274,9 +1488,40 @@ def find_two_hop_bridge(
                         candidate=candidate,
                         collect_noncore=collect_noncore,
                     )
-                    if candidate.accepted_into_core:
-                        return candidate
-    return None
+                    if not candidate.accepted_into_core:
+                        continue
+
+                    scored = score_balance_aware_core_candidate(
+                        candidate=candidate,
+                        policy=balance_policy,
+                        current_relation_counts=current_relation_counts,
+                        current_pattern_counts=current_pattern_counts,
+                    )
+                    if scored is None:
+                        state["counters"]["candidate_outcomes"]["rejected_balance_policy"] += 1
+                        emit_event(
+                            paths,
+                            "candidate_balance_rejected",
+                            **candidate_to_event_payload(candidate),
+                            final_outcome="rejected_balance_policy",
+                        )
+                        continue
+
+                    score, reasons = scored
+                    candidate.selection_score = score
+                    candidate.selection_reasons = reasons
+                    emit_event(
+                        paths,
+                        "candidate_scored_for_core",
+                        **candidate_to_event_payload(candidate),
+                    )
+                    if best_score is None or score > best_score:
+                        best_candidate = candidate
+                        best_score = score
+
+    if best_candidate is not None:
+        emit_event(paths, "core_bridge_selected", **candidate_to_event_payload(best_candidate))
+    return best_candidate
 
 
 # -----------------------------------------------------------------------------
@@ -1314,6 +1559,17 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     p.add_argument("--timeout_sec", type=int, default=60, help="WDQS request timeout in seconds.")
     p.add_argument("--wikidata_sleep_sec", type=float, default=0.2, help="Delay between anchor stages.")
     p.add_argument("--user_agent", type=str, default=DEFAULT_USER_AGENT, help="HTTP User-Agent for WDQS.")
+    p.add_argument(
+        "--disable_balance_aware_core_selection",
+        action="store_true",
+        help="Accept the first repair_core candidate instead of ranking core bridges against current balance targets.",
+    )
+    p.add_argument(
+        "--protected_pattern",
+        action="append",
+        default=None,
+        help="Pattern name to favor when multiple core bridge candidates are eligible; repeatable. Defaults to symmetric.",
+    )
     p.add_argument("--head_field", type=str, default="h")
     p.add_argument("--rel_field", type=str, default="r")
     p.add_argument("--tail_field", type=str, default="t")
@@ -1339,9 +1595,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if args.relation_scope_manifest is not None:
         relation_scope = load_relation_scope_manifest(path=args.relation_scope_manifest)
         relation_scope_source = f"relation_scope_manifest:{args.relation_scope_manifest.resolve()}"
+        balance_policy = None
+        if not args.disable_balance_aware_core_selection:
+            balance_policy = load_balance_selection_policy(
+                path=args.relation_scope_manifest,
+                protected_patterns=args.protected_pattern or ["symmetric"],
+            )
     else:
         relation_scope = load_allowed_relations(path=args.allowed_relations, rel_field=args.rel_field)
         relation_scope_source = f"allowed_relations:{args.allowed_relations.resolve()}"
+        balance_policy = None
 
     original_edge_counts = aggregate_triples(triples)
     original_graph = build_digraph(original_edge_counts)
@@ -1421,6 +1684,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             state["current_anchor_node"] = None
             state["current_stage"] = None
 
+            if balance_policy is not None:
+                current_relation_counts, current_pattern_counts = compute_balance_observed_counts(
+                    edge_counts=edge_counts,
+                    policy=balance_policy,
+                )
+            else:
+                current_relation_counts, current_pattern_counts = {}, {}
+
             emit_event(
                 paths,
                 "component_started",
@@ -1470,6 +1741,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                         anchor=anchor,
                         main_nodes=main_nodes,
                         relation_scope=relation_scope,
+                        balance_policy=balance_policy,
+                        current_relation_counts=current_relation_counts,
+                        current_pattern_counts=current_pattern_counts,
                         user_agent=args.user_agent,
                         timeout_sec=args.timeout_sec,
                         query_limit=args.query_limit,
@@ -1478,12 +1752,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     anchor_state["one_hop_done"] = True
                     checkpoint_state(paths, state, reason="anchor_one_hop_done", component_rank=component_rank, anchor_node=anchor)
                     if one_hop is not None:
-                        selected_bridge = one_hop
+                        if is_better_core_candidate(one_hop, selected_bridge):
+                            selected_bridge = one_hop
                         anchor_state["selected_core"] = True
                         anchor_state["completed"] = True
                         if anchor not in component_state["processed_anchors"]:
                             component_state["processed_anchors"].append(anchor)
-                        break
+                        checkpoint_state(paths, state, reason="anchor_completed", component_rank=component_rank, anchor_node=anchor)
+                        continue
                 else:
                     counters["candidate_outcomes"]["skipped_due_to_resume"] += 1
                     emit_event(
@@ -1507,6 +1783,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                         anchor=anchor,
                         main_nodes=main_nodes,
                         relation_scope=relation_scope,
+                        balance_policy=balance_policy,
+                        current_relation_counts=current_relation_counts,
+                        current_pattern_counts=current_pattern_counts,
                         user_agent=args.user_agent,
                         timeout_sec=args.timeout_sec,
                         query_limit=args.query_limit,
@@ -1515,12 +1794,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     anchor_state["two_hop_done"] = True
                     checkpoint_state(paths, state, reason="anchor_two_hop_done", component_rank=component_rank, anchor_node=anchor)
                     if two_hop is not None:
-                        selected_bridge = two_hop
+                        if is_better_core_candidate(two_hop, selected_bridge):
+                            selected_bridge = two_hop
                         anchor_state["selected_core"] = True
                         anchor_state["completed"] = True
                         if anchor not in component_state["processed_anchors"]:
                             component_state["processed_anchors"].append(anchor)
-                        break
+                        checkpoint_state(paths, state, reason="anchor_completed", component_rank=component_rank, anchor_node=anchor)
+                        continue
                 else:
                     counters["candidate_outcomes"]["skipped_due_to_resume"] += 1
                     emit_event(
