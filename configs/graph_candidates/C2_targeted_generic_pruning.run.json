@@ -1,0 +1,89 @@
+{
+  "schema_name": "graph_candidate_generation_config",
+  "schema_version": 1,
+  "created_on": "2026-05-07",
+  "candidate_id": "C2",
+  "label": "targeted_generic_pruning_from_B0",
+  "status": "template_not_executed",
+  "generator_script": "tools/graph_candidate_generation/targeted_generic_dominance_prune.py",
+  "generator_script_status": "created_isolated_utility_not_executed",
+  "input_graph": {
+    "candidate_id": "B0",
+    "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+    "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+    "format": "csv"
+  },
+  "allocation": {
+    "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+  },
+  "outputs": {
+    "candidate_graph": "experiments/graph_candidates/C2_targeted_generic_pruning/outputs/pruned_graph.jsonl",
+    "generation_report": "experiments/graph_candidates/C2_targeted_generic_pruning/reports/prune_report.json",
+    "evaluator_report": "experiments/graph_candidates/C2_targeted_generic_pruning/reports/evaluator.report.json",
+    "evaluator_summary": "experiments/graph_candidates/C2_targeted_generic_pruning/reports/evaluator.summary.md"
+  },
+  "objective": {
+    "primary": "Reduce generic-dominance surplus in P31, P279, and P131.",
+    "minimum_total_surplus_max_exclusive": 6582,
+    "minimum_total_deficit_max_inclusive": 2359,
+    "preferred_total_deficit_max_inclusive": 2019,
+    "strong_combined_target_relation_surplus_max_exclusive": 6166
+  },
+  "target_relations": [
+    "P31",
+    "P279",
+    "P131"
+  ],
+  "secondary_review_relations": [
+    "P361",
+    "P1001",
+    "P1889"
+  ],
+  "pruning_parameters": {
+    "max_removals": 600,
+    "batch_size": 1,
+    "delete_only_from_target_relations": true,
+    "check_connectivity_after_each_batch": true,
+    "never_delete_below_eta": true,
+    "protect_underfilled_relations": true,
+    "preserve_all_allocated_relation_ids": true
+  },
+  "hard_constraints": {
+    "weak_component_count": 1,
+    "largest_weak_component_ratio": 1.0,
+    "unique_relations": 139,
+    "allocated_relations_observed": 139,
+    "zero_allocated_relations": 0,
+    "duplicate_triple_count": 0,
+    "allocation_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+    "parent_graph_sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
+  },
+  "baseline_metrics": {
+    "B0": {
+      "total_deficit": 2019,
+      "total_surplus": 6702,
+      "P31_observed": 5957,
+      "P31_surplus": 5719,
+      "P279_observed": 750,
+      "P279_surplus": 523,
+      "P131_observed": 353,
+      "P131_surplus": 174
+    },
+    "C1": {
+      "total_deficit": 2359,
+      "total_surplus": 6582,
+      "P31_observed": 5953,
+      "P31_surplus": 5715,
+      "P279_observed": 748,
+      "P279_surplus": 521,
+      "P131_observed": 344,
+      "P131_surplus": 165
+    }
+  },
+  "notes": [
+    "This config is a template and should be copied or materialized into a run-specific config only when C2 execution is authorized.",
+    "The output root is experiments/graph_candidates/C2_targeted_generic_pruning.",
+    "Do not write C2 outputs under data/connectedgraph/candidates."
+  ]
+}

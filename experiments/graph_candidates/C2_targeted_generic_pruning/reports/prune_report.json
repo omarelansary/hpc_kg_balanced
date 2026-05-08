@@ -1,0 +1,3037 @@
+{
+  "accepted_deletion_count": 27,
+  "allocation": {
+    "actual_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+    "expected_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+    "path": "src/Pruning graph/bidirectional_allocation_results5k.json"
+  },
+  "allocation_extraction": {
+    "eta_field_precedence": [
+      "eta_integer",
+      "eta",
+      "eta_expected"
+    ],
+    "positive_allocation_rows": 154,
+    "raw_keys": [
+      "allocations",
+      "config",
+      "eta_per_group",
+      "pattern_groups",
+      "relations_universe"
+    ]
+  },
+  "batch_size": 1,
+  "candidate_id": "C2",
+  "candidate_status": "generated_failed_minimum_thresholds",
+  "config_consistency_checks": {
+    "allocation.path": {
+      "actual": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "expected": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "passed": true
+    },
+    "allocation.sha256": {
+      "actual": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "expected": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "passed": true
+    },
+    "candidate_id": {
+      "actual": "C2",
+      "expected": "C2",
+      "passed": true
+    },
+    "input_graph.path": {
+      "actual": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "expected": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "passed": true
+    },
+    "input_graph.sha256": {
+      "actual": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+      "expected": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+      "passed": true
+    },
+    "outputs.candidate_graph": {
+      "actual": "experiments/graph_candidates/C2_targeted_generic_pruning/outputs/pruned_graph.jsonl",
+      "expected": "experiments/graph_candidates/C2_targeted_generic_pruning/outputs/pruned_graph.jsonl",
+      "passed": true
+    },
+    "outputs.generation_report": {
+      "actual": "experiments/graph_candidates/C2_targeted_generic_pruning/reports/prune_report.json",
+      "expected": "experiments/graph_candidates/C2_targeted_generic_pruning/reports/prune_report.json",
+      "passed": true
+    },
+    "target_relations": {
+      "actual": [
+        "P131",
+        "P279",
+        "P31"
+      ],
+      "expected": [
+        "P131",
+        "P279",
+        "P31"
+      ],
+      "passed": true
+    }
+  },
+  "config_path": "configs/graph_candidates/C2_targeted_generic_pruning.run.json",
+  "errors": [],
+  "exact_command_arguments": {
+    "argv": [
+      "tools/graph_candidate_generation/targeted_generic_dominance_prune.py",
+      "--config",
+      "configs/graph_candidates/C2_targeted_generic_pruning.run.json",
+      "--input-graph",
+      "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "--allocation",
+      "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "--output-graph",
+      "experiments/graph_candidates/C2_targeted_generic_pruning/outputs/pruned_graph.jsonl",
+      "--output-report",
+      "experiments/graph_candidates/C2_targeted_generic_pruning/reports/prune_report.json",
+      "--parent-candidate-id",
+      "B0",
+      "--parent-graph-sha256",
+      "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+      "--allocation-sha256",
+      "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "--target-relation",
+      "P31",
+      "--target-relation",
+      "P279",
+      "--target-relation",
+      "P131",
+      "--max-removals",
+      "600",
+      "--batch-size",
+      "1",
+      "--require-weak-components",
+      "1",
+      "--require-largest-ratio",
+      "1.0",
+      "--min-allocated-relations-observed",
+      "139",
+      "--max-zero-allocated-relations",
+      "0",
+      "--max-total-deficit",
+      "2359",
+      "--max-final-surplus",
+      "6581",
+      "--require-duplicate-count",
+      "0"
+    ],
+    "parsed_args": {
+      "allocation": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "allocation_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "batch_size": 1,
+      "config": "configs/graph_candidates/C2_targeted_generic_pruning.run.json",
+      "input_graph": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "max_final_surplus": 6581.0,
+      "max_removals": 600,
+      "max_total_deficit": 2359.0,
+      "max_zero_allocated_relations": 0,
+      "min_allocated_relations_observed": 139,
+      "output_graph": "experiments/graph_candidates/C2_targeted_generic_pruning/outputs/pruned_graph.jsonl",
+      "output_report": "experiments/graph_candidates/C2_targeted_generic_pruning/reports/prune_report.json",
+      "overwrite": false,
+      "parent_candidate_id": "B0",
+      "parent_graph_sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+      "require_duplicate_count": 0,
+      "require_largest_ratio": 1.0,
+      "require_weak_components": 1,
+      "target_relation": [
+        "P31",
+        "P279",
+        "P131"
+      ]
+    }
+  },
+  "final_metrics": {
+    "allocated_relations_observed": 139,
+    "allocation_relation_count": 139,
+    "duplicate_triple_count": 0,
+    "largest_weak_component_ratio": 1.0,
+    "largest_weak_component_size": 21893,
+    "per_relation_expected_observed": {
+      "P1001": {
+        "deficit": 0.0,
+        "expected_eta": 172.0,
+        "observed_count": 216,
+        "relation": "P1001",
+        "surplus": 44.0
+      },
+      "P1002": {
+        "deficit": 3.0,
+        "expected_eta": 69.0,
+        "observed_count": 66,
+        "relation": "P1002",
+        "surplus": 0.0
+      },
+      "P10254": {
+        "deficit": 4.0,
+        "expected_eta": 88.0,
+        "observed_count": 84,
+        "relation": "P10254",
+        "surplus": 0.0
+      },
+      "P10374": {
+        "deficit": 80.0,
+        "expected_eta": 178.0,
+        "observed_count": 98,
+        "relation": "P10374",
+        "surplus": 0.0
+      },
+      "P10449": {
+        "deficit": 4.0,
+        "expected_eta": 87.0,
+        "observed_count": 83,
+        "relation": "P10449",
+        "surplus": 0.0
+      },
+      "P10607": {
+        "deficit": 4.0,
+        "expected_eta": 99.0,
+        "observed_count": 95,
+        "relation": "P10607",
+        "surplus": 0.0
+      },
+      "P10624": {
+        "deficit": 0.0,
+        "expected_eta": 65.0,
+        "observed_count": 66,
+        "relation": "P10624",
+        "surplus": 1.0
+      },
+      "P1142": {
+        "deficit": 1.0,
+        "expected_eta": 65.0,
+        "observed_count": 64,
+        "relation": "P1142",
+        "surplus": 0.0
+      },
+      "P1151": {
+        "deficit": 1.0,
+        "expected_eta": 114.0,
+        "observed_count": 113,
+        "relation": "P1151",
+        "surplus": 0.0
+      },
+      "P1158": {
+        "deficit": 8.0,
+        "expected_eta": 174.0,
+        "observed_count": 166,
+        "relation": "P1158",
+        "surplus": 0.0
+      },
+      "P1204": {
+        "deficit": 1.0,
+        "expected_eta": 114.0,
+        "observed_count": 113,
+        "relation": "P1204",
+        "surplus": 0.0
+      },
+      "P12363": {
+        "deficit": 4.0,
+        "expected_eta": 87.0,
+        "observed_count": 83,
+        "relation": "P12363",
+        "surplus": 0.0
+      },
+      "P12452": {
+        "deficit": 3.0,
+        "expected_eta": 90.0,
+        "observed_count": 87,
+        "relation": "P12452",
+        "surplus": 0.0
+      },
+      "P1268": {
+        "deficit": 0.0,
+        "expected_eta": 271.0,
+        "observed_count": 271,
+        "relation": "P1268",
+        "surplus": 0.0
+      },
+      "P127": {
+        "deficit": 0.0,
+        "expected_eta": 179.0,
+        "observed_count": 184,
+        "relation": "P127",
+        "surplus": 5.0
+      },
+      "P12764": {
+        "deficit": 3.0,
+        "expected_eta": 138.0,
+        "observed_count": 135,
+        "relation": "P12764",
+        "surplus": 0.0
+      },
+      "P12765": {
+        "deficit": 4.0,
+        "expected_eta": 97.0,
+        "observed_count": 93,
+        "relation": "P12765",
+        "surplus": 0.0
+      },
+      "P1290": {
+        "deficit": 2.0,
+        "expected_eta": 54.0,
+        "observed_count": 52,
+        "relation": "P1290",
+        "surplus": 0.0
+      },
+      "P12994": {
+        "deficit": 121.0,
+        "expected_eta": 227.0,
+        "observed_count": 106,
+        "relation": "P12994",
+        "surplus": 0.0
+      },
+      "P131": {
+        "deficit": 0.0,
+        "expected_eta": 179.0,
+        "observed_count": 337,
+        "relation": "P131",
+        "surplus": 158.0
+      },
+      "P1312": {
+        "deficit": 0.0,
+        "expected_eta": 69.0,
+        "observed_count": 77,
+        "relation": "P1312",
+        "surplus": 8.0
+      },
+      "P13177": {
+        "deficit": 21.0,
+        "expected_eta": 429.0,
+        "observed_count": 408,
+        "relation": "P13177",
+        "surplus": 0.0
+      },
+      "P13210": {
+        "deficit": 1.0,
+        "expected_eta": 189.0,
+        "observed_count": 188,
+        "relation": "P13210",
+        "surplus": 0.0
+      },
+      "P1322": {
+        "deficit": 12.0,
+        "expected_eta": 261.0,
+        "observed_count": 249,
+        "relation": "P1322",
+        "surplus": 0.0
+      },
+      "P13478": {
+        "deficit": 3.0,
+        "expected_eta": 64.0,
+        "observed_count": 61,
+        "relation": "P13478",
+        "surplus": 0.0
+      },
+      "P1398": {
+        "deficit": 6.0,
+        "expected_eta": 132.0,
+        "observed_count": 126,
+        "relation": "P1398",
+        "surplus": 0.0
+      },
+      "P1403": {
+        "deficit": 4.0,
+        "expected_eta": 97.0,
+        "observed_count": 93,
+        "relation": "P1403",
+        "surplus": 0.0
+      },
+      "P1414": {
+        "deficit": 0.0,
+        "expected_eta": 69.0,
+        "observed_count": 71,
+        "relation": "P1414",
+        "surplus": 2.0
+      },
+      "P1420": {
+        "deficit": 10.0,
+        "expected_eta": 211.0,
+        "observed_count": 201,
+        "relation": "P1420",
+        "surplus": 0.0
+      },
+      "P1434": {
+        "deficit": 6.0,
+        "expected_eta": 110.0,
+        "observed_count": 104,
+        "relation": "P1434",
+        "surplus": 0.0
+      },
+      "P1445": {
+        "deficit": 4.0,
+        "expected_eta": 110.0,
+        "observed_count": 106,
+        "relation": "P1445",
+        "surplus": 0.0
+      },
+      "P1531": {
+        "deficit": 4.0,
+        "expected_eta": 89.0,
+        "observed_count": 85,
+        "relation": "P1531",
+        "surplus": 0.0
+      },
+      "P1537": {
+        "deficit": 3.0,
+        "expected_eta": 61.0,
+        "observed_count": 58,
+        "relation": "P1537",
+        "surplus": 0.0
+      },
+      "P1542": {
+        "deficit": 0.0,
+        "expected_eta": 61.0,
+        "observed_count": 64,
+        "relation": "P1542",
+        "surplus": 3.0
+      },
+      "P1560": {
+        "deficit": 10.0,
+        "expected_eta": 208.0,
+        "observed_count": 198,
+        "relation": "P1560",
+        "surplus": 0.0
+      },
+      "P1589": {
+        "deficit": 0.0,
+        "expected_eta": 56.0,
+        "observed_count": 57,
+        "relation": "P1589",
+        "surplus": 1.0
+      },
+      "P16": {
+        "deficit": 6.0,
+        "expected_eta": 294.0,
+        "observed_count": 288,
+        "relation": "P16",
+        "surplus": 0.0
+      },
+      "P1625": {
+        "deficit": 8.0,
+        "expected_eta": 178.0,
+        "observed_count": 170,
+        "relation": "P1625",
+        "surplus": 0.0
+      },
+      "P163": {
+        "deficit": 5.0,
+        "expected_eta": 107.0,
+        "observed_count": 102,
+        "relation": "P163",
+        "surplus": 0.0
+      },
+      "P1639": {
+        "deficit": 13.0,
+        "expected_eta": 249.0,
+        "observed_count": 236,
+        "relation": "P1639",
+        "surplus": 0.0
+      },
+      "P1654": {
+        "deficit": 3.0,
+        "expected_eta": 71.0,
+        "observed_count": 68,
+        "relation": "P1654",
+        "surplus": 0.0
+      },
+      "P167": {
+        "deficit": 6.0,
+        "expected_eta": 132.0,
+        "observed_count": 126,
+        "relation": "P167",
+        "surplus": 0.0
+      },
+      "P1678": {
+        "deficit": 0.0,
+        "expected_eta": 68.0,
+        "observed_count": 68,
+        "relation": "P1678",
+        "surplus": 0.0
+      },
+      "P1753": {
+        "deficit": 4.0,
+        "expected_eta": 91.0,
+        "observed_count": 87,
+        "relation": "P1753",
+        "surplus": 0.0
+      },
+      "P1754": {
+        "deficit": 3.0,
+        "expected_eta": 95.0,
+        "observed_count": 92,
+        "relation": "P1754",
+        "surplus": 0.0
+      },
+      "P1889": {
+        "deficit": 0.0,
+        "expected_eta": 205.0,
+        "observed_count": 251,
+        "relation": "P1889",
+        "surplus": 46.0
+      },
+      "P2098": {
+        "deficit": 2.0,
+        "expected_eta": 111.0,
+        "observed_count": 109,
+        "relation": "P2098",
+        "surplus": 0.0
+      },
+      "P2152": {
+        "deficit": 275.0,
+        "expected_eta": 329.0,
+        "observed_count": 54,
+        "relation": "P2152",
+        "surplus": 0.0
+      },
+      "P2155": {
+        "deficit": 111.0,
+        "expected_eta": 318.0,
+        "observed_count": 207,
+        "relation": "P2155",
+        "surplus": 0.0
+      },
+      "P2283": {
+        "deficit": 0.0,
+        "expected_eta": 59.0,
+        "observed_count": 66,
+        "relation": "P2283",
+        "surplus": 7.0
+      },
+      "P2289": {
+        "deficit": 0.0,
+        "expected_eta": 88.0,
+        "observed_count": 88,
+        "relation": "P2289",
+        "surplus": 0.0
+      },
+      "P2353": {
+        "deficit": 9.0,
+        "expected_eta": 185.0,
+        "observed_count": 176,
+        "relation": "P2353",
+        "surplus": 0.0
+      },
+      "P2388": {
+        "deficit": 0.0,
+        "expected_eta": 91.0,
+        "observed_count": 93,
+        "relation": "P2388",
+        "surplus": 2.0
+      },
+      "P2389": {
+        "deficit": 4.0,
+        "expected_eta": 88.0,
+        "observed_count": 84,
+        "relation": "P2389",
+        "surplus": 0.0
+      },
+      "P2499": {
+        "deficit": 4.0,
+        "expected_eta": 87.0,
+        "observed_count": 83,
+        "relation": "P2499",
+        "surplus": 0.0
+      },
+      "P2500": {
+        "deficit": 4.0,
+        "expected_eta": 87.0,
+        "observed_count": 83,
+        "relation": "P2500",
+        "surplus": 0.0
+      },
+      "P2567": {
+        "deficit": 0.0,
+        "expected_eta": 81.0,
+        "observed_count": 81,
+        "relation": "P2567",
+        "surplus": 0.0
+      },
+      "P2568": {
+        "deficit": 0.0,
+        "expected_eta": 82.0,
+        "observed_count": 82,
+        "relation": "P2568",
+        "surplus": 0.0
+      },
+      "P2670": {
+        "deficit": 0.0,
+        "expected_eta": 183.0,
+        "observed_count": 192,
+        "relation": "P2670",
+        "surplus": 9.0
+      },
+      "P2673": {
+        "deficit": 11.0,
+        "expected_eta": 225.0,
+        "observed_count": 214,
+        "relation": "P2673",
+        "surplus": 0.0
+      },
+      "P2674": {
+        "deficit": 0.0,
+        "expected_eta": 225.0,
+        "observed_count": 226,
+        "relation": "P2674",
+        "surplus": 1.0
+      },
+      "P2681": {
+        "deficit": 3.0,
+        "expected_eta": 131.0,
+        "observed_count": 128,
+        "relation": "P2681",
+        "surplus": 0.0
+      },
+      "P2682": {
+        "deficit": 6.0,
+        "expected_eta": 131.0,
+        "observed_count": 125,
+        "relation": "P2682",
+        "surplus": 0.0
+      },
+      "P2743": {
+        "deficit": 23.0,
+        "expected_eta": 468.0,
+        "observed_count": 445,
+        "relation": "P2743",
+        "surplus": 0.0
+      },
+      "P279": {
+        "deficit": 0.0,
+        "expected_eta": 227.0,
+        "observed_count": 744,
+        "relation": "P279",
+        "surplus": 517.0
+      },
+      "P2935": {
+        "deficit": 1.0,
+        "expected_eta": 69.0,
+        "observed_count": 68,
+        "relation": "P2935",
+        "surplus": 0.0
+      },
+      "P2959": {
+        "deficit": 2.0,
+        "expected_eta": 199.0,
+        "observed_count": 197,
+        "relation": "P2959",
+        "surplus": 0.0
+      },
+      "P3032": {
+        "deficit": 11.0,
+        "expected_eta": 243.0,
+        "observed_count": 232,
+        "relation": "P3032",
+        "surplus": 0.0
+      },
+      "P3075": {
+        "deficit": 0.0,
+        "expected_eta": 63.0,
+        "observed_count": 64,
+        "relation": "P3075",
+        "surplus": 1.0
+      },
+      "P3085": {
+        "deficit": 4.0,
+        "expected_eta": 84.0,
+        "observed_count": 80,
+        "relation": "P3085",
+        "surplus": 0.0
+      },
+      "P3094": {
+        "deficit": 6.0,
+        "expected_eta": 94.0,
+        "observed_count": 88,
+        "relation": "P3094",
+        "surplus": 0.0
+      },
+      "P31": {
+        "deficit": 0.0,
+        "expected_eta": 238.0,
+        "observed_count": 5952,
+        "relation": "P31",
+        "surplus": 5714.0
+      },
+      "P3137": {
+        "deficit": 3.0,
+        "expected_eta": 72.0,
+        "observed_count": 69,
+        "relation": "P3137",
+        "surplus": 0.0
+      },
+      "P3148": {
+        "deficit": 0.0,
+        "expected_eta": 81.0,
+        "observed_count": 81,
+        "relation": "P3148",
+        "surplus": 0.0
+      },
+      "P3261": {
+        "deficit": 2.0,
+        "expected_eta": 84.0,
+        "observed_count": 82,
+        "relation": "P3261",
+        "surplus": 0.0
+      },
+      "P3262": {
+        "deficit": 0.0,
+        "expected_eta": 84.0,
+        "observed_count": 84,
+        "relation": "P3262",
+        "surplus": 0.0
+      },
+      "P3403": {
+        "deficit": 11.0,
+        "expected_eta": 236.0,
+        "observed_count": 225,
+        "relation": "P3403",
+        "surplus": 0.0
+      },
+      "P3461": {
+        "deficit": 0.0,
+        "expected_eta": 83.0,
+        "observed_count": 83,
+        "relation": "P3461",
+        "surplus": 0.0
+      },
+      "P355": {
+        "deficit": 0.0,
+        "expected_eta": 58.0,
+        "observed_count": 58,
+        "relation": "P355",
+        "surplus": 0.0
+      },
+      "P361": {
+        "deficit": 0.0,
+        "expected_eta": 183.0,
+        "observed_count": 241,
+        "relation": "P361",
+        "surplus": 58.0
+      },
+      "P366": {
+        "deficit": 0.0,
+        "expected_eta": 180.0,
+        "observed_count": 198,
+        "relation": "P366",
+        "surplus": 18.0
+      },
+      "P3729": {
+        "deficit": 2.0,
+        "expected_eta": 149.0,
+        "observed_count": 147,
+        "relation": "P3729",
+        "surplus": 0.0
+      },
+      "P3730": {
+        "deficit": 7.0,
+        "expected_eta": 150.0,
+        "observed_count": 143,
+        "relation": "P3730",
+        "surplus": 0.0
+      },
+      "P3833": {
+        "deficit": 11.0,
+        "expected_eta": 230.0,
+        "observed_count": 219,
+        "relation": "P3833",
+        "surplus": 0.0
+      },
+      "P399": {
+        "deficit": 18.0,
+        "expected_eta": 323.0,
+        "observed_count": 305,
+        "relation": "P399",
+        "surplus": 0.0
+      },
+      "P406": {
+        "deficit": 5.0,
+        "expected_eta": 107.0,
+        "observed_count": 102,
+        "relation": "P406",
+        "surplus": 0.0
+      },
+      "P414": {
+        "deficit": 0.0,
+        "expected_eta": 56.0,
+        "observed_count": 57,
+        "relation": "P414",
+        "surplus": 1.0
+      },
+      "P4147": {
+        "deficit": 8.0,
+        "expected_eta": 170.0,
+        "observed_count": 162,
+        "relation": "P4147",
+        "surplus": 0.0
+      },
+      "P4149": {
+        "deficit": 0.0,
+        "expected_eta": 110.0,
+        "observed_count": 110,
+        "relation": "P4149",
+        "surplus": 0.0
+      },
+      "P4151": {
+        "deficit": 0.0,
+        "expected_eta": 63.0,
+        "observed_count": 65,
+        "relation": "P4151",
+        "surplus": 2.0
+      },
+      "P4329": {
+        "deficit": 6.0,
+        "expected_eta": 111.0,
+        "observed_count": 105,
+        "relation": "P4329",
+        "surplus": 0.0
+      },
+      "P4353": {
+        "deficit": 8.0,
+        "expected_eta": 175.0,
+        "observed_count": 167,
+        "relation": "P4353",
+        "surplus": 0.0
+      },
+      "P4545": {
+        "deficit": 280.0,
+        "expected_eta": 339.0,
+        "observed_count": 59,
+        "relation": "P4545",
+        "surplus": 0.0
+      },
+      "P457": {
+        "deficit": 2.0,
+        "expected_eta": 76.0,
+        "observed_count": 74,
+        "relation": "P457",
+        "surplus": 0.0
+      },
+      "P461": {
+        "deficit": 18.0,
+        "expected_eta": 370.0,
+        "observed_count": 352,
+        "relation": "P461",
+        "surplus": 0.0
+      },
+      "P466": {
+        "deficit": 6.0,
+        "expected_eta": 164.0,
+        "observed_count": 158,
+        "relation": "P466",
+        "surplus": 0.0
+      },
+      "P4661": {
+        "deficit": 5.0,
+        "expected_eta": 118.0,
+        "observed_count": 113,
+        "relation": "P4661",
+        "surplus": 0.0
+      },
+      "P4688": {
+        "deficit": 3.0,
+        "expected_eta": 90.0,
+        "observed_count": 87,
+        "relation": "P4688",
+        "surplus": 0.0
+      },
+      "P4792": {
+        "deficit": 2.0,
+        "expected_eta": 118.0,
+        "observed_count": 116,
+        "relation": "P4792",
+        "surplus": 0.0
+      },
+      "P4967": {
+        "deficit": 3.0,
+        "expected_eta": 69.0,
+        "observed_count": 66,
+        "relation": "P4967",
+        "surplus": 0.0
+      },
+      "P5135": {
+        "deficit": 0.0,
+        "expected_eta": 65.0,
+        "observed_count": 65,
+        "relation": "P5135",
+        "surplus": 0.0
+      },
+      "P514": {
+        "deficit": 459.0,
+        "expected_eta": 497.0,
+        "observed_count": 38,
+        "relation": "P514",
+        "surplus": 0.0
+      },
+      "P527": {
+        "deficit": 0.0,
+        "expected_eta": 191.0,
+        "observed_count": 255,
+        "relation": "P527",
+        "surplus": 64.0
+      },
+      "P5277": {
+        "deficit": 0.0,
+        "expected_eta": 180.0,
+        "observed_count": 180,
+        "relation": "P5277",
+        "surplus": 0.0
+      },
+      "P5278": {
+        "deficit": 11.0,
+        "expected_eta": 226.0,
+        "observed_count": 215,
+        "relation": "P5278",
+        "surplus": 0.0
+      },
+      "P5607": {
+        "deficit": 9.0,
+        "expected_eta": 189.0,
+        "observed_count": 180,
+        "relation": "P5607",
+        "surplus": 0.0
+      },
+      "P5642": {
+        "deficit": 0.0,
+        "expected_eta": 62.0,
+        "observed_count": 62,
+        "relation": "P5642",
+        "surplus": 0.0
+      },
+      "P567": {
+        "deficit": 8.0,
+        "expected_eta": 231.0,
+        "observed_count": 223,
+        "relation": "P567",
+        "surplus": 0.0
+      },
+      "P568": {
+        "deficit": 8.0,
+        "expected_eta": 230.0,
+        "observed_count": 222,
+        "relation": "P568",
+        "surplus": 0.0
+      },
+      "P5998": {
+        "deficit": 4.0,
+        "expected_eta": 90.0,
+        "observed_count": 86,
+        "relation": "P5998",
+        "surplus": 0.0
+      },
+      "P612": {
+        "deficit": 0.0,
+        "expected_eta": 89.0,
+        "observed_count": 89,
+        "relation": "P612",
+        "surplus": 0.0
+      },
+      "P6185": {
+        "deficit": 15.0,
+        "expected_eta": 316.0,
+        "observed_count": 301,
+        "relation": "P6185",
+        "surplus": 0.0
+      },
+      "P6291": {
+        "deficit": 0.0,
+        "expected_eta": 106.0,
+        "observed_count": 106,
+        "relation": "P6291",
+        "surplus": 0.0
+      },
+      "P6439": {
+        "deficit": 5.0,
+        "expected_eta": 107.0,
+        "observed_count": 102,
+        "relation": "P6439",
+        "surplus": 0.0
+      },
+      "P694": {
+        "deficit": 7.0,
+        "expected_eta": 141.0,
+        "observed_count": 134,
+        "relation": "P694",
+        "surplus": 0.0
+      },
+      "P7209": {
+        "deficit": 59.0,
+        "expected_eta": 197.0,
+        "observed_count": 138,
+        "relation": "P7209",
+        "surplus": 0.0
+      },
+      "P748": {
+        "deficit": 0.0,
+        "expected_eta": 57.0,
+        "observed_count": 57,
+        "relation": "P748",
+        "surplus": 0.0
+      },
+      "P7604": {
+        "deficit": 5.0,
+        "expected_eta": 110.0,
+        "observed_count": 105,
+        "relation": "P7604",
+        "surplus": 0.0
+      },
+      "P793": {
+        "deficit": 0.0,
+        "expected_eta": 336.0,
+        "observed_count": 343,
+        "relation": "P793",
+        "surplus": 7.0
+      },
+      "P7938": {
+        "deficit": 2.0,
+        "expected_eta": 57.0,
+        "observed_count": 55,
+        "relation": "P7938",
+        "surplus": 0.0
+      },
+      "P8058": {
+        "deficit": 5.0,
+        "expected_eta": 104.0,
+        "observed_count": 99,
+        "relation": "P8058",
+        "surplus": 0.0
+      },
+      "P8138": {
+        "deficit": 3.0,
+        "expected_eta": 62.0,
+        "observed_count": 59,
+        "relation": "P8138",
+        "surplus": 0.0
+      },
+      "P814": {
+        "deficit": 2.0,
+        "expected_eta": 179.0,
+        "observed_count": 177,
+        "relation": "P814",
+        "surplus": 0.0
+      },
+      "P816": {
+        "deficit": 13.0,
+        "expected_eta": 99.0,
+        "observed_count": 86,
+        "relation": "P816",
+        "surplus": 0.0
+      },
+      "P822": {
+        "deficit": 5.0,
+        "expected_eta": 109.0,
+        "observed_count": 104,
+        "relation": "P822",
+        "surplus": 0.0
+      },
+      "P8225": {
+        "deficit": 0.0,
+        "expected_eta": 89.0,
+        "observed_count": 93,
+        "relation": "P8225",
+        "surplus": 4.0
+      },
+      "P8263": {
+        "deficit": 3.0,
+        "expected_eta": 91.0,
+        "observed_count": 88,
+        "relation": "P8263",
+        "surplus": 0.0
+      },
+      "P828": {
+        "deficit": 0.0,
+        "expected_eta": 64.0,
+        "observed_count": 66,
+        "relation": "P828",
+        "surplus": 2.0
+      },
+      "P8289": {
+        "deficit": 4.0,
+        "expected_eta": 109.0,
+        "observed_count": 105,
+        "relation": "P8289",
+        "surplus": 0.0
+      },
+      "P8308": {
+        "deficit": 8.0,
+        "expected_eta": 175.0,
+        "observed_count": 167,
+        "relation": "P8308",
+        "surplus": 0.0
+      },
+      "P837": {
+        "deficit": 0.0,
+        "expected_eta": 60.0,
+        "observed_count": 60,
+        "relation": "P837",
+        "surplus": 0.0
+      },
+      "P8571": {
+        "deficit": 4.0,
+        "expected_eta": 93.0,
+        "observed_count": 89,
+        "relation": "P8571",
+        "surplus": 0.0
+      },
+      "P880": {
+        "deficit": 3.0,
+        "expected_eta": 61.0,
+        "observed_count": 58,
+        "relation": "P880",
+        "surplus": 0.0
+      },
+      "P8865": {
+        "deficit": 101.0,
+        "expected_eta": 230.0,
+        "observed_count": 129,
+        "relation": "P8865",
+        "surplus": 0.0
+      },
+      "P9059": {
+        "deficit": 3.0,
+        "expected_eta": 60.0,
+        "observed_count": 57,
+        "relation": "P9059",
+        "surplus": 0.0
+      },
+      "P9234": {
+        "deficit": 7.0,
+        "expected_eta": 107.0,
+        "observed_count": 100,
+        "relation": "P9234",
+        "surplus": 0.0
+      },
+      "P927": {
+        "deficit": 2.0,
+        "expected_eta": 59.0,
+        "observed_count": 57,
+        "relation": "P927",
+        "surplus": 0.0
+      },
+      "P931": {
+        "deficit": 8.0,
+        "expected_eta": 177.0,
+        "observed_count": 169,
+        "relation": "P931",
+        "surplus": 0.0
+      },
+      "P9926": {
+        "deficit": 5.0,
+        "expected_eta": 107.0,
+        "observed_count": 102,
+        "relation": "P9926",
+        "surplus": 0.0
+      }
+    },
+    "raw_total_rows": 24656,
+    "relation_counts": {
+      "P1001": 216,
+      "P1002": 66,
+      "P10254": 84,
+      "P10374": 98,
+      "P10449": 83,
+      "P10607": 95,
+      "P10624": 66,
+      "P1142": 64,
+      "P1151": 113,
+      "P1158": 166,
+      "P1204": 113,
+      "P12363": 83,
+      "P12452": 87,
+      "P1268": 271,
+      "P127": 184,
+      "P12764": 135,
+      "P12765": 93,
+      "P1290": 52,
+      "P12994": 106,
+      "P131": 337,
+      "P1312": 77,
+      "P13177": 408,
+      "P13210": 188,
+      "P1322": 249,
+      "P13478": 61,
+      "P1398": 126,
+      "P1403": 93,
+      "P1414": 71,
+      "P1420": 201,
+      "P1434": 104,
+      "P1445": 106,
+      "P1531": 85,
+      "P1537": 58,
+      "P1542": 64,
+      "P1560": 198,
+      "P1589": 57,
+      "P16": 288,
+      "P1625": 170,
+      "P163": 102,
+      "P1639": 236,
+      "P1654": 68,
+      "P167": 126,
+      "P1678": 68,
+      "P1753": 87,
+      "P1754": 92,
+      "P1889": 251,
+      "P2098": 109,
+      "P2152": 54,
+      "P2155": 207,
+      "P2283": 66,
+      "P2289": 88,
+      "P2353": 176,
+      "P2388": 93,
+      "P2389": 84,
+      "P2499": 83,
+      "P2500": 83,
+      "P2567": 81,
+      "P2568": 82,
+      "P2670": 192,
+      "P2673": 214,
+      "P2674": 226,
+      "P2681": 128,
+      "P2682": 125,
+      "P2743": 445,
+      "P279": 744,
+      "P2935": 68,
+      "P2959": 197,
+      "P3032": 232,
+      "P3075": 64,
+      "P3085": 80,
+      "P3094": 88,
+      "P31": 5952,
+      "P3137": 69,
+      "P3148": 81,
+      "P3261": 82,
+      "P3262": 84,
+      "P3403": 225,
+      "P3461": 83,
+      "P355": 58,
+      "P361": 241,
+      "P366": 198,
+      "P3729": 147,
+      "P3730": 143,
+      "P3833": 219,
+      "P399": 305,
+      "P406": 102,
+      "P414": 57,
+      "P4147": 162,
+      "P4149": 110,
+      "P4151": 65,
+      "P4329": 105,
+      "P4353": 167,
+      "P4545": 59,
+      "P457": 74,
+      "P461": 352,
+      "P466": 158,
+      "P4661": 113,
+      "P4688": 87,
+      "P4792": 116,
+      "P4967": 66,
+      "P5135": 65,
+      "P514": 38,
+      "P527": 255,
+      "P5277": 180,
+      "P5278": 215,
+      "P5607": 180,
+      "P5642": 62,
+      "P567": 223,
+      "P568": 222,
+      "P5998": 86,
+      "P612": 89,
+      "P6185": 301,
+      "P6291": 106,
+      "P6439": 102,
+      "P694": 134,
+      "P7209": 138,
+      "P748": 57,
+      "P7604": 105,
+      "P793": 343,
+      "P7938": 55,
+      "P8058": 99,
+      "P8138": 59,
+      "P814": 177,
+      "P816": 86,
+      "P822": 104,
+      "P8225": 93,
+      "P8263": 88,
+      "P828": 66,
+      "P8289": 105,
+      "P8308": 167,
+      "P837": 60,
+      "P8571": 89,
+      "P880": 58,
+      "P8865": 129,
+      "P9059": 57,
+      "P9234": 100,
+      "P927": 57,
+      "P931": 169,
+      "P9926": 102
+    },
+    "total_deficit": 2019.0,
+    "total_expected_eta": 20000.0,
+    "total_observed_allocated_triples": 24656,
+    "total_surplus": 6675.0,
+    "unique_entities": 21893,
+    "unique_relations": 139,
+    "unique_triples": 24656,
+    "weak_component_count": 1,
+    "zero_allocated_relation_ids": [],
+    "zero_allocated_relations": 0
+  },
+  "hard_constraint_check_results": {
+    "allocated_relations_observed": {
+      "actual": 139,
+      "minimum": 139,
+      "passed": true
+    },
+    "duplicate_triple_count": {
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    "largest_weak_component_ratio": {
+      "actual": 1.0,
+      "minimum": 1.0,
+      "passed": true
+    },
+    "total_deficit": {
+      "actual": 2019.0,
+      "maximum": 2359.0,
+      "passed": true
+    },
+    "total_surplus": {
+      "actual": 6675.0,
+      "maximum": 6581.0,
+      "passed": false
+    },
+    "weak_component_count": {
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    "zero_allocated_relations": {
+      "actual": 0,
+      "maximum": 0,
+      "passed": true
+    }
+  },
+  "initial_metrics": {
+    "allocated_relations_observed": 139,
+    "allocation_relation_count": 139,
+    "duplicate_triple_count": 0,
+    "largest_weak_component_ratio": 1.0,
+    "largest_weak_component_size": 21893,
+    "per_relation_expected_observed": {
+      "P1001": {
+        "deficit": 0.0,
+        "expected_eta": 172.0,
+        "observed_count": 216,
+        "relation": "P1001",
+        "surplus": 44.0
+      },
+      "P1002": {
+        "deficit": 3.0,
+        "expected_eta": 69.0,
+        "observed_count": 66,
+        "relation": "P1002",
+        "surplus": 0.0
+      },
+      "P10254": {
+        "deficit": 4.0,
+        "expected_eta": 88.0,
+        "observed_count": 84,
+        "relation": "P10254",
+        "surplus": 0.0
+      },
+      "P10374": {
+        "deficit": 80.0,
+        "expected_eta": 178.0,
+        "observed_count": 98,
+        "relation": "P10374",
+        "surplus": 0.0
+      },
+      "P10449": {
+        "deficit": 4.0,
+        "expected_eta": 87.0,
+        "observed_count": 83,
+        "relation": "P10449",
+        "surplus": 0.0
+      },
+      "P10607": {
+        "deficit": 4.0,
+        "expected_eta": 99.0,
+        "observed_count": 95,
+        "relation": "P10607",
+        "surplus": 0.0
+      },
+      "P10624": {
+        "deficit": 0.0,
+        "expected_eta": 65.0,
+        "observed_count": 66,
+        "relation": "P10624",
+        "surplus": 1.0
+      },
+      "P1142": {
+        "deficit": 1.0,
+        "expected_eta": 65.0,
+        "observed_count": 64,
+        "relation": "P1142",
+        "surplus": 0.0
+      },
+      "P1151": {
+        "deficit": 1.0,
+        "expected_eta": 114.0,
+        "observed_count": 113,
+        "relation": "P1151",
+        "surplus": 0.0
+      },
+      "P1158": {
+        "deficit": 8.0,
+        "expected_eta": 174.0,
+        "observed_count": 166,
+        "relation": "P1158",
+        "surplus": 0.0
+      },
+      "P1204": {
+        "deficit": 1.0,
+        "expected_eta": 114.0,
+        "observed_count": 113,
+        "relation": "P1204",
+        "surplus": 0.0
+      },
+      "P12363": {
+        "deficit": 4.0,
+        "expected_eta": 87.0,
+        "observed_count": 83,
+        "relation": "P12363",
+        "surplus": 0.0
+      },
+      "P12452": {
+        "deficit": 3.0,
+        "expected_eta": 90.0,
+        "observed_count": 87,
+        "relation": "P12452",
+        "surplus": 0.0
+      },
+      "P1268": {
+        "deficit": 0.0,
+        "expected_eta": 271.0,
+        "observed_count": 271,
+        "relation": "P1268",
+        "surplus": 0.0
+      },
+      "P127": {
+        "deficit": 0.0,
+        "expected_eta": 179.0,
+        "observed_count": 184,
+        "relation": "P127",
+        "surplus": 5.0
+      },
+      "P12764": {
+        "deficit": 3.0,
+        "expected_eta": 138.0,
+        "observed_count": 135,
+        "relation": "P12764",
+        "surplus": 0.0
+      },
+      "P12765": {
+        "deficit": 4.0,
+        "expected_eta": 97.0,
+        "observed_count": 93,
+        "relation": "P12765",
+        "surplus": 0.0
+      },
+      "P1290": {
+        "deficit": 2.0,
+        "expected_eta": 54.0,
+        "observed_count": 52,
+        "relation": "P1290",
+        "surplus": 0.0
+      },
+      "P12994": {
+        "deficit": 121.0,
+        "expected_eta": 227.0,
+        "observed_count": 106,
+        "relation": "P12994",
+        "surplus": 0.0
+      },
+      "P131": {
+        "deficit": 0.0,
+        "expected_eta": 179.0,
+        "observed_count": 353,
+        "relation": "P131",
+        "surplus": 174.0
+      },
+      "P1312": {
+        "deficit": 0.0,
+        "expected_eta": 69.0,
+        "observed_count": 77,
+        "relation": "P1312",
+        "surplus": 8.0
+      },
+      "P13177": {
+        "deficit": 21.0,
+        "expected_eta": 429.0,
+        "observed_count": 408,
+        "relation": "P13177",
+        "surplus": 0.0
+      },
+      "P13210": {
+        "deficit": 1.0,
+        "expected_eta": 189.0,
+        "observed_count": 188,
+        "relation": "P13210",
+        "surplus": 0.0
+      },
+      "P1322": {
+        "deficit": 12.0,
+        "expected_eta": 261.0,
+        "observed_count": 249,
+        "relation": "P1322",
+        "surplus": 0.0
+      },
+      "P13478": {
+        "deficit": 3.0,
+        "expected_eta": 64.0,
+        "observed_count": 61,
+        "relation": "P13478",
+        "surplus": 0.0
+      },
+      "P1398": {
+        "deficit": 6.0,
+        "expected_eta": 132.0,
+        "observed_count": 126,
+        "relation": "P1398",
+        "surplus": 0.0
+      },
+      "P1403": {
+        "deficit": 4.0,
+        "expected_eta": 97.0,
+        "observed_count": 93,
+        "relation": "P1403",
+        "surplus": 0.0
+      },
+      "P1414": {
+        "deficit": 0.0,
+        "expected_eta": 69.0,
+        "observed_count": 71,
+        "relation": "P1414",
+        "surplus": 2.0
+      },
+      "P1420": {
+        "deficit": 10.0,
+        "expected_eta": 211.0,
+        "observed_count": 201,
+        "relation": "P1420",
+        "surplus": 0.0
+      },
+      "P1434": {
+        "deficit": 6.0,
+        "expected_eta": 110.0,
+        "observed_count": 104,
+        "relation": "P1434",
+        "surplus": 0.0
+      },
+      "P1445": {
+        "deficit": 4.0,
+        "expected_eta": 110.0,
+        "observed_count": 106,
+        "relation": "P1445",
+        "surplus": 0.0
+      },
+      "P1531": {
+        "deficit": 4.0,
+        "expected_eta": 89.0,
+        "observed_count": 85,
+        "relation": "P1531",
+        "surplus": 0.0
+      },
+      "P1537": {
+        "deficit": 3.0,
+        "expected_eta": 61.0,
+        "observed_count": 58,
+        "relation": "P1537",
+        "surplus": 0.0
+      },
+      "P1542": {
+        "deficit": 0.0,
+        "expected_eta": 61.0,
+        "observed_count": 64,
+        "relation": "P1542",
+        "surplus": 3.0
+      },
+      "P1560": {
+        "deficit": 10.0,
+        "expected_eta": 208.0,
+        "observed_count": 198,
+        "relation": "P1560",
+        "surplus": 0.0
+      },
+      "P1589": {
+        "deficit": 0.0,
+        "expected_eta": 56.0,
+        "observed_count": 57,
+        "relation": "P1589",
+        "surplus": 1.0
+      },
+      "P16": {
+        "deficit": 6.0,
+        "expected_eta": 294.0,
+        "observed_count": 288,
+        "relation": "P16",
+        "surplus": 0.0
+      },
+      "P1625": {
+        "deficit": 8.0,
+        "expected_eta": 178.0,
+        "observed_count": 170,
+        "relation": "P1625",
+        "surplus": 0.0
+      },
+      "P163": {
+        "deficit": 5.0,
+        "expected_eta": 107.0,
+        "observed_count": 102,
+        "relation": "P163",
+        "surplus": 0.0
+      },
+      "P1639": {
+        "deficit": 13.0,
+        "expected_eta": 249.0,
+        "observed_count": 236,
+        "relation": "P1639",
+        "surplus": 0.0
+      },
+      "P1654": {
+        "deficit": 3.0,
+        "expected_eta": 71.0,
+        "observed_count": 68,
+        "relation": "P1654",
+        "surplus": 0.0
+      },
+      "P167": {
+        "deficit": 6.0,
+        "expected_eta": 132.0,
+        "observed_count": 126,
+        "relation": "P167",
+        "surplus": 0.0
+      },
+      "P1678": {
+        "deficit": 0.0,
+        "expected_eta": 68.0,
+        "observed_count": 68,
+        "relation": "P1678",
+        "surplus": 0.0
+      },
+      "P1753": {
+        "deficit": 4.0,
+        "expected_eta": 91.0,
+        "observed_count": 87,
+        "relation": "P1753",
+        "surplus": 0.0
+      },
+      "P1754": {
+        "deficit": 3.0,
+        "expected_eta": 95.0,
+        "observed_count": 92,
+        "relation": "P1754",
+        "surplus": 0.0
+      },
+      "P1889": {
+        "deficit": 0.0,
+        "expected_eta": 205.0,
+        "observed_count": 251,
+        "relation": "P1889",
+        "surplus": 46.0
+      },
+      "P2098": {
+        "deficit": 2.0,
+        "expected_eta": 111.0,
+        "observed_count": 109,
+        "relation": "P2098",
+        "surplus": 0.0
+      },
+      "P2152": {
+        "deficit": 275.0,
+        "expected_eta": 329.0,
+        "observed_count": 54,
+        "relation": "P2152",
+        "surplus": 0.0
+      },
+      "P2155": {
+        "deficit": 111.0,
+        "expected_eta": 318.0,
+        "observed_count": 207,
+        "relation": "P2155",
+        "surplus": 0.0
+      },
+      "P2283": {
+        "deficit": 0.0,
+        "expected_eta": 59.0,
+        "observed_count": 66,
+        "relation": "P2283",
+        "surplus": 7.0
+      },
+      "P2289": {
+        "deficit": 0.0,
+        "expected_eta": 88.0,
+        "observed_count": 88,
+        "relation": "P2289",
+        "surplus": 0.0
+      },
+      "P2353": {
+        "deficit": 9.0,
+        "expected_eta": 185.0,
+        "observed_count": 176,
+        "relation": "P2353",
+        "surplus": 0.0
+      },
+      "P2388": {
+        "deficit": 0.0,
+        "expected_eta": 91.0,
+        "observed_count": 93,
+        "relation": "P2388",
+        "surplus": 2.0
+      },
+      "P2389": {
+        "deficit": 4.0,
+        "expected_eta": 88.0,
+        "observed_count": 84,
+        "relation": "P2389",
+        "surplus": 0.0
+      },
+      "P2499": {
+        "deficit": 4.0,
+        "expected_eta": 87.0,
+        "observed_count": 83,
+        "relation": "P2499",
+        "surplus": 0.0
+      },
+      "P2500": {
+        "deficit": 4.0,
+        "expected_eta": 87.0,
+        "observed_count": 83,
+        "relation": "P2500",
+        "surplus": 0.0
+      },
+      "P2567": {
+        "deficit": 0.0,
+        "expected_eta": 81.0,
+        "observed_count": 81,
+        "relation": "P2567",
+        "surplus": 0.0
+      },
+      "P2568": {
+        "deficit": 0.0,
+        "expected_eta": 82.0,
+        "observed_count": 82,
+        "relation": "P2568",
+        "surplus": 0.0
+      },
+      "P2670": {
+        "deficit": 0.0,
+        "expected_eta": 183.0,
+        "observed_count": 192,
+        "relation": "P2670",
+        "surplus": 9.0
+      },
+      "P2673": {
+        "deficit": 11.0,
+        "expected_eta": 225.0,
+        "observed_count": 214,
+        "relation": "P2673",
+        "surplus": 0.0
+      },
+      "P2674": {
+        "deficit": 0.0,
+        "expected_eta": 225.0,
+        "observed_count": 226,
+        "relation": "P2674",
+        "surplus": 1.0
+      },
+      "P2681": {
+        "deficit": 3.0,
+        "expected_eta": 131.0,
+        "observed_count": 128,
+        "relation": "P2681",
+        "surplus": 0.0
+      },
+      "P2682": {
+        "deficit": 6.0,
+        "expected_eta": 131.0,
+        "observed_count": 125,
+        "relation": "P2682",
+        "surplus": 0.0
+      },
+      "P2743": {
+        "deficit": 23.0,
+        "expected_eta": 468.0,
+        "observed_count": 445,
+        "relation": "P2743",
+        "surplus": 0.0
+      },
+      "P279": {
+        "deficit": 0.0,
+        "expected_eta": 227.0,
+        "observed_count": 750,
+        "relation": "P279",
+        "surplus": 523.0
+      },
+      "P2935": {
+        "deficit": 1.0,
+        "expected_eta": 69.0,
+        "observed_count": 68,
+        "relation": "P2935",
+        "surplus": 0.0
+      },
+      "P2959": {
+        "deficit": 2.0,
+        "expected_eta": 199.0,
+        "observed_count": 197,
+        "relation": "P2959",
+        "surplus": 0.0
+      },
+      "P3032": {
+        "deficit": 11.0,
+        "expected_eta": 243.0,
+        "observed_count": 232,
+        "relation": "P3032",
+        "surplus": 0.0
+      },
+      "P3075": {
+        "deficit": 0.0,
+        "expected_eta": 63.0,
+        "observed_count": 64,
+        "relation": "P3075",
+        "surplus": 1.0
+      },
+      "P3085": {
+        "deficit": 4.0,
+        "expected_eta": 84.0,
+        "observed_count": 80,
+        "relation": "P3085",
+        "surplus": 0.0
+      },
+      "P3094": {
+        "deficit": 6.0,
+        "expected_eta": 94.0,
+        "observed_count": 88,
+        "relation": "P3094",
+        "surplus": 0.0
+      },
+      "P31": {
+        "deficit": 0.0,
+        "expected_eta": 238.0,
+        "observed_count": 5957,
+        "relation": "P31",
+        "surplus": 5719.0
+      },
+      "P3137": {
+        "deficit": 3.0,
+        "expected_eta": 72.0,
+        "observed_count": 69,
+        "relation": "P3137",
+        "surplus": 0.0
+      },
+      "P3148": {
+        "deficit": 0.0,
+        "expected_eta": 81.0,
+        "observed_count": 81,
+        "relation": "P3148",
+        "surplus": 0.0
+      },
+      "P3261": {
+        "deficit": 2.0,
+        "expected_eta": 84.0,
+        "observed_count": 82,
+        "relation": "P3261",
+        "surplus": 0.0
+      },
+      "P3262": {
+        "deficit": 0.0,
+        "expected_eta": 84.0,
+        "observed_count": 84,
+        "relation": "P3262",
+        "surplus": 0.0
+      },
+      "P3403": {
+        "deficit": 11.0,
+        "expected_eta": 236.0,
+        "observed_count": 225,
+        "relation": "P3403",
+        "surplus": 0.0
+      },
+      "P3461": {
+        "deficit": 0.0,
+        "expected_eta": 83.0,
+        "observed_count": 83,
+        "relation": "P3461",
+        "surplus": 0.0
+      },
+      "P355": {
+        "deficit": 0.0,
+        "expected_eta": 58.0,
+        "observed_count": 58,
+        "relation": "P355",
+        "surplus": 0.0
+      },
+      "P361": {
+        "deficit": 0.0,
+        "expected_eta": 183.0,
+        "observed_count": 241,
+        "relation": "P361",
+        "surplus": 58.0
+      },
+      "P366": {
+        "deficit": 0.0,
+        "expected_eta": 180.0,
+        "observed_count": 198,
+        "relation": "P366",
+        "surplus": 18.0
+      },
+      "P3729": {
+        "deficit": 2.0,
+        "expected_eta": 149.0,
+        "observed_count": 147,
+        "relation": "P3729",
+        "surplus": 0.0
+      },
+      "P3730": {
+        "deficit": 7.0,
+        "expected_eta": 150.0,
+        "observed_count": 143,
+        "relation": "P3730",
+        "surplus": 0.0
+      },
+      "P3833": {
+        "deficit": 11.0,
+        "expected_eta": 230.0,
+        "observed_count": 219,
+        "relation": "P3833",
+        "surplus": 0.0
+      },
+      "P399": {
+        "deficit": 18.0,
+        "expected_eta": 323.0,
+        "observed_count": 305,
+        "relation": "P399",
+        "surplus": 0.0
+      },
+      "P406": {
+        "deficit": 5.0,
+        "expected_eta": 107.0,
+        "observed_count": 102,
+        "relation": "P406",
+        "surplus": 0.0
+      },
+      "P414": {
+        "deficit": 0.0,
+        "expected_eta": 56.0,
+        "observed_count": 57,
+        "relation": "P414",
+        "surplus": 1.0
+      },
+      "P4147": {
+        "deficit": 8.0,
+        "expected_eta": 170.0,
+        "observed_count": 162,
+        "relation": "P4147",
+        "surplus": 0.0
+      },
+      "P4149": {
+        "deficit": 0.0,
+        "expected_eta": 110.0,
+        "observed_count": 110,
+        "relation": "P4149",
+        "surplus": 0.0
+      },
+      "P4151": {
+        "deficit": 0.0,
+        "expected_eta": 63.0,
+        "observed_count": 65,
+        "relation": "P4151",
+        "surplus": 2.0
+      },
+      "P4329": {
+        "deficit": 6.0,
+        "expected_eta": 111.0,
+        "observed_count": 105,
+        "relation": "P4329",
+        "surplus": 0.0
+      },
+      "P4353": {
+        "deficit": 8.0,
+        "expected_eta": 175.0,
+        "observed_count": 167,
+        "relation": "P4353",
+        "surplus": 0.0
+      },
+      "P4545": {
+        "deficit": 280.0,
+        "expected_eta": 339.0,
+        "observed_count": 59,
+        "relation": "P4545",
+        "surplus": 0.0
+      },
+      "P457": {
+        "deficit": 2.0,
+        "expected_eta": 76.0,
+        "observed_count": 74,
+        "relation": "P457",
+        "surplus": 0.0
+      },
+      "P461": {
+        "deficit": 18.0,
+        "expected_eta": 370.0,
+        "observed_count": 352,
+        "relation": "P461",
+        "surplus": 0.0
+      },
+      "P466": {
+        "deficit": 6.0,
+        "expected_eta": 164.0,
+        "observed_count": 158,
+        "relation": "P466",
+        "surplus": 0.0
+      },
+      "P4661": {
+        "deficit": 5.0,
+        "expected_eta": 118.0,
+        "observed_count": 113,
+        "relation": "P4661",
+        "surplus": 0.0
+      },
+      "P4688": {
+        "deficit": 3.0,
+        "expected_eta": 90.0,
+        "observed_count": 87,
+        "relation": "P4688",
+        "surplus": 0.0
+      },
+      "P4792": {
+        "deficit": 2.0,
+        "expected_eta": 118.0,
+        "observed_count": 116,
+        "relation": "P4792",
+        "surplus": 0.0
+      },
+      "P4967": {
+        "deficit": 3.0,
+        "expected_eta": 69.0,
+        "observed_count": 66,
+        "relation": "P4967",
+        "surplus": 0.0
+      },
+      "P5135": {
+        "deficit": 0.0,
+        "expected_eta": 65.0,
+        "observed_count": 65,
+        "relation": "P5135",
+        "surplus": 0.0
+      },
+      "P514": {
+        "deficit": 459.0,
+        "expected_eta": 497.0,
+        "observed_count": 38,
+        "relation": "P514",
+        "surplus": 0.0
+      },
+      "P527": {
+        "deficit": 0.0,
+        "expected_eta": 191.0,
+        "observed_count": 255,
+        "relation": "P527",
+        "surplus": 64.0
+      },
+      "P5277": {
+        "deficit": 0.0,
+        "expected_eta": 180.0,
+        "observed_count": 180,
+        "relation": "P5277",
+        "surplus": 0.0
+      },
+      "P5278": {
+        "deficit": 11.0,
+        "expected_eta": 226.0,
+        "observed_count": 215,
+        "relation": "P5278",
+        "surplus": 0.0
+      },
+      "P5607": {
+        "deficit": 9.0,
+        "expected_eta": 189.0,
+        "observed_count": 180,
+        "relation": "P5607",
+        "surplus": 0.0
+      },
+      "P5642": {
+        "deficit": 0.0,
+        "expected_eta": 62.0,
+        "observed_count": 62,
+        "relation": "P5642",
+        "surplus": 0.0
+      },
+      "P567": {
+        "deficit": 8.0,
+        "expected_eta": 231.0,
+        "observed_count": 223,
+        "relation": "P567",
+        "surplus": 0.0
+      },
+      "P568": {
+        "deficit": 8.0,
+        "expected_eta": 230.0,
+        "observed_count": 222,
+        "relation": "P568",
+        "surplus": 0.0
+      },
+      "P5998": {
+        "deficit": 4.0,
+        "expected_eta": 90.0,
+        "observed_count": 86,
+        "relation": "P5998",
+        "surplus": 0.0
+      },
+      "P612": {
+        "deficit": 0.0,
+        "expected_eta": 89.0,
+        "observed_count": 89,
+        "relation": "P612",
+        "surplus": 0.0
+      },
+      "P6185": {
+        "deficit": 15.0,
+        "expected_eta": 316.0,
+        "observed_count": 301,
+        "relation": "P6185",
+        "surplus": 0.0
+      },
+      "P6291": {
+        "deficit": 0.0,
+        "expected_eta": 106.0,
+        "observed_count": 106,
+        "relation": "P6291",
+        "surplus": 0.0
+      },
+      "P6439": {
+        "deficit": 5.0,
+        "expected_eta": 107.0,
+        "observed_count": 102,
+        "relation": "P6439",
+        "surplus": 0.0
+      },
+      "P694": {
+        "deficit": 7.0,
+        "expected_eta": 141.0,
+        "observed_count": 134,
+        "relation": "P694",
+        "surplus": 0.0
+      },
+      "P7209": {
+        "deficit": 59.0,
+        "expected_eta": 197.0,
+        "observed_count": 138,
+        "relation": "P7209",
+        "surplus": 0.0
+      },
+      "P748": {
+        "deficit": 0.0,
+        "expected_eta": 57.0,
+        "observed_count": 57,
+        "relation": "P748",
+        "surplus": 0.0
+      },
+      "P7604": {
+        "deficit": 5.0,
+        "expected_eta": 110.0,
+        "observed_count": 105,
+        "relation": "P7604",
+        "surplus": 0.0
+      },
+      "P793": {
+        "deficit": 0.0,
+        "expected_eta": 336.0,
+        "observed_count": 343,
+        "relation": "P793",
+        "surplus": 7.0
+      },
+      "P7938": {
+        "deficit": 2.0,
+        "expected_eta": 57.0,
+        "observed_count": 55,
+        "relation": "P7938",
+        "surplus": 0.0
+      },
+      "P8058": {
+        "deficit": 5.0,
+        "expected_eta": 104.0,
+        "observed_count": 99,
+        "relation": "P8058",
+        "surplus": 0.0
+      },
+      "P8138": {
+        "deficit": 3.0,
+        "expected_eta": 62.0,
+        "observed_count": 59,
+        "relation": "P8138",
+        "surplus": 0.0
+      },
+      "P814": {
+        "deficit": 2.0,
+        "expected_eta": 179.0,
+        "observed_count": 177,
+        "relation": "P814",
+        "surplus": 0.0
+      },
+      "P816": {
+        "deficit": 13.0,
+        "expected_eta": 99.0,
+        "observed_count": 86,
+        "relation": "P816",
+        "surplus": 0.0
+      },
+      "P822": {
+        "deficit": 5.0,
+        "expected_eta": 109.0,
+        "observed_count": 104,
+        "relation": "P822",
+        "surplus": 0.0
+      },
+      "P8225": {
+        "deficit": 0.0,
+        "expected_eta": 89.0,
+        "observed_count": 93,
+        "relation": "P8225",
+        "surplus": 4.0
+      },
+      "P8263": {
+        "deficit": 3.0,
+        "expected_eta": 91.0,
+        "observed_count": 88,
+        "relation": "P8263",
+        "surplus": 0.0
+      },
+      "P828": {
+        "deficit": 0.0,
+        "expected_eta": 64.0,
+        "observed_count": 66,
+        "relation": "P828",
+        "surplus": 2.0
+      },
+      "P8289": {
+        "deficit": 4.0,
+        "expected_eta": 109.0,
+        "observed_count": 105,
+        "relation": "P8289",
+        "surplus": 0.0
+      },
+      "P8308": {
+        "deficit": 8.0,
+        "expected_eta": 175.0,
+        "observed_count": 167,
+        "relation": "P8308",
+        "surplus": 0.0
+      },
+      "P837": {
+        "deficit": 0.0,
+        "expected_eta": 60.0,
+        "observed_count": 60,
+        "relation": "P837",
+        "surplus": 0.0
+      },
+      "P8571": {
+        "deficit": 4.0,
+        "expected_eta": 93.0,
+        "observed_count": 89,
+        "relation": "P8571",
+        "surplus": 0.0
+      },
+      "P880": {
+        "deficit": 3.0,
+        "expected_eta": 61.0,
+        "observed_count": 58,
+        "relation": "P880",
+        "surplus": 0.0
+      },
+      "P8865": {
+        "deficit": 101.0,
+        "expected_eta": 230.0,
+        "observed_count": 129,
+        "relation": "P8865",
+        "surplus": 0.0
+      },
+      "P9059": {
+        "deficit": 3.0,
+        "expected_eta": 60.0,
+        "observed_count": 57,
+        "relation": "P9059",
+        "surplus": 0.0
+      },
+      "P9234": {
+        "deficit": 7.0,
+        "expected_eta": 107.0,
+        "observed_count": 100,
+        "relation": "P9234",
+        "surplus": 0.0
+      },
+      "P927": {
+        "deficit": 2.0,
+        "expected_eta": 59.0,
+        "observed_count": 57,
+        "relation": "P927",
+        "surplus": 0.0
+      },
+      "P931": {
+        "deficit": 8.0,
+        "expected_eta": 177.0,
+        "observed_count": 169,
+        "relation": "P931",
+        "surplus": 0.0
+      },
+      "P9926": {
+        "deficit": 5.0,
+        "expected_eta": 107.0,
+        "observed_count": 102,
+        "relation": "P9926",
+        "surplus": 0.0
+      }
+    },
+    "raw_total_rows": 24683,
+    "relation_counts": {
+      "P1001": 216,
+      "P1002": 66,
+      "P10254": 84,
+      "P10374": 98,
+      "P10449": 83,
+      "P10607": 95,
+      "P10624": 66,
+      "P1142": 64,
+      "P1151": 113,
+      "P1158": 166,
+      "P1204": 113,
+      "P12363": 83,
+      "P12452": 87,
+      "P1268": 271,
+      "P127": 184,
+      "P12764": 135,
+      "P12765": 93,
+      "P1290": 52,
+      "P12994": 106,
+      "P131": 353,
+      "P1312": 77,
+      "P13177": 408,
+      "P13210": 188,
+      "P1322": 249,
+      "P13478": 61,
+      "P1398": 126,
+      "P1403": 93,
+      "P1414": 71,
+      "P1420": 201,
+      "P1434": 104,
+      "P1445": 106,
+      "P1531": 85,
+      "P1537": 58,
+      "P1542": 64,
+      "P1560": 198,
+      "P1589": 57,
+      "P16": 288,
+      "P1625": 170,
+      "P163": 102,
+      "P1639": 236,
+      "P1654": 68,
+      "P167": 126,
+      "P1678": 68,
+      "P1753": 87,
+      "P1754": 92,
+      "P1889": 251,
+      "P2098": 109,
+      "P2152": 54,
+      "P2155": 207,
+      "P2283": 66,
+      "P2289": 88,
+      "P2353": 176,
+      "P2388": 93,
+      "P2389": 84,
+      "P2499": 83,
+      "P2500": 83,
+      "P2567": 81,
+      "P2568": 82,
+      "P2670": 192,
+      "P2673": 214,
+      "P2674": 226,
+      "P2681": 128,
+      "P2682": 125,
+      "P2743": 445,
+      "P279": 750,
+      "P2935": 68,
+      "P2959": 197,
+      "P3032": 232,
+      "P3075": 64,
+      "P3085": 80,
+      "P3094": 88,
+      "P31": 5957,
+      "P3137": 69,
+      "P3148": 81,
+      "P3261": 82,
+      "P3262": 84,
+      "P3403": 225,
+      "P3461": 83,
+      "P355": 58,
+      "P361": 241,
+      "P366": 198,
+      "P3729": 147,
+      "P3730": 143,
+      "P3833": 219,
+      "P399": 305,
+      "P406": 102,
+      "P414": 57,
+      "P4147": 162,
+      "P4149": 110,
+      "P4151": 65,
+      "P4329": 105,
+      "P4353": 167,
+      "P4545": 59,
+      "P457": 74,
+      "P461": 352,
+      "P466": 158,
+      "P4661": 113,
+      "P4688": 87,
+      "P4792": 116,
+      "P4967": 66,
+      "P5135": 65,
+      "P514": 38,
+      "P527": 255,
+      "P5277": 180,
+      "P5278": 215,
+      "P5607": 180,
+      "P5642": 62,
+      "P567": 223,
+      "P568": 222,
+      "P5998": 86,
+      "P612": 89,
+      "P6185": 301,
+      "P6291": 106,
+      "P6439": 102,
+      "P694": 134,
+      "P7209": 138,
+      "P748": 57,
+      "P7604": 105,
+      "P793": 343,
+      "P7938": 55,
+      "P8058": 99,
+      "P8138": 59,
+      "P814": 177,
+      "P816": 86,
+      "P822": 104,
+      "P8225": 93,
+      "P8263": 88,
+      "P828": 66,
+      "P8289": 105,
+      "P8308": 167,
+      "P837": 60,
+      "P8571": 89,
+      "P880": 58,
+      "P8865": 129,
+      "P9059": 57,
+      "P9234": 100,
+      "P927": 57,
+      "P931": 169,
+      "P9926": 102
+    },
+    "total_deficit": 2019.0,
+    "total_expected_eta": 20000.0,
+    "total_observed_allocated_triples": 24683,
+    "total_surplus": 6702.0,
+    "unique_entities": 21893,
+    "unique_relations": 139,
+    "unique_triples": 24683,
+    "weak_component_count": 1,
+    "zero_allocated_relation_ids": [],
+    "zero_allocated_relations": 0
+  },
+  "input_graph": {
+    "actual_sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+    "expected_sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+    "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv"
+  },
+  "label": "targeted_generic_pruning_from_B0",
+  "max_removals": 600,
+  "minimum_threshold_policy": {
+    "description": "Minimum thresholds determine generated candidate status. Pre-generation failures exit nonzero. If an output graph is written, the generator exits 0 even when minimum thresholds fail so the standard evaluator can still run under set -e.",
+    "required_for_generated_passed_minimum_thresholds": [
+      "weak_component_count",
+      "largest_weak_component_ratio",
+      "allocated_relations_observed",
+      "zero_allocated_relations",
+      "total_deficit",
+      "total_surplus",
+      "duplicate_triple_count"
+    ]
+  },
+  "notes": [
+    "Input graph rows are de-duplicated before pruning.",
+    "Deletion candidates are limited to target relations.",
+    "Batch size greater than 1 is refused by this first C2 generator.",
+    "Output graph rows contain h, r, t, and triple_id.",
+    "Run the standard evaluator after generation for final accept/reject tracking."
+  ],
+  "output_graph": {
+    "path": "experiments/graph_candidates/C2_targeted_generic_pruning/outputs/pruned_graph.jsonl",
+    "sha256": "a017ac53fe6ead1f81b26a3cd4c10679eb14036aad40144039d1ed2185d53da0",
+    "written": true
+  },
+  "output_written": true,
+  "parent_candidate_id": "B0",
+  "passes_minimum_thresholds": false,
+  "passes_strong_thresholds": false,
+  "per_target_relation_before_after": {
+    "P131": {
+      "expected_eta": 179.0,
+      "final_count": 337,
+      "final_deficit": 0.0,
+      "final_surplus": 158.0,
+      "initial_count": 353,
+      "initial_deficit": 0.0,
+      "initial_surplus": 174.0,
+      "removed_count": 16
+    },
+    "P279": {
+      "expected_eta": 227.0,
+      "final_count": 744,
+      "final_deficit": 0.0,
+      "final_surplus": 517.0,
+      "initial_count": 750,
+      "initial_deficit": 0.0,
+      "initial_surplus": 523.0,
+      "removed_count": 6
+    },
+    "P31": {
+      "expected_eta": 238.0,
+      "final_count": 5952,
+      "final_deficit": 0.0,
+      "final_surplus": 5714.0,
+      "initial_count": 5957,
+      "initial_deficit": 0.0,
+      "initial_surplus": 5719.0,
+      "removed_count": 5
+    }
+  },
+  "rejected_deletion_count": 92106,
+  "rejection_reasons": {
+    "endpoint_degree_not_redundant": 16212,
+    "no_connectivity_safe_candidate": 1,
+    "would_disconnect_graph": 75893
+  },
+  "removed_triples_first_100": [
+    {
+      "accepted_order": 1,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 15,
+        "t": 225
+      },
+      "h": "Q176",
+      "r": "P131",
+      "relation_count_after": 352,
+      "relation_count_before": 353,
+      "t": "Q16"
+    },
+    {
+      "accepted_order": 2,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 14,
+        "t": 11
+      },
+      "h": "Q74035",
+      "r": "P131",
+      "relation_count_after": 351,
+      "relation_count_before": 352,
+      "t": "Q239"
+    },
+    {
+      "accepted_order": 3,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 51,
+        "t": 9
+      },
+      "h": "Q14751",
+      "r": "P31",
+      "relation_count_after": 5956,
+      "relation_count_before": 5957,
+      "t": "Q5503"
+    },
+    {
+      "accepted_order": 4,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 7,
+        "t": 224
+      },
+      "h": "Q1904",
+      "r": "P131",
+      "relation_count_after": 350,
+      "relation_count_before": 351,
+      "t": "Q16"
+    },
+    {
+      "accepted_order": 5,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 7,
+        "t": 223
+      },
+      "h": "Q1948",
+      "r": "P131",
+      "relation_count_after": 349,
+      "relation_count_before": 350,
+      "t": "Q16"
+    },
+    {
+      "accepted_order": 6,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 6,
+        "t": 222
+      },
+      "h": "Q1965",
+      "r": "P131",
+      "relation_count_after": 348,
+      "relation_count_before": 349,
+      "t": "Q16"
+    },
+    {
+      "accepted_order": 7,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 6,
+        "t": 221
+      },
+      "h": "Q2003",
+      "r": "P131",
+      "relation_count_after": 347,
+      "relation_count_before": 348,
+      "t": "Q16"
+    },
+    {
+      "accepted_order": 8,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 5,
+        "t": 344
+      },
+      "h": "Q1394",
+      "r": "P31",
+      "relation_count_after": 5955,
+      "relation_count_before": 5956,
+      "t": "Q5"
+    },
+    {
+      "accepted_order": 9,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 5,
+        "t": 220
+      },
+      "h": "Q2007",
+      "r": "P131",
+      "relation_count_after": 346,
+      "relation_count_before": 347,
+      "t": "Q16"
+    },
+    {
+      "accepted_order": 10,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 5,
+        "t": 219
+      },
+      "h": "Q2009",
+      "r": "P131",
+      "relation_count_after": 345,
+      "relation_count_before": 346,
+      "t": "Q16"
+    },
+    {
+      "accepted_order": 11,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 5,
+        "t": 218
+      },
+      "h": "Q2023",
+      "r": "P131",
+      "relation_count_after": 344,
+      "relation_count_before": 345,
+      "t": "Q16"
+    },
+    {
+      "accepted_order": 12,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 4,
+        "t": 153
+      },
+      "h": "Q1037393",
+      "r": "P131",
+      "relation_count_after": 343,
+      "relation_count_before": 344,
+      "t": "Q17"
+    },
+    {
+      "accepted_order": 13,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 3,
+        "t": 343
+      },
+      "h": "Q1340",
+      "r": "P31",
+      "relation_count_after": 5954,
+      "relation_count_before": 5955,
+      "t": "Q5"
+    },
+    {
+      "accepted_order": 14,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 3,
+        "t": 217
+      },
+      "h": "Q1058376",
+      "r": "P131",
+      "relation_count_after": 342,
+      "relation_count_before": 343,
+      "t": "Q16"
+    },
+    {
+      "accepted_order": 15,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 3,
+        "t": 40
+      },
+      "h": "Q104778281",
+      "r": "P279",
+      "relation_count_after": 749,
+      "relation_count_before": 750,
+      "t": "Q68"
+    },
+    {
+      "accepted_order": 16,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 2,
+        "t": 342
+      },
+      "h": "Q1145",
+      "r": "P31",
+      "relation_count_after": 5953,
+      "relation_count_before": 5954,
+      "t": "Q5"
+    },
+    {
+      "accepted_order": 17,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 2,
+        "t": 39
+      },
+      "h": "Q12747150",
+      "r": "P279",
+      "relation_count_after": 748,
+      "relation_count_before": 749,
+      "t": "Q68"
+    },
+    {
+      "accepted_order": 18,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 2,
+        "t": 38
+      },
+      "h": "Q12747152",
+      "r": "P279",
+      "relation_count_after": 747,
+      "relation_count_before": 748,
+      "t": "Q68"
+    },
+    {
+      "accepted_order": 19,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 2,
+        "t": 37
+      },
+      "h": "Q128558762",
+      "r": "P279",
+      "relation_count_after": 746,
+      "relation_count_before": 747,
+      "t": "Q68"
+    },
+    {
+      "accepted_order": 20,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 2,
+        "t": 24
+      },
+      "h": "Q111912345",
+      "r": "P131",
+      "relation_count_after": 341,
+      "relation_count_before": 342,
+      "t": "Q15"
+    },
+    {
+      "accepted_order": 21,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 2,
+        "t": 13
+      },
+      "h": "Q117805597",
+      "r": "P279",
+      "relation_count_after": 745,
+      "relation_count_before": 746,
+      "t": "Q58"
+    },
+    {
+      "accepted_order": 22,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 2,
+        "t": 12
+      },
+      "h": "Q137593630",
+      "r": "P279",
+      "relation_count_after": 744,
+      "relation_count_before": 745,
+      "t": "Q58"
+    },
+    {
+      "accepted_order": 23,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 6,
+        "t": 2
+      },
+      "h": "Q1530022",
+      "r": "P31",
+      "relation_count_after": 5952,
+      "relation_count_before": 5953,
+      "t": "Q121144515"
+    },
+    {
+      "accepted_order": 24,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 2,
+        "t": 3
+      },
+      "h": "Q108317356",
+      "r": "P131",
+      "relation_count_after": 340,
+      "relation_count_before": 341,
+      "t": "Q341158"
+    },
+    {
+      "accepted_order": 25,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 2,
+        "t": 3
+      },
+      "h": "Q12024654",
+      "r": "P131",
+      "relation_count_after": 339,
+      "relation_count_before": 340,
+      "t": "Q160720"
+    },
+    {
+      "accepted_order": 26,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 2,
+        "t": 3
+      },
+      "h": "Q123953630",
+      "r": "P131",
+      "relation_count_after": 338,
+      "relation_count_before": 339,
+      "t": "Q4759"
+    },
+    {
+      "accepted_order": 27,
+      "connectivity_after": {
+        "checked_by": "undirected_bridge_test_then_post_acceptance_full_metrics",
+        "largest_weak_component_ratio": 1.0,
+        "weak_component_count": 1
+      },
+      "endpoint_degrees_before": {
+        "h": 2,
+        "t": 3
+      },
+      "h": "Q126039198",
+      "r": "P131",
+      "relation_count_after": 337,
+      "relation_count_before": 338,
+      "t": "Q916"
+    }
+  ],
+  "removed_triples_total_count": 27,
+  "stop_reason": "no_safe_deletion_remaining",
+  "strong_threshold_check_results": {
+    "P131_observed_lt_344": {
+      "actual": 337,
+      "passed": true,
+      "threshold": 344
+    },
+    "P279_observed_lt_748": {
+      "actual": 744,
+      "passed": true,
+      "threshold": 748
+    },
+    "P31_observed_lt_5953": {
+      "actual": 5952,
+      "passed": true,
+      "threshold": 5953
+    },
+    "combined_P31_P279_P131_surplus_lt_6166": {
+      "actual": 6389.0,
+      "passed": false,
+      "threshold": 6166
+    },
+    "total_deficit_le_2019": {
+      "actual": 2019.0,
+      "passed": true,
+      "threshold": 2019
+    },
+    "total_surplus_le_6581": {
+      "actual": 6675.0,
+      "passed": false,
+      "threshold": 6581
+    }
+  },
+  "strong_threshold_policy": {
+    "checks": [
+      "total_deficit <= 2019",
+      "total_surplus <= 6581",
+      "combined P31+P279+P131 surplus < 6166",
+      "P31 observed < 5953",
+      "P279 observed < 748",
+      "P131 observed < 344"
+    ],
+    "description": "Strong thresholds are decision support only. They are reported but do not control generator exit status."
+  },
+  "target_relations": [
+    "P131",
+    "P279",
+    "P31"
+  ]
+}

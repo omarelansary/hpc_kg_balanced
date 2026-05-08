@@ -1,0 +1,62 @@
+{
+  "schema_name": "graph_candidate_manifest",
+  "schema_version": 1,
+  "created_on": "2026-05-07",
+  "candidate_id": "C1",
+  "label": "Stage13 aggressive_but_guarded",
+  "status": "active_candidate_not_final",
+  "decision": "strongest_current_candidate_not_final",
+  "candidate_root": "experiments/graph_candidates/C1_stage13_aggressive",
+  "pointer_only": true,
+  "graph": {
+    "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/aggressive_but_guarded/pruned_graph.jsonl",
+    "format": "jsonl",
+    "sha256": "e01d7137c1dbcd790082825a025cade7198a957b3c936f0d9b5b3f0b33780b73",
+    "copied_into_candidate_root": false
+  },
+  "allocation": {
+    "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+  },
+  "parent": {
+    "candidate_id": "B0",
+    "graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+    "graph_sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
+  },
+  "objective": "Stage13 aggressive_but_guarded pruning candidate; reduce surplus/density while preserving weak connectivity and relation coverage.",
+  "metrics_from_evaluator": {
+    "raw_total_rows": 24223,
+    "unique_triples": 24223,
+    "duplicate_triple_count": 0,
+    "unique_relations": 139,
+    "weak_component_count": 1,
+    "largest_weak_component_ratio": 1.0,
+    "allocated_relations_observed": 139,
+    "zero_allocated_relations": 0,
+    "total_deficit": 2359,
+    "total_surplus": 6582
+  },
+  "evaluator": {
+    "script": "tools/graph_candidate_evaluation/evaluate_graph_candidate.py",
+    "report_path": "docs/reconstruction/graph_candidate_reports/C1_stage13_aggressive.report.json",
+    "summary_path": "docs/reconstruction/graph_candidate_reports/C1_stage13_aggressive.summary.md",
+    "allocation_metric_basis": "unique_triples"
+  },
+  "generation_evidence": {
+    "stage13_log": "logs/stage13_prune_revised_29012090.out",
+    "stage13_runner": "scripts/slurm/stage13_balance_prune_revised_density_aware.slurm",
+    "stage13_report": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/aggressive_but_guarded/pruned_graph.report.json",
+    "stage13_summary_csv": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/summary.csv",
+    "stage13_summary_md": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/summary.md"
+  },
+  "provenance_evidence": [
+    "docs/reconstruction/graph_candidates.tsv",
+    "docs/reconstruction/10_current_decision_state.md",
+    "docs/reconstruction/07_final_graph_decision_matrix.md",
+    "docs/reconstruction/graph_candidate_reports/C1_stage13_aggressive.report.json"
+  ],
+  "known_gaps": [
+    "C1 is not final until explicitly promoted by a human decision.",
+    "C1 does not prove offline Phase II execution."
+  ]
+}

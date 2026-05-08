@@ -1,0 +1,56 @@
+{
+  "schema_name": "graph_candidate_manifest",
+  "schema_version": 1,
+  "created_on": "2026-05-07",
+  "candidate_id": "B0",
+  "label": "Stage12 largest component",
+  "status": "frozen_baseline",
+  "decision": "baseline_not_final",
+  "candidate_root": "experiments/graph_candidates/B0_stage12_largest_component",
+  "pointer_only": true,
+  "graph": {
+    "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+    "format": "csv",
+    "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+    "copied_into_candidate_root": false
+  },
+  "allocation": {
+    "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+  },
+  "parent": {
+    "candidate_id": null,
+    "graph_path": null,
+    "graph_sha256": null,
+    "note": "B0 is the frozen comparison baseline and has no candidate parent in this registry."
+  },
+  "objective": "Frozen baseline for graph-candidate comparison before Stage13 pruning.",
+  "metrics_from_evaluator": {
+    "raw_total_rows": 24683,
+    "unique_triples": 24683,
+    "duplicate_triple_count": 0,
+    "unique_relations": 139,
+    "weak_component_count": 1,
+    "largest_weak_component_ratio": 1.0,
+    "allocated_relations_observed": 139,
+    "zero_allocated_relations": 0,
+    "total_deficit": 2019,
+    "total_surplus": 6702
+  },
+  "evaluator": {
+    "script": "tools/graph_candidate_evaluation/evaluate_graph_candidate.py",
+    "report_path": "docs/reconstruction/graph_candidate_reports/B0_stage12_largest_component.report.json",
+    "summary_path": "docs/reconstruction/graph_candidate_reports/B0_stage12_largest_component.summary.md",
+    "allocation_metric_basis": "unique_triples"
+  },
+  "provenance_evidence": [
+    "docs/reconstruction/graph_candidates.tsv",
+    "docs/reconstruction/10_current_decision_state.md",
+    "docs/reconstruction/07_final_graph_decision_matrix.md",
+    "docs/reconstruction/graph_candidate_reports/B0_stage12_largest_component.report.json"
+  ],
+  "known_gaps": [
+    "No direct Stage12 SLURM log was confirmed in the reconstruction docs.",
+    "B0 is a baseline candidate, not a thesis-final graph decision."
+  ]
+}

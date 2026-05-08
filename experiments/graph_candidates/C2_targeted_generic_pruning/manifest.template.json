@@ -1,0 +1,80 @@
+{
+  "schema_name": "graph_candidate_manifest",
+  "schema_version": 1,
+  "created_on": "2026-05-07",
+  "candidate_id": "C2",
+  "label": "targeted_generic_pruning_from_B0",
+  "status": "planned_not_generated",
+  "decision": "pending",
+  "candidate_root": "experiments/graph_candidates/C2_targeted_generic_pruning",
+  "candidate_exists_as_generated_graph": false,
+  "graph": {
+    "path": "experiments/graph_candidates/C2_targeted_generic_pruning/outputs/pruned_graph.jsonl",
+    "format": "jsonl",
+    "sha256": null,
+    "copied_into_candidate_root": false,
+    "created": false
+  },
+  "allocation": {
+    "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+  },
+  "parent": {
+    "candidate_id": "B0",
+    "graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+    "graph_sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
+  },
+  "objective": "Reduce generic-dominance surplus in P31, P279, and P131 while preserving weak connectivity, relation coverage, duplicate-free content, and the canonical allocation hash.",
+  "target_relations": [
+    "P31",
+    "P279",
+    "P131"
+  ],
+  "future_paths": {
+    "config": "configs/graph_candidates/C2_targeted_generic_pruning.template.json",
+    "command": "experiments/graph_candidates/C2_targeted_generic_pruning/command.template.sh",
+    "generation_report": "experiments/graph_candidates/C2_targeted_generic_pruning/reports/prune_report.json",
+    "evaluator_report": "experiments/graph_candidates/C2_targeted_generic_pruning/reports/evaluator.report.json",
+    "evaluator_summary": "experiments/graph_candidates/C2_targeted_generic_pruning/reports/evaluator.summary.md",
+    "decision_note": "experiments/graph_candidates/C2_targeted_generic_pruning/decision.template.md"
+  },
+  "acceptance_criteria": {
+    "minimum": {
+      "weak_component_count": 1,
+      "largest_weak_component_ratio": 1.0,
+      "unique_relations": 139,
+      "allocated_relations_observed": 139,
+      "zero_allocated_relations": 0,
+      "duplicate_triple_count": 0,
+      "total_surplus_max_exclusive": 6582,
+      "total_deficit_max_inclusive": 2359
+    },
+    "strong": {
+      "weak_component_count": 1,
+      "largest_weak_component_ratio": 1.0,
+      "unique_relations": 139,
+      "allocated_relations_observed": 139,
+      "zero_allocated_relations": 0,
+      "duplicate_triple_count": 0,
+      "total_surplus_max_exclusive": 6582,
+      "total_deficit_max_inclusive": 2019,
+      "combined_P31_P279_P131_surplus_max_exclusive": 6166,
+      "P31_observed_max_exclusive": 5953,
+      "P279_observed_max_exclusive": 748,
+      "P131_observed_max_exclusive": 344
+    }
+  },
+  "required_before_registry_entry": [
+    "Generation command or manifest",
+    "Output graph SHA256",
+    "Generation report",
+    "Evaluator report",
+    "Evaluator summary",
+    "Human accept/reject decision"
+  ],
+  "notes": [
+    "This is a template. C2 must not be treated as an existing graph until outputs/pruned_graph.jsonl exists and is evaluated.",
+    "Do not append C2 to docs/reconstruction/graph_candidates.tsv until hashes, reports, and a decision exist.",
+    "The C2 output root is experiments/graph_candidates/C2_targeted_generic_pruning, not data/connectedgraph/candidates."
+  ]
+}
