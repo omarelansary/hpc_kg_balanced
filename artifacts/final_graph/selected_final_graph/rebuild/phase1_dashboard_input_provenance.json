@@ -1,0 +1,320 @@
+{
+  "investigation_id": "R2.9_phase1_dashboard_input_provenance",
+  "created_on": "2026-05-09",
+  "scope": {
+    "mode": "read_only_investigation",
+    "wdqs_calls_made": false,
+    "llm_calls_made": false,
+    "graph_generation_run": false,
+    "graph_artifacts_modified": false,
+    "thesis_latex_modified": false
+  },
+  "canonical_allocation": {
+    "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+    "relations_universe_count": 1467,
+    "allocation_rows": 154,
+    "unique_allocated_relations": 139,
+    "eta_integer_total": 20000,
+    "status": "confirmed downstream allocation for selected B0 final graph"
+  },
+  "dashboard_defaults": {
+    "source_file": "src/statistics/hop_pattern_analysis_dashboard.py",
+    "default_inputs": [
+      {
+        "role": "hop_support_input",
+        "local_path": "data/archived/hop_support_v2_w_failed_statuses.wikibase_item_only_before_target_enrichment.jsonl",
+        "status": "confirmed checked-in default"
+      },
+      {
+        "role": "composition_input",
+        "local_path": "data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+        "status": "confirmed checked-in default"
+      },
+      {
+        "role": "relation_metadata",
+        "local_path": "data/raw/wikidata_ontology.properties.json",
+        "status": "confirmed checked-in default"
+      }
+    ],
+    "conclusion": "The checked-in v2 defaults do not reproduce the canonical 5k allocation relation universe."
+  },
+  "most_likely_final_allocation_inputs": {
+    "status": "evidence_based_inference_not_confirmed_export_log",
+    "support_input": "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl",
+    "composition_input": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+    "wilson_filtering": "disabled",
+    "reason": "This input family reproduces the canonical 5k allocation relation universe and all four pattern-group relation sets under the canonical thresholds.",
+    "missing_evidence": "No dashboard export log, saved Streamlit session, widget-state capture, or manifest was found."
+  },
+  "input_family_comparison": [
+    {
+      "input_family": "checked_in_dashboard_v2_defaults",
+      "wilson_filtering": false,
+      "derived_relation_universe_count": 1148,
+      "canonical_relation_universe_count": 1467,
+      "pattern_groups_match": false,
+      "status": "contradicted_as_final_input_family"
+    },
+    {
+      "input_family": "checked_in_dashboard_v2_defaults",
+      "wilson_filtering": true,
+      "derived_relation_universe_count": 1148,
+      "canonical_relation_universe_count": 1467,
+      "pattern_groups_match": false,
+      "status": "contradicted_as_final_input_family"
+    },
+    {
+      "input_family": "patched_v3_support_plus_v3_compact_composition",
+      "wilson_filtering": false,
+      "derived_relation_universe_count": 1467,
+      "canonical_relation_universe_count": 1467,
+      "derived_group_counts": {
+        "symmetric": 18,
+        "anti_symmetric": 66,
+        "inverse": 44,
+        "composition": 26
+      },
+      "canonical_group_counts": {
+        "symmetric": 18,
+        "anti_symmetric": 66,
+        "inverse": 44,
+        "composition": 26
+      },
+      "pattern_groups_match": true,
+      "status": "strongest_inferred_final_input_family"
+    },
+    {
+      "input_family": "patched_v3_support_plus_v3_compact_composition",
+      "wilson_filtering": true,
+      "derived_relation_universe_count": 1467,
+      "canonical_relation_universe_count": 1467,
+      "derived_group_counts": {
+        "symmetric": 18,
+        "anti_symmetric": 66,
+        "inverse": 44,
+        "composition": 24
+      },
+      "canonical_group_counts": {
+        "symmetric": 18,
+        "anti_symmetric": 66,
+        "inverse": 44,
+        "composition": 26
+      },
+      "pattern_groups_match": false,
+      "status": "wilson_not_supported_for_final_5k_selection"
+    },
+    {
+      "input_family": "normalized_v3_support_plus_v3_compact_composition",
+      "wilson_filtering": false,
+      "derived_relation_universe_count": 1468,
+      "canonical_relation_universe_count": 1467,
+      "pattern_groups_match": false,
+      "status": "alternative_artifact_not_exact_final_match"
+    }
+  ],
+  "candidate_input_artifacts": [
+    {
+      "path": "data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json",
+      "role": "relation profile and LLM-classified relation metadata",
+      "record_count": 2445,
+      "important_fields": [
+        "_id",
+        "property_id",
+        "llm_classification",
+        "metadata",
+        "rule_verification",
+        "updated_at"
+      ],
+      "status": "upstream_input_partial_provenance",
+      "concern": "LLM prompt/model/raw-response provenance incomplete"
+    },
+    {
+      "path": "data/raw/wikidata_ontology.properties.json",
+      "role": "dashboard relation metadata",
+      "record_count": 2445,
+      "status": "confirmed_dashboard_metadata_input"
+    },
+    {
+      "path": "data/processed/hop_discovery_from_json.jsonl",
+      "role": "cached empirical two-hop discovery",
+      "record_count": 1703,
+      "summed_valid_r2_count": 56278,
+      "status_counts": {
+        "SUCCESS": 1140,
+        "ERROR": 512,
+        "NOT_FOUND": 51
+      },
+      "status": "confirmed_cached_evidence"
+    },
+    {
+      "path": "data/archived/hop_support_v2_w_failed_statuses.wikibase_item_only_before_target_enrichment.jsonl",
+      "role": "checked-in dashboard v2 hop-support default",
+      "record_count": 1703,
+      "status": "confirmed_default_but_not_final_match"
+    },
+    {
+      "path": "data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+      "role": "checked-in dashboard v2 compact composition default",
+      "record_count": 22419,
+      "status": "confirmed_default_but_not_final_match"
+    },
+    {
+      "path": "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl",
+      "role": "patched v3 hop-support input most consistent with canonical allocation",
+      "record_count": 1703,
+      "status": "likely_direct_dashboard_input_for_final_5k_inferred"
+    },
+    {
+      "path": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+      "role": "v3 compact composition input most consistent with canonical allocation",
+      "record_count": 9802,
+      "status": "likely_direct_dashboard_input_for_final_5k_inferred"
+    },
+    {
+      "path": "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json",
+      "role": "genericity support matrix consumed by Stage1",
+      "sha256": "75794511aaa9ef72a7c63fd0d9a3c11969b72c4fa4bfb01237859b612f544041",
+      "status": "confirmed_downstream_consumption_partial_export_linkage"
+    }
+  ],
+  "phase1_chain_status": [
+    {
+      "component": "relation_universe_wikibase_item_filtering",
+      "status": "confirmed_cached_execution",
+      "evidence": [
+        "data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json",
+        "logs/hop_discovery_json_27530562.out",
+        "data/processed/hop_discovery_from_json.jsonl"
+      ]
+    },
+    {
+      "component": "two_hop_discovery",
+      "status": "confirmed_cached_execution",
+      "evidence": [
+        "data/processed/hop_discovery_from_json.jsonl",
+        "logs/hop_discovery_json_27530562.out"
+      ]
+    },
+    {
+      "component": "hop_support_estimation",
+      "status": "confirmed_for_artifacts_final_family_inferred",
+      "evidence": [
+        "logs/hop_support_v2_27520503.out",
+        "logs/normalized_hop_support_v3_rerun28049486.out",
+        "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl"
+      ]
+    },
+    {
+      "component": "symmetry_anti_symmetry",
+      "status": "partial_to_confirmed_from_dashboard_threshold_reproduction",
+      "evidence": [
+        "src/statistics/hop_pattern_analysis_dashboard.py",
+        "src/Pruning graph/bidirectional_allocation_results5k.json"
+      ]
+    },
+    {
+      "component": "inverse_verification",
+      "status": "partial",
+      "evidence": [
+        "data/processed/wikidata_ontology.inverse_mode_aliases_topk.json",
+        "logs/build_inverse_alias_topk_27543764.out",
+        "logs/llm_classification_inv_27548189.out",
+        "logs/llm_classification_inv_27548189.err"
+      ],
+      "gap": "Inverse LLM shard completion remains unresolved."
+    },
+    {
+      "component": "composition_target_filtering",
+      "status": "partial",
+      "evidence": [
+        "data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json",
+        "src/composition_verification/classify_relations_pipeline.py"
+      ],
+      "gap": "LLM prompt/model/raw-response provenance incomplete."
+    },
+    {
+      "component": "domain_range_filtering",
+      "status": "partial",
+      "evidence": [
+        "data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.jsonl",
+        "data/processed/hop_support_v3/min8_hop_support_v3_pairs_with_compatible_targets_dom_rng_v1.jsonl"
+      ]
+    },
+    {
+      "component": "composition_shortcut_verification",
+      "status": "confirmed_historical_execution",
+      "evidence": [
+        "logs/composition_min8_jsonl_27683654.out",
+        "logs/composition_hop_support_v3_min8_jsonl_28197929.out",
+        "data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition.stats.json",
+        "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition.stats.json"
+      ]
+    },
+    {
+      "component": "dashboard_allocation_export",
+      "status": "partial",
+      "evidence": [
+        "src/statistics/hop_pattern_analysis_dashboard.py",
+        "src/Pruning graph/bidirectional_allocation_results5k.json",
+        "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
+      ],
+      "gap": "Exact dashboard export log/session missing."
+    }
+  ],
+  "two_hop_count_claim": {
+    "claim": "approximately 340000 observed two-hop pairs",
+    "status": "unsupported_by_current_evidence",
+    "supported_cached_value": {
+      "path": "data/processed/hop_discovery_from_json.jsonl",
+      "summed_valid_r2_count": 56278,
+      "first_hop_record_count": 1703
+    },
+    "recommended_correction": "Use 56278 summed valid_r2 entries unless a missing artifact supporting 340000 is found."
+  },
+  "claim_safety": [
+    {
+      "claim": "Relation universe was restricted to wikibase-item properties for discovery.",
+      "status": "safe_with_cached_run_evidence"
+    },
+    {
+      "claim": "Empirical two-hop discovery was performed.",
+      "status": "safe_with_56278_valid_r2_count"
+    },
+    {
+      "claim": "Final 5k allocation came from checked-in dashboard v2 defaults.",
+      "status": "contradicted"
+    },
+    {
+      "claim": "Final 5k allocation most closely matches patched v3 inputs.",
+      "status": "evidence_based_inference"
+    },
+    {
+      "claim": "Wilson lower-bound filtering was used for final 5k allocation.",
+      "status": "unsupported"
+    },
+    {
+      "claim": "Full inverse LLM verification completed successfully.",
+      "status": "unsupported"
+    },
+    {
+      "claim": "Exact dashboard export reproducibility is established.",
+      "status": "unsupported"
+    }
+  ],
+  "remaining_gaps": [
+    "Dashboard export log or saved Streamlit state for the 5k allocation",
+    "Same-run manifest linking allocation JSON and support matrix hashes",
+    "LLM relation-profile prompt/model/raw-response provenance",
+    "Inverse LLM shard completion audit",
+    "Direct domain/range enrichment run provenance",
+    "Evidence for the approximately 340000 two-hop pair claim, if the thesis keeps it"
+  ],
+  "overall_status": {
+    "phase1_to_dashboard_provenance": "partial",
+    "most_likely_dashboard_input_family": "patched_v3_support_plus_v3_compact_composition",
+    "dashboard_export_reproducibility": "not_fully_established",
+    "supported_two_hop_valid_r2_count": 56278,
+    "claim_340000": "unsupported"
+  }
+}

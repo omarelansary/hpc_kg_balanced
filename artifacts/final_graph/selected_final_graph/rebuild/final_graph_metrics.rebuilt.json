@@ -1,0 +1,525 @@
+{
+  "allocated_relations_observed": 139,
+  "allocation_path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+  "allocation_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+  "duplicate_triple_count": 0,
+  "largest_weak_component_ratio": 1.0,
+  "metric_source": "artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.report.json",
+  "notes": [
+    "Allocation metrics are computed from unique triples.",
+    "No graph artifact was modified."
+  ],
+  "raw_total_rows": 24683,
+  "rebuilt_on": "2026-05-09T22:29:14.151126+00:00",
+  "selected_candidate_id": "B0",
+  "selected_graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+  "selected_graph_sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+  "top_overfilled_relations": [
+    {
+      "deficit": 0.0,
+      "expected_eta": 238.0,
+      "observed_count": 5957,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P31",
+      "surplus": 5719.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 227.0,
+      "observed_count": 750,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P279",
+      "surplus": 523.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 179.0,
+      "observed_count": 353,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P131",
+      "surplus": 174.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 191.0,
+      "observed_count": 255,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P527",
+      "surplus": 64.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 183.0,
+      "observed_count": 241,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P361",
+      "surplus": 58.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 205.0,
+      "observed_count": 251,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P1889",
+      "surplus": 46.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 172.0,
+      "observed_count": 216,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P1001",
+      "surplus": 44.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 180.0,
+      "observed_count": 198,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P366",
+      "surplus": 18.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 183.0,
+      "observed_count": 192,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P2670",
+      "surplus": 9.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 69.0,
+      "observed_count": 77,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P1312",
+      "surplus": 8.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 59.0,
+      "observed_count": 66,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P2283",
+      "surplus": 7.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 336.0,
+      "observed_count": 343,
+      "patterns": [
+        "anti_symmetric",
+        "composition"
+      ],
+      "relation": "P793",
+      "surplus": 7.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 179.0,
+      "observed_count": 184,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P127",
+      "surplus": 5.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 89.0,
+      "observed_count": 93,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P8225",
+      "surplus": 4.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 61.0,
+      "observed_count": 64,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P1542",
+      "surplus": 3.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 69.0,
+      "observed_count": 71,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P1414",
+      "surplus": 2.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 91.0,
+      "observed_count": 93,
+      "patterns": [
+        "inverse"
+      ],
+      "relation": "P2388",
+      "surplus": 2.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 63.0,
+      "observed_count": 65,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P4151",
+      "surplus": 2.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 64.0,
+      "observed_count": 66,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P828",
+      "surplus": 2.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 65.0,
+      "observed_count": 66,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P10624",
+      "surplus": 1.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 56.0,
+      "observed_count": 57,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P1589",
+      "surplus": 1.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 225.0,
+      "observed_count": 226,
+      "patterns": [
+        "anti_symmetric",
+        "inverse"
+      ],
+      "relation": "P2674",
+      "surplus": 1.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 63.0,
+      "observed_count": 64,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P3075",
+      "surplus": 1.0
+    },
+    {
+      "deficit": 0.0,
+      "expected_eta": 56.0,
+      "observed_count": 57,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P414",
+      "surplus": 1.0
+    }
+  ],
+  "top_underfilled_relations": [
+    {
+      "deficit": 459.0,
+      "expected_eta": 497.0,
+      "observed_count": 38,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P514",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 280.0,
+      "expected_eta": 339.0,
+      "observed_count": 59,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P4545",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 275.0,
+      "expected_eta": 329.0,
+      "observed_count": 54,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P2152",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 121.0,
+      "expected_eta": 227.0,
+      "observed_count": 106,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P12994",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 111.0,
+      "expected_eta": 318.0,
+      "observed_count": 207,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P2155",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 101.0,
+      "expected_eta": 230.0,
+      "observed_count": 129,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P8865",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 80.0,
+      "expected_eta": 178.0,
+      "observed_count": 98,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P10374",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 59.0,
+      "expected_eta": 197.0,
+      "observed_count": 138,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P7209",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 23.0,
+      "expected_eta": 468.0,
+      "observed_count": 445,
+      "patterns": [
+        "inverse",
+        "symmetric"
+      ],
+      "relation": "P2743",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 21.0,
+      "expected_eta": 429.0,
+      "observed_count": 408,
+      "patterns": [
+        "inverse",
+        "symmetric"
+      ],
+      "relation": "P13177",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 18.0,
+      "expected_eta": 323.0,
+      "observed_count": 305,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P399",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 18.0,
+      "expected_eta": 370.0,
+      "observed_count": 352,
+      "patterns": [
+        "composition",
+        "symmetric"
+      ],
+      "relation": "P461",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 15.0,
+      "expected_eta": 316.0,
+      "observed_count": 301,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P6185",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 13.0,
+      "expected_eta": 249.0,
+      "observed_count": 236,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P1639",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 13.0,
+      "expected_eta": 99.0,
+      "observed_count": 86,
+      "patterns": [
+        "anti_symmetric"
+      ],
+      "relation": "P816",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 12.0,
+      "expected_eta": 261.0,
+      "observed_count": 249,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P1322",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 11.0,
+      "expected_eta": 225.0,
+      "observed_count": 214,
+      "patterns": [
+        "anti_symmetric",
+        "inverse"
+      ],
+      "relation": "P2673",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 11.0,
+      "expected_eta": 243.0,
+      "observed_count": 232,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P3032",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 11.0,
+      "expected_eta": 236.0,
+      "observed_count": 225,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P3403",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 11.0,
+      "expected_eta": 230.0,
+      "observed_count": 219,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P3833",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 11.0,
+      "expected_eta": 226.0,
+      "observed_count": 215,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P5278",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 10.0,
+      "expected_eta": 211.0,
+      "observed_count": 201,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P1420",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 10.0,
+      "expected_eta": 208.0,
+      "observed_count": 198,
+      "patterns": [
+        "symmetric"
+      ],
+      "relation": "P1560",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 9.0,
+      "expected_eta": 185.0,
+      "observed_count": 176,
+      "patterns": [
+        "composition"
+      ],
+      "relation": "P2353",
+      "surplus": 0.0
+    },
+    {
+      "deficit": 9.0,
+      "expected_eta": 189.0,
+      "observed_count": 180,
+      "patterns": [
+        "anti_symmetric",
+        "inverse"
+      ],
+      "relation": "P5607",
+      "surplus": 0.0
+    }
+  ],
+  "total_deficit": 2019.0,
+  "total_surplus": 6702.0,
+  "unique_entities": 21893,
+  "unique_relations": 139,
+  "unique_triples": 24683,
+  "weak_component_count": 1,
+  "zero_allocated_relations": 0
+}

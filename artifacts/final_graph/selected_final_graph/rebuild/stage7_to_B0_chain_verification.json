@@ -1,0 +1,323 @@
+{
+  "B0_largest_component": {
+    "fieldnames": [
+      "h",
+      "r",
+      "t"
+    ],
+    "has_h_r_t_fields": true,
+    "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+    "row_count": 24683,
+    "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+    "size_bytes": 601555,
+    "unique_relations": 139,
+    "unique_triples": 24683
+  },
+  "checks": {
+    "B0_subset_of_stage12_graph_output": true,
+    "B0_unique_triples_24683": true,
+    "path_translation_status_resolved_strong": true,
+    "stage11_added_core_unique_triples_6705": true,
+    "stage11_graph_output_unique_triples_24670": true,
+    "stage11_output_minus_stage7_equals_added_core": true,
+    "stage11_subset_of_stage12_graph_output": true,
+    "stage12_added_path_unique_triples_45": true,
+    "stage12_graph_output_matches_report_expected_unique_triples": true,
+    "stage12_graph_output_unique_triples_24715": true,
+    "stage12_output_minus_stage11_equals_added_path_triples": true,
+    "stage7_has_h_r_t_triple_id_fields": true,
+    "stage7_progress_kept_triples_17965": true,
+    "stage7_row_count_17965": true,
+    "stage7_sha256_matches_expected": true,
+    "stage7_subset_of_stage11_graph_output": true,
+    "stage7_summary_kept_triples_17965": true,
+    "stage7_unique_relations_139": true,
+    "stage7_unique_triples_17965": true
+  },
+  "created_by": "scripts/reconstruction/04_verify_stage7_to_B0_chain.sh",
+  "created_on": "2026-05-09T22:29:15.538879+00:00",
+  "hashes": {
+    "B0_largest_component": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+      "size_bytes": 601555
+    },
+    "path_translation_manifest_v3": {
+      "path": "artifacts/final_graph/selected_final_graph/rebuild/path_translation_manifest.v3.json",
+      "sha256": "5718facf88302ff6e3f92e2b489c79a0af259b11edfe7abf0df5a13f02db9527",
+      "size_bytes": 8764
+    },
+    "stage11_graph_output": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl",
+      "sha256": "73bc624bf9147b0bba4962ab286648bcfeeb931a94a1d1a727839f160b35ada5",
+      "size_bytes": 1756236
+    },
+    "stage11_manifest": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/manifest.json",
+      "sha256": "2e4ad9130fc41c25a99c22d44aa0c992c0dc24cc9254188af05774c68ac64c85",
+      "size_bytes": 2164
+    },
+    "stage11_report": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/report.json",
+      "sha256": "e9be44da03112550b21e824a0fd36c4e25c800941d94bedc1475e0faff0ac944",
+      "size_bytes": 119394
+    },
+    "stage11_state": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json",
+      "sha256": "5fd9191eefbfa0c0826b6f8c5dfc94b3185cbc803d0f433b86015c9c1bed75e8",
+      "size_bytes": 73014604
+    },
+    "stage12_graph_output": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl",
+      "sha256": "89ec9bf9c8932962fd3d966073b51f76345666eda5ed5d9beb18659d02e294b0",
+      "size_bytes": 1739977
+    },
+    "stage12_manifest": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/manifest.json",
+      "sha256": "cbf244965001c5b709314b1dffe934e5b946cb90906f53fda77a4c13bdeace70",
+      "size_bytes": 2468
+    },
+    "stage12_report": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/report.json",
+      "sha256": "01165428ca948c37198d8ae792624158a69ca4fc2926aa600e256ceb2ca4f8fa",
+      "size_bytes": 2664
+    },
+    "stage12_state": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/state.json",
+      "sha256": "fe0458cc5c465713a8a8353a0d388ea5677bdbbb196a7028ad9d7d2fa80c4cf1",
+      "size_bytes": 1612882
+    },
+    "stage7_filtered_graph": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+      "sha256": "c7d5132bd0b20aa0da4a64ecbf183abf412c3effca38bef84105c7791126fb4b",
+      "size_bytes": 8431178
+    },
+    "stage7_log": {
+      "path": "archive/hetzner_version/logs/eta_aware_component_filter_prod.out",
+      "sha256": "74889ae5711647c249692e45c26e931c1b008f242f249d998f08080f934c35d9",
+      "size_bytes": 1859027
+    },
+    "stage7_manifest": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/manifest.json",
+      "sha256": "dda38ff4990088601ce4efb317ade1cbecda2da0baf1519dcc818c93f28baa7e",
+      "size_bytes": 1823
+    },
+    "stage7_progress": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/progress.json",
+      "sha256": "73feac80a5ba7485f07e5c0b0d95d518dcf20b2c1ddf7aea7ad18e8c9d1d9a03",
+      "size_bytes": 344
+    },
+    "stage7_summary": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/summary.json",
+      "sha256": "31c884be276a69a5e1be65c4b49fc87753d80fc884cf5de45b206373efd633e8",
+      "size_bytes": 977
+    }
+  },
+  "notes": [
+    "No Stage7, Stage11, Stage12, B0, or allocation artifact was modified.",
+    "No graph was generated.",
+    "No WDQS or LLM call was made.",
+    "This narrows the Stage7-to-B0 historical hash chain; it does not prove full Phase I end-to-end reproducibility."
+  ],
+  "overall_pass": true,
+  "path_translation_manifest_v3": {
+    "investigation_status": "resolved_strong",
+    "path": "artifacts/final_graph/selected_final_graph/rebuild/path_translation_manifest.v3.json",
+    "resolved_local_equivalent": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+    "resolved_local_equivalent_sha256": "c7d5132bd0b20aa0da4a64ecbf183abf412c3effca38bef84105c7791126fb4b",
+    "sha256": "5718facf88302ff6e3f92e2b489c79a0af259b11edfe7abf0df5a13f02db9527"
+  },
+  "scope": "Read-only verification of the resolved Stage7 -> Stage11 -> Stage12 -> B0 evidence chain.",
+  "set_relationships": {
+    "B0_overlap_with_stage12_graph_output": 24683,
+    "stage11_output_minus_stage7_triples": 6705,
+    "stage11_overlap_with_stage12_graph_output": 24670,
+    "stage12_output_minus_B0_triples": 32,
+    "stage12_output_minus_stage11_triples": 45,
+    "stage7_overlap_with_stage11_graph_output": 17965
+  },
+  "stage11_graph_output": {
+    "first_record_keys": [
+      "h",
+      "r",
+      "t",
+      "source"
+    ],
+    "h_r_t_like_record_count": 24670,
+    "jsonl_parse_ok": true,
+    "parse_error_count": 0,
+    "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl",
+    "row_count": 24670,
+    "sha256": "73bc624bf9147b0bba4962ab286648bcfeeb931a94a1d1a727839f160b35ada5",
+    "size_bytes": 1756236,
+    "unique_relations": 139,
+    "unique_triples": 24670
+  },
+  "stage11_report_extract": {
+    "added_core_triples_count": 6705,
+    "completed": true,
+    "final_graph": {
+      "largest_component_size": 21482,
+      "nodes": 21941,
+      "top_component_sizes": [
+        21482,
+        181,
+        133,
+        7,
+        7,
+        5,
+        4,
+        4,
+        4,
+        4
+      ],
+      "weak_components": 60
+    },
+    "original_graph": {
+      "input_triples": 17965,
+      "largest_component_size": 2415,
+      "nodes": 21208,
+      "top_component_sizes": [
+        2415,
+        499,
+        181,
+        178,
+        178,
+        177,
+        169,
+        135,
+        133,
+        117
+      ],
+      "unique_triples": 17965,
+      "weak_components": 6021
+    },
+    "successful": true
+  },
+  "stage11_state_added_core_unique_triples": 6705,
+  "stage12_graph_output": {
+    "first_record_keys": [
+      "h",
+      "r",
+      "t",
+      "source"
+    ],
+    "h_r_t_like_record_count": 24715,
+    "jsonl_parse_ok": true,
+    "parse_error_count": 0,
+    "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl",
+    "row_count": 24715,
+    "sha256": "89ec9bf9c8932962fd3d966073b51f76345666eda5ed5d9beb18659d02e294b0",
+    "size_bytes": 1739977,
+    "unique_relations": 139,
+    "unique_triples": 24715
+  },
+  "stage12_report_extract": {
+    "added_path_triples_count": 45,
+    "completed": true,
+    "derived_expected_unique_triples": 24715,
+    "final_graph": {
+      "largest_component_size": 21893,
+      "nodes": 21953,
+      "top_component_sizes": [
+        21893,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "weak_components": 31
+    },
+    "original_graph": {
+      "input_triples": 24670,
+      "largest_component_size": 21482,
+      "nodes": 21941,
+      "top_component_sizes": [
+        21482,
+        181,
+        133,
+        7,
+        7,
+        5,
+        4,
+        4,
+        4,
+        4
+      ],
+      "unique_triples": 24670,
+      "weak_components": 60
+    },
+    "successful": true,
+    "triples_added": 45
+  },
+  "stage12_state_added_path_unique_triples": 45,
+  "stage7_filtered_graph": {
+    "first_record_keys": [
+      "attachability_score",
+      "bridge_score",
+      "component_merge_score",
+      "first_realization_bonus",
+      "genericity_penalty",
+      "h",
+      "hub_penalty",
+      "layer",
+      "noise_penalty",
+      "r",
+      "relation_need_score",
+      "score",
+      "selection_reason",
+      "structurally_weak",
+      "t",
+      "triple_id"
+    ],
+    "h_r_t_like_record_count": 17965,
+    "jsonl_parse_ok": true,
+    "parse_error_count": 0,
+    "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+    "row_count": 17965,
+    "sha256": "c7d5132bd0b20aa0da4a64ecbf183abf412c3effca38bef84105c7791126fb4b",
+    "size_bytes": 8431178,
+    "unique_relations": 139,
+    "unique_triples": 17965
+  },
+  "stage7_manifest_extract": {
+    "args": {
+      "allocation_path": null,
+      "allow_non_small_removal": false,
+      "eta_keep_ratio": 0.95,
+      "force": false,
+      "input_graph_path": null,
+      "out_dir": "runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod",
+      "progress_every": 1,
+      "run_dir": "runs/prod_refine_20260315_180520",
+      "verbose": true,
+      "weak_component_min_entities": 3,
+      "weak_component_min_triples": 3
+    },
+    "completed_at": "2026-03-19T16:26:32.492786+00:00",
+    "out_dir": "runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod",
+    "run_dir": "/home/kg_benchmark/runs/prod_refine_20260315_180520",
+    "script": "/home/kg_benchmark/src/kg_builder/eta_aware_component_filter.py",
+    "started_at": "2026-03-19T16:26:20.429148+00:00",
+    "status": "completed"
+  },
+  "stage7_progress_extract": {
+    "kept_triples_estimate": 17965,
+    "note": "Run completed successfully.",
+    "phase": "completed",
+    "removed_triples_estimate": 548
+  },
+  "stage7_summary_extract": {
+    "input_triples": 18513,
+    "kept_triples": 17965,
+    "prefilter_source": "stage06_refine_graph",
+    "realized_relations_after": 139,
+    "removed_triples": 548,
+    "total_postfilter_deficit": 2035
+  }
+}

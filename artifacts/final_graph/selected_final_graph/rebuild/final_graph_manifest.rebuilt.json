@@ -1,0 +1,57 @@
+{
+  "allocation_path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+  "allocation_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+  "decision_date": "2026-05-08",
+  "decision_document_path": "docs/reconstruction/19_final_graph_selection_decision.md",
+  "decision_document_sha256": "f4db9c6144db7d4346855a554a32588fa100f9a83cd4af34bf93f410c9bbacf2",
+  "explicit_notes": [
+    "Documentation-only rebuild.",
+    "No graph artifact was copied or modified.",
+    "No graph was generated.",
+    "Metrics were rebuilt from the duplicate-safe B0 reaudit report.",
+    "This does not prove upstream end-to-end reproducibility."
+  ],
+  "final_graph_decision_path": "artifacts/final_graph/selected_final_graph/final_graph_decision.md",
+  "final_graph_decision_sha256": "f66849c78f22da50b45c8ef7341d9dddc3e659ae801f52ef5a7b6a4548a952af",
+  "limitations": "B0 has higher total surplus than C1 and remains affected by generic-relation dominance. Stage13 and later C2/C3 analyses are therefore reported as post hoc candidate investigations rather than as the selected final graph.",
+  "original_manifest_path": "artifacts/final_graph/selected_final_graph/final_graph_manifest.json",
+  "original_manifest_sha256": "808f1dd29e97e9518d5b7ed5eca5447729964622d63f02c43cfcd901455696c4",
+  "rationale": "B0 is selected as the final reported graph because it preserves weak connectivity, keeps all 139 allocated relations observed, has zero allocated-relation absence, and has the lower total quota deficit among the remaining defensible graph candidates. C1 reduces surplus and graph size, but the surplus reduction is modest relative to the increase in deficit. C2 was rejected after failing the surplus threshold, and the C3 feasibility probe did not support a full bridge-rescue candidate with eligible pool v1.",
+  "reaudit_report_path": "artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.report.json",
+  "reaudit_report_sha256": "a0ef6d5d5a0359e2888a422164cc7ab3e14f582e35bbd1a1728b53365988aea5",
+  "rebuild_script": "scripts/reconstruction/02_register_B0_final_manifest.sh",
+  "rebuilt_on": "2026-05-09T22:29:14.151126+00:00",
+  "rejected_or_nonselected_candidates": [
+    {
+      "candidate_id": "C1",
+      "evidence": [
+        "docs/reconstruction/19_final_graph_selection_decision.md",
+        "docs/reconstruction/18_final_graph_decision_state_after_C3_probe.md"
+      ],
+      "reason": "B0/C1 tradeoff resolved by human final graph decision.",
+      "status": "not_selected_after_final_decision"
+    },
+    {
+      "candidate_id": "C2",
+      "evidence": [
+        "experiments/graph_candidates/C2_targeted_generic_pruning/decision.md",
+        "docs/reconstruction/12_C2_result_interpretation.md"
+      ],
+      "reason": "Rejected as final because it failed the surplus threshold and did not beat C1 surplus.",
+      "status": "generated_failed_minimum_thresholds"
+    },
+    {
+      "candidate_id": "C3_probe_v1",
+      "evidence": [
+        "docs/reconstruction/17_C3_feasibility_probe_result.md",
+        "experiments/graph_candidates/C3_remove_replace_generic_connectivity/probe_v1/feasibility_probe_report.json"
+      ],
+      "reason": "Not a graph candidate; full bridge-rescue not recommended with eligible pool v1.",
+      "status": "feasibility_probe_only"
+    }
+  ],
+  "selected_candidate_id": "B0",
+  "selected_graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+  "selected_graph_sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+  "selected_graph_type": "csv_h_r_t"
+}

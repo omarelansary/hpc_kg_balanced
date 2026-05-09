@@ -1,0 +1,111 @@
+{
+  "investigation": "stage7_implementation_provenance",
+  "status": "confirmed_separate_eta_aware_replacement_script",
+  "likely_script": {
+    "local_path": "archive/hetzner_version/src/kg_builder/eta_aware_component_filter.py",
+    "manifest_path": "/home/kg_benchmark/src/kg_builder/eta_aware_component_filter.py",
+    "sha256": "bfbc2958e4ae650b1cd93533415665a3930908b1520ca43b7feab24aa2643261",
+    "evidence": [
+      "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/manifest.json",
+      "archive/hetzner_version/logs/eta_aware_component_filter_prod.out",
+      "archive/hetzner_version/src/kg_builder/eta_aware_component_filter.py"
+    ]
+  },
+  "monolithic_pipeline_script": {
+    "local_path": "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+    "sha256": "a1fec8c08783b3816ebc28e16f39499fb6be2f2a4d587948a00fa4fb9082a5e7",
+    "relationship": "produced earlier stage07_filtering output but not the Stage7 artifact consumed by Stage11 in the selected B0 chain"
+  },
+  "stage7_manifest": {
+    "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/manifest.json",
+    "sha256": "dda38ff4990088601ce4efb317ade1cbecda2da0baf1519dcc818c93f28baa7e",
+    "status": "completed",
+    "started_at": "2026-03-19T16:26:20.429148+00:00",
+    "completed_at": "2026-03-19T16:26:32.492786+00:00",
+    "run_dir": "/home/kg_benchmark/runs/prod_refine_20260315_180520",
+    "out_dir": "runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod",
+    "args": {
+      "run_dir": "runs/prod_refine_20260315_180520",
+      "out_dir": "runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod",
+      "allocation_path": null,
+      "input_graph_path": null,
+      "eta_keep_ratio": 0.95,
+      "weak_component_min_triples": 3,
+      "weak_component_min_entities": 3,
+      "allow_non_small_removal": false,
+      "progress_every": 1,
+      "force": false,
+      "verbose": true
+    }
+  },
+  "stage7_log": {
+    "path": "archive/hetzner_version/logs/eta_aware_component_filter_prod.out",
+    "sha256": "74889ae5711647c249692e45c26e931c1b008f242f249d998f08080f934c35d9",
+    "has_exact_shell_command": false,
+    "records_production_start_done_markers": true
+  },
+  "inputs": {
+    "prefilter_source": "stage06_refine_graph",
+    "stage6_graph_stale_path": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage06_refine_graph/refined_graph_triples.jsonl",
+    "stage6_graph_local_path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage06_refine_graph/refined_graph_triples.jsonl",
+    "input_triples": 18513,
+    "allocation_path_from_manifest": "src/kg_builder/input/bidirectional_allocation_results5k.json",
+    "positive_eta_allocations": 139
+  },
+  "outputs": {
+    "stage7_filtered_graph": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+      "sha256": "c7d5132bd0b20aa0da4a64ecbf183abf412c3effca38bef84105c7791126fb4b",
+      "rows": 17965,
+      "unique_triples": 17965,
+      "unique_relations": 139
+    },
+    "summary": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/summary.json",
+      "sha256": "31c884be276a69a5e1be65c4b49fc87753d80fc884cf5de45b206373efd633e8"
+    },
+    "progress": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/progress.json",
+      "sha256": "73feac80a5ba7485f07e5c0b0d95d518dcf20b2c1ddf7aea7ad18e8c9d1d9a03"
+    }
+  },
+  "counts": {
+    "input_component_count": 6524,
+    "kept_component_count": 6021,
+    "removed_component_count": 503,
+    "input_triples": 18513,
+    "kept_triples": 17965,
+    "removed_triples": 548,
+    "realized_relations_before": 139,
+    "realized_relations_after": 139,
+    "total_prefilter_deficit": 1487,
+    "total_postfilter_deficit": 2035
+  },
+  "comparison_to_original_monolithic_stage7": {
+    "original_stage7_graph_path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering/filtered_graph_triples.jsonl",
+    "original_stage7_graph_sha256": "21f1a9e0f6689998aa777fa93a29033dbb2cee6ee8dde67a55e24ef7dd6f3321",
+    "original_stage7_triples": 10779,
+    "original_stage7_realized_relations": 136,
+    "original_stage7_total_deficit": 9221,
+    "run_manifest_path": "archive/hetzner_version/runs/prod_refine_20260315_180520/manifest.json",
+    "run_manifest_sha256": "918546ec1c0f5e02e99f6b09d9dc8d8a6d3caa16ccd1cb31f3ab26d6cd3eaff9"
+  },
+  "downstream_link": {
+    "stage11_manifest_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/manifest.json",
+    "stage11_manifest_sha256": "2e4ad9130fc41c25a99c22d44aa0c992c0dc24cc9254188af05774c68ac64c85",
+    "stage11_input_triples_stale_path": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+    "stage11_input_triples_local_path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl"
+  },
+  "evidence_assessment": {
+    "implementation_status": "confirmed",
+    "exact_shell_command_status": "partial_reconstructed_from_manifest_args",
+    "user_memory_assessment": "supported",
+    "effect_on_stage4_to_B0_chain": "no_change"
+  },
+  "remaining_gaps": [
+    "No copied shell script or SLURM submission script containing the exact Stage7 eta-aware command was found.",
+    "The upstream Stage2 candidate collection still depends on historical WDQS evidence.",
+    "The full environment lock remains incomplete.",
+    "Full Phase I-to-Phase II allocation export provenance remains incomplete."
+  ]
+}

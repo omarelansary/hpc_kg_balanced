@@ -1,0 +1,407 @@
+{
+  "answers": {
+    "canonical_support_matrix_path": "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json",
+    "canonical_support_matrix_sha256": "75794511aaa9ef72a7c63fd0d9a3c11969b72c4fa4bfb01237859b612f544041",
+    "cryptographically_linked_to_exact_5k_allocation_export": false,
+    "did_stage1_consume_this_support_matrix_directly": "yes, by run manifest/config path and archived stage_score_genericity code; exact runtime log line for support-matrix load was not found",
+    "direct_command_or_log_evidence_for_producing_it": "not found in copied workspace",
+    "duplicate_copy_status": "only one file with exact name found in workspace; no separate local non-archive duplicate copy identified",
+    "inner_relation_set_matches_outer_relation_set": false,
+    "inner_relations": 129,
+    "json_schema": "JSON object mapping outer relation id to sparse object of inner relation id -> numeric support weight",
+    "local_or_archive_duplicate_copies": [
+      "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
+    ],
+    "most_likely_producer_script": "src/statistics/hop_pattern_analysis_dashboard.py via Genericity Matrix JSON download using matrix_to_nested_json_dict and adjacency_support mode",
+    "nonempty_rows": 134,
+    "nonzero_cells": 831,
+    "outer_relation_set_matches_139_unique_allocated_relations": true,
+    "outer_relations": 139,
+    "relations_missing_as_inner_keys": [
+      "P10374",
+      "P1158",
+      "P13210",
+      "P2353",
+      "P3833",
+      "P4353",
+      "P5277",
+      "P7209",
+      "P814",
+      "P8308"
+    ],
+    "safe_thesis_claim": "Stage1 genericity scoring in the archived Phase II run consumed a sparse adjacency-support matrix at archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json; its outer relation set exactly matches the 139 merged positive-eta relations in the canonical 5k allocation.",
+    "same_run_linkage_to_allocation": "partial: config comments require pairing and dashboard code exports matrix over current positive-eta allocation relations; no manifest embeds both output hashes from the same export session",
+    "support_matrix_provenance_status": "partial",
+    "unsafe_thesis_claim": "The support matrix was regenerated or exported in the same dashboard session as the 5k allocation with a preserved command/hash manifest; no such direct export evidence was found."
+  },
+  "archived_allocation_copy": {
+    "allocation_rows": 154,
+    "config": {
+      "anti_min_conf": 0.99,
+      "anti_min_support": 50,
+      "base_max_total": 3253580,
+      "base_min_total": 50,
+      "comp_min_conf": 0.6,
+      "comp_min_support": 50,
+      "epsilon": 0.0,
+      "integerize": true,
+      "inv_min_conf": 0.6,
+      "inv_min_support": 50,
+      "matrix_min_support": 50,
+      "matrix_mode": "log1p_balanced_norm",
+      "sym_min_conf": 0.6,
+      "sym_min_support": 50,
+      "temperature": 1.0
+    },
+    "exists": true,
+    "merged_eta_integer_sum": 20000,
+    "path": "archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.json",
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+    "size_bytes": 85288,
+    "unique_positive_eta_relations_after_merge": 139
+  },
+  "canonical_allocation_for_comparison": {
+    "allocation_rows": 154,
+    "config": {
+      "anti_min_conf": 0.99,
+      "anti_min_support": 50,
+      "base_max_total": 3253580,
+      "base_min_total": 50,
+      "comp_min_conf": 0.6,
+      "comp_min_support": 50,
+      "epsilon": 0.0,
+      "integerize": true,
+      "inv_min_conf": 0.6,
+      "inv_min_support": 50,
+      "matrix_min_support": 50,
+      "matrix_mode": "log1p_balanced_norm",
+      "sym_min_conf": 0.6,
+      "sym_min_support": 50,
+      "temperature": 1.0
+    },
+    "exists": true,
+    "merged_eta_integer_sum": 20000,
+    "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+    "size_bytes": 85288,
+    "unique_positive_eta_relations_after_merge": 139
+  },
+  "canonical_support_matrix": {
+    "allocation_relations_minus_outer": [],
+    "exists": true,
+    "inner_minus_outer": [],
+    "inner_relation_count": 129,
+    "inner_relation_set_is_subset_of_outer_relation_set": true,
+    "inner_relation_set_matches_outer_relation_set": false,
+    "nonempty_rows": 134,
+    "nonzero_cells": 831,
+    "outer_minus_allocation_relations": [],
+    "outer_minus_inner": [
+      "P10374",
+      "P1158",
+      "P13210",
+      "P2353",
+      "P3833",
+      "P4353",
+      "P5277",
+      "P7209",
+      "P814",
+      "P8308"
+    ],
+    "outer_relation_count": 139,
+    "outer_relation_set_matches_merged_5k_allocation_relations": true,
+    "path": "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json",
+    "sample_nonempty_rows_first5": {
+      "P1002": {
+        "P1002": 602.0,
+        "P1889": 772.0,
+        "P279": 1928.0,
+        "P31": 1567.0,
+        "P366": 96.0
+      },
+      "P10254": {
+        "P10254": 2481.0,
+        "P131": 152698.0,
+        "P1889": 3939.0,
+        "P31": 236203.0
+      },
+      "P10374": {
+        "P279": 87.0,
+        "P31": 98.0,
+        "P361": 189.0,
+        "P527": 192.0
+      },
+      "P10449": {
+        "P10449": 2053.0,
+        "P31": 5221.0
+      },
+      "P10607": {
+        "P1268": 1446.0,
+        "P31": 1453.0,
+        "P527": 1588.0,
+        "P822": 119.0
+      }
+    },
+    "schema": "JSON object mapping outer relation id to sparse object of inner relation id -> numeric support weight",
+    "sha256": "75794511aaa9ef72a7c63fd0d9a3c11969b72c4fa4bfb01237859b612f544041",
+    "size_bytes": 18732,
+    "top_level_type": "dict",
+    "weight_max": 2126780.0,
+    "weight_min": 50.0,
+    "weight_sum": 10899602.0,
+    "widest_rows_top10": [
+      {
+        "nonzero_inner_relations": 17,
+        "relation": "P6291"
+      },
+      {
+        "nonzero_inner_relations": 15,
+        "relation": "P3075"
+      },
+      {
+        "nonzero_inner_relations": 15,
+        "relation": "P3461"
+      },
+      {
+        "nonzero_inner_relations": 15,
+        "relation": "P8225"
+      },
+      {
+        "nonzero_inner_relations": 13,
+        "relation": "P1537"
+      },
+      {
+        "nonzero_inner_relations": 12,
+        "relation": "P1312"
+      },
+      {
+        "nonzero_inner_relations": 11,
+        "relation": "P1158"
+      },
+      {
+        "nonzero_inner_relations": 11,
+        "relation": "P2388"
+      },
+      {
+        "nonzero_inner_relations": 10,
+        "relation": "P163"
+      },
+      {
+        "nonzero_inner_relations": 10,
+        "relation": "P167"
+      }
+    ],
+    "zero_rows": [
+      "P1001",
+      "P1889",
+      "P279",
+      "P31",
+      "P361"
+    ],
+    "zero_rows_count": 5
+  },
+  "created_on": "2026-05-09T11:04:07.183395+00:00",
+  "evidence_classification": {
+    "artifact_identity_hash_evidence": "confirmed",
+    "exact_same_run_linkage_to_allocation": "partial/not cryptographic",
+    "export_command_or_log_evidence": "missing",
+    "full_reproducibility": "not_established",
+    "producer_code_path_evidence": "confirmed for dashboard export implementation; inferred for this exact artifact",
+    "relation_set_compatibility_with_5k_allocation": "confirmed",
+    "schema_content_evidence": "confirmed",
+    "stage1_consumption_evidence": "confirmed by manifest/config/code; log line specific to support matrix not found"
+  },
+  "investigation_id": "R2.8_support_matrix_provenance",
+  "producer_code_path_evidence": {
+    "dashboard": {
+      "exists": true,
+      "path": "src/statistics/hop_pattern_analysis_dashboard.py",
+      "sha256": "bb76aa0f43fbfb14cb3f5c3c18767c31a97fc4e767389c0f2201c8e7f944fe85",
+      "size_bytes": 90452
+    },
+    "key_line_references": [
+      {
+        "evidence": "build_weight_matrix returns raw adjacency counts for adjacency_support mode",
+        "lines": "596-610",
+        "path": "src/statistics/hop_pattern_analysis_dashboard.py"
+      },
+      {
+        "evidence": "matrix_to_nested_json_dict serializes nonzero matrix cells to the nested JSON format expected by Stage1",
+        "lines": "637-647",
+        "path": "src/statistics/hop_pattern_analysis_dashboard.py"
+      },
+      {
+        "evidence": "dashboard selects positive-eta allocation relations and adjacency_support as default genericity matrix mode",
+        "lines": "1576-1602",
+        "path": "src/statistics/hop_pattern_analysis_dashboard.py"
+      },
+      {
+        "evidence": "dashboard writes Genericity Matrix JSON through a download button named genericity_support_matrix.{mode}.json",
+        "lines": "1628-1649",
+        "path": "src/statistics/hop_pattern_analysis_dashboard.py"
+      },
+      {
+        "evidence": "config comments state allocation JSON and genericity matrix should be exported from the dashboard and kept paired",
+        "lines": "11-36",
+        "path": "src/kg_building/relation_balanced_kg_pipeline_config.yaml"
+      }
+    ],
+    "phase2_config_template": {
+      "exists": true,
+      "path": "src/kg_building/relation_balanced_kg_pipeline_config.yaml",
+      "sha256": "4552722cccbb8b1a35b0c05c9988ab075362a6230036447404da46c83a63e418",
+      "size_bytes": 2427
+    }
+  },
+  "relation_set_comparison": {
+    "allocation_merged_positive_eta_relation_count": 139,
+    "allocation_minus_outer": [],
+    "inner_equals_outer": false,
+    "inner_minus_outer": [],
+    "inner_subset_outer": true,
+    "interpretation": "Outer keys are the complete allocated-relation support-matrix row set. Inner keys are sparse nonzero columns only; missing inner keys are interpreted by Stage1 as zero support values, not as missing allocated relations.",
+    "outer_equals_allocation_relations": true,
+    "outer_minus_allocation": [],
+    "outer_minus_inner": [
+      "P10374",
+      "P1158",
+      "P13210",
+      "P2353",
+      "P3833",
+      "P4353",
+      "P5277",
+      "P7209",
+      "P814",
+      "P8308"
+    ],
+    "support_inner_relation_count": 129,
+    "support_outer_relation_count": 139
+  },
+  "remaining_gaps": [
+    "No direct Streamlit command or saved dashboard state was found for exporting genericity_support_matrix.adjacency_support.json.",
+    "No manifest was found that records both the 5k allocation JSON hash and support matrix hash from the same dashboard export session.",
+    "The support matrix file does not embed upstream hop-support input paths, threshold values, or source hashes.",
+    "The archived Phase II log does not contain a dedicated support-matrix load line, although the manifest/config/code path confirms Stage1 support_matrix_path consumption.",
+    "Exact Phase I-to-support-matrix regeneration remains incomplete until a wrapper records dashboard inputs, thresholds, matrix mode, output path, and output hash."
+  ],
+  "rules_observed": {
+    "graph_artifacts_modified": false,
+    "graph_generation_performed": false,
+    "llm_calls_made": false,
+    "read_only_investigation": true,
+    "wdqs_calls_made": false
+  },
+  "searched_evidence_files": {
+    "archive/hetzner_version/logs/relation_balanced_kg_pipeline.out": {
+      "exists": true,
+      "path": "archive/hetzner_version/logs/relation_balanced_kg_pipeline.out",
+      "sha256": "117214de34d71b759c58ac3b6188e85db648f63697a9a089c45b6b197a5230ea",
+      "size_bytes": 192527
+    },
+    "archive/hetzner_version/runs/prod_refine_20260315_180520/manifest.json": {
+      "exists": true,
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/manifest.json",
+      "sha256": "918546ec1c0f5e02e99f6b09d9dc8d8a6d3caa16ccd1cb31f3ab26d6cd3eaff9",
+      "size_bytes": 4075
+    },
+    "archive/hetzner_version/src/kg_builder/config.yaml": {
+      "exists": true,
+      "path": "archive/hetzner_version/src/kg_builder/config.yaml",
+      "sha256": "5dd43af7ad0c1a1c8c75ae4e0487818fd48ae805d47320dab1bed7918ec0f1eb",
+      "size_bytes": 15127
+    },
+    "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py": {
+      "exists": true,
+      "path": "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+      "sha256": "a1fec8c08783b3816ebc28e16f39499fb6be2f2a4d587948a00fa4fb9082a5e7",
+      "size_bytes": 96879
+    },
+    "docs/reconstruction/32_stage1_stage2_candidate_collection_provenance.md": {
+      "exists": true,
+      "path": "docs/reconstruction/32_stage1_stage2_candidate_collection_provenance.md",
+      "sha256": "5d579bf9c5a9e74decec54c7b8208e11c9b579d5e6f1e4ec3f7b35f66df9b34f",
+      "size_bytes": 18310
+    },
+    "docs/reconstruction/33_allocation_5k_export_provenance.md": {
+      "exists": true,
+      "path": "docs/reconstruction/33_allocation_5k_export_provenance.md",
+      "sha256": "4b9c9f5b119e4bac5c0d7618a2746481c115dc9a76b2e4250492474e9eb355bc",
+      "size_bytes": 19381
+    },
+    "src/kg_building/relation_balanced_kg_pipeline_config.yaml": {
+      "exists": true,
+      "path": "src/kg_building/relation_balanced_kg_pipeline_config.yaml",
+      "sha256": "4552722cccbb8b1a35b0c05c9988ab075362a6230036447404da46c83a63e418",
+      "size_bytes": 2427
+    },
+    "src/statistics/hop_pattern_analysis_dashboard.py": {
+      "exists": true,
+      "path": "src/statistics/hop_pattern_analysis_dashboard.py",
+      "sha256": "bb76aa0f43fbfb14cb3f5c3c18767c31a97fc4e767389c0f2201c8e7f944fe85",
+      "size_bytes": 90452
+    }
+  },
+  "stage1_consumption_evidence": {
+    "archived_config_yaml": {
+      "exists": true,
+      "path": "archive/hetzner_version/src/kg_builder/config.yaml",
+      "sha256": "5dd43af7ad0c1a1c8c75ae4e0487818fd48ae805d47320dab1bed7918ec0f1eb",
+      "size_bytes": 15127
+    },
+    "archived_pipeline_script": {
+      "exists": true,
+      "path": "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+      "sha256": "a1fec8c08783b3816ebc28e16f39499fb6be2f2a4d587948a00fa4fb9082a5e7",
+      "size_bytes": 96879
+    },
+    "key_line_references": [
+      {
+        "evidence": "run config records support_matrix_path as src/kg_builder/input/genericity_support_matrix.adjacency_support.json",
+        "lines": "1-45",
+        "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/manifest.json"
+      },
+      {
+        "evidence": "production config describes Stage1 support matrix exported from dashboard and points to the adjacency-support JSON",
+        "lines": "64-67",
+        "path": "archive/hetzner_version/src/kg_builder/config.yaml"
+      },
+      {
+        "evidence": "load_support_matrix reads JSON object relation -> relation -> support",
+        "lines": "565-583",
+        "path": "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py"
+      },
+      {
+        "evidence": "score_genericity uses support matrix rows and reverse lookups over allocated relations",
+        "lines": "616-646",
+        "path": "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py"
+      },
+      {
+        "evidence": "stage_score_genericity loads allocated_relations_path and support_matrix_path before scoring",
+        "lines": "2128-2134",
+        "path": "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py"
+      }
+    ],
+    "manifest": {
+      "exists": true,
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/manifest.json",
+      "sha256": "918546ec1c0f5e02e99f6b09d9dc8d8a6d3caa16ccd1cb31f3ab26d6cd3eaff9",
+      "size_bytes": 4075
+    },
+    "r2_6_provenance": {
+      "exists": true,
+      "path": "artifacts/final_graph/selected_final_graph/rebuild/stage1_stage2_candidate_collection_provenance.json",
+      "sha256": "aa3a7ee998b21766a7970cfa1ef5aead48ea8a024567b30cd0625a5d88cc1193",
+      "size_bytes": 244876
+    }
+  },
+  "status": "partial_provenance_confirmed_artifact_stage1_consumption_no_direct_export_command_no_same_run_hash_link",
+  "support_matrix_file_search": {
+    "exact_name_matches": [
+      "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
+    ],
+    "support_matrix_like_matches": [
+      "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json",
+      "artifacts/final_graph/selected_final_graph/rebuild/support_matrix_provenance.json"
+    ]
+  }
+}

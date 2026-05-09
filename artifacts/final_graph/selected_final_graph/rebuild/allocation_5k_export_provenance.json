@@ -1,0 +1,1979 @@
+{
+  "alternate_allocation_artifacts": [
+    {
+      "allocation_row_fields": [
+        "backward_score",
+        "eta_expected",
+        "eta_integer",
+        "eta_total",
+        "forward_score",
+        "p_avg",
+        "p_backward",
+        "p_forward",
+        "pattern",
+        "relation",
+        "relation_dom_rng_class"
+      ],
+      "allocation_rows": 143,
+      "config": {
+        "anti_min_conf": 0.99,
+        "anti_min_support": 50,
+        "base_max_total": 3253580,
+        "base_min_total": 50,
+        "comp_min_conf": 0.95,
+        "comp_min_support": 8,
+        "epsilon": 0.0,
+        "integerize": true,
+        "inv_min_conf": 0.9,
+        "inv_min_support": 50,
+        "matrix_min_support": 50,
+        "matrix_mode": "log1p_balanced_norm",
+        "sym_min_conf": 0.6,
+        "sym_min_support": 50,
+        "temperature": 1.0
+      },
+      "duplicate_relation_rows_count": 18,
+      "duplicate_relations": {
+        "P10449": 2,
+        "P12363": 2,
+        "P1290": 2,
+        "P13177": 3,
+        "P16": 2,
+        "P1639": 2,
+        "P2283": 2,
+        "P2673": 2,
+        "P2674": 2,
+        "P2743": 3,
+        "P3032": 2,
+        "P3085": 2,
+        "P414": 2,
+        "P4147": 2,
+        "P461": 2,
+        "P5607": 2
+      },
+      "eta_expected_row_sum": 20000.0,
+      "eta_integer_row_sum": 20000,
+      "eta_per_group": {
+        "anti_symmetric": 5000,
+        "composition": 5000,
+        "inverse": 5000,
+        "symmetric": 5000
+      },
+      "exists": true,
+      "merged_eta_integer_sum": 20000,
+      "merged_eta_relation_count": 125,
+      "path": "data/processed/hop_support_v3/bidirectional_allocation_results_hop_v3_patchedby_v2_allsup50_60sym_99anti_90inv_95comp.json",
+      "pattern_counts": {
+        "anti_symmetric": 66,
+        "composition": 37,
+        "inverse": 22,
+        "symmetric": 18
+      },
+      "pattern_groups_lengths": {
+        "anti_symmetric": 66,
+        "composition": 37,
+        "inverse": 22,
+        "symmetric": 18
+      },
+      "relations_universe_count": 1467,
+      "sample_allocation_rows": [
+        {
+          "backward_score": 1.8366656984849719,
+          "eta_expected": 190.9817216810353,
+          "eta_integer": 191,
+          "eta_total": 5000,
+          "forward_score": 0.17394225394917845,
+          "p_avg": 0.03819634433620706,
+          "p_backward": 0.06393598173016864,
+          "p_forward": 0.012456706942245483,
+          "pattern": "anti_symmetric",
+          "relation": "P527",
+          "relation_dom_rng_class": "FULL_BOTH"
+        },
+        {
+          "backward_score": 0.6473267834035411,
+          "eta_expected": 98.65444236292049,
+          "eta_integer": 99,
+          "eta_total": 5000,
+          "forward_score": 0.6473267834035411,
+          "p_avg": 0.0197308884725841,
+          "p_backward": 0.019463547987161822,
+          "p_forward": 0.019998228958006372,
+          "pattern": "anti_symmetric",
+          "relation": "P816",
+          "relation_dom_rng_class": "FULL_BOTH"
+        },
+        {
+          "backward_score": 0.5814017119517666,
+          "eta_expected": 94.34832852311814,
+          "eta_integer": 94,
+          "eta_total": 5000,
+          "forward_score": 0.6229965184339444,
+          "p_avg": 0.018869665704623628,
+          "p_backward": 0.018221793280769876,
+          "p_forward": 0.01951753812847738,
+          "pattern": "anti_symmetric",
+          "relation": "P567",
+          "relation_dom_rng_class": "FULL_BOTH"
+        }
+      ],
+      "sha256": "472b32e6418b344267bf87237f3f4474d6a0542e3e8a46cf96bdfef393f94eec",
+      "size_bytes": 80637,
+      "top_level_keys": [
+        "config",
+        "eta_per_group",
+        "pattern_groups",
+        "relations_universe",
+        "allocations"
+      ],
+      "top_level_type": "dict",
+      "top_merged_eta_relations": [
+        {
+          "eta_integer_merged": 779,
+          "relation": "P2743"
+        },
+        {
+          "eta_integer_merged": 697,
+          "relation": "P13177"
+        },
+        {
+          "eta_integer_merged": 497,
+          "relation": "P514"
+        },
+        {
+          "eta_integer_merged": 396,
+          "relation": "P3032"
+        },
+        {
+          "eta_integer_merged": 391,
+          "relation": "P1639"
+        },
+        {
+          "eta_integer_merged": 357,
+          "relation": "P2674"
+        },
+        {
+          "eta_integer_merged": 356,
+          "relation": "P2673"
+        },
+        {
+          "eta_integer_merged": 339,
+          "relation": "P4545"
+        },
+        {
+          "eta_integer_merged": 333,
+          "relation": "P461"
+        },
+        {
+          "eta_integer_merged": 329,
+          "relation": "P2152"
+        },
+        {
+          "eta_integer_merged": 323,
+          "relation": "P399"
+        },
+        {
+          "eta_integer_merged": 318,
+          "relation": "P2155"
+        },
+        {
+          "eta_integer_merged": 316,
+          "relation": "P6185"
+        },
+        {
+          "eta_integer_merged": 277,
+          "relation": "P4147"
+        },
+        {
+          "eta_integer_merged": 264,
+          "relation": "P3578"
+        },
+        {
+          "eta_integer_merged": 262,
+          "relation": "P167"
+        },
+        {
+          "eta_integer_merged": 261,
+          "relation": "P1322"
+        },
+        {
+          "eta_integer_merged": 261,
+          "relation": "P1398"
+        },
+        {
+          "eta_integer_merged": 260,
+          "relation": "P2681"
+        },
+        {
+          "eta_integer_merged": 260,
+          "relation": "P2682"
+        }
+      ],
+      "unique_allocated_relations": 125
+    },
+    {
+      "allocation_row_fields": [
+        "backward_score",
+        "eta_expected",
+        "eta_integer",
+        "eta_total",
+        "forward_score",
+        "p_avg",
+        "p_backward",
+        "p_forward",
+        "pattern",
+        "relation",
+        "relation_dom_rng_class"
+      ],
+      "allocation_rows": 209,
+      "config": {
+        "anti_min_conf": 0.97,
+        "anti_min_support": 50,
+        "base_max_total": 298810,
+        "base_min_total": 50,
+        "comp_min_conf": 0.9,
+        "comp_min_support": 50,
+        "epsilon": 0.0,
+        "integerize": true,
+        "inv_min_conf": 0.97,
+        "inv_min_support": 50,
+        "matrix_min_support": 50,
+        "matrix_mode": "log1p_balanced_norm",
+        "sym_min_conf": 0.97,
+        "sym_min_support": 50,
+        "temperature": 1.0
+      },
+      "duplicate_relation_rows_count": 45,
+      "duplicate_relations": {
+        "P12363": 2,
+        "P12765": 2,
+        "P1290": 2,
+        "P13177": 3,
+        "P1322": 2,
+        "P13478": 2,
+        "P1398": 2,
+        "P1403": 2,
+        "P1434": 2,
+        "P1639": 2,
+        "P167": 2,
+        "P2098": 2,
+        "P2152": 2,
+        "P2155": 2,
+        "P2499": 2,
+        "P2500": 2,
+        "P2568": 2,
+        "P2673": 2,
+        "P2674": 2,
+        "P2681": 2,
+        "P2682": 2,
+        "P2743": 3,
+        "P3032": 2,
+        "P3085": 2,
+        "P3148": 2,
+        "P3578": 2,
+        "P3729": 2,
+        "P3730": 2,
+        "P4147": 3,
+        "P4149": 3,
+        "P461": 2,
+        "P4873": 3,
+        "P4875": 3,
+        "P5135": 2,
+        "P5607": 3,
+        "P6185": 2,
+        "P7604": 2,
+        "P927": 2
+      },
+      "eta_expected_row_sum": 19999.999999999993,
+      "eta_integer_row_sum": 20000,
+      "eta_per_group": {
+        "anti_symmetric": 5000,
+        "composition": 5000,
+        "inverse": 5000,
+        "symmetric": 5000
+      },
+      "exists": true,
+      "merged_eta_integer_sum": 20000,
+      "merged_eta_relation_count": 164,
+      "path": "data/connectedgraph/bidirectional_allocation_results_allsupp50_conf97_compconf90.json",
+      "pattern_counts": {
+        "anti_symmetric": 45,
+        "composition": 64,
+        "inverse": 67,
+        "symmetric": 33
+      },
+      "pattern_groups_lengths": {
+        "anti_symmetric": 45,
+        "composition": 64,
+        "inverse": 67,
+        "symmetric": 33
+      },
+      "relations_universe_count": 1148,
+      "sample_allocation_rows": [
+        {
+          "backward_score": 1.0707885042556655,
+          "eta_expected": 147.30500899549247,
+          "eta_integer": 147,
+          "eta_total": 5000,
+          "forward_score": 0.1759681115649603,
+          "p_avg": 0.029461001799098496,
+          "p_backward": 0.04175656890696731,
+          "p_forward": 0.01716543469122968,
+          "pattern": "anti_symmetric",
+          "relation": "P527",
+          "relation_dom_rng_class": "FULL_BOTH"
+        },
+        {
+          "backward_score": 0.6653238499442561,
+          "eta_expected": 139.59774171221065,
+          "eta_integer": 140,
+          "eta_total": 5000,
+          "forward_score": 0.6653238499442561,
+          "p_avg": 0.027919548342442133,
+          "p_backward": 0.027837725237311383,
+          "p_forward": 0.028001371447572882,
+          "pattern": "anti_symmetric",
+          "relation": "P816",
+          "relation_dom_rng_class": "FULL_BOTH"
+        },
+        {
+          "backward_score": 0.6111702925489843,
+          "eta_expected": 133.50536479545335,
+          "eta_integer": 133,
+          "eta_total": 5000,
+          "forward_score": 0.6300858253134216,
+          "p_avg": 0.02670107295909067,
+          "p_backward": 0.026370304995536414,
+          "p_forward": 0.027031840922644927,
+          "pattern": "anti_symmetric",
+          "relation": "P4147",
+          "relation_dom_rng_class": "FULL_BOTH"
+        }
+      ],
+      "sha256": "aafade9887a863ee5bcebe8fb67a6e0f151ac2c696a6bc2c283044bca9b8090e",
+      "size_bytes": 104372,
+      "top_level_keys": [
+        "config",
+        "eta_per_group",
+        "pattern_groups",
+        "relations_universe",
+        "allocations"
+      ],
+      "top_level_type": "dict",
+      "top_merged_eta_relations": [
+        {
+          "eta_integer_merged": 433,
+          "relation": "P4873"
+        },
+        {
+          "eta_integer_merged": 392,
+          "relation": "P4875"
+        },
+        {
+          "eta_integer_merged": 356,
+          "relation": "P2743"
+        },
+        {
+          "eta_integer_merged": 344,
+          "relation": "P13177"
+        },
+        {
+          "eta_integer_merged": 339,
+          "relation": "P2152"
+        },
+        {
+          "eta_integer_merged": 322,
+          "relation": "P4149"
+        },
+        {
+          "eta_integer_merged": 320,
+          "relation": "P4147"
+        },
+        {
+          "eta_integer_merged": 311,
+          "relation": "P31"
+        },
+        {
+          "eta_integer_merged": 308,
+          "relation": "P3578"
+        },
+        {
+          "eta_integer_merged": 276,
+          "relation": "P6185"
+        },
+        {
+          "eta_integer_merged": 261,
+          "relation": "P2155"
+        },
+        {
+          "eta_integer_merged": 229,
+          "relation": "P5607"
+        },
+        {
+          "eta_integer_merged": 226,
+          "relation": "P3032"
+        },
+        {
+          "eta_integer_merged": 222,
+          "relation": "P1322"
+        },
+        {
+          "eta_integer_merged": 207,
+          "relation": "P2673"
+        },
+        {
+          "eta_integer_merged": 207,
+          "relation": "P2674"
+        },
+        {
+          "eta_integer_merged": 206,
+          "relation": "P12363"
+        },
+        {
+          "eta_integer_merged": 205,
+          "relation": "P1639"
+        },
+        {
+          "eta_integer_merged": 203,
+          "relation": "P4545"
+        },
+        {
+          "eta_integer_merged": 199,
+          "relation": "P461"
+        }
+      ],
+      "unique_allocated_relations": 164
+    },
+    {
+      "allocation_row_fields": [
+        "backward_score",
+        "eta_expected",
+        "eta_integer",
+        "eta_total",
+        "forward_score",
+        "p_avg",
+        "p_backward",
+        "p_forward",
+        "pattern",
+        "relation",
+        "relation_dom_rng_class"
+      ],
+      "allocation_rows": 241,
+      "config": {
+        "anti_min_conf": 0.97,
+        "anti_min_support": 8,
+        "base_max_total": 298810,
+        "base_min_total": 8,
+        "comp_min_conf": 0.9,
+        "comp_min_support": 8,
+        "epsilon": 0.0,
+        "integerize": true,
+        "inv_min_conf": 0.97,
+        "inv_min_support": 8,
+        "matrix_min_support": 8,
+        "matrix_mode": "log1p_balanced_norm",
+        "sym_min_conf": 0.97,
+        "sym_min_support": 8,
+        "temperature": 1.0
+      },
+      "duplicate_relation_rows_count": 45,
+      "duplicate_relations": {
+        "P12363": 2,
+        "P12765": 2,
+        "P1290": 2,
+        "P13177": 3,
+        "P1322": 2,
+        "P13478": 2,
+        "P1398": 2,
+        "P1403": 2,
+        "P1434": 2,
+        "P1639": 2,
+        "P167": 2,
+        "P2098": 2,
+        "P2152": 2,
+        "P2155": 2,
+        "P2499": 2,
+        "P2500": 2,
+        "P2568": 2,
+        "P2673": 2,
+        "P2674": 2,
+        "P2681": 2,
+        "P2682": 2,
+        "P2743": 3,
+        "P3032": 2,
+        "P3085": 2,
+        "P3148": 2,
+        "P3578": 2,
+        "P3729": 2,
+        "P3730": 2,
+        "P4147": 3,
+        "P4149": 3,
+        "P461": 2,
+        "P4873": 3,
+        "P4875": 3,
+        "P5135": 2,
+        "P5607": 3,
+        "P6185": 2,
+        "P7604": 2,
+        "P927": 2
+      },
+      "eta_expected_row_sum": 19999.999999999996,
+      "eta_integer_row_sum": 20000,
+      "eta_per_group": {
+        "anti_symmetric": 5000,
+        "composition": 5000,
+        "inverse": 5000,
+        "symmetric": 5000
+      },
+      "exists": true,
+      "merged_eta_integer_sum": 20000,
+      "merged_eta_relation_count": 196,
+      "path": "data/connectedgraph/bidirectional_allocation_results_allsupp8_conf97_compconf90.json",
+      "pattern_counts": {
+        "anti_symmetric": 63,
+        "composition": 69,
+        "inverse": 75,
+        "symmetric": 34
+      },
+      "pattern_groups_lengths": {
+        "anti_symmetric": 63,
+        "composition": 69,
+        "inverse": 75,
+        "symmetric": 34
+      },
+      "relations_universe_count": 1469,
+      "sample_allocation_rows": [
+        {
+          "backward_score": 1.2193590698092318,
+          "eta_expected": 125.48843516879991,
+          "eta_integer": 126,
+          "eta_total": 5000,
+          "forward_score": 0.16109821020705836,
+          "p_avg": 0.02509768703375998,
+          "p_backward": 0.037201609064073764,
+          "p_forward": 0.012993765003446197,
+          "pattern": "anti_symmetric",
+          "relation": "P527",
+          "relation_dom_rng_class": "FULL_BOTH"
+        },
+        {
+          "backward_score": 0.6091092417590901,
+          "eta_expected": 109.22140416130276,
+          "eta_integer": 109,
+          "eta_total": 5000,
+          "forward_score": 0.752781169172837,
+          "p_avg": 0.021844280832260553,
+          "p_backward": 0.02020847734074487,
+          "p_forward": 0.02348008432377624,
+          "pattern": "anti_symmetric",
+          "relation": "P816",
+          "relation_dom_rng_class": "FULL_BOTH"
+        },
+        {
+          "backward_score": 0.560329358807655,
+          "eta_expected": 97.55953018254745,
+          "eta_integer": 98,
+          "eta_total": 5000,
+          "forward_score": 0.5811707451585089,
+          "p_avg": 0.01951190603650949,
+          "p_backward": 0.019246366771022715,
+          "p_forward": 0.019777445301996262,
+          "pattern": "anti_symmetric",
+          "relation": "P2674",
+          "relation_dom_rng_class": "FULL_BOTH"
+        }
+      ],
+      "sha256": "790e856388e592c29cb2957dbea36aa4edcd43667d14b820b767748cfc8d19e5",
+      "size_bytes": 122333,
+      "top_level_keys": [
+        "config",
+        "eta_per_group",
+        "pattern_groups",
+        "relations_universe",
+        "allocations"
+      ],
+      "top_level_type": "dict",
+      "top_merged_eta_relations": [
+        {
+          "eta_integer_merged": 421,
+          "relation": "P4873"
+        },
+        {
+          "eta_integer_merged": 395,
+          "relation": "P4875"
+        },
+        {
+          "eta_integer_merged": 342,
+          "relation": "P2743"
+        },
+        {
+          "eta_integer_merged": 320,
+          "relation": "P3578"
+        },
+        {
+          "eta_integer_merged": 319,
+          "relation": "P13177"
+        },
+        {
+          "eta_integer_merged": 299,
+          "relation": "P31"
+        },
+        {
+          "eta_integer_merged": 271,
+          "relation": "P2155"
+        },
+        {
+          "eta_integer_merged": 256,
+          "relation": "P4147"
+        },
+        {
+          "eta_integer_merged": 241,
+          "relation": "P6185"
+        },
+        {
+          "eta_integer_merged": 235,
+          "relation": "P4149"
+        },
+        {
+          "eta_integer_merged": 232,
+          "relation": "P2152"
+        },
+        {
+          "eta_integer_merged": 218,
+          "relation": "P4915"
+        },
+        {
+          "eta_integer_merged": 207,
+          "relation": "P3032"
+        },
+        {
+          "eta_integer_merged": 201,
+          "relation": "P5607"
+        },
+        {
+          "eta_integer_merged": 199,
+          "relation": "P1639"
+        },
+        {
+          "eta_integer_merged": 198,
+          "relation": "P1322"
+        },
+        {
+          "eta_integer_merged": 190,
+          "relation": "P461"
+        },
+        {
+          "eta_integer_merged": 182,
+          "relation": "P399"
+        },
+        {
+          "eta_integer_merged": 177,
+          "relation": "P8702"
+        },
+        {
+          "eta_integer_merged": 175,
+          "relation": "P12363"
+        }
+      ],
+      "unique_allocated_relations": 196
+    },
+    {
+      "allocation_row_fields": [
+        "backward_score",
+        "eta_expected",
+        "eta_integer",
+        "eta_total",
+        "forward_score",
+        "p_avg",
+        "p_backward",
+        "p_forward",
+        "pattern",
+        "relation",
+        "relation_dom_rng_class"
+      ],
+      "allocation_rows": 230,
+      "config": {
+        "anti_min_conf": 0.97,
+        "anti_min_support": 8,
+        "base_max_total": 298809,
+        "base_min_total": 8,
+        "comp_min_conf": 0.9,
+        "comp_min_support": 8,
+        "epsilon": 0.0,
+        "integerize": true,
+        "inv_min_conf": 0.9,
+        "inv_min_support": 200,
+        "matrix_min_support": 200,
+        "matrix_mode": "log1p_balanced_norm",
+        "sym_min_conf": 0.97,
+        "sym_min_support": 8,
+        "temperature": 1.0
+      },
+      "duplicate_relation_rows_count": 45,
+      "duplicate_relations": {
+        "P12363": 2,
+        "P12765": 2,
+        "P1290": 2,
+        "P13177": 3,
+        "P1322": 2,
+        "P13478": 2,
+        "P1398": 2,
+        "P1403": 2,
+        "P1434": 2,
+        "P1639": 2,
+        "P167": 2,
+        "P2098": 2,
+        "P2152": 2,
+        "P2155": 2,
+        "P2499": 2,
+        "P2500": 2,
+        "P2568": 2,
+        "P2673": 2,
+        "P2674": 2,
+        "P2681": 2,
+        "P2682": 2,
+        "P2743": 3,
+        "P3032": 2,
+        "P3085": 2,
+        "P3148": 2,
+        "P3261": 2,
+        "P3262": 2,
+        "P3578": 2,
+        "P3729": 2,
+        "P3730": 2,
+        "P4147": 3,
+        "P4149": 3,
+        "P461": 2,
+        "P4873": 2,
+        "P4875": 2,
+        "P5607": 3,
+        "P567": 2,
+        "P568": 2,
+        "P6185": 2,
+        "P7604": 2
+      },
+      "eta_expected_row_sum": 19999.999999999967,
+      "eta_integer_row_sum": 20000,
+      "eta_per_group": {
+        "anti_symmetric": 5000,
+        "composition": 5000,
+        "inverse": 5000,
+        "symmetric": 5000
+      },
+      "exists": true,
+      "merged_eta_integer_sum": 20000,
+      "merged_eta_relation_count": 185,
+      "path": "data/connectedgraph/bidirectional_allocation_results_allsup8_invsup200_allconf97_invcompconf90.json",
+      "pattern_counts": {
+        "anti_symmetric": 63,
+        "composition": 69,
+        "inverse": 64,
+        "symmetric": 34
+      },
+      "pattern_groups_lengths": {
+        "anti_symmetric": 63,
+        "composition": 69,
+        "inverse": 64,
+        "symmetric": 34
+      },
+      "relations_universe_count": 895,
+      "sample_allocation_rows": [
+        {
+          "backward_score": 0.6798715662828049,
+          "eta_expected": 147.6050423390252,
+          "eta_integer": 148,
+          "eta_total": 5000,
+          "forward_score": 1.1796696597622072,
+          "p_avg": 0.029521008467805043,
+          "p_backward": 0.0223239769389771,
+          "p_forward": 0.036718039996632985,
+          "pattern": "anti_symmetric",
+          "relation": "P3262",
+          "relation_dom_rng_class": "FULL_BOTH"
+        },
+        {
+          "backward_score": 1.190440142799198,
+          "eta_expected": 127.64415753418811,
+          "eta_integer": 128,
+          "eta_total": 5000,
+          "forward_score": 0.20545156875913112,
+          "p_avg": 0.025528831506837622,
+          "p_backward": 0.03719706559925159,
+          "p_forward": 0.013860597414423659,
+          "pattern": "anti_symmetric",
+          "relation": "P527",
+          "relation_dom_rng_class": "FULL_BOTH"
+        },
+        {
+          "backward_score": 0.6663217430197608,
+          "eta_expected": 109.99488648311882,
+          "eta_integer": 110,
+          "eta_total": 5000,
+          "forward_score": 0.6662806815517899,
+          "p_avg": 0.021998977296623763,
+          "p_backward": 0.02202353108776782,
+          "p_forward": 0.021974423505479707,
+          "pattern": "anti_symmetric",
+          "relation": "P4149",
+          "relation_dom_rng_class": "FULL_BOTH"
+        }
+      ],
+      "sha256": "ecd16be28f654185389590cca2cd504319a459a079bfe181567b7cacd81364ed",
+      "size_bytes": 108655,
+      "top_level_keys": [
+        "config",
+        "eta_per_group",
+        "pattern_groups",
+        "relations_universe",
+        "allocations"
+      ],
+      "top_level_type": "dict",
+      "top_merged_eta_relations": [
+        {
+          "eta_integer_merged": 434,
+          "relation": "P31"
+        },
+        {
+          "eta_integer_merged": 373,
+          "relation": "P13177"
+        },
+        {
+          "eta_integer_merged": 362,
+          "relation": "P2743"
+        },
+        {
+          "eta_integer_merged": 314,
+          "relation": "P3578"
+        },
+        {
+          "eta_integer_merged": 309,
+          "relation": "P4147"
+        },
+        {
+          "eta_integer_merged": 309,
+          "relation": "P4149"
+        },
+        {
+          "eta_integer_merged": 305,
+          "relation": "P4873"
+        },
+        {
+          "eta_integer_merged": 293,
+          "relation": "P1322"
+        },
+        {
+          "eta_integer_merged": 289,
+          "relation": "P6185"
+        },
+        {
+          "eta_integer_merged": 266,
+          "relation": "P3032"
+        },
+        {
+          "eta_integer_merged": 237,
+          "relation": "P3262"
+        },
+        {
+          "eta_integer_merged": 218,
+          "relation": "P461"
+        },
+        {
+          "eta_integer_merged": 209,
+          "relation": "P5607"
+        },
+        {
+          "eta_integer_merged": 208,
+          "relation": "P1639"
+        },
+        {
+          "eta_integer_merged": 197,
+          "relation": "P567"
+        },
+        {
+          "eta_integer_merged": 197,
+          "relation": "P568"
+        },
+        {
+          "eta_integer_merged": 189,
+          "relation": "P7047"
+        },
+        {
+          "eta_integer_merged": 186,
+          "relation": "P2444"
+        },
+        {
+          "eta_integer_merged": 186,
+          "relation": "P2673"
+        },
+        {
+          "eta_integer_merged": 186,
+          "relation": "P2674"
+        }
+      ],
+      "unique_allocated_relations": 185
+    },
+    {
+      "allocation_row_fields": [
+        "backward_score",
+        "eta_expected",
+        "eta_integer",
+        "eta_total",
+        "forward_score",
+        "p_avg",
+        "p_backward",
+        "p_forward",
+        "pattern",
+        "relation",
+        "relation_dom_rng_class"
+      ],
+      "allocation_rows": 354,
+      "config": {
+        "comp_min_support": 8,
+        "epsilon": 0.0,
+        "integerize": true,
+        "matrix_min_support": 8,
+        "matrix_mode": "log1p_balanced_norm",
+        "max_total": 298809,
+        "min_conf": 0.97,
+        "min_reverse_conf": 0.0,
+        "min_total": 8,
+        "temperature": 1.0
+      },
+      "duplicate_relation_rows_count": 37,
+      "duplicate_relations": {
+        "P1001": 2,
+        "P12363": 2,
+        "P13177": 2,
+        "P13478": 2,
+        "P1531": 2,
+        "P167": 2,
+        "P17": 2,
+        "P2283": 2,
+        "P2499": 2,
+        "P2500": 2,
+        "P2568": 2,
+        "P2673": 2,
+        "P2674": 2,
+        "P2743": 2,
+        "P3032": 2,
+        "P3085": 2,
+        "P3148": 2,
+        "P3261": 2,
+        "P3262": 2,
+        "P355": 2,
+        "P3578": 2,
+        "P361": 2,
+        "P3729": 2,
+        "P3730": 2,
+        "P4147": 2,
+        "P4149": 2,
+        "P4446": 2,
+        "P461": 2,
+        "P4873": 3,
+        "P4875": 2,
+        "P5135": 2,
+        "P527": 2,
+        "P5607": 2,
+        "P793": 2,
+        "P828": 2,
+        "P927": 2
+      },
+      "eta_expected_row_sum": 4000.0,
+      "eta_integer_row_sum": 4000,
+      "eta_per_group": {
+        "anti_symmetric": 1000,
+        "composition": 1000,
+        "inverse": 1000,
+        "symmetric": 1000
+      },
+      "exists": true,
+      "merged_eta_integer_sum": 4000,
+      "merged_eta_relation_count": 317,
+      "path": "data/connectedgraph/bidirectional_allocation_results_backup.json",
+      "pattern_counts": {
+        "anti_symmetric": 63,
+        "composition": 24,
+        "inverse": 233,
+        "symmetric": 34
+      },
+      "pattern_groups_lengths": {
+        "anti_symmetric": 63,
+        "composition": 24,
+        "inverse": 233,
+        "symmetric": 34
+      },
+      "relations_universe_count": 1469,
+      "sample_allocation_rows": [
+        {
+          "backward_score": 1.2193590698092318,
+          "eta_expected": 25.097687033759982,
+          "eta_integer": 25,
+          "eta_total": 1000,
+          "forward_score": 0.16109821020705836,
+          "p_avg": 0.02509768703375998,
+          "p_backward": 0.037201609064073764,
+          "p_forward": 0.012993765003446197,
+          "pattern": "anti_symmetric",
+          "relation": "P527",
+          "relation_dom_rng_class": "FULL_BOTH"
+        },
+        {
+          "backward_score": 0.6091092417590901,
+          "eta_expected": 21.84428083226055,
+          "eta_integer": 22,
+          "eta_total": 1000,
+          "forward_score": 0.752781169172837,
+          "p_avg": 0.021844280832260553,
+          "p_backward": 0.02020847734074487,
+          "p_forward": 0.02348008432377624,
+          "pattern": "anti_symmetric",
+          "relation": "P816",
+          "relation_dom_rng_class": "FULL_BOTH"
+        },
+        {
+          "backward_score": 0.560329358807655,
+          "eta_expected": 19.51190603650949,
+          "eta_integer": 20,
+          "eta_total": 1000,
+          "forward_score": 0.5811707451585089,
+          "p_avg": 0.01951190603650949,
+          "p_backward": 0.019246366771022715,
+          "p_forward": 0.019777445301996262,
+          "pattern": "anti_symmetric",
+          "relation": "P2674",
+          "relation_dom_rng_class": "FULL_BOTH"
+        }
+      ],
+      "sha256": "a56c60da7ba2b2134a356b6217d487a2406a2547f9a58190c0600e45ee572ccd",
+      "size_bytes": 169688,
+      "top_level_keys": [
+        "config",
+        "eta_per_group",
+        "pattern_groups",
+        "relations_universe",
+        "allocations"
+      ],
+      "top_level_type": "dict",
+      "top_merged_eta_relations": [
+        {
+          "eta_integer_merged": 216,
+          "relation": "P527"
+        },
+        {
+          "eta_integer_merged": 118,
+          "relation": "P3578"
+        },
+        {
+          "eta_integer_merged": 100,
+          "relation": "P4873"
+        },
+        {
+          "eta_integer_merged": 90,
+          "relation": "P17"
+        },
+        {
+          "eta_integer_merged": 70,
+          "relation": "P12363"
+        },
+        {
+          "eta_integer_merged": 69,
+          "relation": "P3032"
+        },
+        {
+          "eta_integer_merged": 66,
+          "relation": "P461"
+        },
+        {
+          "eta_integer_merged": 56,
+          "relation": "P3085"
+        },
+        {
+          "eta_integer_merged": 55,
+          "relation": "P13269"
+        },
+        {
+          "eta_integer_merged": 52,
+          "relation": "P10449"
+        },
+        {
+          "eta_integer_merged": 49,
+          "relation": "P361"
+        },
+        {
+          "eta_integer_merged": 48,
+          "relation": "P4875"
+        },
+        {
+          "eta_integer_merged": 47,
+          "relation": "P31"
+        },
+        {
+          "eta_integer_merged": 44,
+          "relation": "P4915"
+        },
+        {
+          "eta_integer_merged": 43,
+          "relation": "P9072"
+        },
+        {
+          "eta_integer_merged": 39,
+          "relation": "P1383"
+        },
+        {
+          "eta_integer_merged": 39,
+          "relation": "P2743"
+        },
+        {
+          "eta_integer_merged": 38,
+          "relation": "P2283"
+        },
+        {
+          "eta_integer_merged": 38,
+          "relation": "P7727"
+        },
+        {
+          "eta_integer_merged": 37,
+          "relation": "P1444"
+        }
+      ],
+      "unique_allocated_relations": 317
+    }
+  ],
+  "answers": {
+    "allocated_relations": "154 allocation rows; 139 unique positive-eta relations after merging duplicate relation rows across pattern groups; merged eta_integer sum 20000",
+    "allocation_export_provenance_status": "partial",
+    "are_local_and_archived_5k_allocation_files_byte_identical": true,
+    "direct_command_or_log_evidence_for_production": "not found in copied workspace; downstream execution logs confirm consumption but not generation/export of the 5k allocation",
+    "eta_fields": [
+      "eta_expected",
+      "eta_integer",
+      "eta_total"
+    ],
+    "most_likely_producer_script": "src/statistics/hop_pattern_analysis_dashboard.py using src/kg_building/bidirectional_triple_allocation.py::allocate_for_patterns; exported through Streamlit download_button and manually renamed/copied to bidirectional_allocation_results5k.json",
+    "safe_thesis_claim": "The final B0 graph was evaluated against the canonical 5k allocation artifact at src/Pruning graph/bidirectional_allocation_results5k.json; this artifact is byte-identical to the archived Hetzner input, contains integer eta quotas for 139 unique allocated relations after duplicate-row merging, and records the threshold/matrix configuration used for allocation.",
+    "schema_summary": "dict with config, eta_per_group, pattern_groups, relations_universe, allocations; allocations rows contain relation, pattern, eta_expected, eta_integer, eta_total, forward/backward scores, probabilities, and relation_dom_rng_class",
+    "support_matrix_linkage": "partial: archived Phase II config and run manifest use genericity_support_matrix.adjacency_support.json; dashboard code exports this matrix over current positive-eta allocation relations, but allocation JSON does not embed the support matrix path/hash and no same-run export command was found",
+    "unsafe_thesis_claim": "The canonical 5k allocation can be regenerated exactly from a logged dashboard command or complete manifest; no such command/export log was found in the copied workspace.",
+    "upstream_phase_i_artifacts_appear_to_feed_it": "dashboard code defaults point to hop_support_v2 JSONL and composition_verified.compact JSONL, and loads wikidata ontology property metadata; the 5k allocation file itself does not embed input paths or hashes"
+  },
+  "archived_allocation_copy": {
+    "allocation_row_fields": [
+      "backward_score",
+      "eta_expected",
+      "eta_integer",
+      "eta_total",
+      "forward_score",
+      "p_avg",
+      "p_backward",
+      "p_forward",
+      "pattern",
+      "relation",
+      "relation_dom_rng_class"
+    ],
+    "allocation_rows": 154,
+    "config": {
+      "anti_min_conf": 0.99,
+      "anti_min_support": 50,
+      "base_max_total": 3253580,
+      "base_min_total": 50,
+      "comp_min_conf": 0.6,
+      "comp_min_support": 50,
+      "epsilon": 0.0,
+      "integerize": true,
+      "inv_min_conf": 0.6,
+      "inv_min_support": 50,
+      "matrix_min_support": 50,
+      "matrix_mode": "log1p_balanced_norm",
+      "sym_min_conf": 0.6,
+      "sym_min_support": 50,
+      "temperature": 1.0
+    },
+    "duplicate_relation_rows_count": 15,
+    "duplicate_relations": {
+      "P1268": 2,
+      "P13177": 2,
+      "P16": 2,
+      "P1625": 2,
+      "P2673": 2,
+      "P2674": 2,
+      "P2743": 2,
+      "P3729": 2,
+      "P3730": 2,
+      "P4147": 2,
+      "P461": 2,
+      "P5607": 2,
+      "P567": 2,
+      "P568": 2,
+      "P793": 2
+    },
+    "eta_expected_row_sum": 20000.0,
+    "eta_integer_row_sum": 20000,
+    "eta_per_group": {
+      "anti_symmetric": 5000,
+      "composition": 5000,
+      "inverse": 5000,
+      "symmetric": 5000
+    },
+    "exists": true,
+    "merged_eta_integer_sum": 20000,
+    "merged_eta_relation_count": 139,
+    "path": "archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.json",
+    "pattern_counts": {
+      "anti_symmetric": 66,
+      "composition": 26,
+      "inverse": 44,
+      "symmetric": 18
+    },
+    "pattern_groups_lengths": {
+      "anti_symmetric": 66,
+      "composition": 26,
+      "inverse": 44,
+      "symmetric": 18
+    },
+    "relations_universe_count": 1467,
+    "sample_allocation_rows": [
+      {
+        "backward_score": 1.8366656984849719,
+        "eta_expected": 190.9817216810353,
+        "eta_integer": 191,
+        "eta_total": 5000,
+        "forward_score": 0.17394225394917845,
+        "p_avg": 0.03819634433620706,
+        "p_backward": 0.06393598173016864,
+        "p_forward": 0.012456706942245483,
+        "pattern": "anti_symmetric",
+        "relation": "P527",
+        "relation_dom_rng_class": "FULL_BOTH"
+      },
+      {
+        "backward_score": 0.6473267834035411,
+        "eta_expected": 98.65444236292049,
+        "eta_integer": 99,
+        "eta_total": 5000,
+        "forward_score": 0.6473267834035411,
+        "p_avg": 0.0197308884725841,
+        "p_backward": 0.019463547987161822,
+        "p_forward": 0.019998228958006372,
+        "pattern": "anti_symmetric",
+        "relation": "P816",
+        "relation_dom_rng_class": "FULL_BOTH"
+      },
+      {
+        "backward_score": 0.5814017119517666,
+        "eta_expected": 94.34832852311814,
+        "eta_integer": 94,
+        "eta_total": 5000,
+        "forward_score": 0.6229965184339444,
+        "p_avg": 0.018869665704623628,
+        "p_backward": 0.018221793280769876,
+        "p_forward": 0.01951753812847738,
+        "pattern": "anti_symmetric",
+        "relation": "P567",
+        "relation_dom_rng_class": "FULL_BOTH"
+      }
+    ],
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+    "size_bytes": 85288,
+    "top_level_keys": [
+      "config",
+      "eta_per_group",
+      "pattern_groups",
+      "relations_universe",
+      "allocations"
+    ],
+    "top_level_type": "dict",
+    "top_merged_eta_relations": [
+      {
+        "eta_integer_merged": 497,
+        "relation": "P514"
+      },
+      {
+        "eta_integer_merged": 468,
+        "relation": "P2743"
+      },
+      {
+        "eta_integer_merged": 429,
+        "relation": "P13177"
+      },
+      {
+        "eta_integer_merged": 370,
+        "relation": "P461"
+      },
+      {
+        "eta_integer_merged": 339,
+        "relation": "P4545"
+      },
+      {
+        "eta_integer_merged": 336,
+        "relation": "P793"
+      },
+      {
+        "eta_integer_merged": 329,
+        "relation": "P2152"
+      },
+      {
+        "eta_integer_merged": 323,
+        "relation": "P399"
+      },
+      {
+        "eta_integer_merged": 318,
+        "relation": "P2155"
+      },
+      {
+        "eta_integer_merged": 316,
+        "relation": "P6185"
+      },
+      {
+        "eta_integer_merged": 294,
+        "relation": "P16"
+      },
+      {
+        "eta_integer_merged": 271,
+        "relation": "P1268"
+      },
+      {
+        "eta_integer_merged": 261,
+        "relation": "P1322"
+      },
+      {
+        "eta_integer_merged": 249,
+        "relation": "P1639"
+      },
+      {
+        "eta_integer_merged": 243,
+        "relation": "P3032"
+      },
+      {
+        "eta_integer_merged": 238,
+        "relation": "P31"
+      },
+      {
+        "eta_integer_merged": 236,
+        "relation": "P3403"
+      },
+      {
+        "eta_integer_merged": 231,
+        "relation": "P567"
+      },
+      {
+        "eta_integer_merged": 230,
+        "relation": "P3833"
+      },
+      {
+        "eta_integer_merged": 230,
+        "relation": "P568"
+      }
+    ],
+    "unique_allocated_relations": 139
+  },
+  "byte_identity": {
+    "csv_local_vs_archive": true,
+    "json_local_vs_archive": true
+  },
+  "canonical_allocation": {
+    "allocation_row_fields": [
+      "backward_score",
+      "eta_expected",
+      "eta_integer",
+      "eta_total",
+      "forward_score",
+      "p_avg",
+      "p_backward",
+      "p_forward",
+      "pattern",
+      "relation",
+      "relation_dom_rng_class"
+    ],
+    "allocation_rows": 154,
+    "config": {
+      "anti_min_conf": 0.99,
+      "anti_min_support": 50,
+      "base_max_total": 3253580,
+      "base_min_total": 50,
+      "comp_min_conf": 0.6,
+      "comp_min_support": 50,
+      "epsilon": 0.0,
+      "integerize": true,
+      "inv_min_conf": 0.6,
+      "inv_min_support": 50,
+      "matrix_min_support": 50,
+      "matrix_mode": "log1p_balanced_norm",
+      "sym_min_conf": 0.6,
+      "sym_min_support": 50,
+      "temperature": 1.0
+    },
+    "duplicate_relation_rows_count": 15,
+    "duplicate_relations": {
+      "P1268": 2,
+      "P13177": 2,
+      "P16": 2,
+      "P1625": 2,
+      "P2673": 2,
+      "P2674": 2,
+      "P2743": 2,
+      "P3729": 2,
+      "P3730": 2,
+      "P4147": 2,
+      "P461": 2,
+      "P5607": 2,
+      "P567": 2,
+      "P568": 2,
+      "P793": 2
+    },
+    "eta_expected_row_sum": 20000.0,
+    "eta_integer_row_sum": 20000,
+    "eta_per_group": {
+      "anti_symmetric": 5000,
+      "composition": 5000,
+      "inverse": 5000,
+      "symmetric": 5000
+    },
+    "exists": true,
+    "merged_eta_integer_sum": 20000,
+    "merged_eta_relation_count": 139,
+    "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "pattern_counts": {
+      "anti_symmetric": 66,
+      "composition": 26,
+      "inverse": 44,
+      "symmetric": 18
+    },
+    "pattern_groups_lengths": {
+      "anti_symmetric": 66,
+      "composition": 26,
+      "inverse": 44,
+      "symmetric": 18
+    },
+    "relations_universe_count": 1467,
+    "sample_allocation_rows": [
+      {
+        "backward_score": 1.8366656984849719,
+        "eta_expected": 190.9817216810353,
+        "eta_integer": 191,
+        "eta_total": 5000,
+        "forward_score": 0.17394225394917845,
+        "p_avg": 0.03819634433620706,
+        "p_backward": 0.06393598173016864,
+        "p_forward": 0.012456706942245483,
+        "pattern": "anti_symmetric",
+        "relation": "P527",
+        "relation_dom_rng_class": "FULL_BOTH"
+      },
+      {
+        "backward_score": 0.6473267834035411,
+        "eta_expected": 98.65444236292049,
+        "eta_integer": 99,
+        "eta_total": 5000,
+        "forward_score": 0.6473267834035411,
+        "p_avg": 0.0197308884725841,
+        "p_backward": 0.019463547987161822,
+        "p_forward": 0.019998228958006372,
+        "pattern": "anti_symmetric",
+        "relation": "P816",
+        "relation_dom_rng_class": "FULL_BOTH"
+      },
+      {
+        "backward_score": 0.5814017119517666,
+        "eta_expected": 94.34832852311814,
+        "eta_integer": 94,
+        "eta_total": 5000,
+        "forward_score": 0.6229965184339444,
+        "p_avg": 0.018869665704623628,
+        "p_backward": 0.018221793280769876,
+        "p_forward": 0.01951753812847738,
+        "pattern": "anti_symmetric",
+        "relation": "P567",
+        "relation_dom_rng_class": "FULL_BOTH"
+      }
+    ],
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+    "size_bytes": 85288,
+    "top_level_keys": [
+      "config",
+      "eta_per_group",
+      "pattern_groups",
+      "relations_universe",
+      "allocations"
+    ],
+    "top_level_type": "dict",
+    "top_merged_eta_relations": [
+      {
+        "eta_integer_merged": 497,
+        "relation": "P514"
+      },
+      {
+        "eta_integer_merged": 468,
+        "relation": "P2743"
+      },
+      {
+        "eta_integer_merged": 429,
+        "relation": "P13177"
+      },
+      {
+        "eta_integer_merged": 370,
+        "relation": "P461"
+      },
+      {
+        "eta_integer_merged": 339,
+        "relation": "P4545"
+      },
+      {
+        "eta_integer_merged": 336,
+        "relation": "P793"
+      },
+      {
+        "eta_integer_merged": 329,
+        "relation": "P2152"
+      },
+      {
+        "eta_integer_merged": 323,
+        "relation": "P399"
+      },
+      {
+        "eta_integer_merged": 318,
+        "relation": "P2155"
+      },
+      {
+        "eta_integer_merged": 316,
+        "relation": "P6185"
+      },
+      {
+        "eta_integer_merged": 294,
+        "relation": "P16"
+      },
+      {
+        "eta_integer_merged": 271,
+        "relation": "P1268"
+      },
+      {
+        "eta_integer_merged": 261,
+        "relation": "P1322"
+      },
+      {
+        "eta_integer_merged": 249,
+        "relation": "P1639"
+      },
+      {
+        "eta_integer_merged": 243,
+        "relation": "P3032"
+      },
+      {
+        "eta_integer_merged": 238,
+        "relation": "P31"
+      },
+      {
+        "eta_integer_merged": 236,
+        "relation": "P3403"
+      },
+      {
+        "eta_integer_merged": 231,
+        "relation": "P567"
+      },
+      {
+        "eta_integer_merged": 230,
+        "relation": "P3833"
+      },
+      {
+        "eta_integer_merged": 230,
+        "relation": "P568"
+      }
+    ],
+    "unique_allocated_relations": 139
+  },
+  "canonical_csv_siblings": {
+    "archived_matrix_csv": {
+      "exists": true,
+      "header": [
+        "relation",
+        "symmetric",
+        "anti_symmetric",
+        "inverse",
+        "composition"
+      ],
+      "path": "archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.csv",
+      "rows_including_header": 140,
+      "sample_rows": [
+        [
+          "P16",
+          "0",
+          "1",
+          "0",
+          "1"
+        ],
+        [
+          "P31",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "P127",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "P131",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "P163",
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ],
+      "sha256": "cd018c815cbf99539fa9b0d2daa999d9121c56627bc6ac983de1017bdc5c8569",
+      "size_bytes": 2119
+    },
+    "enriched_csv": {
+      "exists": true,
+      "header": [
+        "relation",
+        "symmetric",
+        "anti_symmetric",
+        "inverse",
+        "composition",
+        "label",
+        "description"
+      ],
+      "path": "src/Pruning graph/bidirectional_allocation_results5k.enriched.csv",
+      "rows_including_header": 140,
+      "sample_rows": [
+        [
+          "P16",
+          "0",
+          "1",
+          "0",
+          "1",
+          "transport network",
+          "network the infrastructure is a part of"
+        ],
+        [
+          "P31",
+          "0",
+          "0",
+          "0",
+          "1",
+          "instance of",
+          "type to which this subject corresponds/belongs. Different from P279 (subclass of); for example: K2 is an instance of mountain; volcano is a subclass of mountain"
+        ],
+        [
+          "P127",
+          "0",
+          "0",
+          "0",
+          "1",
+          "owned by",
+          "owner of the subject"
+        ],
+        [
+          "P131",
+          "0",
+          "0",
+          "0",
+          "1",
+          "located in the administrative territorial entity",
+          "the item is located on the territory of the following administrative entity. Use P276 for specifying locations that are non-administrative places and for items about events. Use P1382 if the item falls only partially into the administrative entity"
+        ],
+        [
+          "P163",
+          "0",
+          "0",
+          "1",
+          "0",
+          "flag",
+          "subject's flag"
+        ]
+      ],
+      "sha256": "230b21ad779434208de0a962d17cf056ac69270f6231919f75c5d9c6c78fdcab",
+      "size_bytes": 16868
+    },
+    "matrix_csv": {
+      "exists": true,
+      "header": [
+        "relation",
+        "symmetric",
+        "anti_symmetric",
+        "inverse",
+        "composition"
+      ],
+      "path": "src/Pruning graph/bidirectional_allocation_results5k.csv",
+      "rows_including_header": 140,
+      "sample_rows": [
+        [
+          "P16",
+          "0",
+          "1",
+          "0",
+          "1"
+        ],
+        [
+          "P31",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "P127",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "P131",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "P163",
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ],
+      "sha256": "cd018c815cbf99539fa9b0d2daa999d9121c56627bc6ac983de1017bdc5c8569",
+      "size_bytes": 2119
+    }
+  },
+  "code_path_evidence": {
+    "archive/hetzner_version/src/kg_builder/config.runtime.json": {
+      "exists": true,
+      "path": "archive/hetzner_version/src/kg_builder/config.runtime.json",
+      "sha256": "e49e20dd29d17ca0879b9c4c649d07c25370544ddeedf8cad3a30876f4fcf4ad",
+      "size_bytes": 2074
+    },
+    "archive/hetzner_version/src/kg_builder/config.yaml": {
+      "exists": true,
+      "path": "archive/hetzner_version/src/kg_builder/config.yaml",
+      "sha256": "5dd43af7ad0c1a1c8c75ae4e0487818fd48ae805d47320dab1bed7918ec0f1eb",
+      "size_bytes": 15127
+    },
+    "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py": {
+      "exists": true,
+      "path": "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+      "sha256": "a1fec8c08783b3816ebc28e16f39499fb6be2f2a4d587948a00fa4fb9082a5e7",
+      "size_bytes": 96879
+    },
+    "key_line_references": [
+      {
+        "evidence": "run_phase3_allocation builds W and calls allocate_for_patterns.",
+        "lines": "650-678",
+        "path": "src/statistics/hop_pattern_analysis_dashboard.py"
+      },
+      {
+        "evidence": "eta_per_group, relation universe, matrix mode, and allocation call are assembled in the dashboard.",
+        "lines": "1396-1430",
+        "path": "src/statistics/hop_pattern_analysis_dashboard.py"
+      },
+      {
+        "evidence": "allocation rows include pattern, relation, eta_total, scores/probabilities, eta_expected, eta_integer.",
+        "lines": "1464-1477",
+        "path": "src/statistics/hop_pattern_analysis_dashboard.py"
+      },
+      {
+        "evidence": "dashboard exports positive-eta genericity matrix and allocation JSON/CSV via download buttons.",
+        "lines": "1576-1649",
+        "path": "src/statistics/hop_pattern_analysis_dashboard.py"
+      },
+      {
+        "evidence": "allocation algorithm computes eta_expected and eta_integer and exposes allocate_for_patterns.",
+        "lines": "272-452",
+        "path": "src/kg_building/bidirectional_triple_allocation.py"
+      },
+      {
+        "evidence": "config comments say allocation JSON and genericity matrix are exported from the dashboard and should be kept paired.",
+        "lines": "11-36",
+        "path": "src/kg_building/relation_balanced_kg_pipeline_config.yaml"
+      },
+      {
+        "evidence": "production Phase II config points to bidirectional_allocation_results5k.json and genericity_support_matrix.adjacency_support.json.",
+        "lines": "49-67",
+        "path": "archive/hetzner_version/src/kg_builder/config.yaml"
+      }
+    ],
+    "scripts/export_pattern_group_matrix.py": {
+      "exists": true,
+      "path": "scripts/export_pattern_group_matrix.py",
+      "sha256": "5c78e711fb04e841d0d1fad20b90195c63970da6e7e3cb77cbb77ef2d573f114",
+      "size_bytes": 4117
+    },
+    "src/kg_building/bidirectional_triple_allocation.py": {
+      "exists": true,
+      "path": "src/kg_building/bidirectional_triple_allocation.py",
+      "sha256": "5eeed6098e280fc2bb4d136ad8dd9090a4d4aead8baa56c8ded40241b4223eb3",
+      "size_bytes": 15868
+    },
+    "src/kg_building/build_connected_graph_from_allocation.py": {
+      "exists": true,
+      "path": "src/kg_building/build_connected_graph_from_allocation.py",
+      "sha256": "2b72826925bb9781a621bcb3cf4f2a427bf518e6e41e16a8d335639aeb6672e6",
+      "size_bytes": 93043
+    },
+    "src/kg_building/relation_balanced_kg_pipeline_config.yaml": {
+      "exists": true,
+      "path": "src/kg_building/relation_balanced_kg_pipeline_config.yaml",
+      "sha256": "4552722cccbb8b1a35b0c05c9988ab075362a6230036447404da46c83a63e418",
+      "size_bytes": 2427
+    },
+    "src/statistics/hop_pattern_analysis_dashboard.py": {
+      "exists": true,
+      "path": "src/statistics/hop_pattern_analysis_dashboard.py",
+      "sha256": "bb76aa0f43fbfb14cb3f5c3c18767c31a97fc4e767389c0f2201c8e7f944fe85",
+      "size_bytes": 90452
+    }
+  },
+  "created_on": "2026-05-09T10:52:26.092369+00:00",
+  "downstream_consumption_evidence": {
+    "final_graph_manifest": {
+      "exists": true,
+      "path": "artifacts/final_graph/selected_final_graph/final_graph_manifest.json",
+      "sha256": "808f1dd29e97e9518d5b7ed5eca5447729964622d63f02c43cfcd901455696c4",
+      "size_bytes": 3393
+    },
+    "notes": [
+      "archive/hetzner_version/logs/relation_balanced_kg_pipeline.out logs duplicate-row merging from src/kg_builder/input/bidirectional_allocation_results5k.json.",
+      "archive/hetzner_version/logs/eta_aware_component_filter_prod.out logs 139 positive-eta allocations loaded from src/kg_builder/input/bidirectional_allocation_results5k.json.",
+      "Stage11/Stage12 manifests contain stale /home/kg_benchmark/src/kg_builder/input/bidirectional_allocation_results5k.json paths that are mapped to the local canonical file by prior path-translation work."
+    ],
+    "phase2_pipeline_log": {
+      "exists": true,
+      "path": "archive/hetzner_version/logs/relation_balanced_kg_pipeline.out",
+      "sha256": "117214de34d71b759c58ac3b6188e85db648f63697a9a089c45b6b197a5230ea",
+      "size_bytes": 192527
+    },
+    "phase2_run_manifest": {
+      "exists": true,
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/manifest.json",
+      "sha256": "918546ec1c0f5e02e99f6b09d9dc8d8a6d3caa16ccd1cb31f3ab26d6cd3eaff9",
+      "size_bytes": 4075
+    },
+    "r2_6_provenance_json": {
+      "exists": true,
+      "path": "artifacts/final_graph/selected_final_graph/rebuild/stage1_stage2_candidate_collection_provenance.json",
+      "sha256": "aa3a7ee998b21766a7970cfa1ef5aead48ea8a024567b30cd0625a5d88cc1193",
+      "size_bytes": 244876
+    },
+    "stage11_manifest": {
+      "exists": true,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/manifest.json",
+      "sha256": "2e4ad9130fc41c25a99c22d44aa0c992c0dc24cc9254188af05774c68ac64c85",
+      "size_bytes": 2164
+    },
+    "stage12_manifest": {
+      "exists": true,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/manifest.json",
+      "sha256": "cbf244965001c5b709314b1dffe934e5b946cb90906f53fda77a4c13bdeace70",
+      "size_bytes": 2468
+    },
+    "stage1_stage2_doc": {
+      "exists": true,
+      "path": "docs/reconstruction/32_stage1_stage2_candidate_collection_provenance.md",
+      "sha256": "5d579bf9c5a9e74decec54c7b8208e11c9b579d5e6f1e4ec3f7b35f66df9b34f",
+      "size_bytes": 18310
+    },
+    "stage7_log": {
+      "exists": true,
+      "path": "archive/hetzner_version/logs/eta_aware_component_filter_prod.out",
+      "sha256": "74889ae5711647c249692e45c26e931c1b008f242f249d998f08080f934c35d9",
+      "size_bytes": 1859027
+    }
+  },
+  "evidence_classification": {
+    "algorithm_code_path_evidence": "confirmed for implementation; inferred for this exact exported file",
+    "command_log_evidence": "missing for export; confirmed for downstream consumption",
+    "file_identity_hash_evidence": "confirmed",
+    "full_reproducibility": "not_established",
+    "schema_content_evidence": "confirmed",
+    "support_matrix_same_run_linkage": "partial"
+  },
+  "investigation_id": "R2.7_allocation_5k_export_provenance",
+  "likely_upstream_phase_i_artifacts": [
+    {
+      "exists": true,
+      "path": "data/archived/hop_support_v2_w_failed_statuses.wikibase_item_only_before_target_enrichment.jsonl",
+      "sha256": "d97e3fd40152f99b01bd60347eb82d2fd2766c1bb9ee194f4fe64dbf942d0f8f",
+      "size_bytes": 3562314
+    },
+    {
+      "exists": true,
+      "path": "data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+      "sha256": "20761759cd58dd1b3bbae270e76171274975efee7f55fd30ff649e694508f987",
+      "size_bytes": 39087183
+    },
+    {
+      "exists": true,
+      "path": "data/processed/min8_hop_support_v2_with_compatible_targets_dom_rng_v1.composition_verified.jsonl",
+      "sha256": "1313b2d0b6d8afc8f1a9ba3ae291abfb685731b75a9f2c4b8ac7b291827c5fba",
+      "size_bytes": 395432579
+    },
+    {
+      "exists": true,
+      "path": "data/raw/wikidata_ontology.properties.json",
+      "sha256": "daac555483634bfcb608c5fc04f9a2f14678772381edd91440822606db3a0380",
+      "size_bytes": 644751
+    },
+    {
+      "exists": true,
+      "path": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+      "sha256": "8fbc1db6847b7676c1f144521218b444e2768cb06345d1a6288afd58177df54e",
+      "size_bytes": 10021946
+    },
+    {
+      "exists": true,
+      "path": "data/processed/output_hop_support_v3_from_hop_discovery_from_json_and_support_v2_rerun.normalized.jsonl",
+      "sha256": "3795b62b2302695dd5bdf439b96241337b898ce770254b13f4f59c22b649eb15",
+      "size_bytes": 3584582
+    }
+  ],
+  "remaining_gaps": [
+    "No exact Streamlit command or saved dashboard state was found for the 5k allocation export.",
+    "The allocation JSON does not embed input file paths or input hashes for hop support, composition verification, ontology metadata, or support matrix.",
+    "The genericity support matrix used by Phase II is co-located and code-compatible, but no direct same-run export manifest links it cryptographically to the 5k allocation JSON.",
+    "The selected thresholds are preserved inside the allocation config, but the interactive UI state and any manual rename/copy step are not manifested.",
+    "Exact Phase I-to-allocation rerun reproducibility remains incomplete until a wrapper/config captures dashboard inputs, thresholds, support matrix mode, and output hashes."
+  ],
+  "rules_observed": {
+    "graph_artifacts_modified": false,
+    "graph_generation_performed": false,
+    "llm_calls_made": false,
+    "read_only_investigation": true,
+    "wdqs_calls_made": false
+  },
+  "status": "partial_provenance_confirmed_artifact_code_path_no_direct_export_command",
+  "support_matrix_used_by_phase2_stage1": {
+    "exists": true,
+    "inner_relation_count": 129,
+    "nonempty_rows": 134,
+    "nonzero_cells": 831,
+    "outer_equals_inner_relation_set": false,
+    "outer_relation_count": 139,
+    "path": "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json",
+    "sample_keys": [
+      "P1001",
+      "P1002",
+      "P10254",
+      "P10374",
+      "P10449",
+      "P10607",
+      "P10624",
+      "P1142",
+      "P1151",
+      "P1158"
+    ],
+    "sha256": "75794511aaa9ef72a7c63fd0d9a3c11969b72c4fa4bfb01237859b612f544041",
+    "size_bytes": 18732,
+    "top_level_type": "dict"
+  }
+}

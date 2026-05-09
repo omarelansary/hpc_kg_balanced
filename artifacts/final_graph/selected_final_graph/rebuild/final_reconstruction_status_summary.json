@@ -1,0 +1,429 @@
+{
+  "summary_id": "final_reconstruction_status_summary",
+  "created_on": "2026-05-09",
+  "scope": "Consolidated read-only synthesis of thesis pipeline reconstruction evidence. No WDQS query, LLM call, graph generation, or graph-artifact mutation was performed.",
+  "executive_status": {
+    "b0_final_graph_identity": {
+      "status": "confirmed",
+      "evidence": [
+        "artifacts/final_graph/selected_final_graph/rebuild/final_graph_manifest.rebuilt.json",
+        "artifacts/final_graph/selected_final_graph/rebuild/final_graph_metrics.rebuilt.json",
+        "artifacts/final_graph/selected_final_graph/final_graph_decision.md"
+      ]
+    },
+    "stage4_to_b0_chain": {
+      "status": "confirmed",
+      "evidence": [
+        "docs/reconstruction/26_stage7_to_B0_chain_verification.md",
+        "docs/reconstruction/27_stage6_to_B0_chain_verification.md",
+        "docs/reconstruction/28_stage5_to_B0_chain_verification.md",
+        "docs/reconstruction/30_stage3_to_B0_chain_verification.md"
+      ]
+    },
+    "stage1_stage2_to_stage4_provenance": {
+      "status": "partial",
+      "evidence": [
+        "docs/reconstruction/32_stage1_stage2_candidate_collection_provenance.md",
+        "artifacts/final_graph/selected_final_graph/rebuild/stage1_stage2_candidate_collection_provenance.json",
+        "artifacts/final_graph/selected_final_graph/rebuild/stage3_to_B0_chain_verification.json"
+      ],
+      "reason": "Frozen Stage2 shards exist and Stage4 core triples are a subset of the combined shard pool, but Stage2 used WDQS and exact rerun/cache provenance is incomplete."
+    },
+    "phase1_to_allocation_provenance": {
+      "status": "partial",
+      "evidence": [
+        "docs/reconstruction/33_allocation_5k_export_provenance.md",
+        "docs/reconstruction/34_support_matrix_provenance.md",
+        "docs/reconstruction/35_phase1_dashboard_input_provenance.md",
+        "docs/reconstruction/37_dashboard_empirical_pattern_logic_audit.md",
+        "docs/reconstruction/38_composition_llm_relation_profile_provenance_audit.md"
+      ],
+      "reason": "Cached artifacts reproduce the final relation sets, but exact dashboard export session and LLM production provenance are incomplete."
+    },
+    "full_end_to_end_reproducibility": {
+      "status": "not_established",
+      "missing_evidence": [
+        "exact dashboard export session",
+        "exact LLM production run and raw responses",
+        "complete environment lock",
+        "Stage2 WDQS/cache replay evidence",
+        "same-run allocation/support-matrix export manifest"
+      ]
+    }
+  },
+  "selected_final_graph": {
+    "candidate_id": "B0",
+    "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+    "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+    "metrics": {
+      "unique_triples": 24683,
+      "unique_entities": 21893,
+      "unique_relations": 139,
+      "weak_component_count": 1,
+      "largest_weak_component_ratio": 1.0,
+      "allocated_relations_observed": 139,
+      "zero_allocated_relations": 0,
+      "duplicate_triple_count": 0,
+      "total_deficit": 2019,
+      "total_surplus": 6702
+    },
+    "allocation": {
+      "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "merged_positive_eta_relations": 139,
+      "eta_integer_total": 20000
+    }
+  },
+  "verified_b0_chain": [
+    {
+      "stage": "Stage4 core graph",
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl",
+      "sha256": "54f5ae7af3bd2b9a117817adeaa0cea355bbf2a385ed25a97d0551c4e0f975fd",
+      "unique_triples": 18513,
+      "unique_relations": 139,
+      "status": "confirmed"
+    },
+    {
+      "stage": "Stage5 repair",
+      "status": "confirmed_noop",
+      "evidence": "stage05_repair/repair_triples.jsonl has zero rows and summary reports zero repairs"
+    },
+    {
+      "stage": "Stage6 refinement",
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage06_refine_graph/refined_graph_triples.jsonl",
+      "sha256": "54f5ae7af3bd2b9a117817adeaa0cea355bbf2a385ed25a97d0551c4e0f975fd",
+      "unique_triples": 18513,
+      "status": "confirmed_noop_byte_identical_to_stage4"
+    },
+    {
+      "stage": "standalone eta-aware Stage7",
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+      "sha256": "c7d5132bd0b20aa0da4a64ecbf183abf412c3effca38bef84105c7791126fb4b",
+      "unique_triples": 17965,
+      "unique_relations": 139,
+      "status": "confirmed"
+    },
+    {
+      "stage": "Stage11 connectivity repair",
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl",
+      "sha256": "73bc624bf9147b0bba4962ab286648bcfeeb931a94a1d1a727839f160b35ada5",
+      "unique_triples": 24670,
+      "added_core_triples": 6705,
+      "status": "confirmed"
+    },
+    {
+      "stage": "Stage12 path repair",
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl",
+      "sha256": "89ec9bf9c8932962fd3d966073b51f76345666eda5ed5d9beb18659d02e294b0",
+      "unique_triples": 24715,
+      "added_path_triples": 45,
+      "status": "confirmed"
+    },
+    {
+      "stage": "B0 largest component",
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+      "unique_triples": 24683,
+      "unique_relations": 139,
+      "status": "confirmed_selected_final"
+    }
+  ],
+  "components": [
+    {
+      "component_id": "P1_REL_PROFILE",
+      "component_name": "relation-profile artifact",
+      "status": "partial",
+      "evidence_files": [
+        "docs/reconstruction/38_composition_llm_relation_profile_provenance_audit.md",
+        "artifacts/final_graph/selected_final_graph/rebuild/composition_llm_relation_profile_provenance_audit.json"
+      ],
+      "main_artifacts": [
+        {
+          "path": "data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json",
+          "sha256": "a30635f0edc66c46b8aafe66fa01e047a65c2c8d01091be8f02926af8d952258",
+          "record_count": 2445,
+          "composition_target_counts": {
+            "YES": 615,
+            "NO_WAY": 1830
+          }
+        }
+      ],
+      "safe_to_claim": "Stored LLM-derived relation-profile artifact exists and supports upstream high-recall composition-target pruning.",
+      "unsafe_to_claim": "The exact LLM production run is fully reproducible from preserved prompt/model/raw responses.",
+      "remaining_gap": "Raw LLM responses, production-run model metadata, exact command/log, and export manifest are missing."
+    },
+    {
+      "component_id": "P1_HOP_DISCOVERY",
+      "component_name": "two-hop discovery",
+      "status": "confirmed",
+      "evidence_files": [
+        "docs/reconstruction/35_phase1_dashboard_input_provenance.md",
+        "artifacts/final_graph/selected_final_graph/rebuild/phase1_dashboard_input_provenance.json",
+        "logs/hop_discovery_json_27530562.out"
+      ],
+      "main_artifacts": [
+        {
+          "path": "data/processed/hop_discovery_from_json.jsonl",
+          "first_hop_record_count": 1703,
+          "summed_valid_r2_count": 56278
+        }
+      ],
+      "safe_to_claim": "Cached discovery evidence contains 56,278 summed valid second-hop relation entries.",
+      "unsafe_to_claim": "The current evidence supports approximately 340,000 observed two-hop pairs.",
+      "remaining_gap": "Separate evidence is required if the 340,000 metric is retained."
+    },
+    {
+      "component_id": "P1_PATTERN_DASHBOARD",
+      "component_name": "dashboard empirical pattern grouping",
+      "status": "confirmed",
+      "evidence_files": [
+        "docs/reconstruction/37_dashboard_empirical_pattern_logic_audit.md",
+        "artifacts/final_graph/selected_final_graph/rebuild/dashboard_empirical_pattern_logic_audit.json"
+      ],
+      "main_artifacts": [
+        {
+          "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+          "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+          "pattern_group_sizes": {
+            "symmetric": 18,
+            "anti_symmetric": 66,
+            "inverse": 44,
+            "composition": 26
+          }
+        }
+      ],
+      "safe_to_claim": "Patched v3 support plus v3 compact composition output reproduces final pattern relation sets with Wilson disabled.",
+      "unsafe_to_claim": "The exact dashboard export session was preserved.",
+      "remaining_gap": "Saved Streamlit session or export manifest is missing."
+    },
+    {
+      "component_id": "P1_COMP_LLM_DOM_RNG_SHORTCUT",
+      "component_name": "composition target filtering, domain/range filtering, and shortcut verification",
+      "status": "partial_to_confirmed_by_substep",
+      "evidence_files": [
+        "docs/reconstruction/38_composition_llm_relation_profile_provenance_audit.md",
+        "artifacts/final_graph/selected_final_graph/rebuild/composition_llm_relation_profile_provenance_audit.json"
+      ],
+      "main_artifacts": [
+        {
+          "path": "data/processed/hop_support_v3/min8_hop_support_v3_pairs_with_compatible_targets_dom_rng_v1.jsonl",
+          "sha256": "6f9bc2b6c2d0ec344a6603137f464436eb3bb541f8aba66a200d4698f4b75ec9",
+          "rows": 63992
+        },
+        {
+          "path": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+          "sha256": "8fbc1db6847b7676c1f144521218b444e2768cb06345d1a6288afd58177df54e",
+          "rows": 9802
+        }
+      ],
+      "safe_to_claim": "Composition final evidence comes from sampled shortcut verification and dashboard thresholds; LLM labels are upstream pruning signals.",
+      "unsafe_to_claim": "LLM labels prove composition or the v3 domain/range enrichment command/log is fully preserved.",
+      "remaining_gap": "Exact v3 domain/range enrichment command/log and exact LLM production provenance are incomplete."
+    },
+    {
+      "component_id": "P1_ALLOC_SUPPORT",
+      "component_name": "canonical allocation and support matrix",
+      "status": "partial",
+      "evidence_files": [
+        "docs/reconstruction/33_allocation_5k_export_provenance.md",
+        "docs/reconstruction/34_support_matrix_provenance.md",
+        "artifacts/final_graph/selected_final_graph/rebuild/allocation_5k_export_provenance.json",
+        "artifacts/final_graph/selected_final_graph/rebuild/support_matrix_provenance.json"
+      ],
+      "main_artifacts": [
+        {
+          "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+          "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+          "merged_positive_eta_relations": 139,
+          "eta_integer_total": 20000
+        },
+        {
+          "path": "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json",
+          "sha256": "75794511aaa9ef72a7c63fd0d9a3c11969b72c4fa4bfb01237859b612f544041",
+          "outer_relation_count": 139,
+          "nonzero_cells": 831
+        }
+      ],
+      "safe_to_claim": "Canonical allocation and support matrix are hashable downstream inputs used by Phase II evidence.",
+      "unsafe_to_claim": "They are cryptographically linked by a preserved same-run dashboard export manifest.",
+      "remaining_gap": "Exact dashboard export session and same-run allocation/support matrix linkage are missing."
+    },
+    {
+      "component_id": "P2_STAGE1_STAGE2_STAGE4",
+      "component_name": "Phase II Stage1/Stage2 candidate collection into Stage4 core graph",
+      "status": "partial",
+      "evidence_files": [
+        "docs/reconstruction/30_stage3_to_B0_chain_verification.md",
+        "docs/reconstruction/32_stage1_stage2_candidate_collection_provenance.md",
+        "artifacts/final_graph/selected_final_graph/rebuild/stage3_to_B0_chain_verification.json",
+        "artifacts/final_graph/selected_final_graph/rebuild/stage1_stage2_candidate_collection_provenance.json"
+      ],
+      "main_artifacts": [
+        {
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage01_genericity/relation_genericity.jsonl",
+          "sha256": "d7b47683ecd08574f1d8fc8e97a213a0fd8f1b096b5f1bf7d71956df8387ca32",
+          "rows": 139
+        },
+        {
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards",
+          "aggregate_sha256_manifest": "5dad26e9bf51e67ad8c1a8b3df85a836bebbe9d0a63652b62a2aff1cf4af014c",
+          "candidate_rows": 81958,
+          "shards": 139
+        },
+        {
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl",
+          "sha256": "54f5ae7af3bd2b9a117817adeaa0cea355bbf2a385ed25a97d0551c4e0f975fd",
+          "unique_triples": 18513
+        }
+      ],
+      "safe_to_claim": "Frozen Stage2 shards exist and Stage4 core triples are a subset of the combined Stage2 candidate pool.",
+      "unsafe_to_claim": "Stage2 candidate collection is exactly rerunnable from current WDQS without cache/environment caveats.",
+      "remaining_gap": "Stage2 WDQS endpoint/cache/environment provenance remains incomplete."
+    },
+    {
+      "component_id": "P2_STAGE4_TO_B0",
+      "component_name": "Stage4 to B0 verified graph chain",
+      "status": "confirmed",
+      "evidence_files": [
+        "docs/reconstruction/26_stage7_to_B0_chain_verification.md",
+        "docs/reconstruction/27_stage6_to_B0_chain_verification.md",
+        "docs/reconstruction/28_stage5_to_B0_chain_verification.md",
+        "docs/reconstruction/30_stage3_to_B0_chain_verification.md"
+      ],
+      "main_artifacts": [
+        {
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl",
+          "sha256": "54f5ae7af3bd2b9a117817adeaa0cea355bbf2a385ed25a97d0551c4e0f975fd"
+        },
+        {
+          "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+          "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
+        }
+      ],
+      "safe_to_claim": "The Stage4-to-B0 chain is hash-verified through no-op Stage5/Stage6, standalone Stage7, Stage11, Stage12, and B0 LCC extraction.",
+      "unsafe_to_claim": "This chain alone proves full Phase I-to-final reproducibility.",
+      "remaining_gap": "Upstream Phase I and Stage2 exact rerun gaps remain."
+    },
+    {
+      "component_id": "FINAL_CANDIDATES",
+      "component_name": "C1/C2/C3 candidate analyses",
+      "status": "rejected_or_evidence_only",
+      "evidence_files": [
+        "docs/reconstruction/12_C2_result_interpretation.md",
+        "docs/reconstruction/17_C3_feasibility_probe_result.md",
+        "docs/reconstruction/19_final_graph_selection_decision.md",
+        "docs/reconstruction/graph_candidates.tsv"
+      ],
+      "main_artifacts": [
+        {
+          "candidate_id": "C1",
+          "total_deficit": 2359,
+          "total_surplus": 6582,
+          "decision": "not_selected_after_final_decision"
+        },
+        {
+          "candidate_id": "C2",
+          "total_deficit": 2019,
+          "total_surplus": 6675,
+          "accepted_deletions": 27,
+          "decision": "rejected_as_final_kept_as_exploratory_evidence"
+        },
+        {
+          "candidate_id": "C3_probe_v1",
+          "graph_candidate": false,
+          "targets_requiring_replacement": 473,
+          "targets_requiring_replacement_with_feasible_replacement": 0
+        }
+      ],
+      "safe_to_claim": "C1, C2, and C3_probe_v1 are post hoc analyses that did not supersede B0.",
+      "unsafe_to_claim": "C3 was generated or C2/C3 are final graph candidates.",
+      "remaining_gap": "Relation addition and materially different replacement-pool design remain future work."
+    }
+  ],
+  "phase1_status": {
+    "dashboard_empirical_pattern_logic": "confirmed",
+    "pattern_group_sizes_reproduced_with_wilson_disabled": {
+      "symmetric": 18,
+      "anti_symmetric": 66,
+      "inverse": 44,
+      "composition": 26
+    },
+    "two_hop_340k_claim": "unsupported",
+    "supported_valid_second_hop_entries": 56278,
+    "inverse_llm_completion": "not_evidenced",
+    "empirical_inverse_grouping": "supported",
+    "composition_llm_target_filtering": "artifact_confirmed_exact_llm_provenance_incomplete",
+    "shortcut_verification": "confirmed_by_v3_logs_stats_outputs"
+  },
+  "final_graph_decision_status": {
+    "selected": "B0",
+    "nonselected_or_rejected": {
+      "C1": "not selected; lower surplus but higher deficit",
+      "C2": "rejected; failed surplus threshold",
+      "C3_probe_v1": "evidence only; no graph candidate and no bridge-rescue feasibility under eligible pool v1"
+    },
+    "future_work_not_part_of_selected_graph": [
+      "relation addition",
+      "remove-and-replace graph generation",
+      "new replacement-pool design"
+    ]
+  },
+  "remaining_gaps_by_risk": {
+    "high": [
+      {
+        "gap": "exact dashboard export session missing",
+        "impact": "Cannot claim exact saved-session replay of the final 5k allocation."
+      },
+      {
+        "gap": "exact LLM production run/raw responses missing",
+        "impact": "Cannot claim fully reproducible LLM target filtering."
+      },
+      {
+        "gap": "full Phase I-to-final end-to-end rerun not established",
+        "impact": "Cannot claim full reproducibility from live Wikidata and LLM inputs."
+      }
+    ],
+    "medium": [
+      {
+        "gap": "v3 domain/range enrichment command/log incomplete",
+        "impact": "Compatible-target artifact provenance remains cached-intermediate evidence."
+      },
+      {
+        "gap": "Stage2 WDQS exact rerun/cache incomplete",
+        "impact": "Candidate collection cannot be claimed exactly replayable."
+      },
+      {
+        "gap": "support matrix same-run linkage to allocation missing",
+        "impact": "Allocation and support matrix are relation-compatible but not same-run linked by a preserved manifest."
+      }
+    ],
+    "low": [
+      {
+        "gap": "inverse LLM side branch incomplete",
+        "impact": "Low for final allocation because empirical dashboard inverse grouping does not require completed inverse LLM output."
+      }
+    ]
+  },
+  "refactor_readiness": {
+    "can_start": true,
+    "boundary": "Start only with wrapper/orchestration and path-parameterization around frozen evidence. Do not rewrite historical scripts as if they are the original execution record, and do not move or rename provenance folders yet.",
+    "safe_scope": [
+      "create clean wrapper/orchestration layer",
+      "parameterize canonical paths and hashes",
+      "preserve old artifacts as frozen evidence",
+      "add manifests, command capture, and validation checks"
+    ],
+    "unsafe_scope": [
+      "move or rename historical provenance folders before archival",
+      "replace cached evidence with live WDQS or LLM outputs without new experiment tracking",
+      "claim full end-to-end reproducibility before dashboard, LLM, WDQS/cache, and environment gaps are closed"
+    ]
+  },
+  "recommended_next_actions": [
+    "compile thesis",
+    "run claim scan",
+    "commit reconstruction docs and thesis patch",
+    "create wrapper-only reproducibility entrypoint",
+    "begin minimal code refactor only within the accepted wrapper boundary"
+  ]
+}

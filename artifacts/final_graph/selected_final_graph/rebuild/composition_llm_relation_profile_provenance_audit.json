@@ -1,0 +1,343 @@
+{
+  "audit_id": "R2.11_composition_llm_relation_profile_provenance_audit",
+  "created_for": "forensic reconstruction of composition LLM relation-profile provenance, domain/range filtering, and sampled shortcut verification",
+  "policy": {
+    "read_only_investigation": true,
+    "wdqs_calls_made": false,
+    "llm_calls_made": false,
+    "graph_generation_performed": false,
+    "graph_artifacts_modified": false,
+    "thesis_latex_modified": false
+  },
+  "status_summary": {
+    "relation_profile_artifact_status": "confirmed_artifact",
+    "relation_profile_llm_run_provenance_status": "partial_incomplete",
+    "domain_range_filtering_status": "confirmed_artifact_direct_run_provenance_partial",
+    "v3_shortcut_verification_status": "confirmed_historical_execution",
+    "final_composition_group_status": "reproducible_from_v3_compact_output_under_canonical_thresholds_with_wilson_disabled",
+    "exact_dashboard_export_session_status": "missing"
+  },
+  "relation_profile_artifact": {
+    "path": "data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json",
+    "sha256": "a30635f0edc66c46b8aafe66fa01e047a65c2c8d01091be8f02926af8d952258",
+    "size_bytes": 3107956,
+    "json_root_type": "list",
+    "record_count": 2445,
+    "records_with_llm_classification": 2445,
+    "datatype_counts": {
+      "wikibase-item": 1703,
+      "quantity": 675,
+      "time": 67
+    },
+    "top_level_fields": [
+      "_id",
+      "property_id",
+      "llm_classification",
+      "metadata",
+      "rule_verification",
+      "updated_at",
+      "verification_error"
+    ],
+    "llm_classification_fields": [
+      "llm_classification.relation_id",
+      "llm_classification.logic.symmetry.decision",
+      "llm_classification.logic.symmetry.reason",
+      "llm_classification.logic.anti_symmetry.decision",
+      "llm_classification.logic.anti_symmetry.reason",
+      "llm_classification.logic.inverse.decision",
+      "llm_classification.logic.inverse.reason",
+      "llm_classification.composition.composition_target",
+      "llm_classification.composition.composition_reason"
+    ],
+    "composition_target_counts": {
+      "YES": 615,
+      "NO_WAY": 1830
+    },
+    "logic_decision_counts": {
+      "symmetry:TEST": 73,
+      "symmetry:LOW_PRIORITY": 28,
+      "symmetry:NO_WAY": 2344,
+      "anti_symmetry:TEST": 853,
+      "anti_symmetry:LOW_PRIORITY": 768,
+      "anti_symmetry:NO_WAY": 824,
+      "inverse:TEST": 242,
+      "inverse:LOW_PRIORITY": 1322,
+      "inverse:NO_WAY": 881
+    },
+    "verification_error_counts": {
+      "AntiSymmetryNeedsTypedDomainRange": 741,
+      "ConflictSymmetryVsAntiSymmetry": 1
+    },
+    "timestamp_profile": {
+      "updated_at_unique_values": 2,
+      "updated_at_main_value": "2026-01-10T03:40:04.794847",
+      "updated_at_main_value_count": 2444,
+      "updated_at_other_value": "2026-01-10T03:32:36.991905",
+      "updated_at_other_value_count": 1,
+      "metadata_datatype_updated_at_unique_values": 49
+    },
+    "preserved_llm_provenance_fields": {
+      "model_name_key_found": false,
+      "prompt_key_found": false,
+      "raw_response_key_found": false,
+      "llm_config_key_found": false,
+      "temperature_key_found": false,
+      "batch_or_request_id_key_found": false,
+      "derived_labels_and_reasons_found": true
+    }
+  },
+  "likely_llm_producer_script": {
+    "path": "src/composition_verification/classify_relations_pipeline.py",
+    "sha256": "1f3c81c92a17e40a343702580489cd73568e6bf51c5ec24fa4b36b330fcd803f",
+    "evidence_status": "code_compatible_but_no_direct_production_log_found",
+    "evidence_lines": {
+      "prompt": "src/composition_verification/classify_relations_pipeline.py:20-99",
+      "response_schema": "src/composition_verification/classify_relations_pipeline.py:103-168",
+      "openai_call": "src/composition_verification/classify_relations_pipeline.py:400-417",
+      "cli_model_defaults": "src/composition_verification/classify_relations_pipeline.py:424-444",
+      "mongo_update": [
+        "src/composition_verification/classify_relations_pipeline.py:575-580",
+        "src/composition_verification/classify_relations_pipeline.py:612-617"
+      ]
+    },
+    "script_default_model": "gpt-4.1-mini",
+    "script_temperature": 0.2,
+    "script_batch_size_default": 20,
+    "direct_run_log_found": false,
+    "raw_response_archive_found": false,
+    "export_manifest_found": false,
+    "assessment": "likely producer of llm_classification fields, but exact run provenance is incomplete"
+  },
+  "known_consumers_of_relation_profile_artifact": [
+    {
+      "path": "src/enrichments_and_filters/enrich_pairs_with_targets_dom_rng_based.py",
+      "role": "loads relation profiles and keeps composition targets where composition_target != NO_WAY"
+    },
+    {
+      "path": "scripts/slurm/hop_discovery_json.slurm",
+      "role": "uses relation profile export for wikibase-item relation universe and hop discovery"
+    },
+    {
+      "path": "src/inverse_verification_legacy/build_inverse_alias_topk.py",
+      "role": "uses relation profile metadata for inverse alias candidate construction"
+    },
+    {
+      "path": "src/inverse_verification_legacy/llm_classification_inv.py",
+      "role": "uses relation profile metadata for attempted inverse LLM classification"
+    }
+  ],
+  "properties_metadata_artifact": {
+    "path": "data/raw/wikidata_ontology.properties.json",
+    "sha256": "daac555483634bfcb608c5fc04f9a2f14678772381edd91440822606db3a0380",
+    "size_bytes": 644751,
+    "record_count": 2445,
+    "records_with_valid_subject_type_ids": 2445,
+    "records_with_valid_object_type_ids": 2445,
+    "schema_fields": [
+      "_id",
+      "property_id",
+      "label",
+      "valid_subject_type_ids",
+      "valid_object_type_ids"
+    ]
+  },
+  "domain_range_filtering": {
+    "main_v3_artifact": {
+      "path": "data/processed/hop_support_v3/min8_hop_support_v3_pairs_with_compatible_targets_dom_rng_v1.jsonl",
+      "sha256": "6f9bc2b6c2d0ec344a6603137f464436eb3bb541f8aba66a200d4698f4b75ec9",
+      "size_bytes": 1043849440,
+      "jsonl_records": 63992,
+      "bad_json_rows": 0,
+      "rows_with_targets": 63992,
+      "total_stored_target_entries": 13732052,
+      "target_count_min": 113,
+      "target_count_max": 615,
+      "unique_r1": 1481,
+      "unique_target_relations": 615,
+      "schema_fields": [
+        "r1",
+        "r2",
+        "support",
+        "source_mode",
+        "input_status",
+        "target_count",
+        "targets_truncated",
+        "targets"
+      ],
+      "target_entry_fields": [
+        "t",
+        "dom_reason",
+        "rng_reason"
+      ]
+    },
+    "likely_producer_script": {
+      "path": "src/enrichments_and_filters/enrich_pairs_with_targets_dom_rng_based.py",
+      "evidence_status": "code_compatible_but_exact_v3_run_log_not_found",
+      "evidence_lines": {
+        "goal_and_semantics": "src/enrichments_and_filters/enrich_pairs_with_targets_dom_rng_based.py:1-24",
+        "target_selection": "src/enrichments_and_filters/enrich_pairs_with_targets_dom_rng_based.py:98-110",
+        "constraint_loading": "src/enrichments_and_filters/enrich_pairs_with_targets_dom_rng_based.py:113-133",
+        "output_record_construction": "src/enrichments_and_filters/enrich_pairs_with_targets_dom_rng_based.py:303-340",
+        "commented_example_command": "src/enrichments_and_filters/enrich_pairs_with_targets_dom_rng_based.py:376-377"
+      }
+    },
+    "status": "artifact_confirmed_direct_run_provenance_partial"
+  },
+  "shortcut_verification": {
+    "verifier_script": {
+      "path": "src/composition_verification/composition_range_domain_improved.py",
+      "sha256": "4eb12cb6a0d9d1077faed8addab71284ac31efb86418f4212f310a2158881870",
+      "evidence_lines": {
+        "wdqs_endpoint_and_query_execution": "src/composition_verification/composition_range_domain_improved.py:185-290",
+        "chain_sample": "src/composition_verification/composition_range_domain_improved.py:292-368",
+        "target_discovery": "src/composition_verification/composition_range_domain_improved.py:370-465",
+        "sample_confidence_output": "src/composition_verification/composition_range_domain_improved.py:642-669",
+        "jsonl_output_and_compact_output": "src/composition_verification/composition_range_domain_improved.py:1014-1023",
+        "stats_write": "src/composition_verification/composition_range_domain_improved.py:1280-1299",
+        "jsonl_cli": "src/composition_verification/composition_range_domain_improved.py:1307-1385"
+      }
+    },
+    "slurm_runner": {
+      "path": "scripts/slurm/composition_range_domain_improved_min8_jsonl.slurm",
+      "sha256": "5fb5d35fe04ee9371e855a53d3dd065c04e77e8a32e6a4de9c1225c391a07e00",
+      "input_jsonl": "data/processed/hop_support_v3/new_pairs_composition_in_v3_only.jsonl",
+      "output_jsonl": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.jsonl",
+      "output_compact_jsonl": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+      "stats_json": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition.stats.json",
+      "report_jsonl": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition.report.jsonl",
+      "endpoint": "https://query.wikidata.org/sparql",
+      "sample_n": 300,
+      "deterministic_sample": true,
+      "exclude_self_loops": true,
+      "uses_stale_original_workspace_paths": true
+    },
+    "input_artifact": {
+      "path": "data/processed/hop_support_v3/new_pairs_composition_in_v3_only.jsonl",
+      "sha256": "f9a16ed6e584ce1e587ea2869187ebc84f71beed7481ed38e9e2e84841013399",
+      "size_bytes": 165350236,
+      "jsonl_records": 9802,
+      "bad_json_rows": 0,
+      "rows_with_targets": 9802,
+      "total_stored_target_entries": 2169051,
+      "target_count_min": 113,
+      "target_count_max": 615
+    },
+    "output_artifacts": {
+      "full_output_jsonl": {
+        "path": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.jsonl",
+        "sha256": "884a445788c9a0c200cc79d91bb91c28facd744fed5c5594142d508233b9f1ec",
+        "size_bytes": 173827779,
+        "jsonl_records": 9802,
+        "bad_json_rows": 0,
+        "composition_run_status_counts": {
+          "success": 9799,
+          "skip": 3
+        }
+      },
+      "compact_output_jsonl": {
+        "path": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+        "sha256": "8fbc1db6847b7676c1f144521218b444e2768cb06345d1a6288afd58177df54e",
+        "size_bytes": 10021946,
+        "jsonl_records": 9802,
+        "bad_json_rows": 0,
+        "composition_run_status_counts": {
+          "success": 9799,
+          "skip": 3
+        }
+      },
+      "report_jsonl": {
+        "path": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition.report.jsonl",
+        "sha256": "8ad3e98ef57a1168905f79cb563a195f33f54e8495d83abc2f63252e8944efa3",
+        "size_bytes": 305980,
+        "jsonl_records": 1300,
+        "status_counts": {
+          "saved": 1297,
+          "skip": 3
+        }
+      },
+      "stats_json": {
+        "path": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition.stats.json",
+        "sha256": "da9ce624ed266122f4f2c274de9985493115d269272181b2ea9dae30b7e718f9",
+        "size_bytes": 1279,
+        "stats": {
+          "lines_seen": 9802,
+          "nonempty_lines_seen": 9802,
+          "output_docs_written": 9802,
+          "output_compact_docs_written": 9802,
+          "success_docs": 9799,
+          "skipped_docs": 3,
+          "error_docs": 0,
+          "skip_reasons": {
+            "empty_chain_sample": 3
+          },
+          "saved_targets": 1297,
+          "sparql_posts_total": 88199,
+          "stopped_on_transient": false,
+          "final_checkpoint_line": 9802
+        }
+      },
+      "checkpoint_json": {
+        "path": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition.checkpoint.json",
+        "sha256": "5bb2d33257619667c80e1a9dda9e6288cef1290c75b07846a586f73a8f0408db",
+        "last_line": 9802
+      }
+    },
+    "logs": {
+      "stdout": {
+        "path": "logs/composition_hop_support_v3_min8_jsonl_28197929.out",
+        "sha256": "3f28af34696c35d4bbe71b049163e800d00afd2626b5b5b0650b1f695048ef16",
+        "started": "Tue Mar 10 21:32:53 CET 2026",
+        "finished": "Wed Mar 11 13:06:00 CET 2026",
+        "exit_code": 0
+      },
+      "stderr": {
+        "path": "logs/composition_hop_support_v3_min8_jsonl_28197929.err",
+        "sha256": "37796f9aa283693e5b04d16c1df9cfd0fcb5f7f05453ab5a67b9eedb64f08010",
+        "final_logged_docs": 9802,
+        "final_logged_saved_targets": 1297,
+        "final_logged_error_docs": 0,
+        "final_logged_sparql_posts": 88199
+      }
+    },
+    "status": "confirmed_historical_execution_depends_on_live_wdqs_for_rerun"
+  },
+  "final_dashboard_composition_group": {
+    "source_report": "docs/reconstruction/37_dashboard_empirical_pattern_logic_audit.md",
+    "canonical_allocation_path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "canonical_allocation_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+    "canonical_thresholds": {
+      "comp_min_support": 50,
+      "comp_min_conf": 0.6,
+      "comp_min_examined": 50,
+      "comp_min_shortcuts": 1,
+      "wilson_filtering": "disabled"
+    },
+    "accepted_composition_candidate_rows": 13,
+    "unique_composition_relations": 26,
+    "canonical_5k_composition_group_size": 26,
+    "relation_set_match": true,
+    "assessment": "final composition grouping is supported by compact sampled shortcut-verification output, not by LLM labels alone"
+  },
+  "safe_thesis_wording": [
+    "The LLM-based relation-profile artifact was used as an upstream high-recall pruning signal for composition target selection.",
+    "In the stored profile artifact, 615 relations were retained as plausible composition targets and 1,830 were labelled NO_WAY.",
+    "The LLM labels were not treated as proof of composition.",
+    "Candidate targets were subsequently filtered by domain/range compatibility and then evaluated through sampled shortcut verification.",
+    "The final composition group in the 5k allocation is reproduced from the v3 compact composition-verification output under the canonical dashboard thresholds with Wilson filtering disabled."
+  ],
+  "unsafe_thesis_wording": [
+    "The composition LLM labels prove composition.",
+    "The exact LLM classification run is fully reproducible from preserved prompts, raw responses, and model metadata.",
+    "The final composition group was selected directly by the LLM.",
+    "Wilson lower-bound filtering was used for the final 5k allocation.",
+    "The exact Streamlit export session is preserved.",
+    "Domain/range filtering has complete production command/log provenance."
+  ],
+  "remaining_gaps": [
+    "Locate the production command/log for src/composition_verification/classify_relations_pipeline.py.",
+    "Locate any raw OpenAI request/response archive or payload log for the relation-profile classification.",
+    "Locate an export manifest or command that produced data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json from MongoDB.",
+    "Locate the exact v3 domain/range enrichment command/log for min8_hop_support_v3_pairs_with_compatible_targets_dom_rng_v1.jsonl.",
+    "Locate a same-run dashboard export session linking patched v3 support, v3 compact composition output, the canonical 5k allocation, and the genericity support matrix."
+  ]
+}

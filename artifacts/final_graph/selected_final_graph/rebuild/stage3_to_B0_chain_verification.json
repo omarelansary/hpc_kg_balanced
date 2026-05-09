@@ -1,0 +1,1163 @@
+{
+  "B0_largest_component": {
+    "fieldnames": [
+      "h",
+      "r",
+      "t"
+    ],
+    "has_h_r_t_fields": true,
+    "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+    "row_count": 24683,
+    "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+    "size_bytes": 601555,
+    "unique_relations": 139,
+    "unique_triples": 24683
+  },
+  "checks": {
+    "pipeline_code_stage03_before_stage04": true,
+    "pipeline_code_stage04_reads_stage02_shards": true,
+    "run_manifest_stage03_completed": true,
+    "run_manifest_stage04_completed": true,
+    "run_manifest_stage04_core_triple_count_18513": true,
+    "run_manifest_stage04_realized_relations_139": true,
+    "stage02_combined_rows_match_summary": true,
+    "stage02_combined_unique_relations_139": true,
+    "stage02_shard_count_139": true,
+    "stage02_summary_total_written_candidates_81958": true,
+    "stage03_audit_rows_139": true,
+    "stage03_summary_relation_count_139": true,
+    "stage03_summary_zero_candidate_relations_0": true,
+    "stage04_component_report_count_6524": true,
+    "stage04_relation_counts_entries_139": true,
+    "stage04_relation_counts_total_18513": true,
+    "stage4_core_graph_exists": true,
+    "stage4_core_hash_matches_known": true,
+    "stage4_core_overlap_stage02_candidate_shards_18513": true,
+    "stage4_core_rows_18513": true,
+    "stage4_core_subset_of_stage02_candidate_shards": true,
+    "stage4_core_unique_relations_139": true,
+    "stage4_core_unique_triples_18513": true,
+    "stage4_selection_log_equals_core_graph_set": true,
+    "stage4_selection_log_sha_matches_core_graph": true,
+    "stage5_to_B0_previous_verification_passed": true
+  },
+  "created_by": "scripts/reconstruction/07_verify_stage3_to_B0_chain.sh",
+  "created_on": "2026-05-09T22:29:19.649669+00:00",
+  "hashes": {
+    "B0_largest_component": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+      "size_bytes": 601555
+    },
+    "pipeline_config": {
+      "path": "archive/hetzner_version/src/kg_builder/config.yaml",
+      "sha256": "5dd43af7ad0c1a1c8c75ae4e0487818fd48ae805d47320dab1bed7918ec0f1eb",
+      "size_bytes": 15127
+    },
+    "pipeline_runtime_config": {
+      "path": "archive/hetzner_version/src/kg_builder/config.runtime.json",
+      "sha256": "e49e20dd29d17ca0879b9c4c649d07c25370544ddeedf8cad3a30876f4fcf4ad",
+      "size_bytes": 2074
+    },
+    "pipeline_script": {
+      "path": "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+      "sha256": "a1fec8c08783b3816ebc28e16f39499fb6be2f2a4d587948a00fa4fb9082a5e7",
+      "size_bytes": 96879
+    },
+    "run_manifest": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/manifest.json",
+      "sha256": "918546ec1c0f5e02e99f6b09d9dc8d8a6d3caa16ccd1cb31f3ab26d6cd3eaff9",
+      "size_bytes": 4075
+    },
+    "stage02_summary": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/reports/summary.json",
+      "sha256": "d9c6cd6124cb3c938b2045bf25c4bbdf8b6364c3002709547c6b45a98df8626d",
+      "size_bytes": 242
+    },
+    "stage03_audit_jsonl": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage03_candidate_audit/candidate_relation_audit.jsonl",
+      "sha256": "9de5e0649dfebdf9c62aa00f8ea15ded587070a189748dbd981e66f01827ccf6",
+      "size_bytes": 72596
+    },
+    "stage03_summary": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage03_candidate_audit/summary.json",
+      "sha256": "8914081a4f7a81fa865c1eef04b4a3048f46b395e1648a8b4da5f05c68b4d6c2",
+      "size_bytes": 230
+    },
+    "stage04_component_report": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_component_report.json",
+      "sha256": "e8659565533741b8c75cb8a373234d27712ea9f786c5d331e36e15ab3fe09164",
+      "size_bytes": 2407260
+    },
+    "stage04_core_graph": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl",
+      "sha256": "54f5ae7af3bd2b9a117817adeaa0cea355bbf2a385ed25a97d0551c4e0f975fd",
+      "size_bytes": 8696347
+    },
+    "stage04_relation_counts": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_relation_counts.json",
+      "sha256": "3883b9f81036fcfd6b9022082b8dbb8b7321f2be6f4fff287772d0e4de057707",
+      "size_bytes": 2140
+    },
+    "stage04_selection_log": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_selection_log.jsonl",
+      "sha256": "54f5ae7af3bd2b9a117817adeaa0cea355bbf2a385ed25a97d0551c4e0f975fd",
+      "size_bytes": 8696347
+    },
+    "stage5_to_B0_doc": {
+      "path": "docs/reconstruction/28_stage5_to_B0_chain_verification.md",
+      "sha256": "fddee7c2d68301abeec2cd863f4a3a1529c56b48797f6216b2fe597067ef5df0",
+      "size_bytes": 6558
+    },
+    "stage5_to_B0_verification": {
+      "path": "artifacts/final_graph/selected_final_graph/rebuild/stage5_to_B0_chain_verification.json",
+      "sha256": "b579fa8d9a75521fd26dfdab2d121d84c258f2372807a5b5c095e8a779fa98e5",
+      "size_bytes": 8111
+    },
+    "this_verification_script": {
+      "path": "scripts/reconstruction/07_verify_stage3_to_B0_chain.sh",
+      "sha256": "ef79bfb6737a2ed148b4cb2764c439f1c2059f8b2839effd023835ed1fe0d66b",
+      "size_bytes": 22828
+    }
+  },
+  "notes": [
+    "No Stage2, Stage3, Stage4, Stage5, Stage6, Stage7, Stage11, Stage12, B0, or allocation artifact was modified.",
+    "No graph was generated.",
+    "No WDQS or LLM call was made.",
+    "Stage3 audit is not a direct h/r/t graph input; Stage4 construction is linked to Stage2 candidate shards by archived pipeline code and subset evidence.",
+    "This narrows the Stage3/Stage4 evidence chain, but does not establish Stage1-to-Stage2 collection reproducibility, allocation export provenance, exact environment locking, or full Phase I reproducibility."
+  ],
+  "overall_pass": true,
+  "previous_stage5_to_B0_verification": {
+    "overall_pass": true,
+    "path": "artifacts/final_graph/selected_final_graph/rebuild/stage5_to_B0_chain_verification.json",
+    "sha256": "b579fa8d9a75521fd26dfdab2d121d84c258f2372807a5b5c095e8a779fa98e5"
+  },
+  "scope": "Read-only verification of Stage3/Stage4 evidence and Stage4 -> B0 chain.",
+  "set_relationships": {
+    "core_minus_stage4_selection_log": 0,
+    "stage02_candidate_pool_minus_stage4_core": 63445,
+    "stage4_core_minus_stage02_candidate_pool": 0,
+    "stage4_core_overlap_with_stage02_candidate_pool": 18513,
+    "stage4_selection_log_minus_core": 0,
+    "stage4_selection_log_overlap_with_core": 18513
+  },
+  "stage02_candidate_pool_profile": {
+    "aggregate_sha256_manifest": "25b8cacc69bad54d97526f6dfe7d5c43a85856a295a1d1663303fe6c68c84f0d",
+    "appears_direct_stage4_input": true,
+    "evidence_for_or_against": "Archived pipeline code constructs Stage4 from ctx.run_dir/stage02_candidates/shards; Stage4 core triples are a subset of the combined shard triple set.",
+    "file_type": "jsonl_shard_directory",
+    "first_record_keys": [
+      "chunk_id",
+      "collection_mode",
+      "genericity_bucket",
+      "genericity_score",
+      "h",
+      "hub_penalty",
+      "ontology_ok",
+      "quality_score",
+      "query_id",
+      "query_limit",
+      "query_offset",
+      "r",
+      "retrieved_at",
+      "run_id",
+      "self_loop_flag",
+      "shortcut_risk",
+      "source_backend",
+      "source_stage",
+      "t",
+      "triple_id"
+    ],
+    "h_r_t_like_record_count": 81958,
+    "jsonl_parse_ok": true,
+    "parse_error_count": 0,
+    "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards",
+    "records_contain_h_r_t_or_equivalent": true,
+    "row_count": 81958,
+    "shard_count": 139,
+    "stage4_core_triples_subset": true,
+    "stage4_overlap_count": 18513,
+    "unique_relation_count": 139,
+    "unique_triple_count": 81958
+  },
+  "stage02_shard_hashes": [
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1001.jsonl",
+      "sha256": "2ba82b1f62b6ba002893d5571069d5f8bd1d127023644396412375108d95a49b",
+      "size_bytes": 510404
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1002.jsonl",
+      "sha256": "92e8325a84c85ed370074cfb1b6ab68df0eb0badd8be378bb99bb8b6911b7824",
+      "size_bytes": 216346
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P10254.jsonl",
+      "sha256": "ede6374a61efd33b914d84581e876a13b8ab7dc7b5c36ccf5ff89c58b04890c0",
+      "size_bytes": 276447
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P10374.jsonl",
+      "sha256": "352e89abe33bdace420c9abab39e27109c1c04f43e6366e5285464726f29467c",
+      "size_bytes": 57998
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P10449.jsonl",
+      "sha256": "bba8f1ddddfae506d441e0076f5f0f04ac224b30ec0b1a5dfe16550238272f98",
+      "size_bytes": 273416
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P10607.jsonl",
+      "sha256": "415a91d6ddfd7aabb391d2b314f4c55f6baefc25d7a77f394608cadfb054d6dc",
+      "size_bytes": 309830
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P10624.jsonl",
+      "sha256": "69feb3e039662043fa501d36fd3481a167d5b8f49029207bd826610fad860aff",
+      "size_bytes": 205619
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1142.jsonl",
+      "sha256": "a7a6938bd4670c8616219ce080114e52978bcc87863b8a3b62c6b3a65c6258ec",
+      "size_bytes": 201131
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1151.jsonl",
+      "sha256": "709a8e2648c13906653eb86d92512d2156274348e5a569895a03cd36374b17b0",
+      "size_bytes": 352972
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1158.jsonl",
+      "sha256": "7929b5054b409ccefa8a71888770e282d238d73a1a9492bcff5ff2fb8fd006d0",
+      "size_bytes": 280553
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1204.jsonl",
+      "sha256": "e4b6009c1c9c52f0c6b9810559ad28d2965503df2b3204979ea6ead1cff1172d",
+      "size_bytes": 353068
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P12363.jsonl",
+      "sha256": "813b15210029d52233133194cfee2fa3b8eb014549659da54a1b9dab14b7f18f",
+      "size_bytes": 274021
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P12452.jsonl",
+      "sha256": "d924b574ce091d64dcc9d429a29312ee2cd67c598b5b0601bdc66814108ad23d",
+      "size_bytes": 282792
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1268.jsonl",
+      "sha256": "27fa9027476c2eb36f095b7236643229c99dad570fef043f22538d1f1b38b8c3",
+      "size_bytes": 825913
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P127.jsonl",
+      "sha256": "2ab5f27e90f20a96d1bc94aa91803abdf34c11a68d7d79c497e532c7b0083e65",
+      "size_bytes": 535329
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P12764.jsonl",
+      "sha256": "b254a9a9d428a5b5ee7adcdf18cae86d674cbda7dcd8b740906a86111fba84cf",
+      "size_bytes": 427317
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P12765.jsonl",
+      "sha256": "3105da19855409a16d7f69deb91a289e6883e24a2b0a08778beee0f2d6a39b5d",
+      "size_bytes": 296404
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1290.jsonl",
+      "sha256": "236cc20909bac7fea9dec774fc349378d98a87d76459d710dd95ec207d45a871",
+      "size_bytes": 172446
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P12994.jsonl",
+      "sha256": "86ab7e8da9736c62e7fc4832b61add00aaf0c503f844e1a107fecb699be10b4d",
+      "size_bytes": 63576
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P131.jsonl",
+      "sha256": "319f322661a8950939f99dda15ec6bda369c7724cac32eb338b41773691fabbf",
+      "size_bytes": 176560
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1312.jsonl",
+      "sha256": "f78615051191154a089d3aa96b618b5469c01d02b0a98c71c2af9d8e4ab16702",
+      "size_bytes": 216872
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P13177.jsonl",
+      "sha256": "40cb019acaf6f4182526e2cdb99b09dedd46588b98413959d89ff1a2b2036c58",
+      "size_bytes": 1272853
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P13210.jsonl",
+      "sha256": "30c97d32881fd48d084ff2efa637d5dfade3ff6848e757ef43556d0c82a0468c",
+      "size_bytes": 576643
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1322.jsonl",
+      "sha256": "3bac26f38ead5ea6916d3bf5809374d68f48c6486c8bf3eacd2e21944a030d5f",
+      "size_bytes": 332411
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P13478.jsonl",
+      "sha256": "1acb23beb17a95d64482c357258112c672c8fb1508dbbca90aea5602314c9848",
+      "size_bytes": 199945
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1398.jsonl",
+      "sha256": "63ea0108c3fab72eaf21796e8e246668b1650acb0ced607a684f051c7dc7d050",
+      "size_bytes": 409020
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1403.jsonl",
+      "sha256": "44cddc7f35d64f6bd202c2e424e568685a165f4299051d334770c6456f871725",
+      "size_bytes": 296468
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1414.jsonl",
+      "sha256": "6ea06d3ee1a79bc7e015633ca877943aedf363195c4e36ec2ceacd979f418d21",
+      "size_bytes": 215461
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1420.jsonl",
+      "sha256": "1298869f0c97e1438b1a6ccbbcbb82edef59bbfd253d71e4bb12f9c05dee14aa",
+      "size_bytes": 646290
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1434.jsonl",
+      "sha256": "ae78a55e155960ea53826210f62b71f931d360d3d8048e7bc74a32319f2a8121",
+      "size_bytes": 340996
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1445.jsonl",
+      "sha256": "8563e71ed8cecb67ea5cadffdfa78f4312d037c4b7ff8e85e8477c24b241c93c",
+      "size_bytes": 343520
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1531.jsonl",
+      "sha256": "a31541928977bb9baea364bb7273a19cdf527eb1e0a4723d94a34c983995100d",
+      "size_bytes": 278706
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1537.jsonl",
+      "sha256": "4d582bfa37cee6589306a3d97a5e614a5d3794536a631c24756150037b1d9782",
+      "size_bytes": 194207
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1542.jsonl",
+      "sha256": "0a5d63293ac0a188269debe258c96a2ccb67da72af47eebd56168e1ce21bcb63",
+      "size_bytes": 193164
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1560.jsonl",
+      "sha256": "6775082db9415ace5ea271d36242b475a7804b00b0a6ec1b6f3385f7675e6b47",
+      "size_bytes": 620953
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1589.jsonl",
+      "sha256": "bba4e14c5b90273077ba6276360a2f975abb3c2e3a5d7968ab3388c0ce3aaa81",
+      "size_bytes": 178553
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P16.jsonl",
+      "sha256": "a5e06a81a909e0ef9c295cc127cde3b44c5a17b1fd68255d6c28121271f4fc45",
+      "size_bytes": 887641
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1625.jsonl",
+      "sha256": "11e4478e8c923b61d3007e33ee7a7154182c0243af7761a84a429456246f7473",
+      "size_bytes": 548928
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P163.jsonl",
+      "sha256": "05522526be667dbcbfd89f6c43431e87600be3270a0731f7126b68a44af180b9",
+      "size_bytes": 330742
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1639.jsonl",
+      "sha256": "d83e8d6015a3fb1cb3b9d82bf711505d7cc528bd3e8f19e473494df06190e801",
+      "size_bytes": 741756
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1654.jsonl",
+      "sha256": "e14d44a8ee1ab14157f01329f0228db34dbd85f2e01a7f9b9af5d7b8d8a5fa92",
+      "size_bytes": 222986
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P167.jsonl",
+      "sha256": "1469d482625c09cca05b3b8ce3b21018f83ff5c3576c1d371f36e43afac396d4",
+      "size_bytes": 406418
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1678.jsonl",
+      "sha256": "bf66395bebbef2e16ccfd70d817cde751e6091114fb0196b4ff8e4c9a3d679cd",
+      "size_bytes": 149826
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1753.jsonl",
+      "sha256": "c0f91ae29f1e9b4f9c4248fb5336f66b5fc090cff7b79cad50b893355556c08f",
+      "size_bytes": 276870
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1754.jsonl",
+      "sha256": "7d3f2e4dedde4bd4bd38ad94770d501522b6c65e7e77c8207d28e05313ec0479",
+      "size_bytes": 289931
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1889.jsonl",
+      "sha256": "fbd362039ecbb596e4ecc63721b3a8a2398692323661a9ca191326ce4ef9512f",
+      "size_bytes": 623712
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2098.jsonl",
+      "sha256": "afcce6f26b54448bd90ca31d16f10a983171a19a40c0fc78d7761ad3305685b0",
+      "size_bytes": 338168
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2152.jsonl",
+      "sha256": "72357b3797fc529813df49d2fbb69db82232f0139a9810d3437c8cb0cda7357e",
+      "size_bytes": 31400
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2155.jsonl",
+      "sha256": "ae4f2be445e80b6d8ec824e19f4a683405e29df25d468a05e5113f7d268b43e4",
+      "size_bytes": 123883
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2283.jsonl",
+      "sha256": "44554ecbf0072251949d0c8684b9845cf0a205b6004e61817d370f7e37c70f27",
+      "size_bytes": 183317
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2289.jsonl",
+      "sha256": "cbe029b22bc45be5db4d96c6e2a4711a35386aeaf1b7a0e3359d3e48ad017129",
+      "size_bytes": 250357
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2353.jsonl",
+      "sha256": "dc0dc1f8fd1742bb8da34855e9b512a7a99152d14f4b2fdd9b06c7dd07819493",
+      "size_bytes": 118530
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2388.jsonl",
+      "sha256": "4dc4d159f3ffb17e27d21abba3b72fd1f2465285e4cdfc1c60cef229ba6af2fc",
+      "size_bytes": 284997
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2389.jsonl",
+      "sha256": "9fdd296bfb6b6af4628071a52f6983f47b782167475a891480c828927cda0e81",
+      "size_bytes": 269934
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2499.jsonl",
+      "sha256": "cbcdfaf223eaa4bf4e39a56b53e21fa63d0c52ba5b9b640e27bc8cf49e5e3a36",
+      "size_bytes": 266692
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2500.jsonl",
+      "sha256": "a745755abdba47089405583abcc61198a84c758102352315c3ed1dfbc9d73413",
+      "size_bytes": 271922
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2567.jsonl",
+      "sha256": "218f4b238cae189c6c098bd65d1344ebcd1faf946b9cca9fd8b5e2cc4ebe9965",
+      "size_bytes": 255159
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2568.jsonl",
+      "sha256": "61be677b036d478d57d103e571d93e2a05f4f02be78752255714908d00fe7c37",
+      "size_bytes": 258510
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2670.jsonl",
+      "sha256": "1f584c8951ab34f0dd4eadc22153fdb169ac49e323c892a9dd848a739b5128de",
+      "size_bytes": 557292
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2673.jsonl",
+      "sha256": "4cc5fe41446a36021d1dcd9728c0db7227333d60176015d5f666bdfae7046177",
+      "size_bytes": 673020
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2674.jsonl",
+      "sha256": "9d49b5f950bfe6de4928d244d1de6660cc15c387d6f54df35ef2381f9fc3f67f",
+      "size_bytes": 673034
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2681.jsonl",
+      "sha256": "d947fee55c1d2892d7970f6441af7a9cc25052a9d8d5fce2c29414f18c84d585",
+      "size_bytes": 176943
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2682.jsonl",
+      "sha256": "1075f28c4876aff00215b87d5e4d6fff5f879683ed2b99f6b1fe7e3cf24c87ac",
+      "size_bytes": 162424
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2743.jsonl",
+      "sha256": "7badc1d87a028a40f69cf1fb0a956676ff2aea65e452dd8a368011a229a04a8e",
+      "size_bytes": 1385740
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P279.jsonl",
+      "sha256": "ec1c275643cf1bb08b87eccb7ba2935529af545d249562d20bf127e0c47dd4e9",
+      "size_bytes": 179246
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2935.jsonl",
+      "sha256": "62f025eb6bd257003eeb3f2a762981005f6bd87356aee9a93375a95739847304",
+      "size_bytes": 218455
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P2959.jsonl",
+      "sha256": "09cb5e12a40c41cae652cfa9900da03d233c263f6a8725b96e8b3b9f2b4a4ffb",
+      "size_bytes": 592838
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3032.jsonl",
+      "sha256": "1e7316e113eb9c0a2cfde2d2bff2aae7542524e71cc4b849f3395609f80d363a",
+      "size_bytes": 744994
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3075.jsonl",
+      "sha256": "636b46db1b4d634898e6a9c77de0c8cc947a5ade87f802f4fb420d0d91cf9a0d",
+      "size_bytes": 198706
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3085.jsonl",
+      "sha256": "8ca42ea108f6e24de0fdb7e270a801764a824b38ca4d4e383a315a41d7dfb270",
+      "size_bytes": 263102
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3094.jsonl",
+      "sha256": "d93a608b3b6e69fc1af1ebfd16513e883667fafa27a04c5b684b73fa50fd8786",
+      "size_bytes": 120835
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P31.jsonl",
+      "sha256": "fcbd1fb774e6c6a1fec69e3aa005576e61f40a4399dc99dcac131225ed70f223",
+      "size_bytes": 176071
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3137.jsonl",
+      "sha256": "a53e7c81256d0443f028abff13762165266186221030bc459220b3a541c38c06",
+      "size_bytes": 226910
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3148.jsonl",
+      "sha256": "a3be42034a6127831010dd997c69a8641954a5427059b27dbe6f704519cedc2d",
+      "size_bytes": 256385
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3261.jsonl",
+      "sha256": "c709957c2c7fb7d85b933cf192a18f70a659c561a9ea4fa5750d8624c217aefc",
+      "size_bytes": 263655
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3262.jsonl",
+      "sha256": "163e0b70729bb8b6bab87500ddfa5d0cab9bf9eb25d5ceaa67a0cd5e6ba0b800",
+      "size_bytes": 257768
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3403.jsonl",
+      "sha256": "d593cd52e621010d065305247bf67385e147f346174bc15b89864e52dd368581",
+      "size_bytes": 722421
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3461.jsonl",
+      "sha256": "38ba1b26b413ae97d4966f166bfe25acff9755c83160f7508410dcac2736a994",
+      "size_bytes": 235230
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P355.jsonl",
+      "sha256": "5ff88171eaab66b7105a190b23e7b9070d199c47209b01e9a3e50f1f849d6973",
+      "size_bytes": 184647
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P361.jsonl",
+      "sha256": "b59f446c8e0f5a3969c8bf5079329230b496ca7f5f35bb0208b301db68658292",
+      "size_bytes": 553031
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P366.jsonl",
+      "sha256": "78b8e8f28bc76f9640d1622bebbe4154f77e7c0eca7956c1a30af994d021bdd6",
+      "size_bytes": 545657
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3729.jsonl",
+      "sha256": "f2c301912a0d5d3bcfec22165d8a9ba0b86aea5ad2b761ea7fb0f4185735f961",
+      "size_bytes": 457476
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3730.jsonl",
+      "sha256": "ddee70e04c8ba568c6acf89c2ee91f34a0b2d5aab344d61dec19f874c02f2982",
+      "size_bytes": 460029
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P3833.jsonl",
+      "sha256": "e3dd6569243e628d90ef51561559342c0916b707d66fa38456818e866bcc66f6",
+      "size_bytes": 485355
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P399.jsonl",
+      "sha256": "5ab37c777e6806ba8c957a2adf4de303faf37c3beb2ee5413b7286e5e036bafb",
+      "size_bytes": 980680
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P406.jsonl",
+      "sha256": "9da8893655ded248c2e3ddf0b41c071e92f248c2315ee2a9dc1d59841c5d4a6c",
+      "size_bytes": 331687
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P414.jsonl",
+      "sha256": "7140d3e63ce99065104bca2b434472c09e8170afedd9f8ec7803ac78a48dc0ac",
+      "size_bytes": 173885
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P4147.jsonl",
+      "sha256": "ae364b2f0bde4798daa2f94f8cff2e72f1e7312baffce2ef81fcb95e81a746a4",
+      "size_bytes": 232540
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P4149.jsonl",
+      "sha256": "7a639e34b749200cc722af3b6d4d4b9f4bb3f4d1ad41a121b3584c5bd7f40d02",
+      "size_bytes": 182032
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P4151.jsonl",
+      "sha256": "c2876921333a6f8d3e467bc5be93715d1b786dd29f0bbc9dc25caf0ead2bdb98",
+      "size_bytes": 198712
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P4329.jsonl",
+      "sha256": "bb70b2b699bd7598927942a4fdfbabce1e125c5036af43f66289bf33862306c1",
+      "size_bytes": 345265
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P4353.jsonl",
+      "sha256": "02e3b478d7c5479727ce5ef13df23874ada319c5266f0232d2b2185fc3bee849",
+      "size_bytes": 119048
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P4545.jsonl",
+      "sha256": "d38fe5852b25cf0aac9b4244f4d34f39774f974a7a6e43345cf9cc515bff961b",
+      "size_bytes": 36453
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P457.jsonl",
+      "sha256": "affe9a6d1fdbbd63bef348b05516856b181135696db920a7325a94e7ac1051d1",
+      "size_bytes": 239982
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P461.jsonl",
+      "sha256": "1ca43e1b7ea4b74606e633688e5fce6e4e96b5f43403399e9dbe0834b3bf4ff2",
+      "size_bytes": 1090040
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P466.jsonl",
+      "sha256": "be6737b0c98933e0bf96fac03eab2f489d4d32fb004752e8e2fe6b4e18286f66",
+      "size_bytes": 488140
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P4661.jsonl",
+      "sha256": "4c0cfb092b9b15a68a5fac63db118df10bb3a62bb15a54bd4c6e2cbfb791fe91",
+      "size_bytes": 357880
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P4688.jsonl",
+      "sha256": "b791400703b8802659aa0548a7a8ba5d6ca4bacc1709b52749b75dfa410a4109",
+      "size_bytes": 281563
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P4792.jsonl",
+      "sha256": "dce24420a749bbef0a39005d6c1737b88552e3b5363a24722aeecc0c444c296d",
+      "size_bytes": 358414
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P4967.jsonl",
+      "sha256": "68bf953e62a1b255df0a99f153776ab0452ab158340e63f2896d200e14dc2151",
+      "size_bytes": 201669
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P5135.jsonl",
+      "sha256": "143812ca48456bed97a64a716e25ee0ec81300c73bb4b5e2be928fceb531a394",
+      "size_bytes": 161328
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P514.jsonl",
+      "sha256": "d5f4654b7f7559c411eba8cac8cee8cbef2b1b19db5d981bbe640d6c6ba26e07",
+      "size_bytes": 23294
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P527.jsonl",
+      "sha256": "35124b537d473b4c5789ec97ba003c1c819bf95979048891e47bc15dafd98dd1",
+      "size_bytes": 581997
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P5277.jsonl",
+      "sha256": "51b902adce703c7e064f3bce0fac654aa149c6d1c3ef7e6274ef845ed4d123e0",
+      "size_bytes": 553824
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P5278.jsonl",
+      "sha256": "c0fb660d70c42c4643340ff24ee2119ae46bf1289052e83ad7b4b3c7fca8eb82",
+      "size_bytes": 676028
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P5607.jsonl",
+      "sha256": "a23268d0e84357a8350dd166410d70b16c1307432c0135c52427f61c33676f14",
+      "size_bytes": 575568
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P5642.jsonl",
+      "sha256": "f485bb2d4856aa5386aa986ae29568a43c5281069f2ab6220ac107d3459aac29",
+      "size_bytes": 158168
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P567.jsonl",
+      "sha256": "37ab6152da0fae458ba45a03bca5675e8e00ac2c3663a16f5441cd2215002b9b",
+      "size_bytes": 703168
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P568.jsonl",
+      "sha256": "50bc48b20d6fcdee0f95de8ea724be9a9880a0a3a64226d31a4b652514ae0ccc",
+      "size_bytes": 699318
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P5998.jsonl",
+      "sha256": "cfee2293a3bf04a67a83bb0204dd95eab7d095cf653a2fa0672eba08f37b95a5",
+      "size_bytes": 147817
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P612.jsonl",
+      "sha256": "ef0170b23c9f339c3ec33bf999b2819e369971b59c0f742d10f148fdbff97930",
+      "size_bytes": 277037
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P6185.jsonl",
+      "sha256": "dccd66463956e3d6a472e3f0f155427d30e00aa16259dd9c8f6b1272c29156ae",
+      "size_bytes": 552481
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P6291.jsonl",
+      "sha256": "df236a98891c1c24a6d573a1124935e533a50ec726230735845b8618b1a7198b",
+      "size_bytes": 330991
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P6439.jsonl",
+      "sha256": "a09ea7ea29c77952d7c9c21c941cf8f4d198e9c09fd224a86e5305b6b0d57ca0",
+      "size_bytes": 334814
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P694.jsonl",
+      "sha256": "9c35f88bae6dff80c15a6fcae348fc8f3c38cde9522ebb26377243b5e105b400",
+      "size_bytes": 433982
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P7209.jsonl",
+      "sha256": "b1ae7d595a49d58d07c20b0656dd88b4221f4503302d082eebf826cf71e75e63",
+      "size_bytes": 81567
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P748.jsonl",
+      "sha256": "057bcee4086636f6c86e8c61496a77da11855aad35a4e68db4bbb7f971cf1686",
+      "size_bytes": 181608
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P7604.jsonl",
+      "sha256": "9b39c20f05f66970a5f23ead071e698281f3d3fdbd4722fc1419d23b923e3b24",
+      "size_bytes": 343460
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P793.jsonl",
+      "sha256": "bb04a43a10683a3000891b353de79cdfea723115bafc42d7703c2fde760a03be",
+      "size_bytes": 1018147
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P7938.jsonl",
+      "sha256": "2e62f1582f149faff2cb60ae3a3d05e3218bc143689b77352fa363338b7ded26",
+      "size_bytes": 181330
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P8058.jsonl",
+      "sha256": "9ff49416dbb0cd2a7d708e6c06c610f6fc7e4504a67c143ec4e9058849b621cd",
+      "size_bytes": 159722
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P8138.jsonl",
+      "sha256": "27ed42d805c8e2320a4f3f82d1035941027d80062407030728779c7f9610fa2a",
+      "size_bytes": 196719
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P814.jsonl",
+      "sha256": "08c6f8d58280c03970640abcce04402913e38e873a37b54f620c09d20e585160",
+      "size_bytes": 537397
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P816.jsonl",
+      "sha256": "7cf6c55ac7bd695ee71237fa86ba5d0844a57583ecc6dd46f5e993670cce6f4b",
+      "size_bytes": 308386
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P822.jsonl",
+      "sha256": "74a27f9012aa35cd52bec48963b12f0005d52ba8a425a627864434eba2854738",
+      "size_bytes": 337533
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P8225.jsonl",
+      "sha256": "56507841654418d6682655bce2fa41fb331dcdd4d8420de988565c42dbc20373",
+      "size_bytes": 279244
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P8263.jsonl",
+      "sha256": "301fb1d4e630d2a603b4de70753803fc5870192ee60611d8f2c18c4dbff58f7a",
+      "size_bytes": 284549
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P828.jsonl",
+      "sha256": "28006b1ed8e7dc41dc5fff0e8c5c63ed5eb5c83c125f5dd7e1f629d6f6b3dfaf",
+      "size_bytes": 201594
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P8289.jsonl",
+      "sha256": "ba2160b097712e9bb9ec0ef74117bbaddbd7885e801b27bc6a1af4ce239d2591",
+      "size_bytes": 339656
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P8308.jsonl",
+      "sha256": "72876e266a7d9a3e29664671b14f10e59312b50a2146e732a9bac55365bca705",
+      "size_bytes": 102192
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P837.jsonl",
+      "sha256": "72bb8f251722c04aab3f9cf8ab611b1dd8a80450c855e7640498abb0a743f4fa",
+      "size_bytes": 189888
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P8571.jsonl",
+      "sha256": "1c0abb5cdf38c5c684f4fc91d9e962363de8c28286785b92e01374c5000161db",
+      "size_bytes": 106909
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P880.jsonl",
+      "sha256": "808a54deefd6485d7d40af593ba3ee3aa08ea5b251f9fc9542c3f51131f89f00",
+      "size_bytes": 192637
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P8865.jsonl",
+      "sha256": "da8ff60f2956991bb8eef38e82d061426575766a4646f128812e0aa94ddd491e",
+      "size_bytes": 75264
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P9059.jsonl",
+      "sha256": "a0fa17fcaec18118d1f2065fb13ddf4c2f0513ffc33ffd11274adca4b4455168",
+      "size_bytes": 116320
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P9234.jsonl",
+      "sha256": "8a831833a42188e78d92e316eef0890a179ff3e481ea400bfa17a0c8b7c1ff62",
+      "size_bytes": 267041
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P927.jsonl",
+      "sha256": "7509398f984fb68febd566449f38a0431d8e6c610b07b7b20996c3961af3cce7",
+      "size_bytes": 187177
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P931.jsonl",
+      "sha256": "eedfe7e15762e060a5a1b9b141db1a8523d89f9d938dd8b7ac37b0ab7203bb88",
+      "size_bytes": 539102
+    },
+    {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P9926.jsonl",
+      "sha256": "b28ccc1759717c15f1c3702dd12589a4dd5a631b2fc55cb2ec174171063dc075",
+      "size_bytes": 326418
+    }
+  ],
+  "stage03_candidate_or_audit_artifacts": [
+    {
+      "appears_direct_stage4_input": false,
+      "evidence_for_or_against": "Relation-level audit rows; no h/r/t triples. Pipeline code audits Stage2 shards, but Stage4 construction reads Stage2 shards directly rather than this audit JSONL.",
+      "file_type": "jsonl",
+      "first_record_keys": [
+        "avg_genericity_score",
+        "avg_hub_penalty",
+        "avg_quality_score",
+        "candidate_count",
+        "eta_integer",
+        "max_entity_concentration_ratio",
+        "max_entity_frequency",
+        "possible_undercollection_flag",
+        "relation",
+        "top_entities",
+        "unique_entities",
+        "unique_heads",
+        "unique_tails"
+      ],
+      "h_r_t_like_record_count": 0,
+      "jsonl_parse_ok": true,
+      "parse_error_count": 0,
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage03_candidate_audit/candidate_relation_audit.jsonl",
+      "records_contain_h_r_t_or_equivalent": false,
+      "row_count": 139,
+      "sha256": "9de5e0649dfebdf9c62aa00f8ea15ded587070a189748dbd981e66f01827ccf6",
+      "size_bytes": 72596,
+      "stage4_core_triples_subset": false,
+      "stage4_overlap_count": null,
+      "unique_relation_count": 0,
+      "unique_relation_field_count": 139,
+      "unique_triple_count": 0
+    },
+    {
+      "appears_direct_stage4_input": false,
+      "evidence_for_or_against": "Stage3 relation-audit summary; no h/r/t triples.",
+      "file_type": "json",
+      "json_parse_ok": true,
+      "parse_error": null,
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage03_candidate_audit/summary.json",
+      "records_contain_h_r_t_or_equivalent": false,
+      "row_or_key_count": 3,
+      "sha256": "8914081a4f7a81fa865c1eef04b4a3048f46b395e1648a8b4da5f05c68b4d6c2",
+      "size_bytes": 230,
+      "stage4_core_triples_subset": false,
+      "stage4_overlap_count": null,
+      "top_level_type": "dict",
+      "unique_relation_count": null,
+      "unique_triple_count": null
+    },
+    {
+      "aggregate_sha256_manifest": "25b8cacc69bad54d97526f6dfe7d5c43a85856a295a1d1663303fe6c68c84f0d",
+      "appears_direct_stage4_input": true,
+      "evidence_for_or_against": "Archived pipeline code constructs Stage4 from ctx.run_dir/stage02_candidates/shards; Stage4 core triples are a subset of the combined shard triple set.",
+      "file_type": "jsonl_shard_directory",
+      "first_record_keys": [
+        "chunk_id",
+        "collection_mode",
+        "genericity_bucket",
+        "genericity_score",
+        "h",
+        "hub_penalty",
+        "ontology_ok",
+        "quality_score",
+        "query_id",
+        "query_limit",
+        "query_offset",
+        "r",
+        "retrieved_at",
+        "run_id",
+        "self_loop_flag",
+        "shortcut_risk",
+        "source_backend",
+        "source_stage",
+        "t",
+        "triple_id"
+      ],
+      "h_r_t_like_record_count": 81958,
+      "jsonl_parse_ok": true,
+      "parse_error_count": 0,
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards",
+      "records_contain_h_r_t_or_equivalent": true,
+      "row_count": 81958,
+      "shard_count": 139,
+      "stage4_core_triples_subset": true,
+      "stage4_overlap_count": 18513,
+      "unique_relation_count": 139,
+      "unique_triple_count": 81958
+    }
+  ],
+  "stage04_core_graph": {
+    "first_record_keys": [
+      "attachability_score",
+      "bridge_score",
+      "component_merge_score",
+      "first_realization_bonus",
+      "genericity_penalty",
+      "h",
+      "hub_penalty",
+      "layer",
+      "noise_penalty",
+      "r",
+      "relation_need_score",
+      "score",
+      "selection_reason",
+      "structurally_weak",
+      "t",
+      "triple_id"
+    ],
+    "h_r_t_like_record_count": 18513,
+    "jsonl_parse_ok": true,
+    "parse_error_count": 0,
+    "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl",
+    "records_contain_h_r_t_or_equivalent": true,
+    "row_count": 18513,
+    "sha256": "54f5ae7af3bd2b9a117817adeaa0cea355bbf2a385ed25a97d0551c4e0f975fd",
+    "size_bytes": 8696347,
+    "unique_relation_count": 139,
+    "unique_relation_field_count": 0,
+    "unique_triple_count": 18513
+  },
+  "stage04_evidence_artifacts": [
+    {
+      "appears_direct_stage4_input": false,
+      "evidence_for_or_against": "Stage4 output graph, not an input.",
+      "file_type": "jsonl",
+      "first_record_keys": [
+        "attachability_score",
+        "bridge_score",
+        "component_merge_score",
+        "first_realization_bonus",
+        "genericity_penalty",
+        "h",
+        "hub_penalty",
+        "layer",
+        "noise_penalty",
+        "r",
+        "relation_need_score",
+        "score",
+        "selection_reason",
+        "structurally_weak",
+        "t",
+        "triple_id"
+      ],
+      "h_r_t_like_record_count": 18513,
+      "jsonl_parse_ok": true,
+      "parse_error_count": 0,
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl",
+      "records_contain_h_r_t_or_equivalent": true,
+      "row_count": 18513,
+      "sha256": "54f5ae7af3bd2b9a117817adeaa0cea355bbf2a385ed25a97d0551c4e0f975fd",
+      "size_bytes": 8696347,
+      "stage4_core_triples_subset": true,
+      "stage4_overlap_count": 18513,
+      "unique_relation_count": 139,
+      "unique_relation_field_count": 0,
+      "unique_triple_count": 18513
+    },
+    {
+      "appears_direct_stage4_input": false,
+      "evidence_for_or_against": "Stage4 selection log; byte/content-equivalent selected triples log, not an upstream input.",
+      "file_type": "jsonl",
+      "first_record_keys": [
+        "attachability_score",
+        "bridge_score",
+        "component_merge_score",
+        "first_realization_bonus",
+        "genericity_penalty",
+        "h",
+        "hub_penalty",
+        "layer",
+        "noise_penalty",
+        "r",
+        "relation_need_score",
+        "score",
+        "selection_reason",
+        "structurally_weak",
+        "t",
+        "triple_id"
+      ],
+      "h_r_t_like_record_count": 18513,
+      "jsonl_parse_ok": true,
+      "parse_error_count": 0,
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_selection_log.jsonl",
+      "records_contain_h_r_t_or_equivalent": true,
+      "row_count": 18513,
+      "sha256": "54f5ae7af3bd2b9a117817adeaa0cea355bbf2a385ed25a97d0551c4e0f975fd",
+      "size_bytes": 8696347,
+      "stage4_core_triples_subset": true,
+      "stage4_overlap_count": 18513,
+      "unique_relation_count": 139,
+      "unique_relation_field_count": 0,
+      "unique_triple_count": 18513
+    },
+    {
+      "evidence_for_or_against": "Stage4 output relation count report.",
+      "file_type": "json",
+      "json_parse_ok": true,
+      "parse_error": null,
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_relation_counts.json",
+      "records_contain_h_r_t_or_equivalent": false,
+      "relation_count_entries": 139,
+      "relation_count_total": 18513,
+      "row_or_key_count": 139,
+      "sha256": "3883b9f81036fcfd6b9022082b8dbb8b7321f2be6f4fff287772d0e4de057707",
+      "size_bytes": 2140,
+      "top_level_type": "dict",
+      "unique_relation_count": null,
+      "unique_triple_count": null
+    },
+    {
+      "component_count": 6524,
+      "component_triple_count_total": 18513,
+      "evidence_for_or_against": "Stage4 output component report.",
+      "file_type": "json",
+      "json_parse_ok": true,
+      "parse_error": null,
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_component_report.json",
+      "records_contain_h_r_t_or_equivalent": false,
+      "row_or_key_count": 6524,
+      "sha256": "e8659565533741b8c75cb8a373234d27712ea9f786c5d331e36e15ab3fe09164",
+      "size_bytes": 2407260,
+      "top_level_type": "list",
+      "unique_relation_count": null,
+      "unique_triple_count": null
+    }
+  ],
+  "stage04_manifest_summary_log_evidence": {
+    "completion_status": "completed",
+    "log_evidence": {
+      "notes": "No separate Stage4 log file was found under archive/hetzner_version/logs or run logs; run-level manifest and archived pipeline code provide the main command/procedure evidence.",
+      "stage4_specific_log_found": false
+    },
+    "pipeline_script_path": "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+    "pipeline_script_sha256": "a1fec8c08783b3816ebc28e16f39499fb6be2f2a4d587948a00fa4fb9082a5e7",
+    "relation_count": 139,
+    "run_manifest_path": "archive/hetzner_version/runs/prod_refine_20260315_180520/manifest.json",
+    "run_manifest_sha256": "918546ec1c0f5e02e99f6b09d9dc8d8a6d3caa16ccd1cb31f3ab26d6cd3eaff9",
+    "script_evidence": {
+      "has_stage_audit_candidates_function": true,
+      "has_stage_construct_graph_function": true,
+      "pipeline_order_stage03_before_stage04": true,
+      "stage03_audit_reads_stage02_shards": true,
+      "stage04_construct_reads_stage02_shards": true,
+      "stage04_writes_core_graph_triples": true
+    },
+    "selected_triples_count": 18513,
+    "stage03_manifest_info": {
+      "completed_at": "2026-03-15T17:16:58.682885+00:00",
+      "possible_undercollection_relations": [
+        "P12994",
+        "P7209",
+        "P10374",
+        "P8308",
+        "P514",
+        "P4545",
+        "P2152",
+        "P2155",
+        "P8865"
+      ],
+      "relation_count": 139,
+      "relations_with_zero_candidates": 0
+    },
+    "stage04_input_paths_from_code": [
+      "runs/prod_refine_20260315_180520/stage02_candidates/shards",
+      "src/kg_builder/input/bidirectional_allocation_results5k.json"
+    ],
+    "stage04_manifest_info": {
+      "completed_at": "2026-03-18T04:07:08.590320+00:00",
+      "core_triple_count": 18513,
+      "realized_relations": 139
+    },
+    "stage04_output_paths": [
+      "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl",
+      "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_selection_log.jsonl",
+      "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_relation_counts.json",
+      "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_component_report.json"
+    ]
+  },
+  "stage3_to_stage4_interpretation": "Partial. The archived pipeline code and run manifest confirm Stage3 candidate audit precedes Stage4, and Stage4 construction reads the frozen Stage2 candidate shard directory. Stage4 core triples are a subset of the combined Stage2 candidate shards. The Stage3 audit artifact itself is relation-level and contains no h/r/t triples, so it is not a direct graph input to Stage4.",
+  "stage3_to_stage4_status": "partial"
+}

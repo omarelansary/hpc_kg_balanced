@@ -1,0 +1,130 @@
+{
+  "created_by": "scripts/reconstruction/03_path_translation_manifest.sh",
+  "created_on": "2026-05-09T22:29:14.257668+00:00",
+  "explicit_notes": [
+    "No Stage11 or Stage12 manifest was modified.",
+    "No graph artifact was copied or generated.",
+    "No WDQS or LLM call is made by this wrapper.",
+    "Only stale absolute path translation evidence for the final B0 chain is recorded here."
+  ],
+  "purpose": "Document stale absolute paths in Stage11/Stage12 manifests and map only resolved local equivalents.",
+  "stage_manifests": [
+    {
+      "cli_args": {
+        "allowed_relations": null,
+        "anchor_nodes_per_component": 10,
+        "collect_noncore": true,
+        "dry_run": false,
+        "head_field": "h",
+        "input_triples": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+        "max_components": 6020,
+        "output_dir": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage11_eta_aware_connectivity_repair_full",
+        "query_limit": 500,
+        "rel_field": "r",
+        "relation_scope_manifest": "/home/kg_benchmark/src/kg_builder/input/bidirectional_allocation_results5k.json",
+        "resume": false,
+        "tail_field": "t",
+        "timeout_sec": 90,
+        "user_agent": "kg-repair/1.0 (mailto:omar@gmail.com)",
+        "wikidata_sleep_sec": 0.5
+      },
+      "created_at": "2026-03-19T17:32:24.226208+00:00",
+      "inputs": {
+        "allowed_relations": null,
+        "input_triples": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+        "relation_scope_manifest": "/home/kg_benchmark/src/kg_builder/input/bidirectional_allocation_results5k.json",
+        "relation_scope_source": "relation_scope_manifest:/home/kg_benchmark/src/kg_builder/input/bidirectional_allocation_results5k.json"
+      },
+      "output_dir_recorded_in_manifest": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage11_eta_aware_connectivity_repair_full",
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/manifest.json",
+      "role": "stage11_connectivity_repair_manifest",
+      "sha256": "2e4ad9130fc41c25a99c22d44aa0c992c0dc24cc9254188af05774c68ac64c85"
+    },
+    {
+      "cli_args": {
+        "allow_auxiliary_edges": false,
+        "allow_pattern_only_edges": true,
+        "allowed_relations": null,
+        "anchor_nodes_per_component": 10,
+        "collect_noncore": true,
+        "dry_run": false,
+        "head_field": "h",
+        "input_triples": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl",
+        "max_components": 6019,
+        "max_expansions_per_anchor": 500,
+        "max_hops": 3,
+        "max_new_entities_per_hop_ratio": 0.67,
+        "max_new_entities_per_path": 2,
+        "max_noncore_edges_per_path": 1,
+        "output_dir": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod",
+        "query_limit": 200,
+        "rel_field": "r",
+        "relation_scope_manifest": "/home/kg_benchmark/src/kg_builder/input/bidirectional_allocation_results5k.json",
+        "resume": false,
+        "tail_field": "t",
+        "timeout_sec": 90,
+        "user_agent": "kg-path-repair/1.0 (mailto:omar@gmail.com)",
+        "wikidata_sleep_sec": 0.5
+      },
+      "created_at": "2026-03-21T09:32:18.131245+00:00",
+      "inputs": {
+        "allowed_relations": null,
+        "input_triples": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl",
+        "relation_scope_manifest": "/home/kg_benchmark/src/kg_builder/input/bidirectional_allocation_results5k.json",
+        "relation_scope_source": "relation_scope_manifest:/home/kg_benchmark/src/kg_builder/input/bidirectional_allocation_results5k.json"
+      },
+      "output_dir_recorded_in_manifest": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod",
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/manifest.json",
+      "role": "stage12_path_repair_manifest",
+      "sha256": "cbf244965001c5b709314b1dffe934e5b946cb90906f53fda77a4c13bdeace70"
+    }
+  ],
+  "translations": [
+    {
+      "candidate_match_count": 3,
+      "candidate_matches": [
+        {
+          "path": "archive/hetzner_version/runs/kg_run_20260315_052435/stage06_filtering/filtered_graph_triples.jsonl",
+          "sha256": "bb9fb9250b56afef8cab32136037f2d9dd34a7323bc857c4d602e54938cdca95"
+        },
+        {
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering/filtered_graph_triples.jsonl",
+          "sha256": "21f1a9e0f6689998aa777fa93a29033dbb2cee6ee8dde67a55e24ef7dd6f3321"
+        },
+        {
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+          "sha256": "c7d5132bd0b20aa0da4a64ecbf183abf412c3effca38bef84105c7791126fb4b"
+        }
+      ],
+      "local_equivalent": null,
+      "local_sha256": null,
+      "notes": [
+        "This path is recorded as a stale absolute path from the historical Stage11/Stage12 run context.",
+        "If unresolved or ambiguous, the pre-Stage11 graph input remains a reproducibility gap."
+      ],
+      "resolution_status": "unresolved_ambiguous_exact_filename_matches",
+      "role": "pre_stage11_input_graph",
+      "search_policy": "Exact basename search from repository root; historical manifests were not modified.",
+      "stale_path": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl"
+    },
+    {
+      "candidate_match_count": 1,
+      "candidate_matches": [
+        {
+          "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+          "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+        }
+      ],
+      "local_equivalent": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "local_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "notes": [
+        "The local allocation path is the canonical allocation recorded for the selected B0 graph.",
+        "This mapping is documentation-only and does not rewrite historical manifests."
+      ],
+      "resolution_status": "resolved_manual_path_mapping",
+      "role": "relation_scope_manifest_or_allocation",
+      "search_policy": "Mapped to the canonical B0 allocation selected in final graph registration.",
+      "stale_path": "/home/kg_benchmark/src/kg_builder/input/bidirectional_allocation_results5k.json"
+    }
+  ]
+}

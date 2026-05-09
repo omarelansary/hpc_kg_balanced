@@ -1,0 +1,261 @@
+{
+  "audit_id": "R2.10_inverse_verification_completion_audit",
+  "created_for": "forensic reconstruction of inverse verification provenance and completion",
+  "policy": {
+    "read_only_investigation": true,
+    "wdqs_calls_made": false,
+    "llm_calls_made": false,
+    "graph_generation_performed": false,
+    "graph_artifacts_modified": false,
+    "thesis_latex_modified": false
+  },
+  "status_summary": {
+    "inverse_alias_generation_status": "confirmed",
+    "inverse_llm_classification_status": "partial_attempt_not_completed_from_available_evidence",
+    "inverse_llm_shard_outputs_local_status": "not_found",
+    "inverse_llm_merge_status": "not_evidenced",
+    "dashboard_allocation_linkage_status": "no_completed_inverse_llm_artifact_linkage_found",
+    "full_inverse_verification_claim_status": "unsafe"
+  },
+  "alias_generation": {
+    "producer_script": {
+      "path": "src/inverse_verification_legacy/build_inverse_alias_topk.py",
+      "sha256": "83413db36466f895548975cd34d7d0ce88275a92fb44c3e769630bed1cf532aa",
+      "evidence_status": "confirmed_code_path"
+    },
+    "slurm_script": {
+      "path": "scripts/slurm/build_inverse_alias_topk.slurm",
+      "sha256": "3da7e33496b71c08b72bc74240d91b7bdea80e9625fba86965074bd2c0ed8537",
+      "uses_stale_original_workspace_paths": true
+    },
+    "logs": {
+      "stdout": {
+        "path": "logs/build_inverse_alias_topk_27543764.out",
+        "sha256": "74ac4e6e099f99ca29f7e7214face1f491b644767149f5202daebd12b13814e4"
+      },
+      "stderr": {
+        "path": "logs/build_inverse_alias_topk_27543764.err",
+        "sha256": "57c2b1e0d2650130f6d66b0c3e2e04d27e77cd247015929fe8bc8c6815573679"
+      },
+      "run_evidence": {
+        "started": "Sun Feb 15 22:10:16 CET 2026",
+        "finished": "Sun Feb 15 23:26:07 CET 2026",
+        "exit_code": 0,
+        "logged_output_rows": 1703
+      }
+    },
+    "output_artifact": {
+      "path": "data/processed/wikidata_ontology.inverse_mode_aliases_topk.json",
+      "sha256": "2436e644e8b824583046885f702dd9b3141ccc3c4c887a24179e27dca4c6f8cf",
+      "size_bytes": 615388,
+      "row_count": 1703,
+      "unique_pid_count": 1703,
+      "schema_fields": [
+        "datatype",
+        "description",
+        "inverse_links",
+        "inverse_mode_aliases_labels_topk",
+        "label",
+        "pid"
+      ],
+      "alias_count_distribution": {
+        "0": 205,
+        "1": 530,
+        "2": 329,
+        "3": 193,
+        "4": 129,
+        "5": 317
+      },
+      "rows_with_inverse_links": 206,
+      "total_inverse_links": 208
+    },
+    "completion_assessment": "confirmed_completed_alias_generation"
+  },
+  "inverse_llm_classification": {
+    "producer_script": {
+      "path": "src/inverse_verification_legacy/llm_classification_inv.py",
+      "sha256": "e4b870415252fb65a19e630ffcd2889de93564432e4118558e555fce0d3c20f6",
+      "evidence_status": "confirmed_code_path"
+    },
+    "slurm_script": {
+      "path": "scripts/slurm/llm_classification_inv.slurm",
+      "sha256": "32fe432ba44f9bf46863e72380638e282c11be51b03eed68b974c6341c3ae839",
+      "array_range": "0-7",
+      "model": "gpt-4.1",
+      "candidate_source": "union",
+      "batch_size": 15,
+      "input_path": "data/processed/hop_support.wikibase_item_only.jsonl",
+      "inverse_aliases_path": "data/processed/wikidata_ontology.inverse_mode_aliases_topk.json",
+      "output_basename": "data/processed/hop_support.wikibase_item_only.inv_llm.jsonl",
+      "report_basename": "data/processed/hop_support.wikibase_item_only.inv_llm.report.json",
+      "uses_stale_original_workspace_paths": true
+    },
+    "input_artifact": {
+      "path": "data/processed/hop_support.wikibase_item_only.jsonl",
+      "sha256": "aff3440a327d15a5cdfb036a3effc4edf29654b0367818f70422d16a8b815cf7",
+      "size_bytes": 2379967,
+      "row_count": 1703,
+      "status_counts": {
+        "SUCCESS": 1645,
+        "PARTIAL_SUCCESS": 27,
+        "ERROR": 31
+      },
+      "rows_with_support_by_r2": 1154,
+      "rows_with_valid_r2": 0,
+      "candidate_total_implied_by_union_policy": 63994
+    },
+    "shards": [
+      {
+        "shard_index": 0,
+        "log_evidence_found": false,
+        "local_output_found": false,
+        "local_report_found": false,
+        "completion_status": "not_evidenced"
+      },
+      {
+        "shard_index": 1,
+        "log_evidence_found": false,
+        "local_output_found": false,
+        "local_report_found": false,
+        "completion_status": "not_evidenced"
+      },
+      {
+        "shard_index": 2,
+        "log_evidence_found": false,
+        "local_output_found": false,
+        "local_report_found": false,
+        "completion_status": "not_evidenced"
+      },
+      {
+        "shard_index": 3,
+        "log_evidence_found": false,
+        "local_output_found": false,
+        "local_report_found": false,
+        "completion_status": "not_evidenced"
+      },
+      {
+        "shard_index": 4,
+        "log_evidence_found": false,
+        "local_output_found": false,
+        "local_report_found": false,
+        "completion_status": "not_evidenced"
+      },
+      {
+        "shard_index": 5,
+        "log_evidence_found": false,
+        "local_output_found": false,
+        "local_report_found": false,
+        "completion_status": "not_evidenced"
+      },
+      {
+        "shard_index": 6,
+        "log_evidence_found": false,
+        "local_output_found": false,
+        "local_report_found": false,
+        "completion_status": "not_evidenced"
+      },
+      {
+        "shard_index": 7,
+        "log_evidence_found": true,
+        "local_output_found": false,
+        "local_report_found": false,
+        "stdout_log": {
+          "path": "logs/llm_classification_inv_27548189.out",
+          "sha256": "2a4aeb9428dc664d1e08e50493840de5d7f48d7f8a836555b80f7837bfb9d88c"
+        },
+        "stderr_log": {
+          "path": "logs/llm_classification_inv_27548189.err",
+          "sha256": "01302ebb861946a7acb51763de83be89c517a2c127c33dcbcf838ee6af8f7c5c"
+        },
+        "run_evidence": {
+          "started": "Mon Feb 16 00:52:40 CET 2026",
+          "finished": "Mon Feb 16 02:48:09 CET 2026",
+          "process_exit_code": 0,
+          "num_shards": 8,
+          "shard_index": 7,
+          "original_workspace_output_path": "data/processed/hop_support.wikibase_item_only.inv_llm.shard7.jsonl",
+          "original_workspace_report_path": "data/processed/hop_support.wikibase_item_only.inv_llm.report.shard7.json"
+        },
+        "error_evidence": {
+          "http_429_occurrences": 5577,
+          "insufficient_quota_occurrences": 2250,
+          "rate_limit_exceeded_occurrences": 115
+        },
+        "run_summary": {
+          "input_records_seen": 1703,
+          "invalid_r1_skipped": 0,
+          "resume_skipped": 0,
+          "written_records": 218,
+          "stop_triggered_records": 0,
+          "candidate_total": 8608,
+          "decision_counts": {
+            "NO_WAY": 887,
+            "TEST": 12,
+            "ERROR": 7709
+          },
+          "prefilter_self_no_way": 40,
+          "prefilter_non_wikibase_no_way": 0,
+          "llm_batches": 663,
+          "llm_batch_errors": 591,
+          "shard_skipped": 1485
+        },
+        "completion_status": "attempted_but_failed_heavy_and_not_semantically_complete"
+      }
+    ],
+    "local_output_search": {
+      "patterns_checked": [
+        "data/processed/hop_support.wikibase_item_only.inv_llm.shard*.jsonl",
+        "data/processed/hop_support.wikibase_item_only.inv_llm.report.shard*.json",
+        "data/processed/hop_support.wikibase_item_only.inv_llm*.json",
+        "data/processed/*inv_llm*"
+      ],
+      "matching_local_files_found": 0
+    },
+    "completion_assessment": "not_completed_from_available_evidence"
+  },
+  "merge_step": {
+    "merge_script": {
+      "path": "src/inverse_verification_legacy/merge_llm_classification_inv_shards.py",
+      "sha256": "58669c95516336da06a85b91030e3561c04979a4a3558bd0054efda64731ef1e",
+      "script_exists": true
+    },
+    "merged_output_found": false,
+    "merge_log_found": false,
+    "completion_assessment": "not_evidenced"
+  },
+  "dashboard_allocation_linkage": {
+    "canonical_allocation_context": {
+      "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "source_report": "docs/reconstruction/35_phase1_dashboard_input_provenance.md",
+      "r2_9_assessment": "final allocation most likely came from patched v3 hop-support and v3 compact composition-verification inputs with Wilson filtering disabled; exact dashboard export session was not preserved"
+    },
+    "completed_inverse_llm_artifact_linked_to_allocation": false,
+    "evidence": [
+      "No local inverse LLM shard outputs were found.",
+      "No merged inverse LLM output was found.",
+      "No merge log was found.",
+      "Dashboard inverse grouping is compatible with empirical hop-support threshold logic rather than a completed inv_llm artifact."
+    ],
+    "assessment": "do_not_claim_completed_inverse_llm_output_fed_final_allocation"
+  },
+  "safe_thesis_wording": [
+    "Inverse-mode alias candidates were generated for 1,703 wikibase-item relations using relation profiles, property aliases, and label embeddings.",
+    "A sharded LLM-based inverse classification workflow was prepared and at least one shard was attempted, but preserved evidence does not establish successful completion of inverse LLM verification.",
+    "The final allocation should be described as relying on preserved empirical hop-support and dashboard threshold evidence, not on a completed inverse LLM verification artifact."
+  ],
+  "unsafe_thesis_wording": [
+    "Inverse verification was fully completed.",
+    "All inverse LLM shards completed successfully.",
+    "The inverse LLM classifier verified all candidate inverse pairs.",
+    "A merged inverse LLM output fed the final 5k allocation.",
+    "The final allocation is reproducible from completed inverse LLM verification outputs."
+  ],
+  "remaining_gaps": [
+    "Locate inverse LLM shard outputs for shards 0-7, if they exist.",
+    "Locate inverse LLM shard reports for shards 0-7, if they exist.",
+    "Locate logs for shards 0-6, if they exist.",
+    "Locate a merged inverse LLM output, if one exists.",
+    "Locate a merge command or SLURM log for merge_llm_classification_inv_shards.py.",
+    "Determine whether any completed inverse LLM artifact was used in a dashboard session or allocation export."
+  ]
+}

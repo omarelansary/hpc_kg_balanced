@@ -384,7 +384,7 @@ Building on the constrained relation universe of approximately 1,700 \texttt{wik
 
 % Verification Branches (Placed precisely relative to support node)
 \node[branchAbox, below left=10mm and -40mm of support] (branchA)
-{\textbf{Branch A: hop-support verification}\\[1.5mm]
+{\textbf{Branch A: empirical hop-support verification}\\[1.5mm]
 \textbullet~symmetry\\
 \textbullet~anti-symmetry\\
 \textbullet~inversion};
@@ -432,7 +432,7 @@ Building on the constrained relation universe of approximately 1,700 \texttt{wik
 \draw[arrow] (graph) -- (repair);
 
 \end{tikzpicture}
-\caption[Phase I benchmark-construction workflow]{Overall benchmark-construction workflow. After restricting the relation universe to entity-valued Wikidata properties, the pipeline first discovers empirically observed two-hop relation pairs and computes hop-support statistics. From this point, the workflow branches: symmetry, anti-symmetry, and inversion are verified directly from hop-support counts, whereas composition is handled through a separate target-pruning and shortcut-verification branch. The accepted pattern candidates are then merged in the allocation stage, whose outputs drive the final quota-guided graph-construction pipeline. Optional post-pipeline connectivity-repair operators are available for residual fragmentation but are not native stages of the main reported workflow.}
+\caption[Phase I benchmark-construction workflow]{Overall benchmark-construction workflow. After restricting the relation universe to entity-valued Wikidata properties, the pipeline first discovers empirically observed two-hop relation pairs and computes hop-support statistics. From this point, the workflow branches: symmetry, anti-symmetry, and inversion are identified empirically from hop-support counts, whereas composition is handled through a separate target-pruning and sampled shortcut-verification branch. The accepted pattern candidates are then merged in the allocation stage, whose outputs drive the final quota-guided graph-construction pipeline. Optional post-pipeline connectivity-repair operators are available for residual fragmentation but are not native stages of the main reported workflow.}
 \label{fig:Phase1_pipeline}
 \end{figure}
 
@@ -447,7 +447,7 @@ For each $r_1$, we obtain the set:
 \[
 \mathrm{ValidR2}(r_1)
 \]
-This step reduces the theoretical $|R|^2$ space to empirically supported transitions. In practice, this yields approximately 340,000 observed pairs. 
+This step reduces the theoretical $|R|^2$ space to empirically supported transitions. In the cached discovery artifact used for reconstruction, \texttt{data/processed/hop\_discovery\_from\_json.jsonl}, this stage contains 1,703 first-hop relation records and 56,278 summed valid second-hop relation entries.
 This reduction removes only relation pairs that were not observed during the discovery stage.
 
 % ---------------------------------------------------------
@@ -520,17 +520,17 @@ Even after reducing the observed two-hop relation pairs $(r_1,r_2)$, composition
 
 \paragraph{LLM-Based Composition-Target Filtering}
 
-The first pruning step uses an LLM as a high-recall semantic triage classifier for candidate target relations $r_3$. For each relation, the model receives structured metadata describing the relation, including its label, description and other available property metadata collected previously, and is asked only whether the relation is a plausible \emph{target} of a two-hop composition rule of the form
+The first pruning step uses the stored LLM-classified relation-profile artifact as an upstream high-recall semantic triage signal for candidate target relations $r_3$. For each relation, the classifier is given structured metadata describing the relation, including its label, description and other available property metadata collected previously, and is asked only whether the relation is a plausible \emph{target} of a two-hop composition rule of the form
 \[
 r_1(a,b) \wedge r_2(b,c) \Rightarrow r_3(a,c).
 \]
 The classifier does not choose the composing relations $r_1,r_2$ and does not attempt to prove composition. Its task is only to decide whether testing the relation as a composition target is worthwhile.
 
-To reduce hallucination risk and over-pruning, the prompt was designed conservatively. The model was restricted to a binary decision: either the relation is worth testing as a target or it is \texttt{NO\_WAY}. The \texttt{NO\_WAY} label was intended to be used sparingly and only when testing would be structurally or semantically wasted. When uncertain, the model was instructed to keep the relation rather than discard it. The prompt also explicitly framed composition as a definitional shortcut relation and excluded explanatory, provenance, attribute-propagation, and terminal classification-style relations from positive target decisions. Thus, the LLM was used only as a coarse semantic filter with high recall, not as an oracle for logical validity.
+To reduce hallucination risk and over-pruning, the prompt was designed conservatively. The model was restricted to a binary decision: either the relation is worth testing as a target or it is \texttt{NO\_WAY}. The \texttt{NO\_WAY} label was intended to be used sparingly and only when testing would be structurally or semantically wasted. When uncertain, the model was instructed to keep the relation rather than discard it. The prompt also explicitly framed composition as a definitional shortcut relation and excluded explanatory, provenance, attribute-propagation, and terminal classification-style relations from positive target decisions. Thus, the LLM-derived labels were used only as a coarse semantic pruning signal with high recall, not as an oracle for logical validity.
 
-Relations classified as implausible composition targets were removed from further composition testing. This reduced the target-relation set from approximately 1700 to approximately 615. This filtering step was applied only to composition target selection and did not affect the candidate sets for symmetry, anti-symmetry, or inversion.
+In the stored relation-profile artifact, 615 relations were retained as plausible composition targets and 1{,}830 relations were labelled \texttt{NO\_WAY}. These labels are not treated as proof of composition. Instead, they define a reduced target set for downstream compatibility filtering and empirical shortcut verification. This filtering step was applied only to composition target selection and did not affect the candidate sets for symmetry, anti-symmetry, or inversion.
 
-Operationally, relation triage was implemented by a batched OpenAI classification pipeline over the relation-profile collection. For each relation, the payload contained the relation identifier, label, description, datatype, domain type IDs, range type IDs, and, when available, a bounded number of example triples and aliases. Relations whose datatype was not \texttt{wikibase-item} were excluded before any LLM call and assigned \texttt{composition\_target = NO\_WAY} automatically. The remaining relations were sent to the OpenAI chat-completions API in batches of \(20\) by default, with JSON-schema-constrained output, temperature \(0.2\), and up to three retry attempts under exponential backoff. The prompt explicitly framed the task as high-recall triage rather than proof: for composition, the model was instructed to decide only whether the relation was worth testing as the target of a two-hop composition rule, and to output \texttt{composition\_target} in \(\{\texttt{YES},\texttt{NO\_WAY}\}\) together with a short \texttt{composition\_reason}, choosing \texttt{YES} under uncertainty. The same response schema also stored symmetry, anti-symmetry, and inverse triage labels, but the downstream composition-target enrichment stage used only \texttt{llm\_classification.composition.composition\_target} and retained every relation whose value was not \texttt{NO\_WAY}. The script defaulted to model \texttt{gpt-4.1-mini}, although this could be overridden at runtime via \texttt{--model}. The resulting classifications were persisted back to MongoDB under the field \texttt{llm\_classification}. The current implementation does not document a manual review or composition-specific post-hoc correction step.
+Operationally, the code-compatible relation-triage pipeline operates over JSON relation profiles containing relation identifiers, labels, descriptions, datatypes, domain type IDs, range type IDs, and, when available, bounded example triples and aliases. It appends an \texttt{llm\_classification} object with separate fields for composition, symmetry, anti-symmetry, and inverse suitability. The downstream composition-target enrichment stage uses only \texttt{llm\_classification.composition.composition\_target} and retains every relation whose value is not \texttt{NO\_WAY}. The same response schema also stored symmetry, anti-symmetry, and inverse triage labels, but these auxiliary LLM labels are not treated as the final evidence for symmetry, anti-symmetry, or inversion. In the reconstructed final allocation, those groups are identified empirically in the dashboard from hop-support statistics; the separate inverse-LLM shard workflow was attempted, but completed inverse LLM verification is not evidenced in the preserved artifacts. The preserved relation-profile artifact contains derived labels and reasoning fields, but no raw LLM responses, production-run model metadata, or export manifest were found. Therefore, this step is reported as an upstream pruning/profiling artifact, not as an exactly reproducible LLM production run or as final composition evidence.
 
 \paragraph{Domain and Range Compatibility for Composition Targets}
 
@@ -544,12 +544,12 @@ For a candidate composition target $r_3$, we require compatibility between the s
 \]
 A candidate triple $(r_1,r_2,r_3)$ is removed only when the available type declarations are explicitly incompatible. If one side is unknown or has no declared types, that side is treated as unconstrained and does not by itself eliminate the candidate. In other words, empty or missing domain/range information is interpreted permissively rather than as evidence of incompatibility. This avoids discarding candidates purely because ontology metadata are incomplete.
 
-This compatibility pruning is also applied only to composition and does not modify the candidate sets for symmetry, anti-symmetry, or inversion.
+This compatibility pruning is also applied only to composition and does not modify the candidate sets for symmetry, anti-symmetry, or inversion. In the reconstructed v3 chain, the compatible-target artifact is preserved as a cached intermediate candidate-preparation file. However, the exact v3 domain/range enrichment command and execution log are incomplete, so this step is treated as preserved intermediate evidence rather than a fully replayed export.
 
 % ---------------------------------------------------------
 \subsubsection{Stage 4: Pattern Verification Branches} 
 The extracted hop-support counts are then reused in two verification branches. 
-The first branch uses the hop-support counts directly to evaluate symmetric, anti-symmetric, and inverse behavior.
+The first branch uses the hop-support counts directly to identify symmetric, anti-symmetric, and inverse behavior in the dashboard. These labels are empirical pattern scores over retrieved two-hop evidence, not logical Wikidata axioms and not completed LLM inverse classifications.
 
 \paragraph{Hop-Support-Based Verification of Symmetry, Anti-symmetry, and Inversion.}
 
@@ -613,6 +613,8 @@ These two directional scores are not assumed to be equal. To require reciprocal 
 \]
 This choice ensures that a relation pair receives a high inverse score only when both directions exhibit strong return behavior.
 
+At allocation time, the dashboard converts these candidate-level outputs into relation-level groups. Symmetric and anti-symmetric groups use unique self-pair relations passing the loop or non-loop thresholds, with any overlap retained in the symmetric group and removed from the anti-symmetric group. The inverse group is the unique relation set appearing in accepted ordered inverse candidate pairs. Under the canonical thresholds recorded in the 5k allocation, the reconstructed final pattern sets are reproduced from the patched v3 hop-support artifact and the v3 compact composition-verification artifact with Wilson filtering disabled: 18 symmetric relations, 66 anti-symmetric relations, 44 inverse relations, and 26 composition relations. The exact Streamlit dashboard export session was not preserved, so this is a reconstruction from cached inputs, threshold configuration, and matching exported relation sets rather than a saved-session replay.
+
 
 \paragraph{Composition Verification} 
 The second branch is specific to composition. Unlike symmetry, anti-symmetry, and inversion, composition is not verified directly from the hop-support output alone, because it additionally requires a candidate shortcut relation $r_3$ for each observed pair $(r_1,r_2)$.
@@ -647,7 +649,7 @@ denote the number of examined chain pairs for which the shortcut relation $r_3$ 
 {N_{\mathrm{exam}}(r_1,r_2,r_3)}.
 \]
 
-Thus, composition confidence is an empirical shortcut frequency over sampled verified chains, not a direct function of the phase-1 loop/non-loop support counts. In the dashboard, this quantity is loaded from the compact composition-verification output and may optionally be refined by Wilson-score lower-bound filtering before candidate acceptance.
+Thus, composition confidence is an empirical shortcut frequency over sampled verified chains, not a direct function of the phase-1 loop/non-loop support counts. In the dashboard, this quantity is loaded from the compact composition-verification output and may optionally be refined by Wilson-score lower-bound filtering before candidate acceptance. Final composition evidence therefore comes from sampled shortcut verification and dashboard thresholds, not from the upstream LLM labels alone. For the canonical 5k allocation used downstream, the reconstruction evidence does not support treating Wilson filtering as part of the final allocation selection: the final composition group is reproduced from the v3 compact composition-verification output under the canonical dashboard thresholds with Wilson filtering disabled.
 
 
 
@@ -655,6 +657,8 @@ Thus, composition confidence is an empirical shortcut frequency over sampled ver
 
 
 The interactive pattern-analysis pipeline serves as the integration point at which the empirically verified pattern candidates are brought together and converted into relation-level allocations. Its main role in the reported workflow is to take the accepted symmetric, anti-symmetric, inverse, and composition candidates, organize them into relation groups, and compute the allocation on demand. The resulting allocated relations and exported relation-level support matrix are then passed to the graph-construction pipeline described in the following section.
+
+The provenance of the final exported allocation must be stated carefully. The checked-in dashboard defaults point to v2 hop-support and v2 compact composition-verification artifacts, but those defaults do not reproduce the canonical 5k allocation relation universe. The canonical 5k allocation is most consistent with the patched v3 hop-support artifact and the v3 compact composition-verification artifact, with Wilson filtering disabled; however, the exact dashboard export session was not preserved. This distinction separates confirmed cached artifacts from the evidence-based inference about the final dashboard inputs.
 
 This stage distinguishes between two relation-level matrices with different roles. First, it constructs a raw relation--relation support matrix whose entries are aggregated pair-support totals. Second, it transforms this matrix into an allocation matrix that determines how support contributes to quota assignment. This distinction is methodologically important because raw support magnitudes alone can cause a small number of high-support relations to dominate the allocation. In the reported experiments, allocation used the \texttt{log1p\_balanced\_norm} transformation, which compresses heavy-tailed support values and balances row-wise and column-wise structural influence before computing allocation probabilities.
 
@@ -725,7 +729,7 @@ Ties are resolved deterministically. In the dashboard call path no custom tie-br
 Beyond the matrix used for allocation, the pipeline also constructs a second relation-level matrix over the subset of relations with positive integer allocation. This exported matrix is used by the graph-construction pipeline described in the following section, where a support representation restricted to the actually allocated relations is required. Its role is therefore different from that of the allocation matrix: it is not used to determine quotas, but to provide a relation--relation support view for later genericity-aware and graph-construction decisions. In the configuration used in this work, this matrix preserves direct support semantics through the \texttt{adjacency\_support} representation, so that the later pipeline operates on raw support magnitudes rather than on the transformed allocation weights.
 
 \subsubsection{Summary of Phase I.}
-In summary, the first phase of the methodology successfully transitions from a theoretical, unconstrained relation universe to a concrete, empirically verified foundation. By discovering observed paths, pruning unviable targets, and rigorously verifying structural patterns, the pipeline distills the data into two actionable outputs: an integer target quota ($\eta_r$) for each accepted relation and an exported relation-level support matrix. These outputs serve as the direct blueprint for the subsequent graph-generation phase.
+In summary, the first phase of the methodology transitions from a theoretical, unconstrained relation universe to a concrete, empirically verified foundation. By discovering observed paths, pruning unviable targets, and verifying structural patterns, the pipeline distills the data into two actionable outputs: an integer target quota ($\eta_r$) for each accepted relation and an exported relation-level support matrix. The final 5k allocation and support-matrix artifacts are hashable and are used downstream, but exact dashboard export provenance remains incomplete.
 
 
 \subsection{Phase II: Quota-Aware Graph Construction and Refinement}

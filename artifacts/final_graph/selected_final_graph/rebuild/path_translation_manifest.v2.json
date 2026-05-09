@@ -1,0 +1,1772 @@
+{
+  "candidate_summary": {
+    "candidate_count": 48,
+    "exact_17965_line_count_candidates": 0,
+    "plausible_local_equivalent_candidates": 0,
+    "within_100_of_17965_line_count_candidates": 0
+  },
+  "candidates": [
+    {
+      "evidence_assessment": "against: event log, not an h/r/t graph file.",
+      "first_record_keys": [
+        "timestamp",
+        "event_type",
+        "resume",
+        "resumptions"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 866,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "data/connectedgraph/trial9/absent_allocated_relation_before_repair_filtered/events.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "ce5fdb2184c64a2584f8fb5aa30e4b50a95cbeb82593160fae0a58e36074b574",
+      "size_bytes": 209794,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: Trial9 filtered graph has 70 triples and zero overlap with Stage11 output in h/r/t form.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 70,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 0,
+      "parse_error_count": 0,
+      "path": "data/connectedgraph/trial9/trial9_ckpt_filtered.triples.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q191614",
+          "r": "P17",
+          "t": "Q30"
+        },
+        {
+          "h": "Q52",
+          "r": "P17",
+          "t": "Q30"
+        },
+        {
+          "h": "Q60",
+          "r": "P17",
+          "t": "Q30"
+        }
+      ],
+      "sha256": "7353da3146dafd20c9496c51d034d5fdef01fa3cc8b8896cc1e0512d4c8bb44b",
+      "size_bytes": 3101,
+      "triple_like_record_count": 70,
+      "unique_relation_count_if_feasible": 11,
+      "unique_triple_count_if_feasible": 70
+    },
+    {
+      "evidence_assessment": "against: Trial9 filtered graph has 70 triples and zero overlap with Stage11 output in h/r/t form.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 70,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 0,
+      "parse_error_count": 0,
+      "path": "data/connectedgraph/trial9_ckpt_filtered.triples.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q191614",
+          "r": "P17",
+          "t": "Q30"
+        },
+        {
+          "h": "Q52",
+          "r": "P17",
+          "t": "Q30"
+        },
+        {
+          "h": "Q60",
+          "r": "P17",
+          "t": "Q30"
+        }
+      ],
+      "sha256": "7353da3146dafd20c9496c51d034d5fdef01fa3cc8b8896cc1e0512d4c8bb44b",
+      "size_bytes": 3101,
+      "triple_like_record_count": 70,
+      "unique_relation_count_if_feasible": 11,
+      "unique_triple_count_if_feasible": 70
+    },
+    {
+      "evidence_assessment": "against: Trial9 filtered graph has 70 triples and zero overlap with Stage11 output in h/r/t form.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 70,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 0,
+      "parse_error_count": 0,
+      "path": "data/connectedgraph/triples/trial9_ckpt_filtered.triples.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q191614",
+          "r": "P17",
+          "t": "Q30"
+        },
+        {
+          "h": "Q52",
+          "r": "P17",
+          "t": "Q30"
+        },
+        {
+          "h": "Q60",
+          "r": "P17",
+          "t": "Q30"
+        }
+      ],
+      "sha256": "7353da3146dafd20c9496c51d034d5fdef01fa3cc8b8896cc1e0512d4c8bb44b",
+      "size_bytes": 3101,
+      "triple_like_record_count": 70,
+      "unique_relation_count_if_feasible": 11,
+      "unique_triple_count_if_feasible": 70
+    },
+    {
+      "evidence_assessment": "against: event log, not an h/r/t graph file.",
+      "first_record_keys": [
+        "timestamp",
+        "event_type",
+        "resume",
+        "dry_run"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 250477,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+      "size_bytes": 111368539,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: this is the Stage11 output, not the pre-Stage11 input; it has 24,670 unique triples.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "source"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24670,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24670,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P793",
+          "t": "Q323"
+        },
+        {
+          "h": "Q1",
+          "r": "P828",
+          "t": "Q323"
+        }
+      ],
+      "sha256": "73bc624bf9147b0bba4962ab286648bcfeeb931a94a1d1a727839f160b35ada5",
+      "size_bytes": 1756236,
+      "triple_like_record_count": 24670,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24670
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24683,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24638,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/debug_score_scarcity_round1/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "ad4068afc8da69c67b43cc2e09f076ea3ed1351c86b648dd0b6a2f4f2271e171",
+      "size_bytes": 2165733,
+      "triple_like_record_count": 24683,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24683
+    },
+    {
+      "evidence_assessment": "against: event log, not an h/r/t graph file.",
+      "first_record_keys": [
+        "timestamp",
+        "event_type",
+        "resume",
+        "dry_run"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 8041,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/events.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "6f3b52a5bb2e620e5e13082fbb2a5fd2b353759bebc377d3a07dc43f71568527",
+      "size_bytes": 3121682,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: this is Stage12 output, downstream of Stage11; it has 24,715 unique triples.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "source"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24715,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24670,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "89ec9bf9c8932962fd3d966073b51f76345666eda5ed5d9beb18659d02e294b0",
+      "size_bytes": 1739977,
+      "triple_like_record_count": 24715,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24715
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component_eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "1424e30f220be841c652f222c21ee17889dce4db65e6d29cdd391d0ccdcc0e53",
+      "size_bytes": 32830,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/my_debug_run/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "1a6d343e1fa97027f18f6310578cec3108c57955643f240e9539adaa2dbd11df",
+      "size_bytes": 32848,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/my_debug_run/largest_component_eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "1a6d343e1fa97027f18f6310578cec3108c57955643f240e9539adaa2dbd11df",
+      "size_bytes": 32848,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24534,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24489,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/my_debug_run/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "bbad9c0b9860e9fc72d09cb215e00d14a7f1f736911e1a838cfc75250348e496",
+      "size_bytes": 2153082,
+      "triple_like_record_count": 24534,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24534
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_20260322_161843/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "4b01a0727d23a33881637676122b84b1373dcb659adca2636323b1d6543fefab",
+      "size_bytes": 32876,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_20260322_161843/largest_component_eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "4b01a0727d23a33881637676122b84b1373dcb659adca2636323b1d6543fefab",
+      "size_bytes": 32876,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24471,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24426,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_20260322_161843/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "c77994917345f674d821e57ee286ad4a5dd41d5e3b2c562e4a26c56c205e96bb",
+      "size_bytes": 2147873,
+      "triple_like_record_count": 24471,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24471
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_ablation_20260322_215639/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "f96551bc2d67876212db98231747d05b29c75e94ba851694d9d4e10bd49beab9",
+      "size_bytes": 32826,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_ablation_20260322_215639/largest_component_eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "75f7e4f5b54dadc792295d403cb1fa2ff02a724851d9485f48c57724e33d60c4",
+      "size_bytes": 32680,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 17683,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 17638,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_ablation_20260322_215639/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "a357092916a251151634d86c191d3dc3cb69af9e706933e62f2211283310ee56",
+      "size_bytes": 1569425,
+      "triple_like_record_count": 17683,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 17683
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_revised_density_aware_20260423_124515/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "dbe25e21ffc3fa9ce2386b4cb20cb1c17e97e7144c5088af36bfb560eae0c6ca",
+      "size_bytes": 32829,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_revised_density_aware_20260423_124515/largest_component_eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "dbe25e21ffc3fa9ce2386b4cb20cb1c17e97e7144c5088af36bfb560eae0c6ca",
+      "size_bytes": 32829,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24682,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24637,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_revised_density_aware_20260423_124515/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "12ea709097eb48116c5c372d1e2af3b6662e7cdebe64b1cd6179cce8a88a8f7d",
+      "size_bytes": 2165646,
+      "triple_like_record_count": 24682,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24682
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_revised_density_aware_RunA_conservative_20260423_110608/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "dbe25e21ffc3fa9ce2386b4cb20cb1c17e97e7144c5088af36bfb560eae0c6ca",
+      "size_bytes": 32829,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24682,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24637,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_revised_density_aware_RunA_conservative_20260423_110608/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "12ea709097eb48116c5c372d1e2af3b6662e7cdebe64b1cd6179cce8a88a8f7d",
+      "size_bytes": 2165646,
+      "triple_like_record_count": 24682,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24682
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_revised_density_aware_RunB_moderate_1_20260423_114813/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "dbe25e21ffc3fa9ce2386b4cb20cb1c17e97e7144c5088af36bfb560eae0c6ca",
+      "size_bytes": 32829,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24682,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24637,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_revised_density_aware_RunB_moderate_1_20260423_114813/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "12ea709097eb48116c5c372d1e2af3b6662e7cdebe64b1cd6179cce8a88a8f7d",
+      "size_bytes": 2165646,
+      "triple_like_record_count": 24682,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24682
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24682,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24637,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_revised_density_aware_RunB_moderate_2_20260423_120313/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "12ea709097eb48116c5c372d1e2af3b6662e7cdebe64b1cd6179cce8a88a8f7d",
+      "size_bytes": 2165646,
+      "triple_like_record_count": 24682,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24682
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24659,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24614,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_revised_density_aware_RunB_moderate_3_20260423_121214/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "7238e14ab0e5a5f0ee23221c4fa8e7c7ec5b613f9364a63d32b7fe0a516d381b",
+      "size_bytes": 2163671,
+      "triple_like_record_count": 24659,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24659
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/aggressive_but_guarded/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "efc85aaf8e5aae14cd93c0807963d57a30494148b06b935fecbcb0701c87df4f",
+      "size_bytes": 32922,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/aggressive_but_guarded/largest_component_eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "efc85aaf8e5aae14cd93c0807963d57a30494148b06b935fecbcb0701c87df4f",
+      "size_bytes": 32922,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24223,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24178,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/aggressive_but_guarded/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "e01d7137c1dbcd790082825a025cade7198a957b3c936f0d9b5b3f0b33780b73",
+      "size_bytes": 2127003,
+      "triple_like_record_count": 24223,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24223
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/baseline_safe/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "b27aa06068b7101f816d6b0b3dc90e6604bbdc5dda2ecdbc14d3ffc3d77f7302",
+      "size_bytes": 32840,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/baseline_safe/largest_component_eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "b27aa06068b7101f816d6b0b3dc90e6604bbdc5dda2ecdbc14d3ffc3d77f7302",
+      "size_bytes": 32840,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24659,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24614,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/baseline_safe/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "7238e14ab0e5a5f0ee23221c4fa8e7c7ec5b613f9364a63d32b7fe0a516d381b",
+      "size_bytes": 2163671,
+      "triple_like_record_count": 24659,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24659
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/density_loosen/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "de98a1fcd9d1fee441a335879cff62139ae8e79d5cab02d9d6fdf5e5fdcd1b04",
+      "size_bytes": 32854,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/density_loosen/largest_component_eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "de98a1fcd9d1fee441a335879cff62139ae8e79d5cab02d9d6fdf5e5fdcd1b04",
+      "size_bytes": 32854,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24522,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24477,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/density_loosen/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "6c4969add65ca1587a95b4ec5937738935667cf990d558dcb86cc77ea0bca146",
+      "size_bytes": 2152102,
+      "triple_like_record_count": 24522,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24522
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/p31_floor_relax/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "1a6d343e1fa97027f18f6310578cec3108c57955643f240e9539adaa2dbd11df",
+      "size_bytes": 32848,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/p31_floor_relax/largest_component_eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "1a6d343e1fa97027f18f6310578cec3108c57955643f240e9539adaa2dbd11df",
+      "size_bytes": 32848,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24534,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24489,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/p31_floor_relax/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "bbad9c0b9860e9fc72d09cb215e00d14a7f1f736911e1a838cfc75250348e496",
+      "size_bytes": 2153082,
+      "triple_like_record_count": 24534,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24534
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/stronger_balance/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "a5dad8b63e76d10a402b85d7348e0ff784b6aca92cf6616842692764f05b851e",
+      "size_bytes": 32865,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/stronger_balance/largest_component_eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "a5dad8b63e76d10a402b85d7348e0ff784b6aca92cf6616842692764f05b851e",
+      "size_bytes": 32865,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24502,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24457,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/stronger_balance/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "5fbf3d2f1be4e5c423e79c7cb8c5f09c997cb849ad336cb60110369d1f98056d",
+      "size_bytes": 2150430,
+      "triple_like_record_count": 24502,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24502
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/structural_softening/eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "a1f8d43629de468228c972973d33341b1eb9ae108bee4b3a999df2406bda63fe",
+      "size_bytes": 32895,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: eta/audit rows, not h/r/t graph triples.",
+      "first_record_keys": [
+        "deficit",
+        "eta_integer",
+        "eta_total",
+        "exactly_fulfilled",
+        "fulfilled",
+        "observed_count",
+        "observed_ratio",
+        "overfilled",
+        "pattern",
+        "relation",
+        "surplus"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 139,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": null,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/structural_softening/largest_component_eta_analysis/relation_fulfillment.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": false,
+      "sample_triples": [],
+      "sha256": "a1f8d43629de468228c972973d33341b1eb9ae108bee4b3a999df2406bda63fe",
+      "size_bytes": 32895,
+      "triple_like_record_count": 0,
+      "unique_relation_count_if_feasible": null,
+      "unique_triple_count_if_feasible": null
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 24350,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 24305,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/structural_softening/pruned_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "b6167baad85a24618f235f3ac14a6408916e1a97bd5a91c6210ad6e32d8c0068",
+      "size_bytes": 2137720,
+      "triple_like_record_count": 24350,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 24350
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 21850,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 21806,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage2_branch_sweep_20260424_095629/core_density_first/stage2_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "14f9bb9bfb576dd1f00dec8f9e95a2f6e8e17fee6464d84f4547f2d4d791d65a",
+      "size_bytes": 1906984,
+      "triple_like_record_count": 21850,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 21850
+    },
+    {
+      "evidence_assessment": "against: downstream experimental/pruned graph artifact; line count and provenance do not match the Stage11 input.",
+      "first_record_keys": [
+        "h",
+        "r",
+        "t",
+        "triple_id"
+      ],
+      "jsonl_parse_ok": true,
+      "line_count": 21850,
+      "line_count_exact_17965": false,
+      "line_count_within_100_of_17965": false,
+      "overlap_with_stage11_graph_output_if_feasible": 21806,
+      "parse_error_count": 0,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage2_branch_sweep_20260424_095629/core_two_path_first/stage2_graph.jsonl",
+      "path_pattern_match": true,
+      "records_contain_h_r_t_or_equivalent": true,
+      "sample_triples": [
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6005984"
+        },
+        {
+          "h": "Q1",
+          "r": "P2670",
+          "t": "Q6999"
+        },
+        {
+          "h": "Q1",
+          "r": "P527",
+          "t": "Q4169"
+        }
+      ],
+      "sha256": "fcc5a715bb650b03a660e57a766cf6c2c224ef195d882ffb272a821f21193eac",
+      "size_bytes": 1907012,
+      "triple_like_record_count": 21850,
+      "unique_relation_count_if_feasible": 139,
+      "unique_triple_count_if_feasible": 21850
+    }
+  ],
+  "created_by": "controlled local investigation; no graph artifacts modified",
+  "created_on": "2026-05-08T22:51:42.975217+00:00",
+  "explicit_notes": [
+    "No Stage11 or Stage12 manifest was modified.",
+    "No graph artifact was edited, moved, copied, or generated.",
+    "No WDQS or LLM call was made.",
+    "The stale pre-Stage11 input remains unresolved as a local file."
+  ],
+  "inferred_reconstruction_evidence_not_original_file": {
+    "added_core_subset_of_stage11_output": true,
+    "matches_reported_input_unique_count": true,
+    "note": "This supports a derived reconstruction hypothesis, but it is not the original stale input file and cannot provide the original file SHA256.",
+    "output_minus_added_core_unique_relations": 139,
+    "output_minus_added_core_unique_triples": 17965,
+    "stage11_graph_output_unique_triples": 24670,
+    "stage11_state_added_core_triples_items": 6705,
+    "stage11_state_added_core_triples_parsed_unique": 6705
+  },
+  "investigation_status": "unresolved",
+  "previous_manifest": {
+    "path": "artifacts/final_graph/selected_final_graph/rebuild/path_translation_manifest.json",
+    "sha256": "6c0c1d1da4ceec0604f0dfc791f1fa1419a8c5ba0edca7440052b3dab7434b5b"
+  },
+  "search_patterns": [
+    "*filtered*graph*triples*.jsonl",
+    "*graph_triples*.jsonl",
+    "*filtered*.jsonl",
+    "*stage07*",
+    "*eta_aware*",
+    "*prod_refine*",
+    "JSONL files with line count around 17,965"
+  ],
+  "stage11_evidence": {
+    "added_core_triples_count": 6705,
+    "graph_output_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl",
+    "graph_output_sha256": "73bc624bf9147b0bba4962ab286648bcfeeb931a94a1d1a727839f160b35ada5",
+    "manifest_input_triples_path": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+    "manifest_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/manifest.json",
+    "manifest_sha256": "2e4ad9130fc41c25a99c22d44aa0c992c0dc24cc9254188af05774c68ac64c85",
+    "report_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/report.json",
+    "report_sha256": "e9be44da03112550b21e824a0fd36c4e25c800941d94bedc1475e0faff0ac944",
+    "reported_final_graph": {
+      "largest_component_size": 21482,
+      "nodes": 21941,
+      "top_component_sizes": [
+        21482,
+        181,
+        133,
+        7,
+        7,
+        5,
+        4,
+        4,
+        4,
+        4
+      ],
+      "weak_components": 60
+    },
+    "reported_original_graph": {
+      "input_triples": 17965,
+      "largest_component_size": 2415,
+      "nodes": 21208,
+      "top_component_sizes": [
+        2415,
+        499,
+        181,
+        178,
+        178,
+        177,
+        169,
+        135,
+        133,
+        117
+      ],
+      "unique_triples": 17965,
+      "weak_components": 6021
+    },
+    "state_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json",
+    "state_sha256": "5fd9191eefbfa0c0826b6f8c5dfc94b3185cbc803d0f433b86015c9c1bed75e8"
+  },
+  "stale_pre_stage11_path": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+  "updated_translations": [
+    {
+      "candidate_count_examined": 48,
+      "local_equivalent": null,
+      "local_sha256": null,
+      "plausible_candidate_count": 0,
+      "reason": "No local JSONL candidate matched the Stage11-reported 17,965 unique input triples and provenance requirements.",
+      "resolution_status": "unresolved_after_broader_search",
+      "role": "pre_stage11_input_graph",
+      "stale_path": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl"
+    },
+    {
+      "local_equivalent": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "local_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "resolution_status": "resolved_manual_path_mapping_unchanged_from_v1",
+      "role": "relation_scope_manifest_or_allocation",
+      "stale_path": "/home/kg_benchmark/src/kg_builder/input/bidirectional_allocation_results5k.json"
+    }
+  ]
+}

@@ -1,0 +1,261 @@
+{
+  "audit_id": "R2.10b_dashboard_empirical_pattern_logic_audit",
+  "created_for": "forensic reconstruction of dashboard empirical symmetry, anti-symmetry, inverse, and composition grouping logic",
+  "policy": {
+    "read_only_investigation": true,
+    "wdqs_calls_made": false,
+    "llm_calls_made": false,
+    "graph_generation_performed": false,
+    "graph_artifacts_modified": false,
+    "thesis_latex_modified": false
+  },
+  "status_summary": {
+    "dashboard_empirical_pattern_logic_status": "confirmed",
+    "patched_v3_reproduction_status": "relation_sets_match_canonical_5k_allocation_with_wilson_disabled",
+    "exact_dashboard_export_session_status": "not_preserved",
+    "inverse_empirical_grouping_status": "confirmed_from_hop_support_bidirectional_confidence",
+    "inverse_llm_needed_for_final_allocation_claim": false,
+    "inverse_llm_completion_status_from_r2_10": "not_evidenced_completed"
+  },
+  "source_files": {
+    "hop_pattern_analysis_dashboard": {
+      "path": "src/statistics/hop_pattern_analysis_dashboard.py",
+      "sha256": "bb76aa0f43fbfb14cb3f5c3c18767c31a97fc4e767389c0f2201c8e7f944fe85",
+      "role": "empirical pattern grouping and allocation export dashboard"
+    },
+    "hop_support_dashboard": {
+      "path": "src/statistics/hop_support_dashboard.py",
+      "sha256": "e766eebff5492f9adf8fc07af154a190129d27977f32a3959ea46eb001a5137b",
+      "role": "support visualization dashboard; no inverse LLM linkage found"
+    },
+    "bidirectional_triple_allocation": {
+      "path": "src/kg_building/bidirectional_triple_allocation.py",
+      "sha256": "5eeed6098e280fc2bb4d136ad8dd9090a4d4aead8baa56c8ded40241b4223eb3",
+      "role": "allocation algorithm over dashboard pattern groups"
+    }
+  },
+  "canonical_allocation": {
+    "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+    "relations_universe_count": 1467,
+    "allocation_rows": 154,
+    "positive_eta_count": 154,
+    "pattern_group_sizes": {
+      "symmetric": 18,
+      "anti_symmetric": 66,
+      "inverse": 44,
+      "composition": 26
+    },
+    "allocation_rows_by_pattern": {
+      "symmetric": 18,
+      "anti_symmetric": 66,
+      "inverse": 44,
+      "composition": 26
+    },
+    "config": {
+      "base_min_total": 50,
+      "base_max_total": 3253580,
+      "sym_min_support": 50,
+      "sym_min_conf": 0.6,
+      "anti_min_support": 50,
+      "anti_min_conf": 0.99,
+      "inv_min_support": 50,
+      "inv_min_conf": 0.6,
+      "comp_min_support": 50,
+      "comp_min_conf": 0.6,
+      "matrix_min_support": 50,
+      "matrix_mode": "log1p_balanced_norm",
+      "temperature": 1.0,
+      "epsilon": 0.0,
+      "integerize": true
+    },
+    "eta_per_group": {
+      "symmetric": 5000,
+      "anti_symmetric": 5000,
+      "inverse": 5000,
+      "composition": 5000
+    }
+  },
+  "best_supported_input_family": {
+    "status": "strong_evidence_based_inference_not_exact_export_session",
+    "support_input": {
+      "path": "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl",
+      "sha256": "9ff74a945575ccdbf3db45810da5970f01b18d499f304729d8edfb255acb23cf",
+      "role": "symmetric, anti-symmetric, inverse, and adjacency matrix input"
+    },
+    "composition_input": {
+      "path": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+      "sha256": "8fbc1db6847b7676c1f144521218b444e2768cb06345d1a6288afd58177df54e",
+      "role": "composition grouping input"
+    },
+    "wilson_filtering": "disabled",
+    "evidence": "relation universe and all four canonical pattern relation sets reproduce under canonical thresholds"
+  },
+  "dashboard_logic": {
+    "pair_count_loader": {
+      "evidence_lines": "src/statistics/hop_pattern_analysis_dashboard.py:108-180",
+      "input": "hop-support JSONL with r1 and support_data by r2",
+      "aggregation": "sum loop, nonloop, and total per (r1, r2)",
+      "computed_fields": {
+        "conf_loop": "loop / total",
+        "conf_nonloop": "nonloop / total"
+      }
+    },
+    "symmetric": {
+      "evidence_lines": "src/statistics/hop_pattern_analysis_dashboard.py:1052-1055",
+      "input": "patched v3 hop-support pair counts",
+      "rule": "r1 == r2 and total >= sym_min_support and conf_loop >= sym_min_conf",
+      "canonical_thresholds": {
+        "sym_min_support": 50,
+        "sym_min_conf": 0.6
+      },
+      "candidate_rows": 18,
+      "derived_relation_count": 18,
+      "canonical_relation_count": 18,
+      "relation_set_matches_canonical": true
+    },
+    "anti_symmetric": {
+      "evidence_lines": [
+        "src/statistics/hop_pattern_analysis_dashboard.py:1056-1058",
+        "src/statistics/hop_pattern_analysis_dashboard.py:547-550"
+      ],
+      "input": "patched v3 hop-support pair counts",
+      "rule": "r1 == r2 and total >= anti_min_support and conf_nonloop >= anti_min_conf; remove overlap with symmetric group",
+      "canonical_thresholds": {
+        "anti_min_support": 50,
+        "anti_min_conf": 0.99
+      },
+      "candidate_rows_before_overlap_removal": 66,
+      "symmetric_anti_symmetric_overlap_count": 0,
+      "derived_relation_count": 66,
+      "canonical_relation_count": 66,
+      "relation_set_matches_canonical": true
+    },
+    "inverse_empirical": {
+      "evidence_lines": [
+        "src/statistics/hop_pattern_analysis_dashboard.py:298-323",
+        "src/statistics/hop_pattern_analysis_dashboard.py:1060-1064",
+        "src/statistics/hop_pattern_analysis_dashboard.py:552-555"
+      ],
+      "input": "patched v3 hop-support pair counts",
+      "rule": "r1 != r2; join reverse pair; require min(total(r1,r2), total(r2,r1)) >= inv_min_support and min(conf_loop(r1,r2), conf_loop(r2,r1)) >= inv_min_conf; group unique r1 and r2 relations",
+      "canonical_thresholds": {
+        "inv_min_support": 50,
+        "inv_min_conf": 0.6
+      },
+      "candidate_rows": 44,
+      "derived_relation_count": 44,
+      "canonical_relation_count": 44,
+      "relation_set_matches_canonical": true,
+      "requires_inverse_llm_output": false
+    },
+    "composition": {
+      "evidence_lines": [
+        "src/statistics/hop_pattern_analysis_dashboard.py:353-473",
+        "src/statistics/hop_pattern_analysis_dashboard.py:1202-1227",
+        "src/statistics/hop_pattern_analysis_dashboard.py:556-558"
+      ],
+      "input": "v3 compact composition-verification JSONL",
+      "rule": "base_support >= comp_min_support, chain_pairs_examined >= 50, chain_pairs_with_shortcut >= 1, sample confidence >= comp_min_conf; group unique r1, r2, r3 relations",
+      "canonical_thresholds": {
+        "comp_min_support": 50,
+        "comp_min_examined": 50,
+        "comp_min_shortcuts": 1,
+        "comp_min_conf": 0.6
+      },
+      "without_wilson": {
+        "candidate_rows": 13,
+        "derived_relation_count": 26,
+        "canonical_relation_count": 26,
+        "relation_set_matches_canonical": true
+      },
+      "with_wilson_95": {
+        "candidate_rows": 12,
+        "derived_relation_count": 24,
+        "canonical_relation_count": 26,
+        "relation_set_matches_canonical": false
+      },
+      "final_allocation_wilson_assessment": "wilson_filtering_disabled_is_supported; wilson_enabled_does_not_match_canonical_5k"
+    }
+  },
+  "reproduction_check": {
+    "support_docs": 1703,
+    "support_status_counts": {
+      "SUCCESS": 1609,
+      "ERROR": 94
+    },
+    "support_bad_rows": 0,
+    "aggregated_pair_count": 62731,
+    "base_filtered_pair_count": 17913,
+    "composition_docs": 9802,
+    "composition_input_status_counts": {
+      "SUCCESS": 9802
+    },
+    "composition_run_status_counts": {
+      "success": 9799,
+      "skip": 3
+    },
+    "composition_bad_rows": 0,
+    "derived_group_sizes": {
+      "symmetric": 18,
+      "anti_symmetric": 66,
+      "inverse": 44,
+      "composition": 26
+    },
+    "canonical_group_sizes": {
+      "symmetric": 18,
+      "anti_symmetric": 66,
+      "inverse": 44,
+      "composition": 26
+    },
+    "group_relation_set_matches": {
+      "symmetric": true,
+      "anti_symmetric": true,
+      "inverse": true,
+      "composition": true
+    },
+    "missing_from_reproduced_groups": {
+      "symmetric": [],
+      "anti_symmetric": [],
+      "inverse": [],
+      "composition": []
+    },
+    "extra_in_reproduced_groups": {
+      "symmetric": [],
+      "anti_symmetric": [],
+      "inverse": [],
+      "composition": []
+    }
+  },
+  "inverse_llm_relationship": {
+    "r2_10_audit": "docs/reconstruction/36_inverse_verification_completion_audit.md",
+    "alias_generation_status": "confirmed",
+    "llm_inverse_classification_completion_status": "not_evidenced_completed",
+    "local_inverse_llm_shard_outputs_found": false,
+    "merged_inverse_llm_output_found": false,
+    "dashboard_code_references_inverse_llm_outputs": false,
+    "dashboard_code_references_inverse_alias_output": false,
+    "dashboard_code_references_openai_or_gpt": false,
+    "assessment": "final inverse group is empirical hop-support grouping, not completed inverse LLM verification"
+  },
+  "safe_thesis_wording": [
+    "Symmetric, anti-symmetric, and inverse candidate relation groups were identified empirically from hop-support counts in the dashboard.",
+    "Symmetric and anti-symmetric candidates used self-pair loop and non-loop proportions, while inverse candidates used bidirectional loop-confidence thresholds over both (r1,r2) and (r2,r1).",
+    "Composition candidates were derived from compact sampled shortcut-verification outputs.",
+    "The canonical 5k allocation is most consistent with patched v3 hop-support and v3 compact composition-verification inputs under the recorded thresholds, with Wilson filtering disabled.",
+    "The empirical inverse grouping is distinct from the inverse LLM verification branch, whose completion is not evidenced in the preserved artifacts."
+  ],
+  "unsafe_thesis_wording": [
+    "The inverse group was produced by completed inverse LLM verification.",
+    "The inverse LLM classifier verified all final inverse relations.",
+    "All inverse LLM shards completed successfully.",
+    "Wilson lower-bound filtering was used for the final 5k allocation.",
+    "The checked-in dashboard v2 defaults produced the final 5k allocation.",
+    "The exact dashboard export session is fully reproducible from preserved Streamlit state."
+  ],
+  "remaining_gaps": [
+    "Locate a saved dashboard export session or widget-state capture for the exact 5k allocation export.",
+    "Locate a same-run manifest cryptographically linking patched v3 support, v3 compact composition, exported allocation, and exported genericity support matrix.",
+    "Locate complete inverse LLM shard outputs and merge output if they exist, but do not conflate them with empirical dashboard inverse grouping without direct allocation linkage."
+  ]
+}

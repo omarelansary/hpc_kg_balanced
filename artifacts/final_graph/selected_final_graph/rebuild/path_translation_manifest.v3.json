@@ -1,0 +1,211 @@
+{
+  "created_by": "controlled Hetzner archive follow-up; no graph artifacts modified",
+  "created_on": "2026-05-09T09:14:35.882622+00:00",
+  "explicit_notes": [
+    "No Stage11/Stage12 manifest was modified.",
+    "No graph artifact was edited, moved, copied, or generated.",
+    "The previous unresolved v2 manifest is superseded by this Hetzner archive resolution."
+  ],
+  "investigation_status": "resolved_strong",
+  "resolved_local_equivalent": {
+    "first_record_keys": [
+      "attachability_score",
+      "bridge_score",
+      "component_merge_score",
+      "first_realization_bonus",
+      "genericity_penalty",
+      "h",
+      "hub_penalty",
+      "layer",
+      "noise_penalty",
+      "r",
+      "relation_need_score",
+      "score",
+      "selection_reason",
+      "structurally_weak",
+      "t",
+      "triple_id"
+    ],
+    "jsonl_parse_ok": true,
+    "line_count": 17965,
+    "overlap_with_stage11_graph_output": 17965,
+    "parse_error_count": 0,
+    "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+    "sample_triples": [
+      {
+        "h": "Q1000",
+        "r": "P1589",
+        "t": "Q97"
+      },
+      {
+        "h": "Q101023118",
+        "r": "P3075",
+        "t": "Q23540"
+      },
+      {
+        "h": "Q1028",
+        "r": "P3075",
+        "t": "Q432"
+      }
+    ],
+    "sha256": "c7d5132bd0b20aa0da4a64ecbf183abf412c3effca38bef84105c7791126fb4b",
+    "size_bytes": 8431178,
+    "stage11_output_minus_candidate_triples": 6705,
+    "unique_relation_count": 139,
+    "unique_triple_count": 17965
+  },
+  "stage11_evidence": {
+    "graph_output_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl",
+    "graph_output_sha256": "73bc624bf9147b0bba4962ab286648bcfeeb931a94a1d1a727839f160b35ada5",
+    "manifest_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/manifest.json",
+    "manifest_sha256": "2e4ad9130fc41c25a99c22d44aa0c992c0dc24cc9254188af05774c68ac64c85",
+    "report_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/report.json",
+    "report_sha256": "e9be44da03112550b21e824a0fd36c4e25c800941d94bedc1475e0faff0ac944",
+    "reported_added_core_triples_count": 6705,
+    "reported_original_graph": {
+      "input_triples": 17965,
+      "largest_component_size": 2415,
+      "nodes": 21208,
+      "top_component_sizes": [
+        2415,
+        499,
+        181,
+        178,
+        178,
+        177,
+        169,
+        135,
+        133,
+        117
+      ],
+      "unique_triples": 17965,
+      "weak_components": 6021
+    },
+    "state_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json",
+    "state_sha256": "5fd9191eefbfa0c0826b6f8c5dfc94b3185cbc803d0f433b86015c9c1bed75e8"
+  },
+  "stage7_evidence": {
+    "log_path": "archive/hetzner_version/logs/eta_aware_component_filter_prod.out",
+    "log_sha256": "74889ae5711647c249692e45c26e931c1b008f242f249d998f08080f934c35d9",
+    "manifest_args": {
+      "allocation_path": null,
+      "allow_non_small_removal": false,
+      "eta_keep_ratio": 0.95,
+      "force": false,
+      "input_graph_path": null,
+      "out_dir": "runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod",
+      "progress_every": 1,
+      "run_dir": "runs/prod_refine_20260315_180520",
+      "verbose": true,
+      "weak_component_min_entities": 3,
+      "weak_component_min_triples": 3
+    },
+    "manifest_path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/manifest.json",
+    "manifest_sha256": "dda38ff4990088601ce4efb317ade1cbecda2da0baf1519dcc818c93f28baa7e",
+    "manifest_summary": {
+      "allocation_path": "src/kg_builder/input/bidirectional_allocation_results5k.json",
+      "allow_non_small_removal": false,
+      "eta_keep_ratio": 0.95,
+      "existing_stage07_realized_relations": 136,
+      "existing_stage07_total_deficit": 9221,
+      "existing_stage07_triples": 10779,
+      "generated_at": "2026-03-19T16:26:31.922975+00:00",
+      "input_component_count": 6524,
+      "input_triples": 18513,
+      "kept_component_count": 6021,
+      "kept_small_components": 5344,
+      "kept_triples": 17965,
+      "prefilter_source": "stage06_refine_graph",
+      "realized_relations_after": 139,
+      "realized_relations_before": 139,
+      "removed_component_count": 503,
+      "removed_triples": 548,
+      "run_dir": "/home/kg_benchmark/runs/prod_refine_20260315_180520",
+      "total_postfilter_deficit": 2035,
+      "total_postfilter_selected": 17965,
+      "total_prefilter_deficit": 1487,
+      "total_prefilter_selected": 18513,
+      "total_removed_relation_mass": 548,
+      "weak_component_min_entities": 3,
+      "weak_component_min_triples": 3
+    },
+    "progress": {
+      "kept_components": 6021,
+      "kept_triples_estimate": 17965,
+      "note": "Run completed successfully.",
+      "percent_components_complete": 100.0,
+      "phase": "completed",
+      "processed_components": 6524,
+      "removed_components": 503,
+      "removed_triples_estimate": 548,
+      "total_components": 6524,
+      "updated_at": "2026-03-19T16:26:32.494429+00:00"
+    },
+    "progress_path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/progress.json",
+    "progress_sha256": "73feac80a5ba7485f07e5c0b0d95d518dcf20b2c1ddf7aea7ad18e8c9d1d9a03",
+    "script_path": "archive/hetzner_version/src/kg_builder/eta_aware_component_filter.py",
+    "script_sha256": "bfbc2958e4ae650b1cd93533415665a3930908b1520ca43b7feab24aa2643261",
+    "summary": {
+      "allocation_path": "src/kg_builder/input/bidirectional_allocation_results5k.json",
+      "allow_non_small_removal": false,
+      "eta_keep_ratio": 0.95,
+      "existing_stage07_realized_relations": 136,
+      "existing_stage07_total_deficit": 9221,
+      "existing_stage07_triples": 10779,
+      "generated_at": "2026-03-19T16:26:31.922975+00:00",
+      "input_component_count": 6524,
+      "input_triples": 18513,
+      "kept_component_count": 6021,
+      "kept_small_components": 5344,
+      "kept_triples": 17965,
+      "prefilter_source": "stage06_refine_graph",
+      "realized_relations_after": 139,
+      "realized_relations_before": 139,
+      "removed_component_count": 503,
+      "removed_triples": 548,
+      "run_dir": "/home/kg_benchmark/runs/prod_refine_20260315_180520",
+      "total_postfilter_deficit": 2035,
+      "total_postfilter_selected": 17965,
+      "total_prefilter_deficit": 1487,
+      "total_prefilter_selected": 18513,
+      "total_removed_relation_mass": 548,
+      "weak_component_min_entities": 3,
+      "weak_component_min_triples": 3
+    },
+    "summary_path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/summary.json",
+    "summary_sha256": "31c884be276a69a5e1be65c4b49fc87753d80fc884cf5de45b206373efd633e8"
+  },
+  "stale_pre_stage11_path": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+  "supersedes": "artifacts/final_graph/selected_final_graph/rebuild/path_translation_manifest.v2.json",
+  "updated_translations": [
+    {
+      "local_equivalent": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl",
+      "local_sha256": "c7d5132bd0b20aa0da4a64ecbf183abf412c3effca38bef84105c7791126fb4b",
+      "resolution_status": "resolved_strong",
+      "role": "pre_stage11_input_graph",
+      "stale_path": "/home/kg_benchmark/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl"
+    },
+    {
+      "local_equivalent": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "local_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "resolution_status": "resolved_manual_path_mapping_unchanged",
+      "role": "relation_scope_manifest_or_allocation",
+      "stale_path": "/home/kg_benchmark/src/kg_builder/input/bidirectional_allocation_results5k.json"
+    }
+  ],
+  "verification_checks": {
+    "candidate_equals_stage11_output_minus_added_core": true,
+    "candidate_subset_of_stage11_output": true,
+    "contains_h_r_t_fields": true,
+    "jsonl_parse_errors_zero": true,
+    "line_count_matches_stage11_report": true,
+    "overlap_with_stage11_output_equals_candidate": true,
+    "path_suffix_matches_stale_path": true,
+    "stage11_output_minus_candidate_count_equals_added_core": true,
+    "stage11_output_minus_candidate_equals_added_core": true,
+    "stage7_progress_kept_triples_matches_candidate": true,
+    "stage7_summary_kept_triples_matches_candidate": true,
+    "unique_relations_139": true,
+    "unique_triples_match_stage11_report": true
+  }
+}
