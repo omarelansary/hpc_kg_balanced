@@ -1,0 +1,596 @@
+{
+  "schema_version": 1,
+  "created_date": "2026-05-10",
+  "scope": {
+    "working_directory": "/data/horse/ws/omel305g-omel305g-new/hpc_kg_balanced_refactor_work",
+    "read_only": true,
+    "wdqs_calls_made": false,
+    "llm_calls_made": false,
+    "graph_generation_performed": false,
+    "requested_outputs": [
+      "docs/reconstruction/41_source_execution_map.md",
+      "artifacts/final_graph/selected_final_graph/rebuild/source_execution_map.json"
+    ]
+  },
+  "status_values": [
+    "confirmed_used",
+    "likely_used",
+    "side_branch",
+    "historical_experimental",
+    "reconstruction_only",
+    "unresolved"
+  ],
+  "key_findings": [
+    {
+      "finding": "Phase II Stage1 through Stage6 are implemented in the archived monolithic pipeline.",
+      "evidence": [
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "docs/reconstruction/30_stage3_to_B0_chain_verification.md",
+        "docs/reconstruction/32_stage1_stage2_candidate_collection_provenance.md"
+      ]
+    },
+    {
+      "finding": "The selected B0 chain uses a standalone eta-aware Stage7 replacement, not the original monolithic Stage7 output.",
+      "evidence": [
+        "archive/hetzner_version/src/kg_builder/eta_aware_component_filter.py",
+        "docs/reconstruction/31_stage7_implementation_provenance.md"
+      ]
+    },
+    {
+      "finding": "Stage2 candidate collection used live WDQS in the archived production config, so exact rerun reproducibility is partial even though frozen shard outputs are preserved.",
+      "evidence": [
+        "archive/hetzner_version/src/kg_builder/config.yaml",
+        "archive/hetzner_version/src/kg_builder/config.runtime.json",
+        "docs/reconstruction/32_stage1_stage2_candidate_collection_provenance.md"
+      ]
+    },
+    {
+      "finding": "Phase I dashboard empirical pattern logic is confirmed, but the exact dashboard export session is missing.",
+      "evidence": [
+        "src/statistics/hop_pattern_analysis_dashboard.py",
+        "docs/reconstruction/35_phase1_dashboard_input_provenance.md",
+        "docs/reconstruction/37_dashboard_empirical_pattern_logic_audit.md"
+      ]
+    },
+    {
+      "finding": "Composition LLM target filtering is artifact-confirmed as an upstream pruning signal, but exact LLM production provenance is incomplete.",
+      "evidence": [
+        "src/composition_verification/classify_relations_pipeline.py",
+        "data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json",
+        "docs/reconstruction/38_composition_llm_relation_profile_provenance_audit.md"
+      ]
+    }
+  ],
+  "components": [
+    {
+      "component_id": "P1_REL_PROFILE_LLM",
+      "phase": "Phase I",
+      "path": "src/composition_verification/classify_relations_pipeline.py",
+      "entrypoints": [
+        "main",
+        "build_user_payload",
+        "call_llm",
+        "verify_classification"
+      ],
+      "methodology_role": "Relation-profile LLM classifier used as upstream high-recall pruning/profiling signal.",
+      "likely_inputs": [
+        "MongoDB relation profile collection",
+        "Wikidata property metadata"
+      ],
+      "likely_outputs": [
+        "data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json after export"
+      ],
+      "external_dependencies": [
+        "LLM/API",
+        "MongoDB"
+      ],
+      "status": "likely_used",
+      "evidence": [
+        "docs/reconstruction/38_composition_llm_relation_profile_provenance_audit.md",
+        "data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json"
+      ],
+      "safe_thesis_claim": "The stored relation-profile artifact contains LLM-derived labels used as upstream pruning/profiling signals.",
+      "unsafe_thesis_claim": "The exact LLM production run is fully reproducible from preserved prompts, model metadata, raw responses, and export manifest."
+    },
+    {
+      "component_id": "P1_HOP_DISCOVERY",
+      "phase": "Phase I",
+      "path": "src/archive/hop_discovery.py",
+      "entrypoints": [
+        "main",
+        "discover_one_r1",
+        "build_hop_discovery_query",
+        "WDQSClient"
+      ],
+      "methodology_role": "Empirical two-hop discovery over wikibase-item relation universe.",
+      "likely_inputs": [
+        "data/raw/wikidata_ontology.relation_profiles_afterLLM_SecondTime.json"
+      ],
+      "likely_outputs": [
+        "data/processed/hop_discovery_from_json.jsonl"
+      ],
+      "external_dependencies": [
+        "WDQS live query"
+      ],
+      "status": "confirmed_used",
+      "evidence": [
+        "scripts/slurm/hop_discovery_json.slurm",
+        "logs/hop_discovery_json_27530562.out",
+        "docs/reconstruction/35_phase1_dashboard_input_provenance.md"
+      ],
+      "safe_thesis_claim": "The cached two-hop discovery artifact supports 56,278 summed valid second-hop relation entries.",
+      "unsafe_thesis_claim": "The current evidence supports approximately 340,000 observed two-hop pairs."
+    },
+    {
+      "component_id": "P1_HOP_SUPPORT_V2_V3",
+      "phase": "Phase I",
+      "path": "src/hop_support_and_sym_anti_verification/",
+      "entrypoints": [
+        "hop_support_v2.py::main",
+        "hop_support_v2.py::compute_support_v2",
+        "hop_support_v3.py::main",
+        "hop_support_v3.py::compute_support_v2"
+      ],
+      "methodology_role": "Hop-support estimation for loop, non-loop, and total support.",
+      "likely_inputs": [
+        "data/processed/hop_discovery_from_json.jsonl",
+        "normalized hop-support rerun inputs"
+      ],
+      "likely_outputs": [
+        "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl"
+      ],
+      "external_dependencies": [
+        "WDQS live query"
+      ],
+      "status": "confirmed_used",
+      "evidence": [
+        "scripts/slurm/hop_support_v2.slurm",
+        "scripts/slurm/hop_support_v3.slurm",
+        "scripts/slurm/hop_support_v3_sharded.slurm",
+        "docs/reconstruction/35_phase1_dashboard_input_provenance.md",
+        "docs/reconstruction/37_dashboard_empirical_pattern_logic_audit.md"
+      ],
+      "safe_thesis_claim": "Hop support was historically computed and cached; patched v3 support is the best-supported final allocation input family.",
+      "unsafe_thesis_claim": "Hop support can be exactly rerun today without WDQS/cache/environment drift."
+    },
+    {
+      "component_id": "P1_DASHBOARD_PATTERN_ALLOCATION",
+      "phase": "Phase I",
+      "path": "src/statistics/hop_pattern_analysis_dashboard.py",
+      "entrypoints": [
+        "main",
+        "load_pair_counts",
+        "prepare_inverse_table",
+        "load_composition_verified_compact",
+        "classify_composition_patterns",
+        "build_pattern_groups",
+        "run_phase3_allocation",
+        "build_square_adjacency_matrix",
+        "matrix_to_nested_json_dict"
+      ],
+      "methodology_role": "Streamlit dashboard for empirical pattern grouping, allocation, and support-matrix export.",
+      "likely_inputs": [
+        "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl",
+        "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+        "data/raw/wikidata_ontology.properties.json"
+      ],
+      "likely_outputs": [
+        "src/Pruning graph/bidirectional_allocation_results5k.json",
+        "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
+      ],
+      "external_dependencies": [
+        "Streamlit/manual UI",
+        "optional WDQS live query",
+        "optional MongoDB"
+      ],
+      "status": "likely_used",
+      "evidence": [
+        "docs/reconstruction/35_phase1_dashboard_input_provenance.md",
+        "docs/reconstruction/37_dashboard_empirical_pattern_logic_audit.md",
+        "docs/reconstruction/33_allocation_5k_export_provenance.md",
+        "docs/reconstruction/34_support_matrix_provenance.md"
+      ],
+      "safe_thesis_claim": "Patched v3 support plus v3 compact composition reproduces the canonical pattern relation sets with Wilson disabled.",
+      "unsafe_thesis_claim": "The exact dashboard export session and checked-in v2 defaults produced the final allocation."
+    },
+    {
+      "component_id": "P1_INVERSE_LLM_SIDE_BRANCH",
+      "phase": "Phase I",
+      "path": "src/inverse_verification_legacy/",
+      "entrypoints": [
+        "build_inverse_alias_topk.py::main",
+        "llm_classification_inv.py::main",
+        "llm_classification_inv.py::call_llm",
+        "merge_llm_classification_inv_shards.py::main"
+      ],
+      "methodology_role": "Inverse alias generation and attempted LLM inverse classification.",
+      "likely_inputs": [
+        "data/processed/hop_support.wikibase_item_only.jsonl",
+        "data/processed/wikidata_ontology.inverse_mode_aliases_topk.json",
+        "relation profiles"
+      ],
+      "likely_outputs": [
+        "inverse alias JSON",
+        "intended inverse LLM shard outputs not preserved locally"
+      ],
+      "external_dependencies": [
+        "LLM/API"
+      ],
+      "status": "side_branch",
+      "evidence": [
+        "docs/reconstruction/36_inverse_verification_completion_audit.md",
+        "logs/build_inverse_alias_topk_27543764.out",
+        "logs/llm_classification_inv_27548189.out",
+        "logs/llm_classification_inv_27548189.err"
+      ],
+      "safe_thesis_claim": "Inverse alias generation is evidenced; inverse LLM completion is not evidenced.",
+      "unsafe_thesis_claim": "Completed inverse LLM verification fed the final 5k allocation."
+    },
+    {
+      "component_id": "P1_COMPOSITION_VERIFICATION",
+      "phase": "Phase I",
+      "path": "src/composition_verification/composition_range_domain_improved.py",
+      "entrypoints": [
+        "main",
+        "run_candidates",
+        "run_candidates_jsonl",
+        "evaluate_composition_for_doc",
+        "WikidataCompositionChecker"
+      ],
+      "methodology_role": "Domain/range-compatible composition shortcut verification.",
+      "likely_inputs": [
+        "data/processed/hop_support_v3/new_pairs_composition_in_v3_only.jsonl",
+        "data/processed/hop_support_v3/min8_hop_support_v3_pairs_with_compatible_targets_dom_rng_v1.jsonl"
+      ],
+      "likely_outputs": [
+        "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+        "composition stats and report files"
+      ],
+      "external_dependencies": [
+        "WDQS live query",
+        "optional MongoDB"
+      ],
+      "status": "confirmed_used",
+      "evidence": [
+        "scripts/slurm/composition_range_domain_improved_min8_jsonl.slurm",
+        "logs/composition_hop_support_v3_min8_jsonl_28197929.out",
+        "docs/reconstruction/38_composition_llm_relation_profile_provenance_audit.md"
+      ],
+      "safe_thesis_claim": "Final composition evidence comes from sampled shortcut verification and dashboard thresholds.",
+      "unsafe_thesis_claim": "LLM labels alone prove composition."
+    },
+    {
+      "component_id": "P2_STAGE1_TO_STAGE6_MONOLITHIC",
+      "phase": "Phase II",
+      "path": "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+      "entrypoints": [
+        "stage_score_genericity",
+        "stage_collect_candidates",
+        "stage_audit_candidates",
+        "stage_construct_graph",
+        "stage_repair_graph",
+        "stage_refine_graph",
+        "stage_filter_components",
+        "stage_final_audit",
+        "main"
+      ],
+      "methodology_role": "Archived monolithic Phase II pipeline implementing genericity, candidate collection, audit, core graph construction, repair, refinement, filtering, and final audit.",
+      "likely_inputs": [
+        "archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.json",
+        "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json",
+        "WDQS candidate source"
+      ],
+      "likely_outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage01_genericity/",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage03_candidate_audit/",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage05_repair/",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage06_refine_graph/"
+      ],
+      "external_dependencies": [
+        "WDQS live query in Stage2"
+      ],
+      "status": "confirmed_used",
+      "evidence": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/manifest.json",
+        "docs/reconstruction/30_stage3_to_B0_chain_verification.md",
+        "docs/reconstruction/32_stage1_stage2_candidate_collection_provenance.md"
+      ],
+      "safe_thesis_claim": "The archived pipeline produced preserved Stage1-Stage4 evidence and Stage4 core triples are a subset of Stage2 candidate shards.",
+      "unsafe_thesis_claim": "The whole Phase II pipeline is fully offline and exactly rerunnable from local frozen candidate pools."
+    },
+    {
+      "component_id": "P2_STAGE7_ETA_AWARE",
+      "phase": "Phase II",
+      "path": "archive/hetzner_version/src/kg_builder/eta_aware_component_filter.py",
+      "entrypoints": [
+        "main",
+        "filter_components_eta_aware",
+        "write_outputs"
+      ],
+      "methodology_role": "Standalone eta-aware Stage7 replacement used by the final B0 chain.",
+      "likely_inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage06_refine_graph/refined_graph_triples.jsonl",
+        "src/kg_builder/input/bidirectional_allocation_results5k.json"
+      ],
+      "likely_outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl"
+      ],
+      "external_dependencies": [
+        "local frozen artifacts only"
+      ],
+      "status": "confirmed_used",
+      "evidence": [
+        "docs/reconstruction/31_stage7_implementation_provenance.md",
+        "archive/hetzner_version/logs/eta_aware_component_filter_prod.out"
+      ],
+      "safe_thesis_claim": "The final B0 chain uses the standalone eta-aware Stage7 replacement.",
+      "unsafe_thesis_claim": "The original monolithic Stage7 output directly fed B0."
+    },
+    {
+      "component_id": "P2_STAGE11_CONNECTIVITY_REPAIR",
+      "phase": "Phase II",
+      "path": "archive/hetzner_version/src/kg_builder/repair_kg_connectivity.py",
+      "entrypoints": [
+        "main",
+        "find_one_hop_bridge",
+        "find_two_hop_bridge",
+        "query_one_hop_neighbors"
+      ],
+      "methodology_role": "Stage11 eta-aware connectivity repair.",
+      "likely_inputs": [
+        "Stage7 eta-aware filtered graph",
+        "canonical 5k allocation"
+      ],
+      "likely_outputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl",
+        "events.jsonl",
+        "state.json",
+        "report.json"
+      ],
+      "external_dependencies": [
+        "WDQS live query"
+      ],
+      "status": "confirmed_used",
+      "evidence": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/manifest.json",
+        "docs/reconstruction/26_stage7_to_B0_chain_verification.md"
+      ],
+      "safe_thesis_claim": "Stage11 output is verified as Stage7 plus 6,705 added core triples.",
+      "unsafe_thesis_claim": "Stage11 is part of the original eight-stage offline design."
+    },
+    {
+      "component_id": "P2_STAGE12_PATH_REPAIR",
+      "phase": "Phase II",
+      "path": "archive/hetzner_version/src/kg_builder/repair_kg_paths.py",
+      "entrypoints": [
+        "main",
+        "search_bounded_path",
+        "query_one_hop_neighbors"
+      ],
+      "methodology_role": "Stage12 bounded path repair.",
+      "likely_inputs": [
+        "Stage11 graph_output.jsonl",
+        "canonical 5k allocation"
+      ],
+      "likely_outputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl",
+        "events.jsonl",
+        "state.json",
+        "report.json",
+        "largest_component.csv"
+      ],
+      "external_dependencies": [
+        "WDQS live query"
+      ],
+      "status": "confirmed_used",
+      "evidence": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/manifest.json",
+        "docs/reconstruction/26_stage7_to_B0_chain_verification.md"
+      ],
+      "safe_thesis_claim": "Stage12 output is verified as Stage11 plus 45 added path triples; B0 is the selected largest component.",
+      "unsafe_thesis_claim": "Stage12 graph output alone is the selected final artifact without B0 LCC selection."
+    },
+    {
+      "component_id": "POSTHOC_C1_STAGE13",
+      "phase": "Post-hoc candidate analysis",
+      "path": "src/Pruning graph/kg_balance_pruner_revised_pruning_only.py",
+      "entrypoints": [
+        "main",
+        "BalanceAwarePruner",
+        "TripleRemovalScorer"
+      ],
+      "methodology_role": "Stage13/C1 density-aware pruning candidate.",
+      "likely_inputs": [
+        "B0 or Stage12 graph",
+        "canonical 5k allocation"
+      ],
+      "likely_outputs": [
+        "stage13_branch_sweep_20260423_160635/aggressive_but_guarded/pruned_graph.jsonl",
+        "pruned_graph.report.json"
+      ],
+      "external_dependencies": [
+        "local frozen artifacts only"
+      ],
+      "status": "side_branch",
+      "evidence": [
+        "docs/reconstruction/18_final_graph_decision_state_after_C3_probe.md",
+        "docs/reconstruction/19_final_graph_selection_decision.md"
+      ],
+      "safe_thesis_claim": "C1 reduced surplus but increased deficit and did not supersede B0.",
+      "unsafe_thesis_claim": "Stage13/C1 is the final selected graph."
+    },
+    {
+      "component_id": "POSTHOC_C2_C3_TOOLS",
+      "phase": "Post-hoc candidate analysis",
+      "path": "tools/graph_candidate_generation/",
+      "entrypoints": [
+        "targeted_generic_dominance_prune.py::main",
+        "build_c3_replacement_pool.py::main",
+        "filter_c3_replacement_pool.py::main",
+        "probe_c3_remove_replace_feasibility.py::main"
+      ],
+      "methodology_role": "Controlled graph-candidate evaluation, C2 deletion-only pruning, and C3 pool/probe tracking.",
+      "likely_inputs": [
+        "B0 graph",
+        "canonical allocation",
+        "Stage11/Stage12 events/state"
+      ],
+      "likely_outputs": [
+        "C2 reports and output graph",
+        "C3 replacement pool artifacts",
+        "C3 feasibility probe report"
+      ],
+      "external_dependencies": [
+        "local frozen artifacts only"
+      ],
+      "status": "reconstruction_only",
+      "evidence": [
+        "docs/reconstruction/12_C2_result_interpretation.md",
+        "docs/reconstruction/15_C3_replacement_pool_v1_freeze_report.md",
+        "docs/reconstruction/16_C3_eligible_replacement_pool_v1_report.md",
+        "docs/reconstruction/17_C3_feasibility_probe_result.md"
+      ],
+      "safe_thesis_claim": "C2 was rejected and C3_probe_v1 generated no graph candidate.",
+      "unsafe_thesis_claim": "C2 or C3 superseded B0."
+    },
+    {
+      "component_id": "RECON_WRAPPERS",
+      "phase": "Reconstruction/audit wrappers",
+      "path": "scripts/reconstruction/",
+      "entrypoints": [
+        "00_common.sh",
+        "01_audit_B0_final_graph.sh",
+        "02_register_B0_final_manifest.sh",
+        "03_path_translation_manifest.sh",
+        "04_verify_stage7_to_B0_chain.sh",
+        "05_verify_stage6_to_B0_chain.sh",
+        "06_verify_stage5_to_B0_chain.sh",
+        "07_verify_stage3_to_B0_chain.sh",
+        "run_frozen_artifact_reconstruction_audit.sh"
+      ],
+      "methodology_role": "Frozen-artifact validation and reconstruction evidence wrapper layer.",
+      "likely_inputs": [
+        "Existing frozen artifacts",
+        "canonical hashes",
+        "reconstruction docs"
+      ],
+      "likely_outputs": [
+        "rebuild/*.json",
+        "rebuild/*.tsv",
+        "B0 reaudit reports"
+      ],
+      "external_dependencies": [
+        "local frozen artifacts only"
+      ],
+      "status": "reconstruction_only",
+      "evidence": [
+        "docs/reconstruction/40_frozen_artifact_reconstruction_entrypoint.md",
+        "scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh"
+      ],
+      "safe_thesis_claim": "Wrappers validate frozen artifacts and rebuild audit metadata only.",
+      "unsafe_thesis_claim": "Wrappers prove full end-to-end reproduction from live inputs."
+    }
+  ],
+  "wdqs_touching_sources": [
+    "src/archive/hop_discovery.py",
+    "src/hop_support_and_sym_anti_verification/hop_support_v2.py",
+    "src/hop_support_and_sym_anti_verification/hop_support_v3.py",
+    "src/composition_verification/composition_range_domain_improved.py",
+    "src/statistics/hop_pattern_analysis_dashboard.py",
+    "src/statistics/audit_absent_allocated_relations.py",
+    "src/statistics/extract_subgraphs_from_checkpoint.py",
+    "src/kg_building/relation_balanced_kg_pipeline.py",
+    "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+    "src/kg_building/run_phase4_sparql_from_allocation.py",
+    "src/kg_building/repair_kg_connectivity.py",
+    "archive/hetzner_version/src/kg_builder/repair_kg_connectivity.py",
+    "archive/hetzner_version/src/kg_builder/repair_kg_paths.py",
+    "src/kg_building/repair_relation_allocated_absence.py",
+    "src/kg_building/kg_balanced_connected_sampler_sparql.py",
+    "scripts/slurm/hop_discovery_json.slurm",
+    "scripts/slurm/hop_support_v2.slurm",
+    "scripts/slurm/hop_support_v3.slurm",
+    "scripts/slurm/hop_support_v3_sharded.slurm",
+    "scripts/slurm/composition_range_domain_improved_min8_jsonl.slurm",
+    "scripts/slurm/phase4_connectedgraph_sparql*.slurm",
+    "scripts/slurm/run_repair_relation_allocated_absence.slurm",
+    "scripts/slurm/run_repair_apply_topk.slurm"
+  ],
+  "llm_api_touching_sources": [
+    "src/composition_verification/classify_relations_pipeline.py",
+    "src/inverse_verification_legacy/llm_classification_inv.py",
+    "scripts/slurm/llm_classification_inv.slurm"
+  ],
+  "mongo_or_manual_ui_touchpoints": [
+    "src/composition_verification/classify_relations_pipeline.py",
+    "src/composition_verification/composition_range_domain_improved.py",
+    "src/enrichments_and_filters/enrich_dom_range old.py",
+    "src/statistics/hop_pattern_analysis_dashboard.py",
+    "src/statistics/hop_support_dashboard.py"
+  ],
+  "untracked_source_candidates_visible_at_inspection": [
+    {
+      "path": "scripts/compare_compatible_targets.py",
+      "classification": "hold_for_human_review",
+      "reason": "Source-looking utility for comparing compatible-target artifacts."
+    },
+    {
+      "path": "scripts/extract_entity_catalog_metadata.py",
+      "classification": "hold_for_human_review",
+      "reason": "Source-looking reporting utility for entity catalog metadata."
+    },
+    {
+      "path": "scripts/generate_trial2_discussion_figures.py",
+      "classification": "hold_local_unless_thesis_figures_need_it",
+      "reason": "Figure-generation utility for experimental Trial2/discussion outputs."
+    },
+    {
+      "path": "scripts/prune_graph/",
+      "classification": "hold_local_or_external_artifact_storage",
+      "reason": "Historical/post-hoc pruning experiment scaffolds."
+    },
+    {
+      "path": "scripts/slurm/phase4_checkpoint_postprocess_hop_support_v3_trial2.slurm",
+      "classification": "hold_local",
+      "reason": "Side-branch Phase4 checkpoint postprocess runner."
+    },
+    {
+      "path": "scripts/slurm/stage13_balance_prune.slurm",
+      "classification": "hold_for_human_review",
+      "reason": "Post-hoc Stage13 pruning runner."
+    },
+    {
+      "path": "scripts/slurm/stage13_balance_prune_ablation.slurm",
+      "classification": "hold_for_human_review",
+      "reason": "Strict pruning ablation runner."
+    }
+  ],
+  "do_not_refactor_yet": [
+    "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+    "archive/hetzner_version/src/kg_builder/eta_aware_component_filter.py",
+    "archive/hetzner_version/src/kg_builder/repair_kg_connectivity.py",
+    "archive/hetzner_version/src/kg_builder/repair_kg_paths.py",
+    "src/Pruning graph/",
+    "src/composition_verification/classify_relations_pipeline.py",
+    "src/composition_verification/composition_range_domain_improved.py",
+    "src/hop_support_and_sym_anti_verification/hop_support_v2.py",
+    "src/hop_support_and_sym_anti_verification/hop_support_v3.py",
+    "src/inverse_verification_legacy/"
+  ],
+  "safe_future_wrapper_refactor_candidates": [
+    "scripts/reconstruction/*.sh",
+    "docs/reconstruction/* source/provenance maps",
+    "tools/graph_candidate_evaluation/evaluate_graph_candidate.py wrapper calls",
+    "new read-only wrappers that validate frozen artifacts without changing historical logic"
+  ],
+  "remaining_gaps": [
+    "Exact Streamlit dashboard export session for the 5k allocation and support matrix is missing.",
+    "Exact LLM relation-profile production command, model metadata, raw responses, and export manifest are missing.",
+    "Stage2 WDQS candidate collection is preserved as frozen shards, but exact replay depends on historical WDQS/cache/environment conditions.",
+    "Stage11 and Stage12 artifacts are verified, but exact shell command files are incomplete.",
+    "Exact B0 largest-component extraction command remains less explicit than the graph identity and evaluator metrics.",
+    "Some source-looking pruning and reporting utilities remain untracked and require human review."
+  ]
+}
