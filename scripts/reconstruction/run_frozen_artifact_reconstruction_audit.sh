@@ -7,6 +7,7 @@ source "${SCRIPT_DIR}/00_common.sh"
 
 FORCE=0
 DRY_RUN=0
+VALIDATE_ONLY=0
 
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -18,15 +19,20 @@ while [[ "$#" -gt 0 ]]; do
       DRY_RUN=1
       shift
       ;;
+    --validate-only)
+      VALIDATE_ONLY=1
+      shift
+      ;;
     -h|--help)
       cat <<'USAGE'
-usage: scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh [--force] [--dry-run]
+usage: scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh [--force] [--dry-run] [--validate-only]
 
 Wrapper-only reconstruction audit over frozen historical artifacts.
 
 Options:
-  --force    Pass --force to child reconstruction wrappers so rebuild outputs may be overwritten.
-  --dry-run  Print child commands only; do not run wrappers and do not write the run manifest.
+  --force          Pass --force to child reconstruction wrappers so rebuild outputs may be overwritten.
+  --dry-run        Print planned behavior only; do not run wrappers and do not write the run manifest.
+  --validate-only  Do not run child wrappers; validate existing rebuild outputs and write a runtime manifest.
 USAGE
       exit 0
       ;;
@@ -38,6 +44,10 @@ done
 
 if [[ "${FORCE}" -eq 1 && "${DRY_RUN}" -eq 1 ]]; then
   die "--force and --dry-run are mutually exclusive"
+fi
+
+if [[ "${FORCE}" -eq 1 && "${VALIDATE_ONLY}" -eq 1 ]]; then
+  die "--force and --validate-only are mutually exclusive"
 fi
 
 cd "${REPO_ROOT}"
@@ -98,13 +108,24 @@ if [[ "${DRY_RUN}" -eq 1 ]]; then
   printf 'Repository root: %s\n' "${REPO_ROOT}"
   printf 'Run ID: %s\n' "${RUN_ID}"
   printf 'Dry run: no wrappers will be executed and no manifest will be written.\n'
-  for script in "${CHILD_SCRIPTS[@]}"; do
-    if [[ "${FORCE}" -eq 1 ]]; then
-      printf 'bash %q --force\n' "${script}"
-    else
-      printf 'bash %q\n' "${script}"
-    fi
-  done
+  if [[ "${VALIDATE_ONLY}" -eq 1 ]]; then
+    printf 'Mode: validate-only\n'
+    printf 'Child wrappers: skipped/not_executed\n'
+    printf 'Required existing JSON outputs:\n'
+    printf '  %s\n' "${EXPECTED_JSON_OUTPUTS[@]}"
+    printf 'Required existing Markdown outputs:\n'
+    printf '  %s\n' "${EXPECTED_MARKDOWN_OUTPUTS[@]}"
+    printf 'Required existing TSV outputs:\n'
+    printf '  %s\n' "${EXPECTED_TSV_OUTPUTS[@]}"
+  else
+    for script in "${CHILD_SCRIPTS[@]}"; do
+      if [[ "${FORCE}" -eq 1 ]]; then
+        printf 'bash %q --force\n' "${script}"
+      else
+        printf 'bash %q\n' "${script}"
+      fi
+    done
+  fi
   printf 'Runtime manifest on real run: %s\n' "${MANIFEST_OUT}"
   exit 0
 fi
@@ -122,26 +143,28 @@ VALIDATION_STATUS_FILE="$(mktemp)"
 trap 'rm -f "${RUN_STATUS_FILE}" "${VALIDATION_STATUS_FILE}"' EXIT
 
 overall_status="passed"
-for script in "${CHILD_SCRIPTS[@]}"; do
-  if [[ "${FORCE}" -eq 1 ]]; then
-    command_display="bash ${script} --force"
-    set +e
-    bash "${script}" --force
-    status=$?
-    set -e
-  else
-    command_display="bash ${script}"
-    set +e
-    bash "${script}"
-    status=$?
-    set -e
-  fi
-  printf '%s\t%s\t%s\n' "${script}" "${command_display}" "${status}" >> "${RUN_STATUS_FILE}"
-  if [[ "${status}" -ne 0 ]]; then
-    overall_status="failed"
-    break
-  fi
-done
+if [[ "${VALIDATE_ONLY}" -ne 1 ]]; then
+  for script in "${CHILD_SCRIPTS[@]}"; do
+    if [[ "${FORCE}" -eq 1 ]]; then
+      command_display="bash ${script} --force"
+      set +e
+      bash "${script}" --force
+      status=$?
+      set -e
+    else
+      command_display="bash ${script}"
+      set +e
+      bash "${script}"
+      status=$?
+      set -e
+    fi
+    printf '%s\t%s\t%s\n' "${script}" "${command_display}" "${status}" >> "${RUN_STATUS_FILE}"
+    if [[ "${status}" -ne 0 ]]; then
+      overall_status="failed"
+      break
+    fi
+  done
+fi
 
 validation_status="passed"
 if [[ "${overall_status}" == "passed" ]]; then
@@ -184,6 +207,18 @@ if [[ "${overall_status}" == "passed" ]]; then
       overall_status="failed"
     fi
   done
+
+  if [[ "${VALIDATE_ONLY}" -eq 1 ]]; then
+    for path in "${EXPECTED_MARKDOWN_OUTPUTS[@]}"; do
+      if [[ -f "${path}" ]]; then
+        printf 'markdown\t%s\tpresent\n' "${path}" >> "${VALIDATION_STATUS_FILE}"
+      else
+        printf 'markdown\t%s\tmissing\n' "${path}" >> "${VALIDATION_STATUS_FILE}"
+        validation_status="failed"
+        overall_status="failed"
+      fi
+    done
+  fi
 fi
 
 post_b0_sha="$(sha256_file "${B0_GRAPH}")"
@@ -193,6 +228,12 @@ post_stage12_sha="$(sha256_file "${STAGE12_GRAPH}")"
 
 [[ "${post_b0_sha}" == "${EXPECTED_B0_SHA}" ]] || overall_status="failed"
 [[ "${post_allocation_sha}" == "${EXPECTED_ALLOCATION_SHA}" ]] || overall_status="failed"
+if [[ "${VALIDATE_ONLY}" -eq 1 ]]; then
+  [[ "${pre_b0_sha}" == "${post_b0_sha}" ]] || overall_status="failed"
+  [[ "${pre_allocation_sha}" == "${post_allocation_sha}" ]] || overall_status="failed"
+  [[ "${pre_stage11_sha}" == "${post_stage11_sha}" ]] || overall_status="failed"
+  [[ "${pre_stage12_sha}" == "${post_stage12_sha}" ]] || overall_status="failed"
+fi
 
 "${PYTHON_BIN}" - \
   "${MANIFEST_OUT}" \
@@ -201,6 +242,7 @@ post_stage12_sha="$(sha256_file "${STAGE12_GRAPH}")"
   "${overall_status}" \
   "${validation_status}" \
   "${FORCE}" \
+  "${VALIDATE_ONLY}" \
   "${RUN_ID}" \
   "${CAPTURE_GIT_STATUS}" \
   "${pre_b0_sha}" \
@@ -239,6 +281,7 @@ outputs = args[separator + 1 :]
     overall_status,
     validation_status,
     force,
+    validate_only,
     run_id,
     capture_git_status,
     pre_b0_sha,
@@ -265,14 +308,24 @@ def run_text(cmd):
         return None
 
 run_rows = []
-for line in Path(run_status_file).read_text(encoding="utf-8").splitlines():
-    script, command, status = line.split("\t")
-    run_rows.append({
-        "script": script,
-        "command": command,
-        "exit_code": int(status),
-        "status": "passed" if status == "0" else "failed",
-    })
+if validate_only == "1":
+    for script in scripts:
+        run_rows.append({
+            "script": script,
+            "command": "not_executed",
+            "exit_code": None,
+            "status": "skipped",
+            "reason": "validate_only",
+        })
+else:
+    for line in Path(run_status_file).read_text(encoding="utf-8").splitlines():
+        script, command, status = line.split("\t")
+        run_rows.append({
+            "script": script,
+            "command": command,
+            "exit_code": int(status),
+            "status": "passed" if status == "0" else "failed",
+        })
 
 validation_rows = []
 if Path(validation_status_file).exists():
@@ -307,13 +360,13 @@ if capture_git_status == "1":
     runtime_git_status = git_status_summary.splitlines() if git_status_summary else []
 
 manifest = {
-    "schema_version": "reconstruction-audit-runtime-manifest-v2",
+    "schema_version": "reconstruction-audit-runtime-manifest-v3",
     "timestamp": datetime.now(timezone.utc).isoformat(),
     "created_by": "scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh",
     "entrypoint": "scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh",
     "run_id": run_id,
     "manifest_out": manifest_out,
-    "mode": "force" if force == "1" else "default",
+    "mode": "validate-only" if validate_only == "1" else "force" if force == "1" else "default",
     "git_commit": git_commit,
     "runtime_git_status": runtime_git_status,
     "scripts_run": run_rows,
@@ -367,7 +420,11 @@ manifest = {
         "No graph data is generated by this entrypoint.",
         "No WDQS or LLM calls are made by this entrypoint.",
         "This does not establish full end-to-end reproducibility from live upstream inputs.",
-    ],
+    ] + (
+        ["No child wrappers were executed in validate-only mode."]
+        if validate_only == "1"
+        else []
+    ),
 }
 
 Path(manifest_out).write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")

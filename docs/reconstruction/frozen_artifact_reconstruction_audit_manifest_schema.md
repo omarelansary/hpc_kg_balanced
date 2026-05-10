@@ -20,13 +20,13 @@ These fields describe the schema and audit contract and should remain stable acr
 
 | Field | Meaning |
 |---|---|
-| `schema_version` | Runtime manifest schema identifier. Current value: `reconstruction-audit-runtime-manifest-v2`. |
+| `schema_version` | Runtime manifest schema identifier. Current value: `reconstruction-audit-runtime-manifest-v3`. |
 | `created_by` | Entrypoint script that wrote the manifest. |
 | `entrypoint` | Entrypoint script path. |
-| `mode` | `default` or `force`. |
+| `mode` | `default`, `force`, or `validate-only`. |
 | `inputs` | Paths for B0 graph, allocation, Stage11 graph output, and Stage12 graph output. |
 | `outputs.expected` | Expected child-wrapper output paths. |
-| `scripts_run` | Child wrappers invoked by the entrypoint and their exit codes. |
+| `scripts_run` | Child wrappers invoked by the entrypoint, or skipped in validate-only mode. |
 | `validation_results` | JSON/TSV validation records for expected outputs. |
 | `validation_status` | Aggregate validation status. |
 | `key_hashes` | Pre-run and post-run hashes for B0, allocation, Stage11 graph output, and Stage12 graph output. |
@@ -45,9 +45,43 @@ These fields are expected to change across runs and should not be used as stable
 | `git_commit` | Changes when repository history advances. |
 | `runtime_git_status` | Disabled by default; when enabled, can include dirtiness caused by runtime outputs. |
 | `output_files_present_after_run` | Depends on which child outputs exist and whether child wrappers ran successfully. |
-| `scripts_run[].exit_code` | Depends on default versus force mode and existing outputs. |
-| `scripts_run[].status` | Depends on child wrapper execution. |
+| `scripts_run[].exit_code` | Depends on default versus force mode and existing outputs; may be `null` in validate-only mode. |
+| `scripts_run[].status` | Depends on child wrapper execution; `skipped` in validate-only mode. |
 | `validation_status` | Depends on child wrapper execution and output presence. |
+
+## Validate-Only Mode
+
+Validate-only mode is selected with:
+
+```bash
+bash scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh --validate-only
+```
+
+In validate-only mode:
+
+- child wrappers are not executed;
+- existing rebuild outputs are not rewritten;
+- expected JSON outputs must already exist and parse with `python -m json.tool`;
+- expected TSV outputs must already exist and pass row-width validation;
+- expected Markdown summary outputs must already exist;
+- B0, allocation, Stage11 graph output, and Stage12 graph output hashes are computed before and after validation;
+- only the runtime manifest under `rebuild/runs/` is written.
+
+Each `scripts_run` row has this shape:
+
+```json
+{
+  "script": "scripts/reconstruction/01_audit_B0_final_graph.sh",
+  "command": "not_executed",
+  "exit_code": null,
+  "status": "skipped",
+  "reason": "validate_only"
+}
+```
+
+The runtime manifest includes the note:
+
+`No child wrappers were executed in validate-only mode.`
 
 ## Environment Controls
 

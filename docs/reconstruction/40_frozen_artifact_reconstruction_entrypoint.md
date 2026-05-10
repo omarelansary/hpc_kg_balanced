@@ -33,7 +33,7 @@ It validates that the selected B0 graph and canonical allocation hashes match th
 - B0 graph SHA256: `c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9`
 - Canonical allocation SHA256: `a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb`
 
-It also validates generated JSON files with `python -m json.tool`, validates generated TSV row shape, records child-wrapper exit status, and writes a machine-readable runtime manifest.
+It also validates generated JSON files with `python -m json.tool`, validates generated TSV row shape, records child-wrapper execution or skip status, and writes a machine-readable runtime manifest.
 
 ## What It Does Not Do
 
@@ -74,7 +74,7 @@ The shared helpers in `scripts/reconstruction/00_common.sh` cover path defaults,
 - The canonical allocation remains:
   `src/Pruning graph/bidirectional_allocation_results5k.json`
 - Existing child wrappers remain wrapper-only and do not generate graph data.
-- Existing rebuild outputs may already exist. In that case, normal mode will fail when child wrappers refuse overwrite; use `--force` to rebuild audit outputs.
+- Existing rebuild outputs may already exist. In that case, normal mode will fail when child wrappers refuse overwrite; use `--validate-only` to validate existing rebuild outputs without rewriting them, or use `--force` when intentional regeneration is required.
 
 ## Environment Overrides
 
@@ -148,11 +148,36 @@ Force mode:
 bash scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh --force
 ```
 
+Validate-only dry run:
+
+```bash
+bash scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh --validate-only --dry-run
+```
+
+Validate-only mode:
+
+```bash
+bash scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh --validate-only
+```
+
+## Execution Modes
+
+| Mode | Child wrappers executed? | Rebuild outputs rewritten? | Runtime manifest written? | Use when |
+|---|---|---|---|---|
+| Default | Yes, without `--force` | Only if child outputs do not already exist | Yes | Running from a clean rebuild directory. |
+| Force | Yes, with `--force` | Yes | Yes | Intentionally regenerating rebuild audit outputs. |
+| Validate-only | No | No | Yes | Checking existing rebuild outputs without timestamp/hash churn. |
+| Dry-run | No | No | No | Previewing default or validate-only behavior. |
+
+Validate-only mode requires the existing rebuild JSON, Markdown, and TSV outputs to be present. It validates those files and key graph/allocation hashes, then writes only a runtime manifest under `rebuild/runs/`. It records each child wrapper in `scripts_run` as `skipped` with reason `validate_only`.
+
+Use `--force` instead of `--validate-only` only when the rebuild outputs should be intentionally refreshed.
+
 ## Interpretation of Success
 
 Success means:
 
-- all child reconstruction wrappers completed,
+- all child reconstruction wrappers completed, or in validate-only mode all child wrappers were explicitly skipped,
 - B0 and allocation hashes matched expected values before and after the audit,
 - key graph-output hashes were unchanged during the audit,
 - generated JSON reports parsed successfully,
