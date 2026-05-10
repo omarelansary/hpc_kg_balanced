@@ -43,7 +43,17 @@ fi
 cd "${REPO_ROOT}"
 
 REBUILD_DIR="${RECON_REBUILD_DIR}"
-MANIFEST_OUT="${REBUILD_DIR}/frozen_artifact_reconstruction_audit_manifest.json"
+if [[ -n "${RECON_AUDIT_RUN_ID:-}" ]]; then
+  RUN_ID="${RECON_AUDIT_RUN_ID}"
+else
+  RUN_ID="$(date -u +%Y%m%dT%H%M%SZ)"
+fi
+MANIFEST_OUT="${RECON_AUDIT_MANIFEST_OUT:-${REBUILD_DIR}/runs/${RUN_ID}_frozen_artifact_reconstruction_audit_manifest.json}"
+CAPTURE_GIT_STATUS="${RECON_CAPTURE_GIT_STATUS:-0}"
+
+if [[ "${CAPTURE_GIT_STATUS}" != "0" && "${CAPTURE_GIT_STATUS}" != "1" ]]; then
+  die "RECON_CAPTURE_GIT_STATUS must be 0 or 1"
+fi
 
 EXPECTED_B0_SHA="${RECON_EXPECTED_B0_SHA}"
 EXPECTED_ALLOCATION_SHA="${RECON_EXPECTED_ALLOCATION_SHA}"
@@ -86,6 +96,7 @@ require_files "${CHILD_SCRIPTS[@]}" "${B0_GRAPH}" "${ALLOCATION}" "${STAGE11_GRA
 
 if [[ "${DRY_RUN}" -eq 1 ]]; then
   printf 'Repository root: %s\n' "${REPO_ROOT}"
+  printf 'Run ID: %s\n' "${RUN_ID}"
   printf 'Dry run: no wrappers will be executed and no manifest will be written.\n'
   for script in "${CHILD_SCRIPTS[@]}"; do
     if [[ "${FORCE}" -eq 1 ]]; then
@@ -94,11 +105,12 @@ if [[ "${DRY_RUN}" -eq 1 ]]; then
       printf 'bash %q\n' "${script}"
     fi
   done
-  printf 'Manifest on real run: %s\n' "${MANIFEST_OUT}"
+  printf 'Runtime manifest on real run: %s\n' "${MANIFEST_OUT}"
   exit 0
 fi
 
 safe_mkdir "${REBUILD_DIR}"
+safe_mkdir "$(dirname "${MANIFEST_OUT}")"
 
 pre_b0_sha="$(assert_sha256 "${B0_GRAPH}" "${EXPECTED_B0_SHA}" "B0")"
 pre_allocation_sha="$(assert_sha256 "${ALLOCATION}" "${EXPECTED_ALLOCATION_SHA}" "allocation")"
@@ -189,6 +201,8 @@ post_stage12_sha="$(sha256_file "${STAGE12_GRAPH}")"
   "${overall_status}" \
   "${validation_status}" \
   "${FORCE}" \
+  "${RUN_ID}" \
+  "${CAPTURE_GIT_STATUS}" \
   "${pre_b0_sha}" \
   "${post_b0_sha}" \
   "${pre_allocation_sha}" \
@@ -225,6 +239,8 @@ outputs = args[separator + 1 :]
     overall_status,
     validation_status,
     force,
+    run_id,
+    capture_git_status,
     pre_b0_sha,
     post_b0_sha,
     pre_allocation_sha,
@@ -275,26 +291,31 @@ for path_text in outputs:
 git_commit = run_text(["git", "rev-parse", "HEAD"])
 rebuild_dir = str(Path(manifest_out).parent)
 stage11_dir = str(Path(stage11_graph).parent)
-git_status_summary = run_text([
-    "git",
-    "status",
-    "--short",
-    "--",
-    "scripts/reconstruction",
-    "docs/reconstruction",
-    rebuild_dir,
-    stage11_dir,
-    allocation,
-])
+runtime_git_status = "not_captured"
+if capture_git_status == "1":
+    git_status_summary = run_text([
+        "git",
+        "status",
+        "--short",
+        "--",
+        "scripts/reconstruction",
+        "docs/reconstruction",
+        rebuild_dir,
+        stage11_dir,
+        allocation,
+    ])
+    runtime_git_status = git_status_summary.splitlines() if git_status_summary else []
 
 manifest = {
-    "schema_version": "reconstruction-audit-manifest-v1",
+    "schema_version": "reconstruction-audit-runtime-manifest-v2",
     "timestamp": datetime.now(timezone.utc).isoformat(),
     "created_by": "scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh",
     "entrypoint": "scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh",
+    "run_id": run_id,
+    "manifest_out": manifest_out,
     "mode": "force" if force == "1" else "default",
     "git_commit": git_commit,
-    "git_status_summary_relevant_paths": git_status_summary.splitlines() if git_status_summary else [],
+    "runtime_git_status": runtime_git_status,
     "scripts_run": run_rows,
     "expected_output_files": outputs,
     "output_files_present_after_run": output_files,

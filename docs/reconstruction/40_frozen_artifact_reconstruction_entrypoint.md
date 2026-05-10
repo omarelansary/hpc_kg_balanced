@@ -6,7 +6,15 @@ Entrypoint:
 
 Run manifest:
 
+Historical committed manifest from the first wrapper phase:
+
 `artifacts/final_graph/selected_final_graph/rebuild/frozen_artifact_reconstruction_audit_manifest.json`
+
+Runtime manifests from new runs:
+
+`artifacts/final_graph/selected_final_graph/rebuild/runs/${RUN_ID}_frozen_artifact_reconstruction_audit_manifest.json`
+
+The fixed historical manifest is retained as prior evidence. New audit runs write timestamped runtime manifests so normal validation does not rewrite the committed manifest path.
 
 ## What It Does
 
@@ -25,7 +33,7 @@ It validates that the selected B0 graph and canonical allocation hashes match th
 - B0 graph SHA256: `c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9`
 - Canonical allocation SHA256: `a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb`
 
-It also validates generated JSON files with `python -m json.tool`, validates generated TSV row shape, records child-wrapper exit status, and writes a machine-readable run manifest.
+It also validates generated JSON files with `python -m json.tool`, validates generated TSV row shape, records child-wrapper exit status, and writes a machine-readable runtime manifest.
 
 ## What It Does Not Do
 
@@ -83,8 +91,42 @@ The wrappers use these defaults from `scripts/reconstruction/00_common.sh`. They
 | `RECON_HETZNER_RUN_DIR` | Archived Stage3-Stage7 run directory |
 | `RECON_EXPECTED_B0_SHA` | Expected B0 SHA256 |
 | `RECON_EXPECTED_ALLOCATION_SHA` | Expected allocation SHA256 |
+| `RECON_AUDIT_RUN_ID` | Runtime manifest run ID. Default is a UTC timestamp like `YYYYMMDDTHHMMSSZ`. |
+| `RECON_AUDIT_MANIFEST_OUT` | Full runtime manifest output path. Default is `${RECON_REBUILD_DIR}/runs/${RUN_ID}_frozen_artifact_reconstruction_audit_manifest.json`. |
+| `RECON_CAPTURE_GIT_STATUS` | Optional runtime dirty-status capture. Default `0` records `runtime_git_status: "not_captured"`; set `1` to include relevant `git status --short` lines. |
 
 Only path and orchestration defaults are configurable here. Verification thresholds, expected counts, and scientific pass/fail checks remain fixed in the child wrappers.
+
+## Manifest Policy
+
+The committed file `artifacts/final_graph/selected_final_graph/rebuild/frozen_artifact_reconstruction_audit_manifest.json` is historical evidence from the earlier reconstruction phase. It is not the default output path for new runs.
+
+New runtime manifests are generated outputs. They intentionally contain volatile fields such as timestamp, run ID, output presence, validation status, and optional git status. They should be reviewed as run records rather than treated as stable source files.
+
+Schema documentation:
+
+`docs/reconstruction/frozen_artifact_reconstruction_audit_manifest_schema.md`
+
+The default runtime manifest path can be made deterministic for testing:
+
+```bash
+RECON_AUDIT_RUN_ID=test_run \
+  bash scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh --force
+```
+
+The runtime manifest can also be redirected:
+
+```bash
+RECON_AUDIT_MANIFEST_OUT=/tmp/reconstruction_audit_manifest.json \
+  bash scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh --force
+```
+
+Git dirty-status capture is disabled by default to avoid recording dirtiness caused by validation outputs themselves:
+
+```bash
+RECON_CAPTURE_GIT_STATUS=1 \
+  bash scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh --force
+```
 
 ## Commands
 
@@ -115,7 +157,7 @@ Success means:
 - key graph-output hashes were unchanged during the audit,
 - generated JSON reports parsed successfully,
 - generated TSV files had consistent row width,
-- the run manifest was written and parsed successfully.
+- the runtime manifest was written and parsed successfully.
 
 Success does not mean the full thesis pipeline can be rerun from live upstream sources. It means the frozen-artifact evidence chain and documentation rebuild checks are internally consistent.
 
