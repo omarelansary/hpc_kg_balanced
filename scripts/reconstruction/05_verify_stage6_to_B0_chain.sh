@@ -5,53 +5,47 @@ IFS=$'\n\t'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/00_common.sh"
 
-FORCE=0
-if [[ "${1:-}" == "--force" ]]; then
-  FORCE=1
-  shift
-fi
-[[ "$#" -eq 0 ]] || die "usage: $0 [--force]"
+parse_force_only_args "$@"
 
 cd "${REPO_ROOT}"
 
-PYTHON_BIN="${PYTHON_BIN:-python}"
-REBUILD_DIR="artifacts/final_graph/selected_final_graph/rebuild"
+REBUILD_DIR="${RECON_REBUILD_DIR}"
 OUT="${REBUILD_DIR}/stage6_to_B0_chain_verification.json"
 
-EXPECTED_STAGE6_GRAPH="archive/hetzner_version/runs/prod_refine_20260315_180520/stage06_refine_graph/refined_graph_triples.jsonl"
-STAGE6_RUN_DIR="archive/hetzner_version/runs/prod_refine_20260315_180520"
+EXPECTED_STAGE6_GRAPH="${RECON_HETZNER_RUN_DIR}/stage06_refine_graph/refined_graph_triples.jsonl"
+STAGE6_RUN_DIR="${RECON_HETZNER_RUN_DIR}"
 STAGE6_GRAPH="${EXPECTED_STAGE6_GRAPH}"
 if [[ ! -f "${STAGE6_GRAPH}" ]]; then
   STAGE6_GRAPH="$(find "${STAGE6_RUN_DIR}" -type f \( -path '*stage06*' -o -path '*stage6*' \) \( -name '*graph*triples*.jsonl' -o -name '*refined*.jsonl' \) | sort | head -1)"
   [[ -n "${STAGE6_GRAPH}" ]] || die "could not find Stage6 refined graph under ${STAGE6_RUN_DIR}"
 fi
 
-STAGE6_SUMMARY="archive/hetzner_version/runs/prod_refine_20260315_180520/stage06_refine_graph/summary.json"
-STAGE6_REFINEMENT_MOVES="archive/hetzner_version/runs/prod_refine_20260315_180520/stage06_refine_graph/refinement_moves.jsonl"
+STAGE6_SUMMARY="${RECON_HETZNER_RUN_DIR}/stage06_refine_graph/summary.json"
+STAGE6_REFINEMENT_MOVES="${RECON_HETZNER_RUN_DIR}/stage06_refine_graph/refinement_moves.jsonl"
 
-STAGE7_GRAPH="archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl"
-STAGE7_MANIFEST="archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/manifest.json"
-STAGE7_SUMMARY="archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/summary.json"
-STAGE7_PROGRESS="archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/progress.json"
+STAGE7_GRAPH="${RECON_HETZNER_RUN_DIR}/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl"
+STAGE7_MANIFEST="${RECON_HETZNER_RUN_DIR}/stage07_filtering_eta_aware_prod/manifest.json"
+STAGE7_SUMMARY="${RECON_HETZNER_RUN_DIR}/stage07_filtering_eta_aware_prod/summary.json"
+STAGE7_PROGRESS="${RECON_HETZNER_RUN_DIR}/stage07_filtering_eta_aware_prod/progress.json"
 STAGE7_LOG="archive/hetzner_version/logs/eta_aware_component_filter_prod.out"
 
-STAGE11_MANIFEST="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/manifest.json"
-STAGE11_REPORT="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/report.json"
-STAGE11_STATE="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json"
-STAGE11_GRAPH_OUTPUT="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl"
+STAGE11_MANIFEST="${RECON_STAGE11_DIR}/manifest.json"
+STAGE11_REPORT="${RECON_STAGE11_DIR}/report.json"
+STAGE11_STATE="${RECON_STAGE11_DIR}/state.json"
+STAGE11_GRAPH_OUTPUT="${RECON_STAGE11_DIR}/graph_output.jsonl"
 
-STAGE12_MANIFEST="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/manifest.json"
-STAGE12_REPORT="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/report.json"
-STAGE12_STATE="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/state.json"
-STAGE12_GRAPH_OUTPUT="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl"
-B0_GRAPH="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv"
+STAGE12_MANIFEST="${RECON_STAGE12_DIR}/manifest.json"
+STAGE12_REPORT="${RECON_STAGE12_DIR}/report.json"
+STAGE12_STATE="${RECON_STAGE12_DIR}/state.json"
+STAGE12_GRAPH_OUTPUT="${RECON_STAGE12_DIR}/graph_output.jsonl"
+B0_GRAPH="${RECON_B0_GRAPH}"
 
-PATH_TRANSLATION_V3="artifacts/final_graph/selected_final_graph/rebuild/path_translation_manifest.v3.json"
-STAGE7_TO_B0_VERIFICATION="artifacts/final_graph/selected_final_graph/rebuild/stage7_to_B0_chain_verification.json"
+PATH_TRANSLATION_V3="${REBUILD_DIR}/path_translation_manifest.v3.json"
+STAGE7_TO_B0_VERIFICATION="${REBUILD_DIR}/stage7_to_B0_chain_verification.json"
 STAGE7_RESOLUTION_DOC="docs/reconstruction/25_pre_stage11_input_mapping_hetzner_resolution.md"
 STAGE7_TO_B0_DOC="docs/reconstruction/26_stage7_to_B0_chain_verification.md"
 
-for path in \
+require_files \
   "${STAGE6_GRAPH}" \
   "${STAGE6_SUMMARY}" \
   "${STAGE6_REFINEMENT_MOVES}" \
@@ -72,13 +66,9 @@ for path in \
   "${PATH_TRANSLATION_V3}" \
   "${STAGE7_TO_B0_VERIFICATION}" \
   "${STAGE7_RESOLUTION_DOC}" \
-  "${STAGE7_TO_B0_DOC}"; do
-  require_file "${path}"
-done
+  "${STAGE7_TO_B0_DOC}"
 
-if [[ "${FORCE}" -ne 1 ]]; then
-  [[ ! -e "${OUT}" ]] || die "refusing to overwrite ${OUT}; rerun with --force"
-fi
+refuse_overwrite_unless_force "${FORCE}" "${OUT}"
 
 safe_mkdir "${REBUILD_DIR}"
 

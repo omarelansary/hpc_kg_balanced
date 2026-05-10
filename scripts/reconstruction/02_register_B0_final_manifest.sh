@@ -5,19 +5,13 @@ IFS=$'\n\t'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/00_common.sh"
 
-FORCE=0
-if [[ "${1:-}" == "--force" ]]; then
-  FORCE=1
-  shift
-fi
-[[ "$#" -eq 0 ]] || die "usage: $0 [--force]"
+parse_force_only_args "$@"
 
 cd "${REPO_ROOT}"
 
-PYTHON_BIN="${PYTHON_BIN:-python}"
-REBUILD_DIR="artifacts/final_graph/selected_final_graph/rebuild"
-SELECTED_GRAPH="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv"
-ALLOCATION="src/Pruning graph/bidirectional_allocation_results5k.json"
+REBUILD_DIR="${RECON_REBUILD_DIR}"
+SELECTED_GRAPH="${RECON_B0_GRAPH}"
+ALLOCATION="${RECON_ALLOCATION}"
 REAUDIT_REPORT="${REBUILD_DIR}/B0_reaudit.report.json"
 ORIGINAL_MANIFEST="artifacts/final_graph/selected_final_graph/final_graph_manifest.json"
 DECISION_DOC="docs/reconstruction/19_final_graph_selection_decision.md"
@@ -27,21 +21,18 @@ MANIFEST_OUT="${REBUILD_DIR}/final_graph_manifest.rebuilt.json"
 METRICS_OUT="${REBUILD_DIR}/final_graph_metrics.rebuilt.json"
 HASHES_OUT="${REBUILD_DIR}/final_graph_hashes.rebuilt.tsv"
 
-EXPECTED_GRAPH_SHA="c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
-EXPECTED_ALLOCATION_SHA="a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+EXPECTED_GRAPH_SHA="${RECON_EXPECTED_B0_SHA}"
+EXPECTED_ALLOCATION_SHA="${RECON_EXPECTED_ALLOCATION_SHA}"
 
-require_file "${SELECTED_GRAPH}"
-require_file "${ALLOCATION}"
-require_file "${REAUDIT_REPORT}"
-require_file "${ORIGINAL_MANIFEST}"
-require_file "${DECISION_DOC}"
-require_file "${FINAL_DECISION_MD}"
+require_files \
+  "${SELECTED_GRAPH}" \
+  "${ALLOCATION}" \
+  "${REAUDIT_REPORT}" \
+  "${ORIGINAL_MANIFEST}" \
+  "${DECISION_DOC}" \
+  "${FINAL_DECISION_MD}"
 
-if [[ "${FORCE}" -ne 1 ]]; then
-  [[ ! -e "${MANIFEST_OUT}" ]] || die "refusing to overwrite ${MANIFEST_OUT}; rerun with --force"
-  [[ ! -e "${METRICS_OUT}" ]] || die "refusing to overwrite ${METRICS_OUT}; rerun with --force"
-  [[ ! -e "${HASHES_OUT}" ]] || die "refusing to overwrite ${HASHES_OUT}; rerun with --force"
-fi
+refuse_overwrite_unless_force "${FORCE}" "${MANIFEST_OUT}" "${METRICS_OUT}" "${HASHES_OUT}"
 
 safe_mkdir "${REBUILD_DIR}"
 
@@ -196,4 +187,3 @@ print(f"rebuilt_manifest={manifest_out}")
 print(f"rebuilt_metrics={metrics_out}")
 print(f"rebuilt_hashes={hashes_out}")
 PY
-

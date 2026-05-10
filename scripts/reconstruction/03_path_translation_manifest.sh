@@ -5,33 +5,23 @@ IFS=$'\n\t'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/00_common.sh"
 
-FORCE=0
-if [[ "${1:-}" == "--force" ]]; then
-  FORCE=1
-  shift
-fi
-[[ "$#" -eq 0 ]] || die "usage: $0 [--force]"
+parse_force_only_args "$@"
 
 cd "${REPO_ROOT}"
 
-PYTHON_BIN="${PYTHON_BIN:-python}"
-REBUILD_DIR="artifacts/final_graph/selected_final_graph/rebuild"
+REBUILD_DIR="${RECON_REBUILD_DIR}"
 OUT="${REBUILD_DIR}/path_translation_manifest.json"
 
-STAGE11_MANIFEST="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/manifest.json"
-STAGE12_MANIFEST="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/manifest.json"
-LOCAL_ALLOCATION="src/Pruning graph/bidirectional_allocation_results5k.json"
+STAGE11_MANIFEST="${RECON_STAGE11_DIR}/manifest.json"
+STAGE12_MANIFEST="${RECON_STAGE12_DIR}/manifest.json"
+LOCAL_ALLOCATION="${RECON_ALLOCATION}"
 
 STALE_PRE_STAGE11_GRAPH="/home/kg_benchmark/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl"
 STALE_ALLOCATION="/home/kg_benchmark/src/kg_builder/input/bidirectional_allocation_results5k.json"
 
-require_file "${STAGE11_MANIFEST}"
-require_file "${STAGE12_MANIFEST}"
-require_file "${LOCAL_ALLOCATION}"
+require_files "${STAGE11_MANIFEST}" "${STAGE12_MANIFEST}" "${LOCAL_ALLOCATION}"
 
-if [[ "${FORCE}" -ne 1 ]]; then
-  [[ ! -e "${OUT}" ]] || die "refusing to overwrite ${OUT}; rerun with --force"
-fi
+refuse_overwrite_unless_force "${FORCE}" "${OUT}"
 
 safe_mkdir "${REBUILD_DIR}"
 

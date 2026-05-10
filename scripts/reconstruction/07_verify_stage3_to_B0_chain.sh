@@ -5,20 +5,14 @@ IFS=$'\n\t'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/00_common.sh"
 
-FORCE=0
-if [[ "${1:-}" == "--force" ]]; then
-  FORCE=1
-  shift
-fi
-[[ "$#" -eq 0 ]] || die "usage: $0 [--force]"
+parse_force_only_args "$@"
 
 cd "${REPO_ROOT}"
 
-PYTHON_BIN="${PYTHON_BIN:-python}"
-REBUILD_DIR="artifacts/final_graph/selected_final_graph/rebuild"
+REBUILD_DIR="${RECON_REBUILD_DIR}"
 OUT="${REBUILD_DIR}/stage3_to_B0_chain_verification.json"
 
-RUN_DIR="archive/hetzner_version/runs/prod_refine_20260315_180520"
+RUN_DIR="${RECON_HETZNER_RUN_DIR}"
 RUN_MANIFEST="${RUN_DIR}/manifest.json"
 
 PIPELINE_SCRIPT="archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py"
@@ -36,11 +30,11 @@ STAGE04_SELECTION_LOG="${RUN_DIR}/stage04_core_graph/core_graph_selection_log.js
 STAGE04_RELATION_COUNTS="${RUN_DIR}/stage04_core_graph/core_graph_relation_counts.json"
 STAGE04_COMPONENT_REPORT="${RUN_DIR}/stage04_core_graph/core_graph_component_report.json"
 
-STAGE5_TO_B0_VERIFICATION="artifacts/final_graph/selected_final_graph/rebuild/stage5_to_B0_chain_verification.json"
+STAGE5_TO_B0_VERIFICATION="${REBUILD_DIR}/stage5_to_B0_chain_verification.json"
 STAGE5_TO_B0_DOC="docs/reconstruction/28_stage5_to_B0_chain_verification.md"
-B0_GRAPH="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv"
+B0_GRAPH="${RECON_B0_GRAPH}"
 
-for path in \
+require_files \
   "${RUN_MANIFEST}" \
   "${PIPELINE_SCRIPT}" \
   "${PIPELINE_CONFIG}" \
@@ -54,14 +48,10 @@ for path in \
   "${STAGE04_COMPONENT_REPORT}" \
   "${STAGE5_TO_B0_VERIFICATION}" \
   "${STAGE5_TO_B0_DOC}" \
-  "${B0_GRAPH}"; do
-  require_file "${path}"
-done
-[[ -d "${STAGE02_SHARDS_DIR}" ]] || die "required directory not found: ${STAGE02_SHARDS_DIR}"
+  "${B0_GRAPH}"
+require_dir "${STAGE02_SHARDS_DIR}"
 
-if [[ "${FORCE}" -ne 1 ]]; then
-  [[ ! -e "${OUT}" ]] || die "refusing to overwrite ${OUT}; rerun with --force"
-fi
+refuse_overwrite_unless_force "${FORCE}" "${OUT}"
 
 safe_mkdir "${REBUILD_DIR}"
 

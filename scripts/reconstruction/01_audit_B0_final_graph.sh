@@ -5,40 +5,26 @@ IFS=$'\n\t'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/00_common.sh"
 
-FORCE=0
-if [[ "${1:-}" == "--force" ]]; then
-  FORCE=1
-  shift
-fi
-[[ "$#" -eq 0 ]] || die "usage: $0 [--force]"
+parse_force_only_args "$@"
 
 cd "${REPO_ROOT}"
 
-PYTHON_BIN="${PYTHON_BIN:-python}"
-SELECTED_GRAPH="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv"
-ALLOCATION="src/Pruning graph/bidirectional_allocation_results5k.json"
+SELECTED_GRAPH="${RECON_B0_GRAPH}"
+ALLOCATION="${RECON_ALLOCATION}"
 EVALUATOR="tools/graph_candidate_evaluation/evaluate_graph_candidate.py"
-REBUILD_DIR="artifacts/final_graph/selected_final_graph/rebuild"
+REBUILD_DIR="${RECON_REBUILD_DIR}"
 REPORT="${REBUILD_DIR}/B0_reaudit.report.json"
 SUMMARY="${REBUILD_DIR}/B0_reaudit.summary.md"
 
-EXPECTED_GRAPH_SHA="c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
-EXPECTED_ALLOCATION_SHA="a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+EXPECTED_GRAPH_SHA="${RECON_EXPECTED_B0_SHA}"
+EXPECTED_ALLOCATION_SHA="${RECON_EXPECTED_ALLOCATION_SHA}"
 
-require_file "${SELECTED_GRAPH}"
-require_file "${ALLOCATION}"
-require_file "${EVALUATOR}"
+require_files "${SELECTED_GRAPH}" "${ALLOCATION}" "${EVALUATOR}"
 
-if [[ "${FORCE}" -ne 1 ]]; then
-  [[ ! -e "${REPORT}" ]] || die "refusing to overwrite ${REPORT}; rerun with --force"
-  [[ ! -e "${SUMMARY}" ]] || die "refusing to overwrite ${SUMMARY}; rerun with --force"
-fi
+refuse_overwrite_unless_force "${FORCE}" "${REPORT}" "${SUMMARY}"
 
-GRAPH_SHA="$(sha256_file "${SELECTED_GRAPH}")"
-ALLOCATION_SHA="$(sha256_file "${ALLOCATION}")"
-
-[[ "${GRAPH_SHA}" == "${EXPECTED_GRAPH_SHA}" ]] || die "selected graph SHA mismatch: ${GRAPH_SHA}"
-[[ "${ALLOCATION_SHA}" == "${EXPECTED_ALLOCATION_SHA}" ]] || die "allocation SHA mismatch: ${ALLOCATION_SHA}"
+GRAPH_SHA="$(assert_sha256 "${SELECTED_GRAPH}" "${EXPECTED_GRAPH_SHA}" "selected graph")"
+ALLOCATION_SHA="$(assert_sha256 "${ALLOCATION}" "${EXPECTED_ALLOCATION_SHA}" "allocation")"
 
 safe_mkdir "${REBUILD_DIR}"
 
@@ -66,4 +52,3 @@ print(f"B0 reaudit complete: {report_path}")
 print(f"graph_sha256={graph_sha}")
 print(f"allocation_sha256={allocation_sha}")
 PY
-

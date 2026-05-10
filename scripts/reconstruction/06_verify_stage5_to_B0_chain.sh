@@ -5,20 +5,14 @@ IFS=$'\n\t'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/00_common.sh"
 
-FORCE=0
-if [[ "${1:-}" == "--force" ]]; then
-  FORCE=1
-  shift
-fi
-[[ "$#" -eq 0 ]] || die "usage: $0 [--force]"
+parse_force_only_args "$@"
 
 cd "${REPO_ROOT}"
 
-PYTHON_BIN="${PYTHON_BIN:-python}"
-REBUILD_DIR="artifacts/final_graph/selected_final_graph/rebuild"
+REBUILD_DIR="${RECON_REBUILD_DIR}"
 OUT="${REBUILD_DIR}/stage5_to_B0_chain_verification.json"
 
-RUN_DIR="archive/hetzner_version/runs/prod_refine_20260315_180520"
+RUN_DIR="${RECON_HETZNER_RUN_DIR}"
 STAGE4_CORE_GRAPH="${RUN_DIR}/stage04_core_graph/core_graph_triples.jsonl"
 
 STAGE5_DIR="${RUN_DIR}/stage05_repair"
@@ -29,10 +23,10 @@ STAGE6_GRAPH="${RUN_DIR}/stage06_refine_graph/refined_graph_triples.jsonl"
 STAGE6_SUMMARY="${RUN_DIR}/stage06_refine_graph/summary.json"
 STAGE6_REFINEMENT_MOVES="${RUN_DIR}/stage06_refine_graph/refinement_moves.jsonl"
 
-STAGE6_TO_B0_VERIFICATION="artifacts/final_graph/selected_final_graph/rebuild/stage6_to_B0_chain_verification.json"
+STAGE6_TO_B0_VERIFICATION="${REBUILD_DIR}/stage6_to_B0_chain_verification.json"
 STAGE6_TO_B0_DOC="docs/reconstruction/27_stage6_to_B0_chain_verification.md"
 
-for path in \
+require_files \
   "${STAGE4_CORE_GRAPH}" \
   "${STAGE5_SUMMARY}" \
   "${STAGE5_REPAIR_TRIPLES}" \
@@ -40,13 +34,9 @@ for path in \
   "${STAGE6_SUMMARY}" \
   "${STAGE6_REFINEMENT_MOVES}" \
   "${STAGE6_TO_B0_VERIFICATION}" \
-  "${STAGE6_TO_B0_DOC}"; do
-  require_file "${path}"
-done
+  "${STAGE6_TO_B0_DOC}"
 
-if [[ "${FORCE}" -ne 1 ]]; then
-  [[ ! -e "${OUT}" ]] || die "refusing to overwrite ${OUT}; rerun with --force"
-fi
+refuse_overwrite_unless_force "${FORCE}" "${OUT}"
 
 safe_mkdir "${REBUILD_DIR}"
 

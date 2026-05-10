@@ -45,6 +45,19 @@ It does not:
 
 It validates frozen historical artifacts and rebuilds audit/manifest outputs only.
 
+## Wrapper-Only Refactor Boundary
+
+The reconstruction wrappers centralize shell orchestration only. The refactor does not change:
+
+- scientific checks,
+- expected hashes,
+- expected triple counts,
+- graph parsing logic,
+- inline Python verification logic,
+- selected B0 graph or allocation artifacts.
+
+The shared helpers in `scripts/reconstruction/00_common.sh` cover path defaults, `--force` handling, overwrite refusal, required-file checks, SHA256 assertions, JSON validation, and TSV row-width validation.
+
 ## Required Assumptions
 
 - The repository contains the Hetzner archive evidence used in R2.2-R2.7.
@@ -54,6 +67,24 @@ It validates frozen historical artifacts and rebuilds audit/manifest outputs onl
   `src/Pruning graph/bidirectional_allocation_results5k.json`
 - Existing child wrappers remain wrapper-only and do not generate graph data.
 - Existing rebuild outputs may already exist. In that case, normal mode will fail when child wrappers refuse overwrite; use `--force` to rebuild audit outputs.
+
+## Environment Overrides
+
+The wrappers use these defaults from `scripts/reconstruction/00_common.sh`. They may be overridden by environment variables for controlled local testing, while preserving the current default behavior:
+
+| Variable | Default role |
+|---|---|
+| `PYTHON_BIN` | Python executable, default `python` |
+| `RECON_REBUILD_DIR` | Rebuild/audit output directory |
+| `RECON_B0_GRAPH` | Selected B0 largest-component graph |
+| `RECON_ALLOCATION` | Canonical 5k allocation JSON |
+| `RECON_STAGE11_DIR` | Stage11 repair artifact directory |
+| `RECON_STAGE12_DIR` | Stage12 path-repair artifact directory |
+| `RECON_HETZNER_RUN_DIR` | Archived Stage3-Stage7 run directory |
+| `RECON_EXPECTED_B0_SHA` | Expected B0 SHA256 |
+| `RECON_EXPECTED_ALLOCATION_SHA` | Expected allocation SHA256 |
+
+Only path and orchestration defaults are configurable here. Verification thresholds, expected counts, and scientific pass/fail checks remain fixed in the child wrappers.
 
 ## Commands
 

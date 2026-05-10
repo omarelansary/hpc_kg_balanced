@@ -5,41 +5,35 @@ IFS=$'\n\t'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/00_common.sh"
 
-FORCE=0
-if [[ "${1:-}" == "--force" ]]; then
-  FORCE=1
-  shift
-fi
-[[ "$#" -eq 0 ]] || die "usage: $0 [--force]"
+parse_force_only_args "$@"
 
 cd "${REPO_ROOT}"
 
-PYTHON_BIN="${PYTHON_BIN:-python}"
-REBUILD_DIR="artifacts/final_graph/selected_final_graph/rebuild"
+REBUILD_DIR="${RECON_REBUILD_DIR}"
 OUT="${REBUILD_DIR}/stage7_to_B0_chain_verification.json"
 
 EXPECTED_STAGE7_SHA="c7d5132bd0b20aa0da4a64ecbf183abf412c3effca38bef84105c7791126fb4b"
 
-STAGE7_GRAPH="archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl"
-STAGE7_MANIFEST="archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/manifest.json"
-STAGE7_SUMMARY="archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/summary.json"
-STAGE7_PROGRESS="archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_filtering_eta_aware_prod/progress.json"
+STAGE7_GRAPH="${RECON_HETZNER_RUN_DIR}/stage07_filtering_eta_aware_prod/filtered_graph_triples.jsonl"
+STAGE7_MANIFEST="${RECON_HETZNER_RUN_DIR}/stage07_filtering_eta_aware_prod/manifest.json"
+STAGE7_SUMMARY="${RECON_HETZNER_RUN_DIR}/stage07_filtering_eta_aware_prod/summary.json"
+STAGE7_PROGRESS="${RECON_HETZNER_RUN_DIR}/stage07_filtering_eta_aware_prod/progress.json"
 STAGE7_LOG="archive/hetzner_version/logs/eta_aware_component_filter_prod.out"
 
-STAGE11_MANIFEST="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/manifest.json"
-STAGE11_REPORT="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/report.json"
-STAGE11_STATE="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json"
-STAGE11_GRAPH_OUTPUT="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl"
+STAGE11_MANIFEST="${RECON_STAGE11_DIR}/manifest.json"
+STAGE11_REPORT="${RECON_STAGE11_DIR}/report.json"
+STAGE11_STATE="${RECON_STAGE11_DIR}/state.json"
+STAGE11_GRAPH_OUTPUT="${RECON_STAGE11_DIR}/graph_output.jsonl"
 
-STAGE12_MANIFEST="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/manifest.json"
-STAGE12_REPORT="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/report.json"
-STAGE12_STATE="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/state.json"
-STAGE12_GRAPH_OUTPUT="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl"
-B0_GRAPH="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv"
+STAGE12_MANIFEST="${RECON_STAGE12_DIR}/manifest.json"
+STAGE12_REPORT="${RECON_STAGE12_DIR}/report.json"
+STAGE12_STATE="${RECON_STAGE12_DIR}/state.json"
+STAGE12_GRAPH_OUTPUT="${RECON_STAGE12_DIR}/graph_output.jsonl"
+B0_GRAPH="${RECON_B0_GRAPH}"
 
-PATH_TRANSLATION_V3="artifacts/final_graph/selected_final_graph/rebuild/path_translation_manifest.v3.json"
+PATH_TRANSLATION_V3="${REBUILD_DIR}/path_translation_manifest.v3.json"
 
-for path in \
+require_files \
   "${STAGE7_GRAPH}" \
   "${STAGE7_MANIFEST}" \
   "${STAGE7_SUMMARY}" \
@@ -54,13 +48,9 @@ for path in \
   "${STAGE12_STATE}" \
   "${STAGE12_GRAPH_OUTPUT}" \
   "${B0_GRAPH}" \
-  "${PATH_TRANSLATION_V3}"; do
-  require_file "${path}"
-done
+  "${PATH_TRANSLATION_V3}"
 
-if [[ "${FORCE}" -ne 1 ]]; then
-  [[ ! -e "${OUT}" ]] || die "refusing to overwrite ${OUT}; rerun with --force"
-fi
+refuse_overwrite_unless_force "${FORCE}" "${OUT}"
 
 safe_mkdir "${REBUILD_DIR}"
 

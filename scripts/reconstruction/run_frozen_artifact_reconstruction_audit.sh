@@ -42,17 +42,16 @@ fi
 
 cd "${REPO_ROOT}"
 
-PYTHON_BIN="${PYTHON_BIN:-python}"
-REBUILD_DIR="artifacts/final_graph/selected_final_graph/rebuild"
+REBUILD_DIR="${RECON_REBUILD_DIR}"
 MANIFEST_OUT="${REBUILD_DIR}/frozen_artifact_reconstruction_audit_manifest.json"
 
-EXPECTED_B0_SHA="c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
-EXPECTED_ALLOCATION_SHA="a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+EXPECTED_B0_SHA="${RECON_EXPECTED_B0_SHA}"
+EXPECTED_ALLOCATION_SHA="${RECON_EXPECTED_ALLOCATION_SHA}"
 
-B0_GRAPH="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv"
-ALLOCATION="src/Pruning graph/bidirectional_allocation_results5k.json"
-STAGE11_GRAPH="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl"
-STAGE12_GRAPH="src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl"
+B0_GRAPH="${RECON_B0_GRAPH}"
+ALLOCATION="${RECON_ALLOCATION}"
+STAGE11_GRAPH="${RECON_STAGE11_DIR}/graph_output.jsonl"
+STAGE12_GRAPH="${RECON_STAGE12_DIR}/graph_output.jsonl"
 
 CHILD_SCRIPTS=(
   "scripts/reconstruction/01_audit_B0_final_graph.sh"
@@ -65,27 +64,25 @@ CHILD_SCRIPTS=(
 )
 
 EXPECTED_JSON_OUTPUTS=(
-  "artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.report.json"
-  "artifacts/final_graph/selected_final_graph/rebuild/final_graph_manifest.rebuilt.json"
-  "artifacts/final_graph/selected_final_graph/rebuild/final_graph_metrics.rebuilt.json"
-  "artifacts/final_graph/selected_final_graph/rebuild/path_translation_manifest.json"
-  "artifacts/final_graph/selected_final_graph/rebuild/stage7_to_B0_chain_verification.json"
-  "artifacts/final_graph/selected_final_graph/rebuild/stage6_to_B0_chain_verification.json"
-  "artifacts/final_graph/selected_final_graph/rebuild/stage5_to_B0_chain_verification.json"
-  "artifacts/final_graph/selected_final_graph/rebuild/stage3_to_B0_chain_verification.json"
+  "${REBUILD_DIR}/B0_reaudit.report.json"
+  "${REBUILD_DIR}/final_graph_manifest.rebuilt.json"
+  "${REBUILD_DIR}/final_graph_metrics.rebuilt.json"
+  "${REBUILD_DIR}/path_translation_manifest.json"
+  "${REBUILD_DIR}/stage7_to_B0_chain_verification.json"
+  "${REBUILD_DIR}/stage6_to_B0_chain_verification.json"
+  "${REBUILD_DIR}/stage5_to_B0_chain_verification.json"
+  "${REBUILD_DIR}/stage3_to_B0_chain_verification.json"
 )
 
 EXPECTED_MARKDOWN_OUTPUTS=(
-  "artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.summary.md"
+  "${REBUILD_DIR}/B0_reaudit.summary.md"
 )
 
 EXPECTED_TSV_OUTPUTS=(
-  "artifacts/final_graph/selected_final_graph/rebuild/final_graph_hashes.rebuilt.tsv"
+  "${REBUILD_DIR}/final_graph_hashes.rebuilt.tsv"
 )
 
-for path in "${CHILD_SCRIPTS[@]}" "${B0_GRAPH}" "${ALLOCATION}" "${STAGE11_GRAPH}" "${STAGE12_GRAPH}"; do
-  require_file "${path}"
-done
+require_files "${CHILD_SCRIPTS[@]}" "${B0_GRAPH}" "${ALLOCATION}" "${STAGE11_GRAPH}" "${STAGE12_GRAPH}"
 
 if [[ "${DRY_RUN}" -eq 1 ]]; then
   printf 'Repository root: %s\n' "${REPO_ROOT}"
@@ -103,13 +100,10 @@ fi
 
 safe_mkdir "${REBUILD_DIR}"
 
-pre_b0_sha="$(sha256_file "${B0_GRAPH}")"
-pre_allocation_sha="$(sha256_file "${ALLOCATION}")"
+pre_b0_sha="$(assert_sha256 "${B0_GRAPH}" "${EXPECTED_B0_SHA}" "B0")"
+pre_allocation_sha="$(assert_sha256 "${ALLOCATION}" "${EXPECTED_ALLOCATION_SHA}" "allocation")"
 pre_stage11_sha="$(sha256_file "${STAGE11_GRAPH}")"
 pre_stage12_sha="$(sha256_file "${STAGE12_GRAPH}")"
-
-[[ "${pre_b0_sha}" == "${EXPECTED_B0_SHA}" ]] || die "B0 SHA mismatch before audit: ${pre_b0_sha}"
-[[ "${pre_allocation_sha}" == "${EXPECTED_ALLOCATION_SHA}" ]] || die "allocation SHA mismatch before audit: ${pre_allocation_sha}"
 
 RUN_STATUS_FILE="$(mktemp)"
 VALIDATION_STATUS_FILE="$(mktemp)"
@@ -147,7 +141,7 @@ if [[ "${overall_status}" == "passed" ]]; then
       continue
     fi
     set +e
-    "${PYTHON_BIN}" -m json.tool "${path}" >/dev/null
+    validate_json_file "${path}"
     status=$?
     set -e
     if [[ "${status}" -eq 0 ]]; then
@@ -167,21 +161,7 @@ if [[ "${overall_status}" == "passed" ]]; then
       continue
     fi
     set +e
-    "${PYTHON_BIN}" - "${path}" <<'PY' >/dev/null
-import csv
-import sys
-from pathlib import Path
-
-path = Path(sys.argv[1])
-with path.open(encoding="utf-8", newline="") as handle:
-    rows = list(csv.reader(handle, delimiter="\t"))
-if not rows:
-    raise SystemExit("empty TSV")
-width = len(rows[0])
-bad = [idx + 1 for idx, row in enumerate(rows) if len(row) != width]
-if bad:
-    raise SystemExit(f"bad TSV row widths at rows {bad[:10]}")
-PY
+    validate_tsv_width "${path}" 3
     status=$?
     set -e
     if [[ "${status}" -eq 0 ]]; then
@@ -293,6 +273,8 @@ for path_text in outputs:
     })
 
 git_commit = run_text(["git", "rev-parse", "HEAD"])
+rebuild_dir = str(Path(manifest_out).parent)
+stage11_dir = str(Path(stage11_graph).parent)
 git_status_summary = run_text([
     "git",
     "status",
@@ -300,13 +282,15 @@ git_status_summary = run_text([
     "--",
     "scripts/reconstruction",
     "docs/reconstruction",
-    "artifacts/final_graph/selected_final_graph/rebuild",
-    "src/Pruning graph/stage11_eta_aware_connectivity_repair_full",
-    "src/Pruning graph/bidirectional_allocation_results5k.json",
+    rebuild_dir,
+    stage11_dir,
+    allocation,
 ])
 
 manifest = {
+    "schema_version": "reconstruction-audit-manifest-v1",
     "timestamp": datetime.now(timezone.utc).isoformat(),
+    "created_by": "scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh",
     "entrypoint": "scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh",
     "mode": "force" if force == "1" else "default",
     "git_commit": git_commit,
@@ -314,6 +298,16 @@ manifest = {
     "scripts_run": run_rows,
     "expected_output_files": outputs,
     "output_files_present_after_run": output_files,
+    "inputs": {
+        "b0_graph": b0_graph,
+        "allocation": allocation,
+        "stage11_graph_output": stage11_graph,
+        "stage12_graph_output": stage12_graph,
+    },
+    "outputs": {
+        "expected": outputs,
+        "present_after_run": output_files,
+    },
     "validation_status": validation_status,
     "validation_results": validation_rows,
     "key_hashes": {

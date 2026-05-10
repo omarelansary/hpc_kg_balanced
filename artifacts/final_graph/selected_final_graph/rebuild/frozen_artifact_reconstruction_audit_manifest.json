@@ -1,4 +1,5 @@
 {
+  "created_by": "scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh",
   "entrypoint": "scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh",
   "expected_output_files": [
     "artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.report.json",
@@ -18,33 +19,37 @@
     "No WDQS or LLM calls are made by this entrypoint.",
     "This does not establish full end-to-end reproducibility from live upstream inputs."
   ],
-  "git_commit": "629004356ceacba109fa5f5b490d910a89c7baad",
+  "git_commit": "6ef636e8ccdff23af1c1cd1600c46ef6fa9dd83b",
   "git_status_summary_relevant_paths": [
-    "?? artifacts/final_graph/selected_final_graph/rebuild/",
-    "?? docs/reconstruction/21_thesis_claim_evidence_audit.md",
-    "?? docs/reconstruction/22_pipeline_reconstruction_dag.md",
-    "?? docs/reconstruction/23_reconstruction_wrappers_R2.md",
-    "?? docs/reconstruction/24_pre_stage11_input_mapping_investigation.md",
-    "?? docs/reconstruction/25_pre_stage11_input_mapping_hetzner_resolution.md",
-    "?? docs/reconstruction/26_stage7_to_B0_chain_verification.md",
-    "?? docs/reconstruction/27_stage6_to_B0_chain_verification.md",
-    "?? docs/reconstruction/28_stage5_to_B0_chain_verification.md",
-    "?? docs/reconstruction/29_historical_branch_narrative_note.md",
-    "?? docs/reconstruction/30_stage3_to_B0_chain_verification.md",
-    "?? docs/reconstruction/31_stage7_implementation_provenance.md",
-    "?? docs/reconstruction/32_stage1_stage2_candidate_collection_provenance.md",
-    "?? docs/reconstruction/33_allocation_5k_export_provenance.md",
-    "?? docs/reconstruction/34_support_matrix_provenance.md",
-    "?? docs/reconstruction/35_phase1_dashboard_input_provenance.md",
-    "?? docs/reconstruction/36_inverse_verification_completion_audit.md",
-    "?? docs/reconstruction/37_dashboard_empirical_pattern_logic_audit.md",
-    "?? docs/reconstruction/38_composition_llm_relation_profile_provenance_audit.md",
-    "?? docs/reconstruction/39_final_reconstruction_status_summary.md",
-    "?? docs/reconstruction/40_frozen_artifact_reconstruction_entrypoint.md",
-    "?? docs/reconstruction/pipeline_reconstruction_dag.tsv",
-    "?? scripts/reconstruction/",
+    "M artifacts/final_graph/selected_final_graph/rebuild/final_graph_hashes.rebuilt.tsv",
+    " M artifacts/final_graph/selected_final_graph/rebuild/final_graph_manifest.rebuilt.json",
+    " M artifacts/final_graph/selected_final_graph/rebuild/final_graph_metrics.rebuilt.json",
+    " M artifacts/final_graph/selected_final_graph/rebuild/path_translation_manifest.json",
+    " M artifacts/final_graph/selected_final_graph/rebuild/stage3_to_B0_chain_verification.json",
+    " M artifacts/final_graph/selected_final_graph/rebuild/stage5_to_B0_chain_verification.json",
+    " M artifacts/final_graph/selected_final_graph/rebuild/stage6_to_B0_chain_verification.json",
+    " M artifacts/final_graph/selected_final_graph/rebuild/stage7_to_B0_chain_verification.json",
+    " M docs/reconstruction/40_frozen_artifact_reconstruction_entrypoint.md",
+    " M scripts/reconstruction/00_common.sh",
+    " M scripts/reconstruction/01_audit_B0_final_graph.sh",
+    " M scripts/reconstruction/02_register_B0_final_manifest.sh",
+    " M scripts/reconstruction/03_path_translation_manifest.sh",
+    " M scripts/reconstruction/04_verify_stage7_to_B0_chain.sh",
+    " M scripts/reconstruction/05_verify_stage6_to_B0_chain.sh",
+    " M scripts/reconstruction/06_verify_stage5_to_B0_chain.sh",
+    " M scripts/reconstruction/07_verify_stage3_to_B0_chain.sh",
+    " M scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh",
+    "?? artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.report.json",
+    "?? docs/reconstruction/graph_candidate_reports/B0_stage12_largest_component.report.json",
+    "?? docs/reconstruction/graph_candidate_reports/C1_stage13_aggressive.report.json",
     "?? \"src/Pruning graph/stage11_eta_aware_connectivity_repair_full/\""
   ],
+  "inputs": {
+    "allocation": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "b0_graph": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+    "stage11_graph_output": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl",
+    "stage12_graph_output": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl"
+  },
   "key_hashes": {
     "allocation": {
       "changed_during_run": false,
@@ -118,7 +123,64 @@
       "present_after_run": true
     }
   ],
+  "outputs": {
+    "expected": [
+      "artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.report.json",
+      "artifacts/final_graph/selected_final_graph/rebuild/final_graph_manifest.rebuilt.json",
+      "artifacts/final_graph/selected_final_graph/rebuild/final_graph_metrics.rebuilt.json",
+      "artifacts/final_graph/selected_final_graph/rebuild/path_translation_manifest.json",
+      "artifacts/final_graph/selected_final_graph/rebuild/stage7_to_B0_chain_verification.json",
+      "artifacts/final_graph/selected_final_graph/rebuild/stage6_to_B0_chain_verification.json",
+      "artifacts/final_graph/selected_final_graph/rebuild/stage5_to_B0_chain_verification.json",
+      "artifacts/final_graph/selected_final_graph/rebuild/stage3_to_B0_chain_verification.json",
+      "artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.summary.md",
+      "artifacts/final_graph/selected_final_graph/rebuild/final_graph_hashes.rebuilt.tsv"
+    ],
+    "present_after_run": [
+      {
+        "path": "artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.report.json",
+        "present_after_run": true
+      },
+      {
+        "path": "artifacts/final_graph/selected_final_graph/rebuild/final_graph_manifest.rebuilt.json",
+        "present_after_run": true
+      },
+      {
+        "path": "artifacts/final_graph/selected_final_graph/rebuild/final_graph_metrics.rebuilt.json",
+        "present_after_run": true
+      },
+      {
+        "path": "artifacts/final_graph/selected_final_graph/rebuild/path_translation_manifest.json",
+        "present_after_run": true
+      },
+      {
+        "path": "artifacts/final_graph/selected_final_graph/rebuild/stage7_to_B0_chain_verification.json",
+        "present_after_run": true
+      },
+      {
+        "path": "artifacts/final_graph/selected_final_graph/rebuild/stage6_to_B0_chain_verification.json",
+        "present_after_run": true
+      },
+      {
+        "path": "artifacts/final_graph/selected_final_graph/rebuild/stage5_to_B0_chain_verification.json",
+        "present_after_run": true
+      },
+      {
+        "path": "artifacts/final_graph/selected_final_graph/rebuild/stage3_to_B0_chain_verification.json",
+        "present_after_run": true
+      },
+      {
+        "path": "artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.summary.md",
+        "present_after_run": true
+      },
+      {
+        "path": "artifacts/final_graph/selected_final_graph/rebuild/final_graph_hashes.rebuilt.tsv",
+        "present_after_run": true
+      }
+    ]
+  },
   "overall_status": "passed",
+  "schema_version": "reconstruction-audit-manifest-v1",
   "scripts_run": [
     {
       "command": "bash scripts/reconstruction/01_audit_B0_final_graph.sh --force",
@@ -163,7 +225,7 @@
       "status": "passed"
     }
   ],
-  "timestamp": "2026-05-09T22:29:20.101136+00:00",
+  "timestamp": "2026-05-10T01:43:35.868389+00:00",
   "validation_results": [
     {
       "path": "artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.report.json",
