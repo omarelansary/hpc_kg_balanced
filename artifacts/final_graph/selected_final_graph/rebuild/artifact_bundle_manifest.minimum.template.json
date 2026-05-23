@@ -1,0 +1,63 @@
+{
+  "schema_version": "kg-reconstruction-artifact-bundle-manifest-v1",
+  "repo_commit": "1678d92",
+  "bundle_id": "minimum-validate-only-frozen-reconstruction-evidence",
+  "created_at_utc": "TEMPLATE",
+  "artifacts": [
+    {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl",
+      "sha256": "73bc624bf9147b0bba4962ab286648bcfeeb931a94a1d1a727839f160b35ada5",
+      "size_bytes": 1756236,
+      "storage_class": "external",
+      "required_for_validate_only": true,
+      "required_for_force_rebuild": true,
+      "required_for_thesis_provenance": true,
+      "role": "Stage11 graph output used by frozen reconstruction hash validation",
+      "notes": "Large historical graph output; restore from repo-relative external artifact bundle, not normal Git."
+    },
+    {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl",
+      "sha256": "89ec9bf9c8932962fd3d966073b51f76345666eda5ed5d9beb18659d02e294b0",
+      "size_bytes": 1739977,
+      "storage_class": "external",
+      "required_for_validate_only": true,
+      "required_for_force_rebuild": true,
+      "required_for_thesis_provenance": true,
+      "role": "Stage12 graph output used by frozen reconstruction hash validation",
+      "notes": "Large historical graph output; restore from repo-relative external artifact bundle, not normal Git."
+    },
+    {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+      "size_bytes": 601555,
+      "storage_class": "external",
+      "required_for_validate_only": true,
+      "required_for_force_rebuild": true,
+      "required_for_thesis_provenance": true,
+      "role": "Selected B0 final graph, Stage12 repaired largest component",
+      "notes": "Final reported graph artifact; restore from repo-relative external artifact bundle unless Git LFS is adopted."
+    },
+    {
+      "path": "artifacts/final_graph/selected_final_graph/rebuild/B0_reaudit.report.json",
+      "sha256": "a0ef6d5d5a0359e2888a422164cc7ab3e14f582e35bbd1a1728b53365988aea5",
+      "size_bytes": 53533,
+      "storage_class": "external",
+      "required_for_validate_only": true,
+      "required_for_force_rebuild": false,
+      "required_for_thesis_provenance": true,
+      "role": "B0 rebuilt evaluator report required by validate-only checks",
+      "notes": "Small generated evidence file; currently treated as external because it is not tracked in normal Git."
+    },
+    {
+      "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "size_bytes": 85288,
+      "storage_class": "git",
+      "required_for_validate_only": true,
+      "required_for_force_rebuild": true,
+      "required_for_thesis_provenance": true,
+      "role": "Canonical 5k allocation used for B0 validation",
+      "notes": "Tracked small evidence artifact; included in manifest so hash drift is detected."
+    }
+  ]
+}
