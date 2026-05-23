@@ -1,0 +1,2 @@
+"""Graph candidate registry helpers."""
+

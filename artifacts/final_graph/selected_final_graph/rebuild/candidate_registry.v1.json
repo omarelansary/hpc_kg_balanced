@@ -1,0 +1,118 @@
+{
+  "schema_version": "kg-candidate-registry-v1",
+  "created_from": "frozen reconstruction and historical candidate evidence",
+  "canonical_allocation_path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+  "canonical_allocation_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+  "candidates": [
+    {
+      "candidate_id": "B0",
+      "label": "Stage12 repaired largest component",
+      "role": "selected_baseline",
+      "is_graph_candidate": true,
+      "status": "selected_final_graph",
+      "decision": "selected_as_current_connected_reference_baseline",
+      "parent_candidate_id": null,
+      "graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "graph_sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+      "allocation_path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "allocation_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "report_path": "docs/reconstruction/graph_candidate_reports/B0_stage12_largest_component.report.json",
+      "report_schema": "standard_evaluator",
+      "report_sha256": "89c66bc666be6d01c9834c28cef164523b0e529f9b3f30a4b99770aecb300ed2",
+      "evidence_paths": [
+        "artifacts/final_graph/selected_final_graph/final_graph_manifest.json",
+        "artifacts/final_graph/selected_final_graph/final_graph_decision.md",
+        "docs/reconstruction/19_final_graph_selection_decision.md",
+        "docs/reconstruction/graph_candidates.tsv"
+      ],
+      "notes": "Selected final graph and current connected reference baseline. The graph file is referenced in place and was not copied into the final artifact package."
+    },
+    {
+      "candidate_id": "C1",
+      "label": "Stage13 aggressive_but_guarded",
+      "role": "active_candidate",
+      "is_graph_candidate": true,
+      "status": "not_selected_after_final_decision",
+      "decision": "not_selected_after_final_decision",
+      "parent_candidate_id": "B0",
+      "graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/aggressive_but_guarded/pruned_graph.jsonl",
+      "graph_sha256": "e01d7137c1dbcd790082825a025cade7198a957b3c936f0d9b5b3f0b33780b73",
+      "allocation_path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "allocation_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "report_path": "docs/reconstruction/graph_candidate_reports/C1_stage13_aggressive.report.json",
+      "report_schema": "standard_evaluator",
+      "report_sha256": "7eec3f900868e8b148341077566f71bc4bb153d2d4e909e49ba47c9e6d28ede8",
+      "evidence_paths": [
+        "docs/reconstruction/19_final_graph_selection_decision.md",
+        "docs/reconstruction/18_final_graph_decision_state_after_C3_probe.md",
+        "docs/reconstruction/graph_candidates.tsv"
+      ],
+      "notes": "C1 preserves connectivity and relation coverage and reduces surplus relative to B0, but it was not selected after the final B0/C1 decision because it increases total deficit."
+    },
+    {
+      "candidate_id": "C2",
+      "label": "targeted_generic_pruning_from_B0",
+      "role": "rejected_candidate",
+      "is_graph_candidate": true,
+      "status": "generated_failed_minimum_thresholds",
+      "decision": "rejected_as_final_kept_as_exploratory_evidence",
+      "parent_candidate_id": "B0",
+      "graph_path": "experiments/graph_candidates/C2_targeted_generic_pruning/outputs/pruned_graph.jsonl",
+      "graph_sha256": "a017ac53fe6ead1f81b26a3cd4c10679eb14036aad40144039d1ed2185d53da0",
+      "allocation_path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "allocation_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "report_path": "experiments/graph_candidates/C2_targeted_generic_pruning/reports/evaluator.report.json",
+      "report_schema": "standard_evaluator",
+      "report_sha256": "89abfc02efd2613e242271e5c0837c6c8bb80952a52f9280d33e90e6492e5afa",
+      "evidence_paths": [
+        "experiments/graph_candidates/C2_targeted_generic_pruning/decision.md",
+        "docs/reconstruction/12_C2_result_interpretation.md",
+        "docs/reconstruction/graph_candidates.tsv"
+      ],
+      "notes": "C2 preserved weak connectivity and relation coverage but failed the minimum surplus threshold; it is kept as exploratory negative evidence for deletion-only targeted generic pruning."
+    },
+    {
+      "candidate_id": "strict_balance_pruned_ablation",
+      "label": "strict balance-pruned diagnostic ablation",
+      "role": "diagnostic_ablation",
+      "is_graph_candidate": true,
+      "status": "diagnostic_balance_first_stress_test",
+      "decision": "diagnostic_balance_first_stress_test_not_final",
+      "parent_candidate_id": "B0",
+      "graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_ablation_20260322_215639/pruned_graph.jsonl",
+      "graph_sha256": "a357092916a251151634d86c191d3dc3cb69af9e706933e62f2211283310ee56",
+      "allocation_path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "allocation_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "report_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_balance_prune_ablation_20260322_215639/pruned_graph.report.json",
+      "report_schema": "pruner_final_snapshot",
+      "report_sha256": "91404b78b0fbf48c14ee3edb2c402470cf5020cfd63893441feb4010fa115b25",
+      "evidence_paths": [
+        "docs/reconstruction/21_thesis_claim_evidence_audit.md",
+        "docs/reconstruction/44_reusable_pipeline_target_design.md",
+        "docs/reconstruction/49_candidate_evaluation_compatibility.md"
+      ],
+      "notes": "Diagnostic balance-first stress test. It is useful for the connectedness-vs-balance frontier but is not a final graph because it fragments into many weak components."
+    },
+    {
+      "candidate_id": "C3_probe_v1",
+      "label": "C3 remove-replace feasibility probe v1",
+      "role": "probe_only",
+      "is_graph_candidate": false,
+      "status": "feasibility_probe_only",
+      "decision": "full_bridge_rescue_not_recommended_with_eligible_pool_v1",
+      "parent_candidate_id": "B0",
+      "graph_path": null,
+      "graph_sha256": null,
+      "allocation_path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "allocation_sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+      "report_path": "experiments/graph_candidates/C3_remove_replace_generic_connectivity/probe_v1/feasibility_probe_report.json",
+      "report_schema": "feasibility_probe",
+      "report_sha256": "24f766766125fbb7c38aba41312b269558ec5a786b1c895217cd70da66f0b6cc",
+      "evidence_paths": [
+        "docs/reconstruction/17_C3_feasibility_probe_result.md",
+        "experiments/graph_candidates/C3_remove_replace_generic_connectivity/probe_v1/feasibility_probe_summary.md"
+      ],
+      "notes": "Probe-only evidence. No C3 graph candidate was generated, and no graph_candidates.tsv row should be added for this probe."
+    }
+  ]
+}
