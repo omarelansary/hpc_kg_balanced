@@ -1,0 +1,185 @@
+{
+  "assessment_scope": {
+    "type": "presentation_assessment",
+    "stage2_sweep_dir": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage2_branch_sweep_20260424_095629",
+    "note": "Read-only assessment of completed Stage 2 partial sweep outputs against the existing B0/C1/C2 decision set."
+  },
+  "final_conclusion": {
+    "use_level": "Use only in backup",
+    "defense_wording": "A post-hoc Stage 2 continuation from the locked Stage 1 structural_softening graph preserved weak connectivity, full 139/139 allocated-relation coverage, and duplicate-free triples in two completed branches, but both branches substantially increased total quota deficit and therefore did not change the final selection of B0.",
+    "limitation_wording": "The Stage 2 sweep remained partial because backbone_fringe_trim timed out, and the completed outputs were not promoted into the registered graph-candidate set, so they should be framed as exploratory continuation evidence rather than as a new defended result.",
+    "changes_selected_final_graph_decision": false,
+    "strongest_presentation_safe_conclusion": "Deletion-only Stage 2 continuation can preserve connectedness and complete allocated-relation coverage on top of the structural_softening base, but in the completed runs it did so only by discarding too much allocation mass, so it does not change the selected final graph decision."
+  },
+  "branch_status": {
+    "core_density_first": {
+      "status": "completed",
+      "classification": "evaluator-valid graph artifact, exploratory partial output",
+      "registered_graph_candidate": false
+    },
+    "core_two_path_first": {
+      "status": "completed",
+      "classification": "evaluator-valid graph artifact, exploratory partial output",
+      "registered_graph_candidate": false
+    },
+    "backbone_fringe_trim": {
+      "status": "timeout",
+      "classification": "failed branch",
+      "registered_graph_candidate": false
+    }
+  },
+  "required_checks": {
+    "core_density_first": {
+      "weak_connectivity_preserved": true,
+      "relation_coverage_139_of_139": true,
+      "zero_allocated_relation_absence": true,
+      "duplicate_free": true
+    },
+    "core_two_path_first": {
+      "weak_connectivity_preserved": true,
+      "relation_coverage_139_of_139": true,
+      "zero_allocated_relation_absence": true,
+      "duplicate_free": true
+    }
+  },
+  "comparison_table": {
+    "B0": {
+      "role": "selected_final_graph",
+      "graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "graph_sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+      "triples": 24683,
+      "entities": 21893,
+      "relations": 139,
+      "weak_component_count": 1,
+      "largest_component_ratio": 1.0,
+      "triples_minus_entities": 2790,
+      "triples_per_entity": 1.127438,
+      "entities_per_triple": 0.886967,
+      "average_participation": 2.254876,
+      "allocated_relations_observed": 139,
+      "zero_allocated_relations": 0,
+      "duplicate_triples": 0,
+      "total_deficit": 2019.0,
+      "total_surplus": 6702.0,
+      "P31_count": 5957,
+      "P31_surplus": 5719.0,
+      "P279_count": 750,
+      "P279_surplus": 523.0,
+      "P131_count": 353,
+      "P131_surplus": 174.0
+    },
+    "C1": {
+      "role": "registered_nonselected_candidate",
+      "graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage13_branch_sweep_20260423_160635/aggressive_but_guarded/pruned_graph.jsonl",
+      "graph_sha256": "e01d7137c1dbcd790082825a025cade7198a957b3c936f0d9b5b3f0b33780b73",
+      "triples": 24223,
+      "entities": 21893,
+      "relations": 139,
+      "weak_component_count": 1,
+      "largest_component_ratio": 1.0,
+      "triples_minus_entities": 2330,
+      "triples_per_entity": 1.106427,
+      "entities_per_triple": 0.90381,
+      "average_participation": 2.212853,
+      "allocated_relations_observed": 139,
+      "zero_allocated_relations": 0,
+      "duplicate_triples": 0,
+      "total_deficit": 2359.0,
+      "total_surplus": 6582.0,
+      "P31_count": 5953,
+      "P31_surplus": 5715.0,
+      "P279_count": 748,
+      "P279_surplus": 521.0,
+      "P131_count": 344,
+      "P131_surplus": 165.0
+    },
+    "C2": {
+      "role": "registered_rejected_candidate",
+      "graph_path": "experiments/graph_candidates/C2_targeted_generic_pruning/outputs/pruned_graph.jsonl",
+      "graph_sha256": "a017ac53fe6ead1f81b26a3cd4c10679eb14036aad40144039d1ed2185d53da0",
+      "triples": 24656,
+      "entities": 21893,
+      "relations": 139,
+      "weak_component_count": 1,
+      "largest_component_ratio": 1.0,
+      "triples_minus_entities": 2763,
+      "triples_per_entity": 1.126205,
+      "entities_per_triple": 0.887938,
+      "average_participation": 2.252409,
+      "allocated_relations_observed": 139,
+      "zero_allocated_relations": 0,
+      "duplicate_triples": 0,
+      "total_deficit": 2019.0,
+      "total_surplus": 6675.0,
+      "P31_count": 5952,
+      "P31_surplus": 5714.0,
+      "P279_count": 744,
+      "P279_surplus": 517.0,
+      "P131_count": 337,
+      "P131_surplus": 158.0
+    },
+    "core_density_first": {
+      "role": "completed_stage2_branch",
+      "graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage2_branch_sweep_20260424_095629/core_density_first/stage2_graph.jsonl",
+      "graph_sha256": "14f9bb9bfb576dd1f00dec8f9e95a2f6e8e17fee6464d84f4547f2d4d791d65a",
+      "triples": 21850,
+      "entities": 19393,
+      "relations": 139,
+      "weak_component_count": 1,
+      "largest_component_ratio": 1.0,
+      "triples_minus_entities": 2457,
+      "triples_per_entity": 1.126695,
+      "entities_per_triple": 0.887551,
+      "average_participation": 2.25339,
+      "two_path_count": 20806,
+      "allocated_relations_observed": 139,
+      "zero_allocated_relations": 0,
+      "duplicate_triples": 0,
+      "total_deficit": 4689.0,
+      "total_surplus": 6539.0,
+      "P31_count": 5930,
+      "P31_surplus": 5692.0,
+      "P279_count": 738,
+      "P279_surplus": 511.0,
+      "P131_count": 344,
+      "P131_surplus": 165.0
+    },
+    "core_two_path_first": {
+      "role": "completed_stage2_branch",
+      "graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/stage2_branch_sweep_20260424_095629/core_two_path_first/stage2_graph.jsonl",
+      "graph_sha256": "fcc5a715bb650b03a660e57a766cf6c2c224ef195d882ffb272a821f21193eac",
+      "triples": 21850,
+      "entities": 19393,
+      "relations": 139,
+      "weak_component_count": 1,
+      "largest_component_ratio": 1.0,
+      "triples_minus_entities": 2457,
+      "triples_per_entity": 1.126695,
+      "entities_per_triple": 0.887551,
+      "average_participation": 2.25339,
+      "two_path_count": 20845,
+      "allocated_relations_observed": 139,
+      "zero_allocated_relations": 0,
+      "duplicate_triples": 0,
+      "total_deficit": 4694.0,
+      "total_surplus": 6544.0,
+      "P31_count": 5934,
+      "P31_surplus": 5696.0,
+      "P279_count": 739,
+      "P279_surplus": 512.0,
+      "P131_count": 344,
+      "P131_surplus": 165.0
+    }
+  },
+  "judgments": {
+    "either_completed_branch_clearly_improves_final_decision": false,
+    "safe_for_main_presentation_as_new_result": false,
+    "safe_for_backup_as_negative_or_ongoing_evidence": true,
+    "backbone_fringe_trim_should_be_rerun_before_presentation": false,
+    "backbone_fringe_trim_rerun_reason": "It already timed out after two days, and the two completed branches already show that the current deletion-only Stage 2 continuation does not beat the B0/C1/C2 decision frontier."
+  },
+  "safe_wording": {
+    "backup_sentence": "A post-hoc Stage 2 continuation from the locked structural_softening base preserved connectedness and full allocated-relation coverage, but the completed deletion-only branches increased total quota deficit too strongly to justify replacing the selected B0 graph.",
+    "ongoing_work_sentence": "We also tested a partial Stage 2 continuation beyond structural_softening; two completed non-synthetic branches stayed connected and coverage-complete, but because they remained exploratory and worsened allocation deficit substantially, they are reported only as ongoing continuation evidence and not as new graph candidates."
+  }
+}
