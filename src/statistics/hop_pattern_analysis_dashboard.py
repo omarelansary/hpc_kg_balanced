@@ -68,6 +68,26 @@ except ModuleNotFoundError:
         sys.path.append(str(project_root))
     from src.kg_building.bidirectional_triple_allocation import allocate_for_patterns
 
+from src.kg_pipeline.phase1.allocation_export import run_phase3_allocation as phase1_run_phase3_allocation
+from src.kg_pipeline.phase1.genericity_matrix import (
+    build_square_adjacency_matrix as phase1_build_square_adjacency_matrix,
+    build_weight_matrix as phase1_build_weight_matrix,
+    extract_relation_submatrix as phase1_extract_relation_submatrix,
+    matrix_to_nested_json_dict as phase1_matrix_to_nested_json_dict,
+)
+from src.kg_pipeline.phase1.pattern_evidence import (
+    is_pid as phase1_is_pid,
+    load_composition_verified_compact as phase1_load_composition_verified_compact,
+    load_pair_counts as phase1_load_pair_counts,
+    prepare_inverse_table as phase1_prepare_inverse_table,
+    wilson_interval as phase1_wilson_interval,
+)
+from src.kg_pipeline.phase1.pattern_groups import (
+    build_pattern_groups as phase1_build_pattern_groups,
+    classify_composition_patterns as phase1_classify_composition_patterns,
+    unique_preserve as phase1_unique_preserve,
+)
+
 try:
     from src.kg_building.build_connected_graph_from_allocation import (
         LocalTripleSource,
@@ -102,7 +122,7 @@ def is_pid(x: str) -> bool:
     Input JSONL may contain non-property tokens or malformed records. Filtering
     early avoids contaminating confidence aggregates with invalid relation IDs.
     """
-    return isinstance(x, str) and len(x) >= 2 and x[0] == "P" and x[1:].isdigit()
+    return phase1_is_pid(x)
 
 
 @st.cache_data(show_spinner=False)
@@ -127,60 +147,7 @@ def load_pair_counts(jsonl_path: str, only_success: bool = True) -> pd.DataFrame
     - restricting to SUCCESS docs (default) avoids mixing complete and partial
       extraction outcomes in baseline pattern confidence estimates.
     """
-    rows = []
-    doc_status = defaultdict(int)
-    bad_rows = 0
-
-    with open(jsonl_path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                doc = json.loads(line)
-            except json.JSONDecodeError:
-                doc_status["__JSON_DECODE_ERROR__"] += 1
-                continue
-
-            status = doc.get("status", "NO_STATUS")
-            doc_status[status] += 1
-            if only_success and status != "SUCCESS":
-                continue
-
-            r1 = doc.get("r1")
-            support_data = doc.get("support_data", {})
-            if not is_pid(r1) or not isinstance(support_data, dict):
-                continue
-
-            for r2, rec in support_data.items():
-                if not is_pid(r2) or not isinstance(rec, dict):
-                    continue
-                try:
-                    loop = int(rec.get("loop", 0) or 0)
-                    nonloop = int(rec.get("nonloop", 0) or 0)
-                    total = int(rec.get("total", loop + nonloop) or (loop + nonloop))
-                except (TypeError, ValueError):
-                    bad_rows += 1
-                    continue
-
-                rows.append({"r1": r1, "r2": r2, "loop": loop, "nonloop": nonloop, "total": total})
-
-    df = pd.DataFrame(rows)
-    if df.empty:
-        df = pd.DataFrame(columns=["r1", "r2", "loop", "nonloop", "total"])
-
-    agg = (
-        df.groupby(["r1", "r2"], as_index=False)
-        .agg(loop=("loop", "sum"), nonloop=("nonloop", "sum"), total=("total", "sum"))
-    )
-    agg["conf_loop"] = agg["loop"] / agg["total"].where(agg["total"] > 0, pd.NA)
-    agg["conf_nonloop"] = agg["nonloop"] / agg["total"].where(agg["total"] > 0, pd.NA)
-    agg["conf_loop"] = agg["conf_loop"].fillna(0.0)
-    agg["conf_nonloop"] = agg["conf_nonloop"].fillna(0.0)
-
-    agg.attrs["doc_status"] = dict(doc_status)
-    agg.attrs["bad_rows"] = int(bad_rows)
-    return agg
+    return phase1_load_pair_counts(jsonl_path, only_success=only_success)
 
 
 @st.cache_data(show_spinner=False)
@@ -311,16 +278,7 @@ def prepare_inverse_table(df_pairs: pd.DataFrame) -> pd.DataFrame:
       direction is weak; `bidirectional_conf_min` is a strict conservative
       criterion aligned with "both directions should be high".
     """
-    base = df_pairs[df_pairs["r1"] != df_pairs["r2"]][["r1", "r2", "loop", "nonloop", "total", "conf_loop"]].copy()
-    rev = base[["r1", "r2", "conf_loop", "total"]].rename(
-        columns={"r1": "r2", "r2": "r1", "conf_loop": "reverse_conf_loop", "total": "reverse_total"}
-    )
-    out = base.merge(rev, on=["r1", "r2"], how="left")
-    out["reverse_conf_loop"] = out["reverse_conf_loop"].fillna(0.0)
-    out["reverse_total"] = out["reverse_total"].fillna(0).astype(int)
-    out["bidirectional_conf_min"] = out[["conf_loop", "reverse_conf_loop"]].min(axis=1)
-    out["bidirectional_conf_mean"] = out[["conf_loop", "reverse_conf_loop"]].mean(axis=1)
-    return out
+    return phase1_prepare_inverse_table(df_pairs)
 
 
 def wilson_interval(successes: int, n: int, z: float) -> tuple[float, float]:
@@ -337,16 +295,7 @@ def wilson_interval(successes: int, n: int, z: float) -> tuple[float, float]:
     - In this app we primarily use the lower bound to rank/filter composition
       rules conservatively under sampling uncertainty.
     """
-    if n <= 0:
-        return 0.0, 1.0
-    p = successes / n
-    z2 = z * z
-    denom = 1.0 + (z2 / n)
-    center = (p + (z2 / (2.0 * n))) / denom
-    margin = (z / denom) * math.sqrt((p * (1.0 - p) / n) + (z2 / (4.0 * n * n)))
-    lower = max(0.0, center - margin)
-    upper = min(1.0, center + margin)
-    return lower, upper
+    return phase1_wilson_interval(successes, n, z)
 
 
 @st.cache_data(show_spinner=False)
@@ -375,102 +324,7 @@ def load_composition_verified_compact(jsonl_path: str, only_success: bool = True
     - this loader keeps one row per discovered (r1, r2, r3) rule candidate to
       support direct ranking, filtering, and per-pair best-target summaries.
     """
-    rows = []
-    input_status_counts = defaultdict(int)
-    run_status_counts = defaultdict(int)
-    bad_rows = 0
-
-    with open(jsonl_path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                doc = json.loads(line)
-            except json.JSONDecodeError:
-                bad_rows += 1
-                continue
-
-            input_status = doc.get("input_status", "NO_STATUS")
-            input_status_counts[input_status] += 1
-            if only_success and input_status != "SUCCESS":
-                continue
-
-            rv = doc.get("rule_verification", {})
-            if not isinstance(rv, dict):
-                continue
-
-            run = rv.get("composition_run", {})
-            if isinstance(run, dict):
-                run_status_counts[run.get("status", "NO_RUN_STATUS")] += 1
-
-            r1 = doc.get("r1")
-            r2 = doc.get("r2")
-            if not is_pid(r1) or not is_pid(r2):
-                continue
-
-            base_support = int(doc.get("support", 0) or 0)
-            source_mode = doc.get("source_mode")
-            target_count = int(doc.get("target_count", 0) or 0)
-            targets_truncated = bool(doc.get("targets_truncated", False))
-
-            comp = rv.get("composition", {})
-            if not isinstance(comp, dict) or not comp:
-                continue
-
-            for r3, rec in comp.items():
-                if not is_pid(r3) or not isinstance(rec, dict):
-                    continue
-                try:
-                    examined = int(rec.get("chain_pairs_examined", 0) or 0)
-                    shortcuts = int(rec.get("chain_pairs_with_shortcut", 0) or 0)
-                    missing = int(rec.get("chain_pairs_missing_shortcut", max(examined - shortcuts, 0)) or 0)
-                except (TypeError, ValueError):
-                    bad_rows += 1
-                    continue
-
-                conf_sample = (shortcuts / examined) if examined > 0 else 0.0
-                conf_reported = float(rec.get("sample_confidence", conf_sample) or conf_sample)
-                rows.append(
-                    {
-                        "r1": r1,
-                        "r2": r2,
-                        "r3": r3,
-                        "base_support": base_support,
-                        "chain_pairs_examined": examined,
-                        "chain_pairs_with_shortcut": shortcuts,
-                        "chain_pairs_missing_shortcut": missing,
-                        "conf_composition_sample": conf_sample,
-                        "sample_confidence_reported": conf_reported,
-                        "source_mode": source_mode,
-                        "target_count": target_count,
-                        "targets_truncated": targets_truncated,
-                    }
-                )
-
-    out = pd.DataFrame(rows)
-    if out.empty:
-        out = pd.DataFrame(
-            columns=[
-                "r1",
-                "r2",
-                "r3",
-                "base_support",
-                "chain_pairs_examined",
-                "chain_pairs_with_shortcut",
-                "chain_pairs_missing_shortcut",
-                "conf_composition_sample",
-                "sample_confidence_reported",
-                "source_mode",
-                "target_count",
-                "targets_truncated",
-            ]
-        )
-
-    out.attrs["input_status_counts"] = dict(input_status_counts)
-    out.attrs["run_status_counts"] = dict(run_status_counts)
-    out.attrs["bad_rows"] = int(bad_rows)
-    return out
+    return phase1_load_composition_verified_compact(jsonl_path, only_success=only_success)
 
 
 def classify_composition_patterns(df: pd.DataFrame) -> pd.DataFrame:
@@ -494,35 +348,11 @@ def classify_composition_patterns(df: pd.DataFrame) -> pd.DataFrame:
     - Commutativity here is empirical/existential in the accepted result set,
       not a universal logical proof over all graph facts.
     """
-    out = df.copy()
-    if out.empty:
-        out["is_transitive_self"] = pd.Series(dtype=bool)
-        out["swap_supports_same_target"] = pd.Series(dtype=bool)
-        out["composition_class"] = pd.Series(dtype=str)
-        return out
-
-    accepted = set(zip(out["r1"], out["r2"], out["r3"]))
-
-    is_transitive_self = (out["r1"] == out["r2"]) & (out["r2"] == out["r3"])
-    swap_supports_same_target = out.apply(lambda r: (r["r2"], r["r1"], r["r3"]) in accepted, axis=1)
-
-    out["is_transitive_self"] = is_transitive_self
-    out["swap_supports_same_target"] = swap_supports_same_target
-
-    out["composition_class"] = "non_transitive_non_commutative_composition"
-    out.loc[swap_supports_same_target, "composition_class"] = "non_transitive_commutative_composition"
-    out.loc[is_transitive_self, "composition_class"] = "transitive_self_composition"
-    return out
+    return phase1_classify_composition_patterns(df)
 
 
 def _unique_preserve(values) -> list[str]:
-    out = []
-    seen = set()
-    for v in values:
-        if isinstance(v, str) and v not in seen:
-            seen.add(v)
-            out.append(v)
-    return out
+    return phase1_unique_preserve(values)
 
 
 def build_pattern_groups(
@@ -544,25 +374,7 @@ def build_pattern_groups(
     - "candidate count" from Phase 1/2 will generally differ from
       "group size" shown in Phase 3.
     """
-    sym_rel = _unique_preserve(sym_df["r1"].tolist()) if not sym_df.empty else []
-    anti_rel = _unique_preserve(anti_df["r1"].tolist()) if not anti_df.empty else []
-    overlap = sorted(set(sym_rel).intersection(anti_rel))
-    anti_rel = [r for r in anti_rel if r not in set(sym_rel)]
-
-    inv_rel = []
-    if not inv_df.empty:
-        inv_rel = _unique_preserve(inv_df["r1"].tolist() + inv_df["r2"].tolist())
-
-    comp_rel = []
-    if not comp_df.empty:
-        comp_rel = _unique_preserve(comp_df["r1"].tolist() + comp_df["r2"].tolist() + comp_df["r3"].tolist())
-
-    return {
-        "symmetric": sym_rel,
-        "anti_symmetric": anti_rel,
-        "inverse": inv_rel,
-        "composition": comp_rel,
-    }, overlap
+    return phase1_build_pattern_groups(sym_df, anti_df, inv_df, comp_df)
 
 
 def build_square_adjacency_matrix(
@@ -572,52 +384,16 @@ def build_square_adjacency_matrix(
     extra_relations: Optional[list[str]] = None,
 ) -> tuple[list[str], np.ndarray]:
     """Build square adjacency from filtered pair counts with support thresholding."""
-    edge_sum = df_pairs.groupby(["r1", "r2"], as_index=False)["total"].sum()
-    edge_sum = edge_sum[edge_sum["total"] >= int(min_support)].copy()
-
-    nodes = set()
-    if not edge_sum.empty:
-        nodes.update(edge_sum["r1"].tolist())
-        nodes.update(edge_sum["r2"].tolist())
-    if extra_relations:
-        nodes.update(extra_relations)
-    relations_universe = sorted(nodes)
-
-    n = len(relations_universe)
-    A = np.zeros((n, n), dtype=float)
-    rel_to_idx = {r: i for i, r in enumerate(relations_universe)}
-    for row in edge_sum.itertuples(index=False):
-        i = rel_to_idx[row.r1]
-        j = rel_to_idx[row.r2]
-        A[i, j] = float(row.total)
-    return relations_universe, A
+    return phase1_build_square_adjacency_matrix(
+        df_pairs,
+        min_support=min_support,
+        extra_relations=extra_relations,
+    )
 
 
 def build_weight_matrix(adjacency: np.ndarray, *, matrix_mode: str) -> np.ndarray:
     """Build the Phase 3 relation-weight matrix from adjacency counts."""
-
-    def _row_normalize(X: np.ndarray) -> np.ndarray:
-        s = X.sum(axis=1, keepdims=True)
-        return np.divide(X, s, out=np.zeros_like(X), where=s > 0)
-
-    def _col_normalize(X: np.ndarray) -> np.ndarray:
-        s = X.sum(axis=0, keepdims=True)
-        return np.divide(X, s, out=np.zeros_like(X), where=s > 0)
-
-    if matrix_mode == "adjacency_support":
-        return adjacency.copy()
-    if matrix_mode == "adjacency_log1p":
-        return np.log1p(adjacency)
-    if matrix_mode == "two_hop_log1p":
-        return np.log1p(adjacency @ adjacency)
-    if matrix_mode == "log1p_row_norm":
-        return _row_normalize(np.log1p(adjacency))
-    if matrix_mode == "log1p_col_norm":
-        return _col_normalize(np.log1p(adjacency))
-    if matrix_mode == "log1p_balanced_norm":
-        W0 = np.log1p(adjacency)
-        return 0.5 * (_row_normalize(W0) + _col_normalize(W0))
-    raise ValueError(f"Unknown matrix_mode: {matrix_mode}")
+    return phase1_build_weight_matrix(adjacency, matrix_mode=matrix_mode)
 
 
 def extract_relation_submatrix(
@@ -626,25 +402,12 @@ def extract_relation_submatrix(
     relations: list[str],
 ) -> tuple[list[str], np.ndarray]:
     """Slice a square matrix down to a relation subset while preserving order."""
-    rel_to_idx = {r: i for i, r in enumerate(relations_universe)}
-    rels = [r for r in _unique_preserve(relations) if r in rel_to_idx]
-    if not rels:
-        return [], np.zeros((0, 0), dtype=float)
-    idx = [rel_to_idx[r] for r in rels]
-    return rels, W[np.ix_(idx, idx)]
+    return phase1_extract_relation_submatrix(W, relations_universe, relations)
 
 
 def matrix_to_nested_json_dict(relations: list[str], W: np.ndarray) -> dict[str, dict[str, float]]:
     """Serialize a square matrix into the JSON format expected by Stage 1."""
-    out: dict[str, dict[str, float]] = {}
-    for i, r_from in enumerate(relations):
-        row: dict[str, float] = {}
-        for j, r_to in enumerate(relations):
-            value = float(W[i, j])
-            if value != 0.0:
-                row[r_to] = value
-        out[r_from] = row
-    return out
+    return phase1_matrix_to_nested_json_dict(relations, W)
 
 
 def run_phase3_allocation(
@@ -659,23 +422,16 @@ def run_phase3_allocation(
     integerize: bool,
 ) -> tuple[np.ndarray, dict]:
     """Run allocation over all non-empty groups and return selected W plus results."""
-    W = build_weight_matrix(adjacency, matrix_mode=matrix_mode)
-
-    non_empty_groups = {k: v for k, v in pattern_groups.items() if len(v) > 0}
-    non_empty_eta = {k: int(eta_per_group.get(k, 0)) for k in non_empty_groups}
-    if not non_empty_groups:
-        return W, {}
-
-    results = allocate_for_patterns(
-        W=W,
+    return phase1_run_phase3_allocation(
+        pattern_groups=pattern_groups,
+        eta_per_group=eta_per_group,
         relations_universe=relations_universe,
-        pattern_groups=non_empty_groups,
-        eta_per_group=non_empty_eta,
-        temperature=float(temperature),
-        epsilon=float(epsilon),
-        integerize=bool(integerize),
+        adjacency=adjacency,
+        matrix_mode=matrix_mode,
+        temperature=temperature,
+        epsilon=epsilon,
+        integerize=integerize,
     )
-    return W, results
 
 
 def _fmt_sci(x: float, digits: int = 4) -> str:
