@@ -1,0 +1,1128 @@
+{
+  "baseline_metrics": {
+    "allocated_relations_observed": 139,
+    "duplicate_triple_count": 0,
+    "largest_weak_component_ratio": 1.0,
+    "total_deficit": 2019.0,
+    "total_surplus": 6702.0,
+    "unique_entities": 21893,
+    "unique_relations": 139,
+    "unique_triples": 24683,
+    "weak_component_count": 1,
+    "zero_allocated_relations": 0
+  },
+  "best_feasible_moves_first_50": [],
+  "candidate_id": "C4_bridge_aware_replace_add",
+  "greedy_non_reuse_moves_first_50": [],
+  "inputs": {
+    "allocation": {
+      "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+    },
+    "config": "experiments/graph_candidates/C4_bridge_aware_replace_add/configs/config.template.json",
+    "parent_graph": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
+    },
+    "replacement_pool": {
+      "configured_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/eligible_replacement_candidates.jsonl",
+      "resolution_note": "configured path missing; used restored eligible_v1 pool path",
+      "resolved_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/eligible_v1/eligible_replacement_candidates.jsonl",
+      "sha256": "5440075235b69bd9586c602371ad80202fe805c9d27235efb4de5e90796d061e"
+    }
+  },
+  "limits": {
+    "max_replacement_candidates": 1000,
+    "max_target_edges": 200
+  },
+  "notes": [
+    "Probe-only run; no graph candidate was generated.",
+    "No WDQS query was made.",
+    "No LLM call was made.",
+    "Parent graph was read only and not modified.",
+    "candidate_registry.v1.json was not updated."
+  ],
+  "probe_id": "C4_bridge_aware_replace_add_probe_only",
+  "protected_constraints": {
+    "allocated_relations_observed_min": 139,
+    "duplicate_triple_count_max": 0,
+    "weak_component_count_max": 1,
+    "zero_allocated_relations_max": 0
+  },
+  "rejection_reasons": {
+    "does_not_reconnect_bridge_cut": 122400,
+    "replacement_endpoint_not_in_parent_graph": 75600
+  },
+  "runtime": {
+    "elapsed_seconds": 0.407138,
+    "finished_on": "2026-05-23T22:35:03.841936+00:00",
+    "started_on": "2026-05-23T22:35:03.434798+00:00"
+  },
+  "schema_version": "c4-bridge-aware-replace-add-probe-v1",
+  "status": "probe_only_no_graph_generated",
+  "summary": {
+    "best_observed_deficit_delta": null,
+    "best_observed_surplus_delta": null,
+    "connectivity_critical_count": 200,
+    "deletion_safe_count": 0,
+    "feasible_replacements_for_connectivity_critical": 0,
+    "feasible_safe_deletions": 0,
+    "greedy_non_reuse_candidate_count": 0,
+    "replacement_candidates_loaded": 990,
+    "replacement_pair_tests_upper_bound": 198000,
+    "target_edges_tested": 200,
+    "total_feasible_independent_moves": 0
+  },
+  "target_results_first_50": [
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q100",
+        "Q1549591"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q100",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 7,
+      "t": "Q1549591"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q1000022",
+        "Q5503"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q1000022",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 4,
+      "t": "Q5503"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q1001",
+        "Q5"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q1001",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 1,
+      "t": "Q5"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q100172",
+        "Q4164871"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q100172",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 6,
+      "t": "Q4164871"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q100271070",
+        "Q4"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q100271070",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 1,
+      "t": "Q4"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q100272953",
+        "Q15702752"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q100272953",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "t": "Q15702752"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q100387856",
+        "Q16521"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q100387856",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q16521"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q100416",
+        "Q13406463"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q100416",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q13406463"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q1004668",
+        "Q105543609"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q1004668",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q105543609"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q1005697",
+        "Q27020041"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q1005697",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "t": "Q27020041"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q1007474",
+        "Q484170"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q1007474",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q484170"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q100783929",
+        "Q1210334"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q100783929",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "t": "Q1210334"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q100786190",
+        "Q537127"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q100786190",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "t": "Q537127"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q1008",
+        "Q6256"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q1008",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "t": "Q6256"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q1009",
+        "Q6256"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q1009",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 4,
+      "t": "Q6256"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q100918027",
+        "Q101352"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q100918027",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q101352"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101007553",
+        "Q537127"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101007553",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 4,
+      "t": "Q537127"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101028",
+        "Q747074"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101028",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q747074"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101068305",
+        "Q3331189"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101068305",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q3331189"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101089146",
+        "Q101352"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101089146",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q101352"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101096582",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101096582",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101099235",
+        "Q559618"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101099235",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 5,
+      "t": "Q559618"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101169335",
+        "Q537127"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101169335",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "t": "Q537127"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101195558",
+        "Q559618"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101195558",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "t": "Q559618"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101199365",
+        "Q35054"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101199365",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q35054"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101244310",
+        "Q101352"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101244310",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q101352"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101244349",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101244349",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101244353",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101244353",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101244355",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101244355",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101245555",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101245555",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101250871",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101250871",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101250892",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101250892",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101250895",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101250895",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101250919",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101250919",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101250920",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101250920",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101251117",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101251117",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101251118",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101251118",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101251155",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101251155",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101252248",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101252248",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101252363",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101252363",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101252379",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101252379",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101265035",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101265035",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101265044",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101265044",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101289413",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101289413",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101297099",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101297099",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101298362",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101298362",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101303375",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101303375",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101412903",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101412903",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101413238",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101413238",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    },
+    {
+      "best_replacements": [],
+      "bridge_pair": [
+        "Q101413246",
+        "Q18663566"
+      ],
+      "connectivity_critical": true,
+      "deletion_safe": false,
+      "feasible_replacement_count": 0,
+      "feasible_safe_deletion": false,
+      "h": "Q101413246",
+      "is_bridge": true,
+      "r": "P31",
+      "rejection_counts": {
+        "does_not_reconnect_bridge_cut": 612,
+        "replacement_endpoint_not_in_parent_graph": 378
+      },
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "t": "Q18663566"
+    }
+  ]
+}
