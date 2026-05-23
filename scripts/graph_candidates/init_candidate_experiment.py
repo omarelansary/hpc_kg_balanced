@@ -152,9 +152,9 @@ def readme_text(args: argparse.Namespace, manifest: dict[str, Any]) -> str:
     graph_path = manifest["intended_outputs"]["candidate_graph"]
     allocation_path = manifest["allocation_path"]
     if not Path(allocation_path).is_absolute():
-        allocation_path = "../../" + allocation_path
+        allocation_path = "../../../" + allocation_path
     eval_command = (
-        "python ../../scripts/graph_candidates/evaluate_candidate.py "
+        "python ../../../scripts/graph_candidates/evaluate_candidate.py "
         f"--candidate-id {args.candidate_id} "
         f"--label \"{args.label}\" "
         f"--graph \"{graph_path}\" "
