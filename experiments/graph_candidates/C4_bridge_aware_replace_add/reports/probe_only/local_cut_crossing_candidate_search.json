@@ -1,0 +1,3608 @@
+{
+  "aggregate_counts": {
+    "allocated_balance_improving_candidate_cut_pairs": 0,
+    "allocated_cut_crossing_candidate_rows": 106,
+    "balance_improving_candidate_cut_pairs": 546,
+    "cut_crossing_candidate_rows": 629,
+    "deficit_increase_candidate_cut_pairs": 0,
+    "unallocated_balance_improving_candidate_cut_pairs": 546,
+    "unique_allocated_cut_crossing_candidates": 102,
+    "unique_balance_improving_candidates": 523,
+    "unique_cut_crossing_candidates": 625,
+    "unique_deficit_increase_candidates": 0
+  },
+  "bridge_cut_context": {
+    "b0_entities": 21893,
+    "b0_unique_triples": 24683,
+    "cut_index_entities": 679,
+    "cuts_tested": 200,
+    "target_relations": [
+      "P131",
+      "P279",
+      "P31"
+    ]
+  },
+  "candidate_sources": {
+    "frozen_candidate_pools": {
+      "file_count": 2,
+      "paths_first_10": [
+        "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/eligible_v1/eligible_replacement_candidates.jsonl",
+        "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl"
+      ],
+      "source_type": "jsonl_tree"
+    },
+    "stage02_candidate_shards": {
+      "file_count": 139,
+      "paths_first_10": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1001.jsonl",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1002.jsonl",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P10254.jsonl",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P10374.jsonl",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P10449.jsonl",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P10607.jsonl",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P10624.jsonl",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1142.jsonl",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1151.jsonl",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1158.jsonl"
+      ],
+      "source_type": "jsonl_glob"
+    },
+    "stage11_graph_output": {
+      "file_count": 1,
+      "paths_first_10": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl"
+      ],
+      "source_type": "single_jsonl"
+    },
+    "stage12_graph_output": {
+      "file_count": 1,
+      "paths_first_10": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl"
+      ],
+      "source_type": "single_jsonl"
+    }
+  },
+  "inputs": {
+    "allocation": {
+      "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+    },
+    "bridge_cut_audit_report": {
+      "path": "experiments/graph_candidates/C4_bridge_aware_replace_add/reports/probe_only/replacement_pool_bridge_cut_audit.json",
+      "sha256": "50cecab5b598fcfed24edc5a9c6f924baab86d1713f2363330307b3544345a90",
+      "summary": {
+        "crosses_any_tested_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "replacement_rows_loaded": 990,
+        "tested_bridge_targets": 200
+      }
+    },
+    "config": {
+      "path": "experiments/graph_candidates/C4_bridge_aware_replace_add/configs/config.template.json",
+      "sha256": "f7708be91bf3230cfdd3ecca438a57173c6b4c03cbee118622e7d0322ed58a90"
+    },
+    "parent_graph": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
+    }
+  },
+  "interpretation": {
+    "candidate_registry_updated": false,
+    "graph_candidate_generated": false,
+    "primary_result": "only_unallocated_cut_crossing_candidates_reduce_surplus"
+  },
+  "limits": {
+    "max_target_edges": 200
+  },
+  "notes": [
+    "Read-only local evidence search; no graph candidate was generated.",
+    "No WDQS query was made.",
+    "No LLM call was made.",
+    "candidate_registry.v1.json was not updated.",
+    "Candidate triples already present in B0 were excluded from cut-crossing candidate counts."
+  ],
+  "runtime": {
+    "elapsed_seconds": 6.525623,
+    "finished_on": "2026-05-23T23:16:09.639488+00:00",
+    "started_on": "2026-05-23T23:16:03.113865+00:00"
+  },
+  "schema_version": "c4-local-cut-crossing-candidate-search-v1",
+  "search_id": "C4_2_local_cut_crossing_candidate_search",
+  "source_stats": {
+    "frozen_candidate_pools": {
+      "allocated_cut_crossing_candidate_rows": 102,
+      "balance_improving_candidate_cut_pairs": 546,
+      "both_endpoints_in_b0_but_no_tested_cut_crossing": 15370,
+      "bytes_scanned": 657272253,
+      "cut_crossing_candidate_rows": 625,
+      "endpoint_inside_b0_both": 15995,
+      "endpoint_inside_b0_none": 571862,
+      "endpoint_inside_b0_one": 284299,
+      "files_scanned": 2,
+      "rows_scanned": 872156,
+      "top_20_relations": {
+        "P101": 13777,
+        "P131": 30033,
+        "P1343": 18729,
+        "P136": 13716,
+        "P1412": 26330,
+        "P161": 10377,
+        "P166": 33887,
+        "P17": 28787,
+        "P180": 9163,
+        "P19": 14676,
+        "P27": 13000,
+        "P279": 23665,
+        "P31": 139677,
+        "P361": 9324,
+        "P407": 10092,
+        "P5021": 9932,
+        "P527": 10558,
+        "P5753": 14647,
+        "P921": 14247,
+        "P971": 12929
+      },
+      "triples_parsed": 872156,
+      "unallocated_balance_improving_candidate_cut_pairs": 546,
+      "unallocated_cut_crossing_candidate_rows": 523
+    },
+    "stage02_candidate_shards": {
+      "allocated_cut_crossing_candidate_rows": 4,
+      "already_in_b0": 17941,
+      "both_endpoints_in_b0_but_no_tested_cut_crossing": 294,
+      "bytes_scanned": 48692812,
+      "cut_crossing_candidate_rows": 4,
+      "endpoint_inside_b0_both": 18239,
+      "endpoint_inside_b0_none": 55233,
+      "endpoint_inside_b0_one": 8486,
+      "files_scanned": 139,
+      "rows_scanned": 81958,
+      "top_20_relations": {
+        "P1268": 1375,
+        "P13177": 2165,
+        "P1420": 1075,
+        "P1560": 1060,
+        "P16": 1490,
+        "P1639": 1265,
+        "P1889": 1045,
+        "P2673": 1145,
+        "P2674": 1145,
+        "P2743": 2360,
+        "P2959": 1015,
+        "P3032": 1235,
+        "P3403": 1200,
+        "P399": 1635,
+        "P461": 1870,
+        "P527": 975,
+        "P5278": 1150,
+        "P567": 1175,
+        "P568": 1170,
+        "P793": 1700
+      },
+      "triples_parsed": 81958
+    },
+    "stage11_graph_output": {
+      "already_in_b0": 24638,
+      "bytes_scanned": 1756236,
+      "endpoint_inside_b0_both": 24638,
+      "endpoint_inside_b0_none": 32,
+      "files_scanned": 1,
+      "rows_scanned": 24670,
+      "top_20_relations": {
+        "P1268": 271,
+        "P131": 353,
+        "P13177": 408,
+        "P1322": 249,
+        "P16": 288,
+        "P1639": 237,
+        "P1889": 250,
+        "P2674": 226,
+        "P2743": 445,
+        "P279": 739,
+        "P3032": 232,
+        "P31": 5934,
+        "P3403": 225,
+        "P361": 239,
+        "P399": 307,
+        "P461": 359,
+        "P527": 253,
+        "P567": 223,
+        "P6185": 301,
+        "P793": 343
+      },
+      "triples_parsed": 24670
+    },
+    "stage12_graph_output": {
+      "already_in_b0": 24683,
+      "bytes_scanned": 1739977,
+      "endpoint_inside_b0_both": 24683,
+      "endpoint_inside_b0_none": 32,
+      "files_scanned": 1,
+      "rows_scanned": 24715,
+      "top_20_relations": {
+        "P1268": 271,
+        "P131": 353,
+        "P13177": 408,
+        "P1322": 249,
+        "P16": 288,
+        "P1639": 237,
+        "P1889": 251,
+        "P2674": 226,
+        "P2743": 445,
+        "P279": 750,
+        "P3032": 232,
+        "P31": 5957,
+        "P3403": 225,
+        "P361": 241,
+        "P399": 307,
+        "P461": 361,
+        "P527": 255,
+        "P567": 223,
+        "P6185": 301,
+        "P793": 343
+      },
+      "triples_parsed": 24715
+    }
+  },
+  "status": "read_only_local_evidence_search",
+  "top_candidate_examples": [
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P105",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q104253351",
+        "r": "P105",
+        "t": "Q7432"
+      },
+      "cut_id": 195,
+      "deficit_would_increase": false,
+      "line_number": 87183,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_19c46f75d3e4843ede7dd342",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q104253351",
+        "r": "P31",
+        "t": "Q16521"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P105",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q102128341",
+        "r": "P105",
+        "t": "Q7432"
+      },
+      "cut_id": 78,
+      "deficit_would_increase": false,
+      "line_number": 88453,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1a2127dfa81b5f591b017b39",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102128341",
+        "r": "P31",
+        "t": "Q16521"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1056",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q157062",
+        "r": "P1056",
+        "t": "Q1187656"
+      },
+      "cut_id": 80,
+      "deficit_would_increase": false,
+      "line_number": 60164,
+      "smaller_side_size": 10,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_11be577cdbabbd9f6382c209",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1021645",
+        "r": "P31",
+        "t": "Q29028649"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1366",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q101551918",
+        "r": "P1366",
+        "t": "Q264206"
+      },
+      "cut_id": 67,
+      "deficit_would_increase": false,
+      "line_number": 84565,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1904c57fec36bbd89d37d024",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q101551918",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1411",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q104123",
+        "r": "P1411",
+        "t": "Q1320315"
+      },
+      "cut_id": 171,
+      "deficit_would_increase": false,
+      "line_number": 21376,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_064910bb42335d7a8051ab86",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q104123",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1411",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q104123",
+        "r": "P1411",
+        "t": "Q1260789"
+      },
+      "cut_id": 171,
+      "deficit_would_increase": false,
+      "line_number": 74073,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_15e60efc0a6aa8c09799a95c",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q104123",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1423",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q10801119",
+        "r": "P1423",
+        "t": "Q148"
+      },
+      "cut_id": 74,
+      "deficit_would_increase": false,
+      "line_number": 4135,
+      "smaller_side_size": 65,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_013a8c7d838aef7d0b9fd7a4",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102066",
+        "r": "P31",
+        "t": "Q1047113"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1423",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q10722391",
+        "r": "P1423",
+        "t": "Q11399"
+      },
+      "cut_id": 74,
+      "deficit_would_increase": false,
+      "line_number": 58704,
+      "smaller_side_size": 65,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_114ef905117bc58141e9d7e9",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102066",
+        "r": "P31",
+        "t": "Q1047113"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1424",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q4",
+        "r": "P1424",
+        "t": "Q10728979"
+      },
+      "cut_id": 74,
+      "deficit_would_increase": false,
+      "line_number": 129911,
+      "smaller_side_size": 65,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_266228272d85cc68c97c7339",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102066",
+        "r": "P31",
+        "t": "Q1047113"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P155",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q102244",
+        "r": "P155",
+        "t": "Q102438"
+      },
+      "cut_id": 83,
+      "deficit_would_increase": false,
+      "line_number": 58068,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_111f230a37c323a700db616d",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102244",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P155",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q102244",
+        "r": "P155",
+        "t": "Q102438"
+      },
+      "cut_id": 94,
+      "deficit_would_increase": false,
+      "line_number": 58068,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_111f230a37c323a700db616d",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102438",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1552",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q105775352",
+        "r": "P1552",
+        "t": "Q63141557"
+      },
+      "cut_id": 91,
+      "deficit_would_increase": false,
+      "line_number": 26160,
+      "smaller_side_size": 84,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_07ae0aa0846671d8a5e9568b",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102362359",
+        "r": "P31",
+        "t": "Q63141557"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1552",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q136780133",
+        "r": "P1552",
+        "t": "Q668136"
+      },
+      "cut_id": 5,
+      "deficit_would_increase": false,
+      "line_number": 28194,
+      "smaller_side_size": 3,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_084e2c3303cdd88c2747482d",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q100272953",
+        "r": "P31",
+        "t": "Q15702752"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1552",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q105672581",
+        "r": "P1552",
+        "t": "Q63141557"
+      },
+      "cut_id": 91,
+      "deficit_would_increase": false,
+      "line_number": 97449,
+      "smaller_side_size": 84,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1ccfb18d5dfeaedd233724dc",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102362359",
+        "r": "P31",
+        "t": "Q63141557"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1552",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q105663630",
+        "r": "P1552",
+        "t": "Q63141557"
+      },
+      "cut_id": 91,
+      "deficit_would_increase": false,
+      "line_number": 99356,
+      "smaller_side_size": 84,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1d5eb6cf44aa59433d92715c",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102362359",
+        "r": "P31",
+        "t": "Q63141557"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1552",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q136780169",
+        "r": "P1552",
+        "t": "Q668136"
+      },
+      "cut_id": 5,
+      "deficit_would_increase": false,
+      "line_number": 123536,
+      "smaller_side_size": 3,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_247eb14bbcab76f70ea81f1f",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q100272953",
+        "r": "P31",
+        "t": "Q15702752"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P156",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q10281918",
+        "r": "P156",
+        "t": "Q10281917"
+      },
+      "cut_id": 102,
+      "deficit_would_increase": false,
+      "line_number": 122773,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_244160b2477413d7a6ed79d0",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q10281917",
+        "r": "P31",
+        "t": "Q1408581"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P156",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q10281918",
+        "r": "P156",
+        "t": "Q10281917"
+      },
+      "cut_id": 103,
+      "deficit_would_increase": false,
+      "line_number": 122773,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_244160b2477413d7a6ed79d0",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q10281918",
+        "r": "P31",
+        "t": "Q1408581"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q10376078",
+        "r": "P17",
+        "t": "Q155"
+      },
+      "cut_id": 143,
+      "deficit_would_increase": false,
+      "line_number": 3694,
+      "smaller_side_size": 3,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_011a9f077dca45382ea75ff3",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q10376078",
+        "r": "P31",
+        "t": "Q57644089"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q192751",
+        "r": "P17",
+        "t": "Q30"
+      },
+      "cut_id": 93,
+      "deficit_would_increase": false,
+      "line_number": 18622,
+      "smaller_side_size": 68,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_057d3a85c936b56b700775cc",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102402",
+        "r": "P31",
+        "t": "Q386208"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q136702031",
+        "r": "P17",
+        "t": "Q17"
+      },
+      "cut_id": 93,
+      "deficit_would_increase": false,
+      "line_number": 38533,
+      "smaller_side_size": 68,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_0b5bed7b4fb9b08391024f5b",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102402",
+        "r": "P31",
+        "t": "Q386208"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q101250892",
+        "r": "P17",
+        "t": "Q17"
+      },
+      "cut_id": 31,
+      "deficit_would_increase": false,
+      "line_number": 56063,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1088ac7102d271d99d128588",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q101250892",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q10281922",
+        "r": "P17",
+        "t": "Q45"
+      },
+      "cut_id": 104,
+      "deficit_would_increase": false,
+      "line_number": 63569,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_12c6281b34545398c2f5279f",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q10281922",
+        "r": "P31",
+        "t": "Q1408581"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q103168123",
+        "r": "P17",
+        "t": "Q214"
+      },
+      "cut_id": 119,
+      "deficit_would_increase": false,
+      "line_number": 68899,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1460cfdc8e7d1ba315fd7682",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q103168123",
+        "r": "P31",
+        "t": "Q16970"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q203008",
+        "r": "P17",
+        "t": "Q30"
+      },
+      "cut_id": 93,
+      "deficit_would_increase": false,
+      "line_number": 70279,
+      "smaller_side_size": 68,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_14cb2550df0deb862efe9af9",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102402",
+        "r": "P31",
+        "t": "Q386208"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q1860",
+        "r": "P17",
+        "t": "Q1009"
+      },
+      "cut_id": 14,
+      "deficit_would_increase": false,
+      "line_number": 76464,
+      "smaller_side_size": 4,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1696908aa86e2df3a50480d1",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1009",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q102045682",
+        "r": "P17",
+        "t": "Q183"
+      },
+      "cut_id": 73,
+      "deficit_would_increase": false,
+      "line_number": 84442,
+      "smaller_side_size": 4,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_18fc6ab9ec36c76bb9f0bcff",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102045682",
+        "r": "P31",
+        "t": "Q19860854"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q192081",
+        "r": "P17",
+        "t": "Q30"
+      },
+      "cut_id": 93,
+      "deficit_would_increase": false,
+      "line_number": 99963,
+      "smaller_side_size": 68,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1d8c8390aa1b67021995e424",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102402",
+        "r": "P31",
+        "t": "Q386208"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q6025558",
+        "r": "P17",
+        "t": "Q1042"
+      },
+      "cut_id": 181,
+      "deficit_would_increase": false,
+      "line_number": 100936,
+      "smaller_side_size": 3,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1dd23fe9e62fc42c9ebae251",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1042",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q1000022",
+        "r": "P17",
+        "t": "Q148"
+      },
+      "cut_id": 1,
+      "deficit_would_increase": false,
+      "line_number": 105043,
+      "smaller_side_size": 4,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1f0bc2e666ea1ac60af55b0c",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1000022",
+        "r": "P31",
+        "t": "Q5503"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q101417059",
+        "r": "P17",
+        "t": "Q17"
+      },
+      "cut_id": 54,
+      "deficit_would_increase": false,
+      "line_number": 121018,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_23be5639c39419f755ba0144",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q101417059",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q101096582",
+        "r": "P17",
+        "t": "Q17"
+      },
+      "cut_id": 20,
+      "deficit_would_increase": false,
+      "line_number": 121793,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_23f4f6081b2cb6a530bcc3d5",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q101096582",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P17",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q101244355",
+        "r": "P17",
+        "t": "Q17"
+      },
+      "cut_id": 28,
+      "deficit_would_increase": false,
+      "line_number": 127228,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_25942abe4c3ceeb6ba6cb018",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q101244355",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P190",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q10305",
+        "r": "P190",
+        "t": "Q384"
+      },
+      "cut_id": 116,
+      "deficit_would_increase": false,
+      "line_number": 8155,
+      "smaller_side_size": 9,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_026155127c84a7520c70c105",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q10308",
+        "r": "P31",
+        "t": "Q476028"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P190",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q100",
+        "r": "P190",
+        "t": "Q1492"
+      },
+      "cut_id": 0,
+      "deficit_would_increase": false,
+      "line_number": 85242,
+      "smaller_side_size": 7,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1935453bda69c263672dfc18",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q100",
+        "r": "P31",
+        "t": "Q1549591"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P1923",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q1488480",
+        "r": "P1923",
+        "t": "Q10308"
+      },
+      "cut_id": 116,
+      "deficit_would_increase": false,
+      "line_number": 27081,
+      "smaller_side_size": 9,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_07f302e9819c818db39df4e4",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q10308",
+        "r": "P31",
+        "t": "Q476028"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P205",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q97",
+        "r": "P205",
+        "t": "Q1030"
+      },
+      "cut_id": 114,
+      "deficit_would_increase": false,
+      "line_number": 58985,
+      "smaller_side_size": 6,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_11652194b072d1ecb9fe9110",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1030",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P272",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q102438",
+        "r": "P272",
+        "t": "Q126399"
+      },
+      "cut_id": 94,
+      "deficit_would_increase": false,
+      "line_number": 40849,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_0c0a6ff06d9f1aa3ed7dc2b0",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102438",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P2853",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q1039",
+        "r": "P2853",
+        "t": "Q1123613"
+      },
+      "cut_id": 152,
+      "deficit_would_increase": false,
+      "line_number": 121756,
+      "smaller_side_size": 3,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_23f2d7372b284f292638fcc2",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1039",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P360",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q103942977",
+        "r": "P360",
+        "t": "Q134556"
+      },
+      "cut_id": 155,
+      "deficit_would_increase": false,
+      "line_number": 34660,
+      "smaller_side_size": 3,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_0a3ccf33a110e7235de630e9",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q103943584",
+        "r": "P31",
+        "t": "Q134556"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P364",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q102754",
+        "r": "P364",
+        "t": "Q1860"
+      },
+      "cut_id": 100,
+      "deficit_would_increase": false,
+      "line_number": 76440,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_1694bf8d5c3094e9f0919490",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102754",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P37",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q1009",
+        "r": "P37",
+        "t": "Q1860"
+      },
+      "cut_id": 14,
+      "deficit_would_increase": false,
+      "line_number": 13738,
+      "smaller_side_size": 4,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_0407edfedde2513d5bd39536",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1009",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P3842",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q101547689",
+        "r": "P3842",
+        "t": "Q264206"
+      },
+      "cut_id": 65,
+      "deficit_would_increase": false,
+      "line_number": 1901,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_00953a97f726762af3bc7296",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q101547689",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P407",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q106247684",
+        "r": "P407",
+        "t": "Q1860"
+      },
+      "cut_id": 91,
+      "deficit_would_increase": false,
+      "line_number": 34172,
+      "smaller_side_size": 84,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_0a176f882051d68b148e4ddb",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q102362359",
+        "r": "P31",
+        "t": "Q63141557"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P407",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q103403201",
+        "r": "P407",
+        "t": "Q1860"
+      },
+      "cut_id": 128,
+      "deficit_would_increase": false,
+      "line_number": 72048,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_154d5d8ee88287e8ed090e19",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q103403201",
+        "r": "P31",
+        "t": "Q105543609"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P407",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q106240992",
+        "r": "P407",
+        "t": "Q1860"
+      },
+      "cut_id": 8,
+      "deficit_would_increase": false,
+      "line_number": 120385,
+      "smaller_side_size": 2,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_238eb90f553a822b747ae368",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1004668",
+        "r": "P31",
+        "t": "Q105543609"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P463",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q1009",
+        "r": "P463",
+        "t": "Q47543"
+      },
+      "cut_id": 14,
+      "deficit_would_increase": false,
+      "line_number": 13533,
+      "smaller_side_size": 4,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_03f7108a5bba53758bf6a11f",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1009",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P463",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q1039",
+        "r": "P463",
+        "t": "Q7809"
+      },
+      "cut_id": 152,
+      "deficit_would_increase": false,
+      "line_number": 17567,
+      "smaller_side_size": 3,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_052d92605bd9a4a2d2493172",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "state_query_cache",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1039",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P463",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q1009",
+        "r": "P463",
+        "t": "Q170424"
+      },
+      "cut_id": 14,
+      "deficit_would_increase": false,
+      "line_number": 45762,
+      "smaller_side_size": 4,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_0d7ad33275568abea50633f9",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1009",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_relation": false,
+      "balance_effect": {
+        "add_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": null,
+          "observed_after": 1,
+          "observed_before": 0,
+          "relation": "P463",
+          "surplus_delta": 0.0
+        },
+        "deficit_delta": 0.0,
+        "remove_relation": {
+          "deficit_delta": 0.0,
+          "expected_eta": 238.0,
+          "observed_after": 5956,
+          "observed_before": 5957,
+          "relation": "P31",
+          "surplus_delta": -1.0
+        },
+        "surplus_delta": -1.0
+      },
+      "candidate": {
+        "h": "Q1042",
+        "r": "P463",
+        "t": "Q1065"
+      },
+      "cut_id": 181,
+      "deficit_would_increase": false,
+      "line_number": 83064,
+      "smaller_side_size": 3,
+      "source_id": "frozen_candidate_pools",
+      "source_metadata": {
+        "candidate_id": "c3poolv1_18946455cc60cd061b3b073e",
+        "endpoint_overlap_with_b0": "both",
+        "provenance_type": "event_bridge_triples",
+        "relation_allocation_status": "unallocated",
+        "source_stage": "stage11"
+      },
+      "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+      "surplus_reducing": true,
+      "target_edge": {
+        "h": "Q1042",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    }
+  ],
+  "top_cuts_by_candidate_count": [
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 1,
+      "balance_improving_candidate_rows": 42,
+      "bridge_pair": [
+        "Q102362359",
+        "Q63141557"
+      ],
+      "cut_crossing_candidate_rows": 43,
+      "cut_id": 91,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21809,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 84,
+      "target_edge": {
+        "h": "Q102362359",
+        "r": "P31",
+        "t": "Q63141557"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 27,
+      "balance_improving_candidate_rows": 38,
+      "bridge_pair": [
+        "Q102402",
+        "Q386208"
+      ],
+      "cut_crossing_candidate_rows": 65,
+      "cut_id": 93,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21825,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 68,
+      "target_edge": {
+        "h": "Q102402",
+        "r": "P31",
+        "t": "Q386208"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 2,
+      "balance_improving_candidate_rows": 38,
+      "bridge_pair": [
+        "Q1030",
+        "Q6256"
+      ],
+      "cut_crossing_candidate_rows": 40,
+      "cut_id": 114,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21887,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 6,
+      "target_edge": {
+        "h": "Q1030",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 33,
+      "bridge_pair": [
+        "Q1016",
+        "Q6256"
+      ],
+      "cut_crossing_candidate_rows": 33,
+      "cut_id": 69,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21887,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 6,
+      "target_edge": {
+        "h": "Q1016",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 32,
+      "bridge_pair": [
+        "Q1009",
+        "Q6256"
+      ],
+      "cut_crossing_candidate_rows": 32,
+      "cut_id": 14,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21889,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 4,
+      "target_edge": {
+        "h": "Q1009",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 2,
+      "balance_improving_candidate_rows": 24,
+      "bridge_pair": [
+        "Q1008",
+        "Q6256"
+      ],
+      "cut_crossing_candidate_rows": 26,
+      "cut_id": 13,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21890,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q1008",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 3,
+      "balance_improving_candidate_rows": 18,
+      "bridge_pair": [
+        "Q1042",
+        "Q6256"
+      ],
+      "cut_crossing_candidate_rows": 21,
+      "cut_id": 181,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21890,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q1042",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 2,
+      "balance_improving_candidate_rows": 13,
+      "bridge_pair": [
+        "Q1039",
+        "Q6256"
+      ],
+      "cut_crossing_candidate_rows": 15,
+      "cut_id": 152,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21890,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q1039",
+        "r": "P31",
+        "t": "Q6256"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 6,
+      "balance_improving_candidate_rows": 11,
+      "bridge_pair": [
+        "Q102066",
+        "Q1047113"
+      ],
+      "cut_crossing_candidate_rows": 17,
+      "cut_id": 74,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21828,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 65,
+      "target_edge": {
+        "h": "Q102066",
+        "r": "P31",
+        "t": "Q1047113"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 2,
+      "balance_improving_candidate_rows": 11,
+      "bridge_pair": [
+        "Q102731386",
+        "Q13023500"
+      ],
+      "cut_crossing_candidate_rows": 13,
+      "cut_id": 98,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21888,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 5,
+      "target_edge": {
+        "h": "Q102731386",
+        "r": "P31",
+        "t": "Q13023500"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 11,
+      "bridge_pair": [
+        "Q102244",
+        "Q11424"
+      ],
+      "cut_crossing_candidate_rows": 11,
+      "cut_id": 83,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q102244",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 1,
+      "balance_improving_candidate_rows": 9,
+      "bridge_pair": [
+        "Q100",
+        "Q1549591"
+      ],
+      "cut_crossing_candidate_rows": 10,
+      "cut_id": 0,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21886,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 7,
+      "target_edge": {
+        "h": "Q100",
+        "r": "P31",
+        "t": "Q1549591"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 9,
+      "bridge_pair": [
+        "Q102235",
+        "Q11424"
+      ],
+      "cut_crossing_candidate_rows": 9,
+      "cut_id": 82,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q102235",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 9,
+      "bridge_pair": [
+        "Q102448",
+        "Q11424"
+      ],
+      "cut_crossing_candidate_rows": 9,
+      "cut_id": 95,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q102448",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 8,
+      "bridge_pair": [
+        "Q102438",
+        "Q11424"
+      ],
+      "cut_crossing_candidate_rows": 8,
+      "cut_id": 94,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q102438",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 2,
+      "balance_improving_candidate_rows": 6,
+      "bridge_pair": [
+        "Q1022",
+        "Q1549591"
+      ],
+      "cut_crossing_candidate_rows": 8,
+      "cut_id": 81,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21890,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q1022",
+        "r": "P31",
+        "t": "Q1549591"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 1,
+      "balance_improving_candidate_rows": 6,
+      "bridge_pair": [
+        "Q103569",
+        "Q11424"
+      ],
+      "cut_crossing_candidate_rows": 7,
+      "cut_id": 137,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q103569",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 1,
+      "balance_improving_candidate_rows": 5,
+      "bridge_pair": [
+        "Q102734420",
+        "Q13023500"
+      ],
+      "cut_crossing_candidate_rows": 6,
+      "cut_id": 99,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q102734420",
+        "r": "P31",
+        "t": "Q13023500"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 1,
+      "balance_improving_candidate_rows": 5,
+      "bridge_pair": [
+        "Q103505118",
+        "Q13023500"
+      ],
+      "cut_crossing_candidate_rows": 6,
+      "cut_id": 134,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q103505118",
+        "r": "P31",
+        "t": "Q13023500"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 1,
+      "balance_improving_candidate_rows": 5,
+      "bridge_pair": [
+        "Q104123",
+        "Q11424"
+      ],
+      "cut_crossing_candidate_rows": 6,
+      "cut_id": 171,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q104123",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 5,
+      "bridge_pair": [
+        "Q10281918",
+        "Q1408581"
+      ],
+      "cut_crossing_candidate_rows": 5,
+      "cut_id": 103,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q10281918",
+        "r": "P31",
+        "t": "Q1408581"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 3,
+      "balance_improving_candidate_rows": 4,
+      "bridge_pair": [
+        "Q10232928",
+        "Q4167836"
+      ],
+      "cut_crossing_candidate_rows": 7,
+      "cut_id": 87,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21886,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 7,
+      "target_edge": {
+        "h": "Q10232928",
+        "r": "P31",
+        "t": "Q4167836"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 1,
+      "balance_improving_candidate_rows": 4,
+      "bridge_pair": [
+        "Q10358425",
+        "Q19860854"
+      ],
+      "cut_crossing_candidate_rows": 5,
+      "cut_id": 138,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21890,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q10358425",
+        "r": "P31",
+        "t": "Q19860854"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 4,
+      "bridge_pair": [
+        "Q101542498",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 4,
+      "cut_id": 62,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101542498",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 4,
+      "bridge_pair": [
+        "Q101542511",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 4,
+      "cut_id": 63,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101542511",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 4,
+      "bridge_pair": [
+        "Q101546948",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 4,
+      "cut_id": 64,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101546948",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 4,
+      "bridge_pair": [
+        "Q101547689",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 4,
+      "cut_id": 65,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101547689",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 4,
+      "bridge_pair": [
+        "Q101551022",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 4,
+      "cut_id": 66,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101551022",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 4,
+      "bridge_pair": [
+        "Q101551918",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 4,
+      "cut_id": 67,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101551918",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 4,
+      "bridge_pair": [
+        "Q10308",
+        "Q476028"
+      ],
+      "cut_crossing_candidate_rows": 4,
+      "cut_id": 116,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21884,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 9,
+      "target_edge": {
+        "h": "Q10308",
+        "r": "P31",
+        "t": "Q476028"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 4,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q100172",
+        "Q4164871"
+      ],
+      "cut_crossing_candidate_rows": 7,
+      "cut_id": 3,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21887,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 6,
+      "target_edge": {
+        "h": "Q100172",
+        "r": "P31",
+        "t": "Q4164871"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 4,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q102673",
+        "Q4830453"
+      ],
+      "cut_crossing_candidate_rows": 7,
+      "cut_id": 97,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21889,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 4,
+      "target_edge": {
+        "h": "Q102673",
+        "r": "P31",
+        "t": "Q4830453"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q1001",
+        "Q5"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 2,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21892,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 1,
+      "target_edge": {
+        "h": "Q1001",
+        "r": "P31",
+        "t": "Q5"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q100272953",
+        "Q15702752"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 5,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21890,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q100272953",
+        "r": "P31",
+        "t": "Q15702752"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q101251117",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 35,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101251117",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q101251118",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 36,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101251118",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q101413238",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 48,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101413238",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q101413246",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 49,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101413246",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q101413643",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 50,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101413643",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q101413644",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 51,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101413644",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q101413645",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 52,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101413645",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q101413646",
+        "Q18663566"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 53,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101413646",
+        "r": "P31",
+        "t": "Q18663566"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q10144516",
+        "Q4167836"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 59,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q10144516",
+        "r": "P31",
+        "t": "Q4167836"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q102754",
+        "Q11424"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 100,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q102754",
+        "r": "P31",
+        "t": "Q11424"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q10281916",
+        "Q1408581"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 101,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q10281916",
+        "r": "P31",
+        "t": "Q1408581"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 0,
+      "balance_improving_candidate_rows": 3,
+      "bridge_pair": [
+        "Q10281917",
+        "Q1408581"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 102,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q10281917",
+        "r": "P31",
+        "t": "Q1408581"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 6,
+      "balance_improving_candidate_rows": 2,
+      "bridge_pair": [
+        "Q1021645",
+        "Q29028649"
+      ],
+      "cut_crossing_candidate_rows": 8,
+      "cut_id": 80,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21883,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 10,
+      "target_edge": {
+        "h": "Q1021645",
+        "r": "P31",
+        "t": "Q29028649"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 1,
+      "balance_improving_candidate_rows": 2,
+      "bridge_pair": [
+        "Q1004668",
+        "Q105543609"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 8,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21891,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q1004668",
+        "r": "P31",
+        "t": "Q105543609"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 1,
+      "balance_improving_candidate_rows": 2,
+      "bridge_pair": [
+        "Q103841109",
+        "Q134556"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 150,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21890,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q103841109",
+        "r": "P31",
+        "t": "Q134556"
+      }
+    },
+    {
+      "allocated_balance_improving_candidate_rows": 0,
+      "allocated_cut_crossing_candidate_rows": 1,
+      "balance_improving_candidate_rows": 2,
+      "bridge_pair": [
+        "Q103943584",
+        "Q134556"
+      ],
+      "cut_crossing_candidate_rows": 3,
+      "cut_id": 155,
+      "deficit_increase_candidate_rows": 0,
+      "larger_side_size": 21890,
+      "relation_surplus_before": 5719.0,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q103943584",
+        "r": "P31",
+        "t": "Q134556"
+      }
+    }
+  ],
+  "top_feasible_looking_candidates": []
+}
