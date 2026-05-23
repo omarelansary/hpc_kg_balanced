@@ -1,0 +1,1912 @@
+{
+  "aggregate": {
+    "crosses_any_tested_cut": 0,
+    "crosses_cut_and_allocated": 0,
+    "crosses_cut_and_balance_improving": 0,
+    "crosses_cut_but_duplicate": 0,
+    "endpoint_inside_b0_both": 612,
+    "endpoint_inside_b0_none": 0,
+    "endpoint_inside_b0_one": 378,
+    "replacement_rows_loaded": 990,
+    "tested_bridge_targets": 200
+  },
+  "audit_id": "C4_1_replacement_pool_bridge_cut_audit",
+  "bridge_cut_context": {
+    "b0_entities": 21893,
+    "b0_unique_triples": 24683,
+    "ordered_surplus_target_edges_considered": 200,
+    "target_relations": [
+      "P131",
+      "P279",
+      "P31"
+    ],
+    "tested_bridge_targets": 200,
+    "undirected_simple_bridge_pairs": 19168
+  },
+  "inputs": {
+    "allocation": {
+      "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+    },
+    "config": {
+      "path": "experiments/graph_candidates/C4_bridge_aware_replace_add/configs/config.template.json",
+      "sha256": "f7708be91bf3230cfdd3ecca438a57173c6b4c03cbee118622e7d0322ed58a90"
+    },
+    "parent_graph": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
+    },
+    "probe_report": {
+      "path": "experiments/graph_candidates/C4_bridge_aware_replace_add/reports/probe_only/probe_report.json",
+      "sha256": "abebff524785e6b251a6868e1f68e3811f499467f7625faacefa7e3159c4954f",
+      "summary": {
+        "best_observed_deficit_delta": null,
+        "best_observed_surplus_delta": null,
+        "connectivity_critical_count": 200,
+        "deletion_safe_count": 0,
+        "feasible_replacements_for_connectivity_critical": 0,
+        "feasible_safe_deletions": 0,
+        "greedy_non_reuse_candidate_count": 0,
+        "replacement_candidates_loaded": 990,
+        "replacement_pair_tests_upper_bound": 198000,
+        "target_edges_tested": 200,
+        "total_feasible_independent_moves": 0
+      }
+    },
+    "replacement_pool": {
+      "configured_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/eligible_replacement_candidates.jsonl",
+      "resolution_note": "configured path missing; used restored eligible_v1 pool path",
+      "resolved_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/eligible_v1/eligible_replacement_candidates.jsonl",
+      "sha256": "5440075235b69bd9586c602371ad80202fe805c9d27235efb4de5e90796d061e"
+    }
+  },
+  "interpretation": {
+    "candidate_registry_updated": false,
+    "no_graph_generated": true,
+    "primary_failure_mode": "bridge_cut_crossing_failure"
+  },
+  "limits": {
+    "max_replacement_candidates": 1000,
+    "max_target_edges": 200
+  },
+  "notes": [
+    "Read-only audit; no graph candidate was generated.",
+    "No WDQS query was made.",
+    "No LLM call was made.",
+    "candidate_registry.v1.json was not updated."
+  ],
+  "pair_test_aggregate": {
+    "crosses_cut": 0,
+    "crosses_cut_and_allocated": 0,
+    "crosses_cut_and_balance_improving": 0,
+    "crosses_cut_but_duplicate": 0,
+    "deficit_would_increase": 0,
+    "endpoint_inside_b0_both": 122400,
+    "endpoint_inside_b0_none": 0,
+    "endpoint_inside_b0_one": 75600,
+    "feasible_if_hard_constraints_hold": 0,
+    "reject_deficit_increase": 0,
+    "reject_does_not_cross_bridge_cut": 122400,
+    "reject_duplicate": 0,
+    "reject_endpoint_not_both_inside_b0": 75600,
+    "reject_not_surplus_reducing": 0,
+    "reject_unallocated_relation": 0
+  },
+  "replacement_pool_summary": {
+    "allocated_relation_rows": 990,
+    "duplicate_rows": 0,
+    "endpoint_inside_b0_both": 612,
+    "endpoint_inside_b0_none": 0,
+    "endpoint_inside_b0_one": 378,
+    "relation_distribution": {
+      "P10254": 3,
+      "P1142": 4,
+      "P1151": 23,
+      "P1204": 2,
+      "P12452": 2,
+      "P12764": 6,
+      "P12765": 9,
+      "P1322": 10,
+      "P1398": 16,
+      "P1403": 20,
+      "P1420": 28,
+      "P1434": 9,
+      "P1445": 52,
+      "P1537": 1,
+      "P1560": 5,
+      "P163": 27,
+      "P1639": 20,
+      "P1654": 1,
+      "P167": 18,
+      "P1753": 47,
+      "P1754": 4,
+      "P2098": 1,
+      "P2389": 20,
+      "P2499": 52,
+      "P2500": 68,
+      "P2682": 1,
+      "P2935": 36,
+      "P2959": 69,
+      "P3032": 29,
+      "P3085": 1,
+      "P3261": 4,
+      "P3403": 42,
+      "P3461": 6,
+      "P355": 11,
+      "P399": 8,
+      "P406": 3,
+      "P4329": 32,
+      "P457": 1,
+      "P466": 8,
+      "P4688": 2,
+      "P4792": 1,
+      "P4967": 1,
+      "P5135": 1,
+      "P5277": 194,
+      "P5278": 3,
+      "P612": 19,
+      "P6185": 5,
+      "P694": 2,
+      "P7938": 16,
+      "P814": 25,
+      "P816": 1,
+      "P822": 4,
+      "P8263": 1,
+      "P8289": 10,
+      "P8865": 1,
+      "P927": 1,
+      "P931": 1,
+      "P9926": 3
+    },
+    "top_30_relations": {
+      "P1151": 23,
+      "P12764": 6,
+      "P12765": 9,
+      "P1322": 10,
+      "P1398": 16,
+      "P1403": 20,
+      "P1420": 28,
+      "P1434": 9,
+      "P1445": 52,
+      "P163": 27,
+      "P1639": 20,
+      "P167": 18,
+      "P1753": 47,
+      "P2389": 20,
+      "P2499": 52,
+      "P2500": 68,
+      "P2935": 36,
+      "P2959": 69,
+      "P3032": 29,
+      "P3403": 42,
+      "P3461": 6,
+      "P355": 11,
+      "P399": 8,
+      "P4329": 32,
+      "P466": 8,
+      "P5277": 194,
+      "P612": 19,
+      "P7938": 16,
+      "P814": 25,
+      "P8289": 10
+    },
+    "unallocated_relation_rows": 0
+  },
+  "runtime": {
+    "elapsed_seconds": 0.385351,
+    "finished_on": "2026-05-23T22:52:25.456668+00:00",
+    "started_on": "2026-05-23T22:52:25.071317+00:00"
+  },
+  "schema_version": "c4-replacement-pool-bridge-cut-audit-v1",
+  "status": "read_only_probe_audit",
+  "target_bridge_summaries_count": 200,
+  "target_bridge_summaries_first_50": [
+    {
+      "bridge_pair": [
+        "Q100",
+        "Q1549591"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 7,
+      "target_edge": {
+        "h": "Q100",
+        "r": "P31",
+        "t": "Q1549591"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q1000022",
+        "Q5503"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 4,
+      "target_edge": {
+        "h": "Q1000022",
+        "r": "P31",
+        "t": "Q5503"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q1001",
+        "Q5"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 1,
+      "target_edge": {
+        "h": "Q1001",
+        "r": "P31",
+        "t": "Q5"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q100172",
+        "Q4164871"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 6,
+      "target_edge": {
+        "h": "Q100172",
+        "r": "P31",
+        "t": "Q4164871"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q100271070",
+        "Q4"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 1,
+      "target_edge": {
+        "h": "Q100271070",
+        "r": "P31",
+        "t": "Q4"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q100272953",
+        "Q15702752"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q100272953",
+        "r": "P31",
+        "t": "Q15702752"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q100387856",
+        "Q16521"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q100387856",
+        "r": "P31",
+        "t": "Q16521"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q100416",
+        "Q13406463"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q100416",
+        "r": "P31",
+        "t": "Q13406463"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q1004668",
+        "Q105543609"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q1004668",
+        "r": "P31",
+        "t": "Q105543609"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q1005697",
+        "Q27020041"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q1005697",
+        "r": "P31",
+        "t": "Q27020041"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q1007474",
+        "Q484170"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q1007474",
+        "r": "P31",
+        "t": "Q484170"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q100783929",
+        "Q1210334"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q100783929",
+        "r": "P31",
+        "t": "Q1210334"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q100786190",
+        "Q537127"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q100786190",
+        "r": "P31",
+        "t": "Q537127"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q1008",
+        "Q6256"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q1008",
+        "r": "P31",
+        "t": "Q6256"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q1009",
+        "Q6256"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 4,
+      "target_edge": {
+        "h": "Q1009",
+        "r": "P31",
+        "t": "Q6256"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q100918027",
+        "Q101352"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q100918027",
+        "r": "P31",
+        "t": "Q101352"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101007553",
+        "Q537127"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 4,
+      "target_edge": {
+        "h": "Q101007553",
+        "r": "P31",
+        "t": "Q537127"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101028",
+        "Q747074"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101028",
+        "r": "P31",
+        "t": "Q747074"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101068305",
+        "Q3331189"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101068305",
+        "r": "P31",
+        "t": "Q3331189"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101089146",
+        "Q101352"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101089146",
+        "r": "P31",
+        "t": "Q101352"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101096582",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101096582",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101099235",
+        "Q559618"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 5,
+      "target_edge": {
+        "h": "Q101099235",
+        "r": "P31",
+        "t": "Q559618"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101169335",
+        "Q537127"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q101169335",
+        "r": "P31",
+        "t": "Q537127"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101195558",
+        "Q559618"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 3,
+      "target_edge": {
+        "h": "Q101195558",
+        "r": "P31",
+        "t": "Q559618"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101199365",
+        "Q35054"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101199365",
+        "r": "P31",
+        "t": "Q35054"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101244310",
+        "Q101352"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101244310",
+        "r": "P31",
+        "t": "Q101352"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101244349",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101244349",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101244353",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101244353",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101244355",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101244355",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101245555",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101245555",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101250871",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101250871",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101250892",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101250892",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101250895",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101250895",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101250919",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101250919",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101250920",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101250920",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101251117",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101251117",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101251118",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101251118",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101251155",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101251155",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101252248",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101252248",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101252363",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101252363",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101252379",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101252379",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101265035",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101265035",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101265044",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101265044",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101289413",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101289413",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101297099",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101297099",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101298362",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101298362",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101303375",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101303375",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101412903",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101412903",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101413238",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101413238",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    },
+    {
+      "bridge_pair": [
+        "Q101413246",
+        "Q18663566"
+      ],
+      "counts": {
+        "crosses_cut": 0,
+        "crosses_cut_and_allocated": 0,
+        "crosses_cut_and_balance_improving": 0,
+        "crosses_cut_but_duplicate": 0,
+        "deficit_would_increase": 0,
+        "endpoint_inside_b0_both": 612,
+        "endpoint_inside_b0_none": 0,
+        "endpoint_inside_b0_one": 378,
+        "feasible_if_hard_constraints_hold": 0,
+        "reject_deficit_increase": 0,
+        "reject_does_not_cross_bridge_cut": 612,
+        "reject_duplicate": 0,
+        "reject_endpoint_not_both_inside_b0": 378,
+        "reject_not_surplus_reducing": 0,
+        "reject_unallocated_relation": 0
+      },
+      "crossing_candidate_examples": [],
+      "crossing_relation_distribution": {},
+      "relation_surplus_before": 5719.0,
+      "replacement_pair_tests": 990,
+      "smaller_side_size": 2,
+      "target_edge": {
+        "h": "Q101413246",
+        "r": "P31",
+        "t": "Q18663566"
+      },
+      "unique_crossing_replacements": 0
+    }
+  ],
+  "top_reasons_no_feasible_replacement": {
+    "does_not_cross_bridge_cut": 122400,
+    "endpoint_not_both_inside_b0": 75600,
+    "no_cut_crossing_allocated_replacement": 200,
+    "no_cut_crossing_surplus_reducing_replacement": 200,
+    "no_replacement_candidate_crossed_any_tested_bridge_cut": 200
+  }
+}
