@@ -1,0 +1,52 @@
+{
+  "schema_version": "kg-candidate-generation-config-v1",
+  "candidate_id": "C4_bridge_aware_replace_add",
+  "parent_candidate_id": "B0",
+  "parent_graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+  "allocation_path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+  "candidate_registry_path": "artifacts/final_graph/selected_final_graph/rebuild/candidate_registry.v1.json",
+  "strategy": "bridge_aware_remove_replace_controlled_addition",
+  "allowed_live_sources": false,
+  "allowed_wdqs": false,
+  "allowed_llm": false,
+  "target_relations": [
+    "P31",
+    "P279",
+    "P131"
+  ],
+  "protected_constraints": {
+    "weak_component_count_max": 1,
+    "zero_allocated_relations_max": 0,
+    "duplicate_triple_count_max": 0,
+    "allocated_relations_observed_min": 139
+  },
+  "soft_objectives": [
+    "reduce_total_surplus",
+    "reduce_composition_pattern_surplus",
+    "avoid_total_deficit_increase",
+    "preserve_or_improve_largest_component_ratio"
+  ],
+  "replacement_sources": [
+    {
+      "path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/eligible_replacement_candidates.jsonl",
+      "storage_class": "optional/local_external",
+      "required_for_scaffold": false,
+      "notes": "Frozen local replacement-pool evidence may be restored outside Git; do not query live WDQS to recreate it."
+    }
+  ],
+  "operation_types": [
+    "remove_safe_edge",
+    "remove_replace_edge",
+    "controlled_addition_then_remove"
+  ],
+  "output_paths": {
+    "candidate_graph": "outputs/graph.jsonl",
+    "report": "reports/report.json",
+    "summary": "reports/summary.md",
+    "relation_quota_report": "reports/relation_quota_report.tsv",
+    "pattern_balance_report": "reports/pattern_balance_report.tsv",
+    "evaluation_manifest": "reports/manifest.json",
+    "decision": "decision.md"
+  },
+  "status": "planned_not_generated"
+}
