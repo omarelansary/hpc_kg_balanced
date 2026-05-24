@@ -1,0 +1,37 @@
+{
+  "acceptance_classification": "c5_h2_candidate_passed_policy",
+  "candidate_id": "C5_connectivity_support_hypothesis_matrix",
+  "generated_by": "tools/graph_candidate_generation/c5_generate_h2_auxiliary_connectivity_candidate.py",
+  "hashes": {
+    "auxiliary_edge_report": "1b060b08523c9c29882e7adf59ec6d2202da94c658b67ebcc54adf76c898c818",
+    "auxiliary_edges": "802f280163984859a78d649565174673e39719d50d9f1c00eb03ecac732cf12a",
+    "canonical_edges": "efa6ed429e4328744a6049148f82dd7134d9f195cf768a3417a8dd5a5e85576b",
+    "graph": "17c082efa49384f0f162b37551d7f7c8a221e73e2cdd7e726a1e018db8ead540",
+    "pattern_balance_report": "4c8a5ae79446355189403c85c0a09890b12c387c55912d265f29d8f7cdcaaf9a",
+    "relation_quota_report": "8b02b180cb5fd8285e067efe279010d1ce2e3393d0ddb0867ca6a849516e9380",
+    "removed_canonical_edges": "a2a28dfae6b9d42977e3f9ba30825d20480f6da024abfbd36c84653c83992590",
+    "removed_edge_report": "8e0fc5a8e21c95debbfa08a32d81ba0bf2e0f52a0b3c1ef973505a8a9a24bc7f",
+    "report": "58665be281c9ab2a5aee66539a81eeedbbb95e73fff4f58ab8a4f11cd6ef989b"
+  },
+  "notes": [
+    "No WDQS query was made.",
+    "No LLM call was made.",
+    "No synthetic triples were created.",
+    "candidate_registry.v1.json was not updated."
+  ],
+  "outputs": {
+    "auxiliary_edge_report": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/reports/auxiliary_edge_report.tsv",
+    "auxiliary_edges": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/outputs/auxiliary_edges.jsonl",
+    "canonical_edges": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/outputs/canonical_edges.jsonl",
+    "graph": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/outputs/graph.jsonl",
+    "manifest": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/reports/manifest.json",
+    "pattern_balance_report": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/reports/pattern_balance_report.tsv",
+    "relation_quota_report": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/reports/relation_quota_report.tsv",
+    "removed_canonical_edges": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/outputs/removed_canonical_edges.jsonl",
+    "removed_edge_report": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/reports/removed_edge_report.tsv",
+    "report": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/reports/report.json",
+    "summary": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/reports/summary.md"
+  },
+  "parent_candidate_id": "B0",
+  "schema_version": "c5-h2-auxiliary-connectivity-manifest-v1"
+}

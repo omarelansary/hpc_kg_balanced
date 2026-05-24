@@ -1,0 +1,98 @@
+{
+  "schema_version": "kg-candidate-package-manifest-v1",
+  "candidate_id": "C5_H2_diversity_light_cap50",
+  "parent_candidate_id": "B0",
+  "source_experiment": "C5_connectivity_support_hypothesis_matrix",
+  "source_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50",
+  "strategy": "relation_diversity_penalty_light",
+  "cap": 50,
+  "status": "pending_human_registry_decision",
+  "recommended_status": "experimental_candidate_pending_artifact_preservation",
+  "artifact_storage_status": "local_untracked_or_external_required",
+  "classification": "c5_h2_candidate_passed_policy",
+  "metrics": {
+    "selected_auxiliary_edges": 50,
+    "removed_canonical_edges": 50,
+    "canonical_surplus_delta": -50.0,
+    "canonical_deficit_delta": 0.0,
+    "full_weak_components": 1,
+    "canonical_only_weak_components": 49,
+    "full_graph_triples": 24683,
+    "canonical_only_triples": 24633,
+    "auxiliary_relation_count": 48,
+    "p17_count": 1,
+    "p17_share": 0.02
+  },
+  "graph_outputs_referenced_not_copied": {
+    "graph_jsonl": {
+      "path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/outputs/graph.jsonl",
+      "sha256": "17c082efa49384f0f162b37551d7f7c8a221e73e2cdd7e726a1e018db8ead540",
+      "size_bytes": 4728416
+    },
+    "canonical_edges_jsonl": {
+      "path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/outputs/canonical_edges.jsonl",
+      "sha256": "efa6ed429e4328744a6049148f82dd7134d9f195cf768a3417a8dd5a5e85576b",
+      "size_bytes": 4664895
+    },
+    "auxiliary_edges_jsonl": {
+      "path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/outputs/auxiliary_edges.jsonl",
+      "sha256": "802f280163984859a78d649565174673e39719d50d9f1c00eb03ecac732cf12a",
+      "size_bytes": 63521
+    },
+    "removed_canonical_edges_jsonl": {
+      "path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/outputs/removed_canonical_edges.jsonl",
+      "sha256": "a2a28dfae6b9d42977e3f9ba30825d20480f6da024abfbd36c84653c83992590",
+      "size_bytes": 29591
+    }
+  },
+  "reports_copied": {
+    "report_json": {
+      "path": "experiments/graph_candidates/C5_H2_diversity_light_cap50/reports/report.json",
+      "sha256": "58665be281c9ab2a5aee66539a81eeedbbb95e73fff4f58ab8a4f11cd6ef989b",
+      "size_bytes": 243392
+    },
+    "summary_md": {
+      "path": "experiments/graph_candidates/C5_H2_diversity_light_cap50/reports/summary.md",
+      "sha256": "481e6edee6c9d2764179d0f0c999777bfc4a02c5c39361ea773e17fa9f32e604",
+      "size_bytes": 920
+    },
+    "manifest_json": {
+      "path": "experiments/graph_candidates/C5_H2_diversity_light_cap50/reports/manifest.json",
+      "sha256": "6a56b025dcdc95f90d44fc33d3e9fc4648b9123930435edd9ce294c6f073345f",
+      "size_bytes": 3362
+    },
+    "auxiliary_edge_report_tsv": {
+      "path": "experiments/graph_candidates/C5_H2_diversity_light_cap50/reports/auxiliary_edge_report.tsv",
+      "sha256": "1b060b08523c9c29882e7adf59ec6d2202da94c658b67ebcc54adf76c898c818",
+      "size_bytes": 9208
+    },
+    "removed_edge_report_tsv": {
+      "path": "experiments/graph_candidates/C5_H2_diversity_light_cap50/reports/removed_edge_report.tsv",
+      "sha256": "8e0fc5a8e21c95debbfa08a32d81ba0bf2e0f52a0b3c1ef973505a8a9a24bc7f",
+      "size_bytes": 2455
+    },
+    "relation_quota_report_tsv": {
+      "path": "experiments/graph_candidates/C5_H2_diversity_light_cap50/reports/relation_quota_report.tsv",
+      "sha256": "8b02b180cb5fd8285e067efe279010d1ce2e3393d0ddb0867ca6a849516e9380",
+      "size_bytes": 3954
+    },
+    "pattern_balance_report_tsv": {
+      "path": "experiments/graph_candidates/C5_H2_diversity_light_cap50/reports/pattern_balance_report.tsv",
+      "sha256": "4c8a5ae79446355189403c85c0a09890b12c387c55912d265f29d8f7cdcaaf9a",
+      "size_bytes": 225
+    }
+  },
+  "source_evidence": {
+    "diversity_reranking_report": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/reports/diversity_reranking/diversity_reranking_report.json",
+    "diversity_reranking_decision_doc": "docs/reconstruction/64_C5_H2_diversity_reranking_probe.md",
+    "c5_h2_generator_doc": "docs/reconstruction/61_C5_H2_constrained_generator.md",
+    "cap_sweep_doc": "docs/reconstruction/63_C5_H2_cap_sweep.md"
+  },
+  "notes": [
+    "Graph JSONL outputs are referenced by path and SHA256, not copied into this package.",
+    "Auxiliary edges are observed but unallocated and are not canonical benchmark triples.",
+    "Canonical surplus and deficit metrics are computed over canonical allocated triples only.",
+    "No WDQS query, LLM call, or synthetic triple generation was used.",
+    "candidate_registry.v1.json was not updated."
+  ]
+}
