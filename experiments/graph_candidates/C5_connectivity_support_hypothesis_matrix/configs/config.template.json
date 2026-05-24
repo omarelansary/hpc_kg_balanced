@@ -1,0 +1,154 @@
+{
+  "allocation_path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+  "allowed_live_sources": false,
+  "allowed_llm": false,
+  "allowed_synthetic_pattern_derived": false,
+  "allowed_wdqs": false,
+  "candidate_id": "C5_connectivity_support_hypothesis_matrix",
+  "candidate_registry_path": "artifacts/final_graph/selected_final_graph/rebuild/candidate_registry.v1.json",
+  "edge_provenance_axis": [
+    {
+      "enabled_first": true,
+      "label": "canonical_allocated_observed",
+      "meaning": "Observed triple whose relation is in the canonical 139 allocated relations."
+    },
+    {
+      "enabled_first": true,
+      "label": "auxiliary_unallocated_observed",
+      "meaning": "Observed triple whose relation is outside the canonical allocation; may only be used as separately accounted auxiliary support."
+    },
+    {
+      "enabled_first": false,
+      "label": "synthetic_pattern_derived",
+      "meaning": "Triple inferred from verified structural patterns rather than directly observed."
+    },
+    {
+      "enabled_first": false,
+      "label": "live_verified_observed",
+      "meaning": "Observed triple from a live WDQS run; non-canonical until frozen and audited."
+    },
+    {
+      "enabled_first": false,
+      "label": "synthetic_unverified",
+      "meaning": "Triple without preserved observation or validated pattern derivation; not allowed."
+    }
+  ],
+  "evaluation_axis": {
+    "allocation_surplus_deficit_scope": "canonical_allocated_triples_only",
+    "connectivity_modes": [
+      "connectivity_with_all_edges",
+      "connectivity_after_removing_auxiliary_or_synthetic_edges"
+    ],
+    "graph_size_modes": [
+      "canonical_allocated_triples",
+      "auxiliary_observed_unallocated_triples",
+      "synthetic_pattern_derived_triples",
+      "unverified_synthetic_triples",
+      "full_graph_size_including_auxiliary_or_synthetic_edges"
+    ],
+    "must_report_separately": [
+      "canonical_allocated_triples",
+      "auxiliary_observed_unallocated_triples",
+      "synthetic_pattern_derived_triples",
+      "unverified_synthetic_triples"
+    ]
+  },
+  "first_probe_hypotheses": [
+    "H1",
+    "H2"
+  ],
+  "future_hypotheses": [
+    "H3",
+    "H4",
+    "H5"
+  ],
+  "hypotheses": {
+    "H1": {
+      "description": "Verified allocated underfilled-pattern cut-crossing replacements exist and improve balance.",
+      "enabled_first": true,
+      "edge_provenance": "canonical_allocated_observed",
+      "operation": "remove_replace"
+    },
+    "H2": {
+      "description": "Verified unallocated cut-crossing auxiliary edges can create redundancy that allows later pruning of surplus generic bridge edges.",
+      "enabled_first": true,
+      "edge_provenance": "auxiliary_unallocated_observed",
+      "operation": "auxiliary_add_then_prune"
+    },
+    "H3": {
+      "description": "Pattern-derived synthetic triples from verified symmetry/inverse/composition rules can create bridge alternatives, but must be marked synthetic_pattern_derived and evaluated separately.",
+      "enabled_first": false,
+      "edge_provenance": "synthetic_pattern_derived",
+      "operation": "pattern_synthesis_then_prune"
+    },
+    "H4": {
+      "description": "Live WDQS can find observed cut-crossing evidence not present in frozen local sources, but this is exploratory until frozen and audited.",
+      "enabled_first": false,
+      "edge_provenance": "live_verified_observed",
+      "operation": "remove_replace_or_auxiliary_add_then_prune"
+    },
+    "H5": {
+      "description": "LLM should not verify or invent triples. At most, it may rank already-fixed candidate sets in a future exploratory branch with full prompt/model/raw-response logging.",
+      "enabled_first": false,
+      "edge_provenance": "fixed_candidate_set_ranking_only",
+      "operation": "ranking_only"
+    }
+  },
+  "operation_axis": [
+    {
+      "enabled_first": true,
+      "label": "remove_replace"
+    },
+    {
+      "enabled_first": true,
+      "label": "auxiliary_add_then_prune"
+    },
+    {
+      "enabled_first": false,
+      "label": "auxiliary_add_only"
+    },
+    {
+      "enabled_first": false,
+      "label": "pattern_synthesis_then_prune"
+    }
+  ],
+  "output_paths": {
+    "candidate_graph": "outputs/graph.jsonl",
+    "decision": "decision.md",
+    "evaluation_manifest": "reports/manifest.json",
+    "pattern_balance_report": "reports/pattern_balance_report.tsv",
+    "probe_reports": "reports/probe_only/",
+    "relation_quota_report": "reports/relation_quota_report.tsv",
+    "report": "reports/report.json",
+    "summary": "reports/summary.md"
+  },
+  "parent_candidate_id": "B0",
+  "parent_graph_path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+  "pattern_priority_axis": {
+    "compute_current_pattern_deficits_from_b0": true,
+    "do_not_hardcode_symmetric_first": true,
+    "priority_rule": "prioritize_most_deficit_pattern_first"
+  },
+  "protected_constraints": {
+    "allocated_relations_observed_min": 139,
+    "duplicate_triple_count_max": 0,
+    "weak_component_count_max": 1,
+    "zero_allocated_relations_max": 0
+  },
+  "schema_version": "kg-candidate-hypothesis-matrix-config-v1",
+  "source_evidence": {
+    "c4_probe_report": "experiments/graph_candidates/C4_bridge_aware_replace_add/reports/probe_only/probe_report.json",
+    "c4_1_bridge_cut_audit": "experiments/graph_candidates/C4_bridge_aware_replace_add/reports/probe_only/replacement_pool_bridge_cut_audit.json",
+    "c4_2_local_cut_crossing_search": "experiments/graph_candidates/C4_bridge_aware_replace_add/reports/probe_only/local_cut_crossing_candidate_search.json"
+  },
+  "status": "planned_not_generated",
+  "strategy": "connectivity_support_hypothesis_matrix",
+  "threshold_axis": {
+    "fallback_confidence_min": null,
+    "fallback_support_min": null,
+    "lower_confidence_label": "lower_confidence",
+    "preferred_confidence_min": null,
+    "preferred_support_min": null,
+    "thresholds_must_be_set_before_generator": true
+  }
+}
