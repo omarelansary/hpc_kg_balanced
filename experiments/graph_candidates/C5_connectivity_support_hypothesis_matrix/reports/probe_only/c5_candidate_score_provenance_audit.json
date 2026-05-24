@@ -1,0 +1,3641 @@
+{
+  "audit_id": "C5_1_H2_candidate_score_provenance_audit",
+  "h2_candidate_score_audit": {
+    "actual_score_field_counts": {},
+    "actual_score_field_names_found": [],
+    "greedy_h2_candidates_with_any_numeric_score_field": 0,
+    "greedy_h2_candidates_without_numeric_score_field": 20,
+    "h2_pairs_with_any_numeric_score_field": 0,
+    "h2_pairs_with_any_score_or_provenance_field": 546,
+    "h2_pairs_without_numeric_score_field": 546,
+    "numeric_score_distribution_by_source": {},
+    "previously_unselected_candidate_space_count": 546,
+    "provenance_field_counts": {
+      "accepted": 546,
+      "candidate_id": 546,
+      "classification_label": 546,
+      "duplicate_provenance_count": 546,
+      "endpoint_overlap_with_b0": 546,
+      "in_b0": 546,
+      "is_primary_source": 546,
+      "is_target_generic_relation": 546,
+      "notes": 546,
+      "path_group_id": 546,
+      "path_role": 546,
+      "provenance_type": 546,
+      "relation_allocation_status": 546,
+      "source_artifact": 546,
+      "source_event_type": 546,
+      "source_record_index": 546,
+      "source_sha256": 546,
+      "source_stage": 546
+    },
+    "provenance_field_names_found": [
+      "accepted",
+      "candidate_id",
+      "classification_label",
+      "duplicate_provenance_count",
+      "endpoint_overlap_with_b0",
+      "in_b0",
+      "is_primary_source",
+      "is_target_generic_relation",
+      "notes",
+      "path_group_id",
+      "path_role",
+      "provenance_type",
+      "relation_allocation_status",
+      "source_artifact",
+      "source_event_type",
+      "source_record_index",
+      "source_sha256",
+      "source_stage"
+    ],
+    "score_or_provenance_field_counts": {
+      "accepted": 546,
+      "candidate_id": 546,
+      "classification_label": 546,
+      "duplicate_provenance_count": 546,
+      "endpoint_overlap_with_b0": 546,
+      "in_b0": 546,
+      "is_primary_source": 546,
+      "is_target_generic_relation": 546,
+      "notes": 546,
+      "path_group_id": 546,
+      "path_role": 546,
+      "provenance_type": 546,
+      "relation_allocation_status": 546,
+      "source_artifact": 546,
+      "source_event_type": 546,
+      "source_record_index": 546,
+      "source_sha256": 546,
+      "source_stage": 546
+    },
+    "score_or_provenance_field_names_found": [
+      "accepted",
+      "candidate_id",
+      "classification_label",
+      "duplicate_provenance_count",
+      "endpoint_overlap_with_b0",
+      "in_b0",
+      "is_primary_source",
+      "is_target_generic_relation",
+      "notes",
+      "path_group_id",
+      "path_role",
+      "provenance_type",
+      "relation_allocation_status",
+      "source_artifact",
+      "source_event_type",
+      "source_record_index",
+      "source_sha256",
+      "source_stage"
+    ],
+    "selected_by_stage4_count": 0,
+    "selected_into_b0_count": 0,
+    "source_counts": {
+      "frozen_candidate_pools": 546
+    },
+    "source_counts_with_numeric_score": {},
+    "top_h2_candidates_by_available_score": [],
+    "top_h2_greedy_candidates_with_score_provenance": [
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q1860",
+          "r": "P17",
+          "t": "Q1009"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 14,
+        "line_number": 76464,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_1696908aa86e2df3a50480d1",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 80,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q1860",
+            "component_rank": 86,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q15"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 84034,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_1696908aa86e2df3a50480d1",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 80,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q1860",
+            "component_rank": 86,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q15"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 84034,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q1009",
+          "r": "P31",
+          "t": "Q6256"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q1000022",
+          "r": "P17",
+          "t": "Q148"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 1,
+        "line_number": 105043,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_1f0bc2e666ea1ac60af55b0c",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q10946020",
+            "component_rank": 722,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q148"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 130771,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_1f0bc2e666ea1ac60af55b0c",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q10946020",
+            "component_rank": 722,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q148"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 130771,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q1000022",
+          "r": "P31",
+          "t": "Q5503"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q101096582",
+          "r": "P17",
+          "t": "Q17"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 20,
+        "line_number": 121793,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_23f4f6081b2cb6a530bcc3d5",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q101096582",
+            "component_rank": 1109,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q17"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 147803,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_23f4f6081b2cb6a530bcc3d5",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q101096582",
+            "component_rank": 1109,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q17"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 147803,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q101096582",
+          "r": "P31",
+          "t": "Q18663566"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q101244349",
+          "r": "P17",
+          "t": "Q17"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 26,
+        "line_number": 134467,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_27b2a4a50a2560d8dbbbbdda",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q101244349",
+            "component_rank": 1124,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q17"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 149644,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_27b2a4a50a2560d8dbbbbdda",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q101244349",
+            "component_rank": 1124,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q17"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 149644,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q101244349",
+          "r": "P31",
+          "t": "Q18663566"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q101028",
+          "r": "P17",
+          "t": "Q38"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 17,
+        "line_number": 161946,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_2fc7a2e529c88c854674669f",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q135210355",
+            "component_rank": 1104,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q38"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 147735,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_2fc7a2e529c88c854674669f",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q135210355",
+            "component_rank": 1104,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q38"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 147735,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q101028",
+          "r": "P31",
+          "t": "Q747074"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q101199365",
+          "r": "P17",
+          "t": "Q39"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 24,
+        "line_number": 206317,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_3cca0a9450adfdbf71f10e09",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q101199365",
+            "component_rank": 1114,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q39"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 148254,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_3cca0a9450adfdbf71f10e09",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q101199365",
+            "component_rank": 1114,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q39"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 148254,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q101199365",
+          "r": "P31",
+          "t": "Q35054"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q101007553",
+          "r": "P17",
+          "t": "Q30"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 16,
+        "line_number": 243453,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_47b2f41c1336b640c09cc220",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q101007553",
+            "component_rank": 385,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q30"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 110148,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_47b2f41c1336b640c09cc220",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q101007553",
+            "component_rank": 385,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q30"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 110148,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q101007553",
+          "r": "P31",
+          "t": "Q537127"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q15702752",
+          "r": "P1074",
+          "t": "Q107391611"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 5,
+        "line_number": 258028,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_4be2a120b288e90fbb9d6590",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q136780169",
+            "component_rank": 4799,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q107391611"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 227394,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_4be2a120b288e90fbb9d6590",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q136780169",
+            "component_rank": 4799,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q107391611"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 227394,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q100272953",
+          "r": "P31",
+          "t": "Q15702752"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q179673",
+          "r": "P921",
+          "t": "Q7242"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 21,
+        "line_number": 298379,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": null,
+          "candidate_id": "c3poolv1_57c63ac44fdc3bf06a4d23bc",
+          "classification_label": null,
+          "duplicate_provenance_count": 1,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "cache_key": "Q7242|in|500",
+            "source_field": "query_cache"
+          },
+          "path_group_id": null,
+          "path_role": "query_cache_edge",
+          "provenance_type": "state_query_cache",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json",
+          "source_event_type": null,
+          "source_record_index": 768275,
+          "source_sha256": "5fd9191eefbfa0c0826b6f8c5dfc94b3185cbc803d0f433b86015c9c1bed75e8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": null,
+          "candidate_id": "c3poolv1_57c63ac44fdc3bf06a4d23bc",
+          "classification_label": null,
+          "duplicate_provenance_count": 1,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "cache_key": "Q7242|in|500",
+            "source_field": "query_cache"
+          },
+          "path_group_id": null,
+          "path_role": "query_cache_edge",
+          "provenance_type": "state_query_cache",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json",
+          "source_event_type": null,
+          "source_record_index": 768275,
+          "source_sha256": "5fd9191eefbfa0c0826b6f8c5dfc94b3185cbc803d0f433b86015c9c1bed75e8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q101099235",
+          "r": "P31",
+          "t": "Q559618"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q100783929",
+          "r": "P17",
+          "t": "Q40"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 11,
+        "line_number": 356561,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_68f47498f7576da0e225ef92",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q100783929",
+            "component_rank": 561,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q40"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 125304,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_68f47498f7576da0e225ef92",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q100783929",
+            "component_rank": 561,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q40"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 125304,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q100783929",
+          "r": "P31",
+          "t": "Q1210334"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q844",
+          "r": "P407",
+          "t": "Q1860"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 23,
+        "line_number": 435366,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": null,
+          "candidate_id": "c3poolv1_7ffe6c0040ed53c99cce3639",
+          "classification_label": null,
+          "duplicate_provenance_count": 1,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "cache_key": "Q1860|in|500",
+            "source_field": "query_cache"
+          },
+          "path_group_id": null,
+          "path_role": "query_cache_edge",
+          "provenance_type": "state_query_cache",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json",
+          "source_event_type": null,
+          "source_record_index": 306717,
+          "source_sha256": "5fd9191eefbfa0c0826b6f8c5dfc94b3185cbc803d0f433b86015c9c1bed75e8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": null,
+          "candidate_id": "c3poolv1_7ffe6c0040ed53c99cce3639",
+          "classification_label": null,
+          "duplicate_provenance_count": 1,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "cache_key": "Q1860|in|500",
+            "source_field": "query_cache"
+          },
+          "path_group_id": null,
+          "path_role": "query_cache_edge",
+          "provenance_type": "state_query_cache",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json",
+          "source_event_type": null,
+          "source_record_index": 306717,
+          "source_sha256": "5fd9191eefbfa0c0826b6f8c5dfc94b3185cbc803d0f433b86015c9c1bed75e8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q101195558",
+          "r": "P31",
+          "t": "Q559618"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q1522558",
+          "r": "P1532",
+          "t": "Q1008"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 13,
+        "line_number": 465526,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": null,
+          "candidate_id": "c3poolv1_88e281851741fa9f11996662",
+          "classification_label": null,
+          "duplicate_provenance_count": 1,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "cache_key": "Q1522558|out|500",
+            "source_field": "query_cache"
+          },
+          "path_group_id": null,
+          "path_role": "query_cache_edge",
+          "provenance_type": "state_query_cache",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json",
+          "source_event_type": null,
+          "source_record_index": 228939,
+          "source_sha256": "5fd9191eefbfa0c0826b6f8c5dfc94b3185cbc803d0f433b86015c9c1bed75e8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": null,
+          "candidate_id": "c3poolv1_88e281851741fa9f11996662",
+          "classification_label": null,
+          "duplicate_provenance_count": 1,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "cache_key": "Q1522558|out|500",
+            "source_field": "query_cache"
+          },
+          "path_group_id": null,
+          "path_role": "query_cache_edge",
+          "provenance_type": "state_query_cache",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json",
+          "source_event_type": null,
+          "source_record_index": 228939,
+          "source_sha256": "5fd9191eefbfa0c0826b6f8c5dfc94b3185cbc803d0f433b86015c9c1bed75e8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q1008",
+          "r": "P31",
+          "t": "Q6256"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q1007474",
+          "r": "P17",
+          "t": "Q142"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 10,
+        "line_number": 477944,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_8c90a4ea1ff3f403f4648136",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q1007474",
+            "component_rank": 1097,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q142"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 147136,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_8c90a4ea1ff3f403f4648136",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q1007474",
+            "component_rank": 1097,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q142"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 147136,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q1007474",
+          "r": "P31",
+          "t": "Q484170"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q100416",
+          "r": "P360",
+          "t": "Q5"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 7,
+        "line_number": 538609,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_9e59ab697640cae7677d9f77",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q100416",
+            "component_rank": 1086,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q5"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 146903,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_9e59ab697640cae7677d9f77",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q100416",
+            "component_rank": 1086,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q5"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 146903,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q100416",
+          "r": "P31",
+          "t": "Q13406463"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q1004668",
+          "r": "P166",
+          "t": "Q276"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 8,
+        "line_number": 651970,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_bf98adb612a7d51d0c66b1b5",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q106240992",
+            "component_rank": 1095,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q276"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 147067,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_bf98adb612a7d51d0c66b1b5",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q106240992",
+            "component_rank": 1095,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q276"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 147067,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q1004668",
+          "r": "P31",
+          "t": "Q105543609"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q101169335",
+          "r": "P17",
+          "t": "Q145"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 22,
+        "line_number": 661350,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_c258a8ed77f7c81177968df7",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q101169335",
+            "component_rank": 566,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q145"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 125384,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_c258a8ed77f7c81177968df7",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q101169335",
+            "component_rank": 566,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q145"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 125384,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q101169335",
+          "r": "P31",
+          "t": "Q537127"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q100172",
+          "r": "P17",
+          "t": "Q36"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 3,
+        "line_number": 669883,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_c4d2715cf2bd1f718ca5b2ed",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q100172",
+            "component_rank": 380,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q36"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 110079,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_c4d2715cf2bd1f718ca5b2ed",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q100172",
+            "component_rank": 380,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q36"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 110079,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q100172",
+          "r": "P31",
+          "t": "Q4164871"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q1056123",
+          "r": "P159",
+          "t": "Q100"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 0,
+        "line_number": 691209,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": null,
+          "candidate_id": "c3poolv1_cb251d6de66aa4bb7cf7e793",
+          "classification_label": null,
+          "duplicate_provenance_count": 1,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "cache_key": "Q1056123|out|500",
+            "source_field": "query_cache"
+          },
+          "path_group_id": null,
+          "path_role": "query_cache_edge",
+          "provenance_type": "state_query_cache",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json",
+          "source_event_type": null,
+          "source_record_index": 34321,
+          "source_sha256": "5fd9191eefbfa0c0826b6f8c5dfc94b3185cbc803d0f433b86015c9c1bed75e8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": null,
+          "candidate_id": "c3poolv1_cb251d6de66aa4bb7cf7e793",
+          "classification_label": null,
+          "duplicate_provenance_count": 1,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "cache_key": "Q1056123|out|500",
+            "source_field": "query_cache"
+          },
+          "path_group_id": null,
+          "path_role": "query_cache_edge",
+          "provenance_type": "state_query_cache",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/state.json",
+          "source_event_type": null,
+          "source_record_index": 34321,
+          "source_sha256": "5fd9191eefbfa0c0826b6f8c5dfc94b3185cbc803d0f433b86015c9c1bed75e8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q100",
+          "r": "P31",
+          "t": "Q1549591"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q100786190",
+          "r": "P17",
+          "t": "Q183"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 12,
+        "line_number": 733997,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_d7bd1f325835c2b376ae0953",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q100786190",
+            "component_rank": 562,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q183"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 125320,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_d7bd1f325835c2b376ae0953",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 4,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q100786190",
+            "component_rank": 562,
+            "path_length": 1,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q183"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 125320,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q100786190",
+          "r": "P31",
+          "t": "Q537127"
+        }
+      },
+      {
+        "actual_score_fields": {},
+        "candidate": {
+          "h": "Q1001",
+          "r": "P27",
+          "t": "Q668"
+        },
+        "canonical_deficit_delta": 0.0,
+        "canonical_surplus_delta": -1.0,
+        "cut_id": 2,
+        "line_number": 770968,
+        "preferred_score": null,
+        "previously_unselected_candidate_space": true,
+        "provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_e2a422db41b02426bde862ee",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 10,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q1860",
+            "component_rank": 86,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q1001"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 80723,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "score_or_provenance_fields": {
+          "accepted": false,
+          "candidate_id": "c3poolv1_e2a422db41b02426bde862ee",
+          "classification_label": "repair_auxiliary",
+          "duplicate_provenance_count": 10,
+          "endpoint_overlap_with_b0": "both",
+          "in_b0": false,
+          "is_primary_source": true,
+          "is_target_generic_relation": false,
+          "notes": {
+            "acceptance_reason": null,
+            "anchor_node": "Q1860",
+            "component_rank": 86,
+            "path_length": 2,
+            "relation_deficit_gain": null,
+            "source_field": "bridge_triples",
+            "target_main_node": "Q1001"
+          },
+          "path_group_id": null,
+          "path_role": "bridge_edge",
+          "provenance_type": "event_bridge_triples",
+          "relation_allocation_status": "unallocated",
+          "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+          "source_event_type": "candidate_classified",
+          "source_record_index": 80723,
+          "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+          "source_stage": "stage11"
+        },
+        "selected_by_stage4": false,
+        "selected_into_b0": false,
+        "source_id": "frozen_candidate_pools",
+        "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+        "target_edge": {
+          "h": "Q1001",
+          "r": "P31",
+          "t": "Q5"
+        }
+      }
+    ],
+    "total_h2_feasible_candidate_cut_pairs": 546
+  },
+  "inputs": {
+    "c4_2_local_cut_crossing_search": {
+      "aggregate_counts": {
+        "allocated_balance_improving_candidate_cut_pairs": 0,
+        "allocated_cut_crossing_candidate_rows": 106,
+        "balance_improving_candidate_cut_pairs": 546,
+        "cut_crossing_candidate_rows": 629,
+        "deficit_increase_candidate_cut_pairs": 0,
+        "unallocated_balance_improving_candidate_cut_pairs": 546,
+        "unique_allocated_cut_crossing_candidates": 102,
+        "unique_balance_improving_candidates": 523,
+        "unique_cut_crossing_candidates": 625,
+        "unique_deficit_increase_candidates": 0
+      },
+      "path": "experiments/graph_candidates/C4_bridge_aware_replace_add/reports/probe_only/local_cut_crossing_candidate_search.json",
+      "sha256": "95918bd28305f57542c777818766530ef6352ae0893dd8cff2d96dd1f335fe25"
+    },
+    "c5_h1_h2_probe_report": {
+      "greedy_h2_upper_bound": {
+        "aggregate_deficit_delta": 0.0,
+        "aggregate_surplus_delta": -151.0,
+        "count": 151
+      },
+      "h2_summary": {
+        "auxiliary_enables_prune_count": 546,
+        "auxiliary_unallocated_pairs_found": 546,
+        "best_examples": [
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q1056123",
+              "r": "P159",
+              "t": "Q100"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 0,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21886,
+            "line_number": 691209,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 7,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_cb251d6de66aa4bb7cf7e793",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "state_query_cache",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100",
+              "r": "P31",
+              "t": "Q1549591"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q1061122",
+              "r": "P159",
+              "t": "Q100"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 0,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21886,
+            "line_number": 175135,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 7,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_33a9c068c54740bc5816e108",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "state_query_cache",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100",
+              "r": "P31",
+              "t": "Q1549591"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q1335573",
+              "r": "P159",
+              "t": "Q100"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 0,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21886,
+            "line_number": 398085,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 7,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_7519540ce28f0b53acb084f7",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "state_query_cache",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100",
+              "r": "P31",
+              "t": "Q1549591"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q100",
+              "r": "P17",
+              "t": "Q30"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 0,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21886,
+            "line_number": 791437,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 7,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_e8ab8efcad19aee838622dfe",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "state_query_cache",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100",
+              "r": "P31",
+              "t": "Q1549591"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q100",
+              "r": "P190",
+              "t": "Q1492"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 0,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21886,
+            "line_number": 85242,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 7,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_1935453bda69c263672dfc18",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "state_query_cache",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100",
+              "r": "P31",
+              "t": "Q1549591"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q100",
+              "r": "P190",
+              "t": "Q1524"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 0,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21886,
+            "line_number": 373092,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 7,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_6dceed1f1046c4f42e4526ae",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "state_query_cache",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100",
+              "r": "P31",
+              "t": "Q1549591"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q1524",
+              "r": "P190",
+              "t": "Q100"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 0,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21886,
+            "line_number": 609883,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 7,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_b3453e14c2e4ec137571a369",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "state_query_cache",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100",
+              "r": "P31",
+              "t": "Q1549591"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q194121",
+              "r": "P276",
+              "t": "Q100"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 0,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21886,
+            "line_number": 690025,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 7,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_cacf62544cab201a96c0bf3b",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "state_query_cache",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100",
+              "r": "P31",
+              "t": "Q1549591"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q100",
+              "r": "P30",
+              "t": "Q49"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 0,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21886,
+            "line_number": 848887,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 7,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_f97d37e8091071725b7f5776",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "state_query_cache",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100",
+              "r": "P31",
+              "t": "Q1549591"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q1000022",
+              "r": "P17",
+              "t": "Q148"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 1,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21889,
+            "line_number": 105043,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 4,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_1f0bc2e666ea1ac60af55b0c",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "event_bridge_triples",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q1000022",
+              "r": "P31",
+              "t": "Q5503"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q10946020",
+              "r": "P17",
+              "t": "Q148"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 1,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21889,
+            "line_number": 348079,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 4,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_667e06dac3ff7e930900f9d3",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "event_bridge_triples",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q1000022",
+              "r": "P31",
+              "t": "Q5503"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q1001",
+              "r": "P27",
+              "t": "Q668"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 2,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21892,
+            "line_number": 770968,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 1,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_e2a422db41b02426bde862ee",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "event_bridge_triples",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q1001",
+              "r": "P31",
+              "t": "Q5"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q1001",
+              "r": "P551",
+              "t": "Q668"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 2,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21892,
+            "line_number": 138941,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 1,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_290064d1487f6f430803a39b",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "event_bridge_triples",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q1001",
+              "r": "P31",
+              "t": "Q5"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q1001",
+              "r": "P6886",
+              "t": "Q1860"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 2,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21892,
+            "line_number": 367241,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 1,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_6c167e2f2adbf1896704804c",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "event_bridge_triples",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q1001",
+              "r": "P31",
+              "t": "Q5"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q100172",
+              "r": "P17",
+              "t": "Q36"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 3,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21887,
+            "line_number": 669883,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 6,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_c4d2715cf2bd1f718ca5b2ed",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "event_bridge_triples",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100172",
+              "r": "P31",
+              "t": "Q4164871"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q11741983",
+              "r": "P17",
+              "t": "Q36"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 3,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21887,
+            "line_number": 461338,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 6,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_87ac02300b1be8d6377a49fb",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "event_bridge_triples",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100172",
+              "r": "P31",
+              "t": "Q4164871"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q98964",
+              "r": "P276",
+              "t": "Q270"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 3,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21887,
+            "line_number": 638013,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 6,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_bb853ebae7366fa650107a43",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "state_query_cache",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100172",
+              "r": "P31",
+              "t": "Q4164871"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q15702752",
+              "r": "P1074",
+              "t": "Q107391611"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 5,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21890,
+            "line_number": 258028,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 3,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_4be2a120b288e90fbb9d6590",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "event_bridge_triples",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100272953",
+              "r": "P31",
+              "t": "Q15702752"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q136780133",
+              "r": "P1552",
+              "t": "Q668136"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 5,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21890,
+            "line_number": 28194,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 3,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_084e2c3303cdd88c2747482d",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "state_query_cache",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100272953",
+              "r": "P31",
+              "t": "Q15702752"
+            }
+          },
+          {
+            "auxiliary_edges_used": 1,
+            "balance_effect": {
+              "add_relation": null,
+              "deficit_delta": 0.0,
+              "remove_relation": {
+                "deficit_delta": 0.0,
+                "expected_eta": 238.0,
+                "observed_after": 5956,
+                "observed_before": 5957,
+                "relation": "P31",
+                "surplus_delta": -1.0
+              },
+              "surplus_delta": -1.0
+            },
+            "candidate": {
+              "h": "Q136780169",
+              "r": "P1552",
+              "t": "Q668136"
+            },
+            "canonical_deficit_delta": 0.0,
+            "canonical_surplus_delta": -1.0,
+            "canonical_triples_after_prune": 24682,
+            "classification": "feasible_h2_auxiliary_enables_prune",
+            "connectivity_with_auxiliary": 1,
+            "connectivity_without_auxiliary": 2,
+            "cut_id": 5,
+            "edge_provenance": "auxiliary_unallocated_observed",
+            "edge_role": "auxiliary_connectivity_verified",
+            "full_triples_after_auxiliary": 24684,
+            "full_triples_after_auxiliary_and_prune": 24683,
+            "hard_constraints": {
+              "allocated_relations_observed": 139,
+              "duplicate_triple_count": 0,
+              "passes": true,
+              "weak_component_count": 1,
+              "zero_allocated_relations": 0
+            },
+            "hypothesis": "H2",
+            "larger_side_size": 21890,
+            "line_number": 123536,
+            "operation": "auxiliary_add_then_prune",
+            "pattern_total_delta": {
+              "composition": -1.0
+            },
+            "smaller_side_size": 3,
+            "source_id": "frozen_candidate_pools",
+            "source_metadata": {
+              "candidate_id": "c3poolv1_247eb14bbcab76f70ea81f1f",
+              "endpoint_overlap_with_b0": "both",
+              "provenance_type": "event_bridge_triples",
+              "relation_allocation_status": "unallocated",
+              "source_stage": "stage11"
+            },
+            "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+            "target_edge": {
+              "h": "Q100272953",
+              "r": "P31",
+              "t": "Q15702752"
+            }
+          }
+        ],
+        "candidate_cut_pairs_tested": 546,
+        "classification_counts": {
+          "feasible_h2_auxiliary_enables_prune": 546
+        },
+        "feasible_count": 546
+      },
+      "path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/reports/probe_only/c5_h1_h2_probe_report.json",
+      "sha256": "d3cc91be4c7575575e85717d0c8bcaf22f38f52f49e25a7431c3950b803aef60"
+    },
+    "config": {
+      "path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/configs/config.template.json",
+      "sha256": "01566c4a9a35800271c4f7bb0ef19ce3531d046fc2b2f84252904568175359a3"
+    },
+    "parent_graph": {
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
+    }
+  },
+  "notes": [
+    "Read-only audit; no graph candidate was generated.",
+    "No WDQS query was made.",
+    "No LLM call was made.",
+    "candidate_registry.v1.json was not updated.",
+    "H2 auxiliary candidates are observed unallocated triples and must remain separately accounted."
+  ],
+  "runtime": {
+    "elapsed_seconds": 29.732627,
+    "finished_on": "2026-05-24T10:35:28.708693+00:00",
+    "started_on": "2026-05-24T10:34:58.976066+00:00"
+  },
+  "schema_version": "c5-candidate-score-provenance-audit-v1",
+  "score_reuse_assessment": {
+    "classification": "no_score_for_h2_candidates",
+    "reason": "The H2 candidates do not expose old Phase II numeric score fields in their source rows. They expose provenance fields such as duplicate_provenance_count, source_stage, and provenance_type.",
+    "safe_to_rank_c5_h2_by_old_score": false
+  },
+  "score_semantics_evidence": {
+    "pipeline_script": {
+      "path": "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+      "score_function_references": [
+        {
+          "line": 616,
+          "text": "def score_genericity("
+        },
+        {
+          "line": 947,
+          "text": "def quality_score(*, ontology_ok: bool, self_loop_flag: bool, hub_penalty: float, shortcut_risk: float, genericity_score: float) -> float:"
+        },
+        {
+          "line": 1374,
+          "text": "def candidate_total_score(rec: Dict[str, Any], state: GraphState, allocations_map: Dict[str, RelationAllocation], entity_relation_incidence: Dict[str, int], config: Config) -> Tuple[float, Dict[str, float]]:"
+        }
+      ],
+      "sha256": "a1fec8c08783b3816ebc28e16f39499fb6be2f2a4d587948a00fa4fb9082a5e7"
+    },
+    "run_manifest": {
+      "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/manifest.json",
+      "sha256": "918546ec1c0f5e02e99f6b09d9dc8d8a6d3caa16ccd1cb31f3ab26d6cd3eaff9"
+    }
+  },
+  "source_schema_scan": {
+    "frozen_candidate_pools": {
+      "actual_score_field_counts": {
+        "path_group_score": 990,
+        "path_group_size": 990,
+        "score": 990
+      },
+      "actual_score_field_names": [
+        "path_group_score",
+        "path_group_size",
+        "score"
+      ],
+      "example_score_rows": [
+        {
+          "fields": {
+            "accepted": false,
+            "candidate_id": "c3poolv1_e6d65502099e4f8f08ae82e0",
+            "classification_label": "repair_auxiliary",
+            "duplicate_provenance_count": 4,
+            "endpoint_overlap_with_b0": "both",
+            "in_b0": false,
+            "is_primary_source": true,
+            "is_target_generic_relation": false,
+            "notes": {
+              "acceptance_reason": null,
+              "anchor_node": "Q209",
+              "component_rank": 5,
+              "path_length": 2,
+              "relation_deficit_gain": null,
+              "source_field": "bridge_triples",
+              "target_main_node": "Q38"
+            },
+            "path_group_id": null,
+            "path_group_score": 160,
+            "path_group_size": 1,
+            "path_role": "bridge_edge",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "underfilled",
+            "score": 160,
+            "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+            "source_event_type": "candidate_classified",
+            "source_record_index": 7363,
+            "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+            "source_stage": "stage11"
+          },
+          "line_number": 1,
+          "path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/eligible_v1/eligible_replacement_candidates.jsonl"
+        },
+        {
+          "fields": {
+            "accepted": false,
+            "candidate_id": "c3poolv1_0410d707176344b20c9115c4",
+            "classification_label": "repair_auxiliary",
+            "duplicate_provenance_count": 5,
+            "endpoint_overlap_with_b0": "both",
+            "in_b0": false,
+            "is_primary_source": true,
+            "is_target_generic_relation": false,
+            "notes": {
+              "acceptance_reason": null,
+              "anchor_node": "Q993765",
+              "component_rank": 10,
+              "path_length": 2,
+              "relation_deficit_gain": null,
+              "source_field": "bridge_triples",
+              "target_main_node": "Q183"
+            },
+            "path_group_id": null,
+            "path_group_score": 160,
+            "path_group_size": 1,
+            "path_role": "bridge_edge",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "underfilled",
+            "score": 160,
+            "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+            "source_event_type": "candidate_classified",
+            "source_record_index": 22863,
+            "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+            "source_stage": "stage11"
+          },
+          "line_number": 2,
+          "path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/eligible_v1/eligible_replacement_candidates.jsonl"
+        },
+        {
+          "fields": {
+            "accepted": false,
+            "candidate_id": "c3poolv1_1518cec36562501514390c6f",
+            "classification_label": "repair_auxiliary",
+            "duplicate_provenance_count": 5,
+            "endpoint_overlap_with_b0": "both",
+            "in_b0": false,
+            "is_primary_source": true,
+            "is_target_generic_relation": false,
+            "notes": {
+              "acceptance_reason": null,
+              "anchor_node": "Q993765",
+              "component_rank": 10,
+              "path_length": 2,
+              "relation_deficit_gain": null,
+              "source_field": "bridge_triples",
+              "target_main_node": "Q183"
+            },
+            "path_group_id": null,
+            "path_group_score": 160,
+            "path_group_size": 1,
+            "path_role": "bridge_edge",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "underfilled",
+            "score": 160,
+            "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+            "source_event_type": "candidate_classified",
+            "source_record_index": 22764,
+            "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+            "source_stage": "stage11"
+          },
+          "line_number": 3,
+          "path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/eligible_v1/eligible_replacement_candidates.jsonl"
+        },
+        {
+          "fields": {
+            "accepted": false,
+            "candidate_id": "c3poolv1_18311a761f1c73efe8acb5df",
+            "classification_label": "repair_auxiliary",
+            "duplicate_provenance_count": 5,
+            "endpoint_overlap_with_b0": "both",
+            "in_b0": false,
+            "is_primary_source": true,
+            "is_target_generic_relation": false,
+            "notes": {
+              "acceptance_reason": null,
+              "anchor_node": "Q993765",
+              "component_rank": 10,
+              "path_length": 2,
+              "relation_deficit_gain": null,
+              "source_field": "bridge_triples",
+              "target_main_node": "Q183"
+            },
+            "path_group_id": null,
+            "path_group_score": 160,
+            "path_group_size": 1,
+            "path_role": "bridge_edge",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "underfilled",
+            "score": 160,
+            "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+            "source_event_type": "candidate_classified",
+            "source_record_index": 22782,
+            "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+            "source_stage": "stage11"
+          },
+          "line_number": 4,
+          "path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/eligible_v1/eligible_replacement_candidates.jsonl"
+        },
+        {
+          "fields": {
+            "accepted": false,
+            "candidate_id": "c3poolv1_232764728a39b60b1ba92871",
+            "classification_label": "repair_auxiliary",
+            "duplicate_provenance_count": 5,
+            "endpoint_overlap_with_b0": "both",
+            "in_b0": false,
+            "is_primary_source": true,
+            "is_target_generic_relation": false,
+            "notes": {
+              "acceptance_reason": null,
+              "anchor_node": "Q993765",
+              "component_rank": 10,
+              "path_length": 2,
+              "relation_deficit_gain": null,
+              "source_field": "bridge_triples",
+              "target_main_node": "Q183"
+            },
+            "path_group_id": null,
+            "path_group_score": 160,
+            "path_group_size": 1,
+            "path_role": "bridge_edge",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "underfilled",
+            "score": 160,
+            "source_artifact": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/events.jsonl",
+            "source_event_type": "candidate_classified",
+            "source_record_index": 22683,
+            "source_sha256": "d1f7d5ee50d3a0d602d6f026ffdb0b8129cd9e8c34dd59b43d87d2e7fa0247f8",
+            "source_stage": "stage11"
+          },
+          "line_number": 5,
+          "path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/eligible_v1/eligible_replacement_candidates.jsonl"
+        }
+      ],
+      "field_names": [
+        "accepted",
+        "candidate_id",
+        "classification_label",
+        "duplicate_provenance_count",
+        "endpoint_overlap_with_b0",
+        "h",
+        "in_b0",
+        "is_primary_source",
+        "is_target_generic_relation",
+        "notes",
+        "path_group_id",
+        "path_group_score",
+        "path_group_size",
+        "path_role",
+        "provenance_type",
+        "query_hash",
+        "r",
+        "relation_allocation_status",
+        "score",
+        "source_artifact",
+        "source_event_type",
+        "source_record_index",
+        "source_sha256",
+        "source_stage",
+        "t"
+      ],
+      "file_count": 2,
+      "files_scanned": 2,
+      "numeric_score_distribution": {
+        "path_group_score": {
+          "count": 990,
+          "max": 160.0,
+          "mean": 109.27272727272727,
+          "min": 80.0
+        },
+        "path_group_size": {
+          "count": 990,
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0
+        },
+        "score": {
+          "count": 990,
+          "max": 160.0,
+          "mean": 109.27272727272727,
+          "min": 80.0
+        }
+      },
+      "provenance_field_counts": {
+        "accepted": 872156,
+        "candidate_id": 872156,
+        "classification_label": 872156,
+        "duplicate_provenance_count": 872156,
+        "endpoint_overlap_with_b0": 872156,
+        "in_b0": 872156,
+        "is_primary_source": 872156,
+        "is_target_generic_relation": 872156,
+        "notes": 872156,
+        "path_group_id": 872156,
+        "path_role": 872156,
+        "provenance_type": 872156,
+        "relation_allocation_status": 872156,
+        "source_artifact": 872156,
+        "source_event_type": 872156,
+        "source_record_index": 872156,
+        "source_sha256": 872156,
+        "source_stage": 872156
+      },
+      "provenance_field_names": [
+        "accepted",
+        "candidate_id",
+        "classification_label",
+        "duplicate_provenance_count",
+        "endpoint_overlap_with_b0",
+        "in_b0",
+        "is_primary_source",
+        "is_target_generic_relation",
+        "notes",
+        "path_group_id",
+        "path_role",
+        "provenance_type",
+        "relation_allocation_status",
+        "source_artifact",
+        "source_event_type",
+        "source_record_index",
+        "source_sha256",
+        "source_stage"
+      ],
+      "rows_scanned": 872156,
+      "score_or_provenance_field_counts": {
+        "accepted": 872156,
+        "candidate_id": 872156,
+        "classification_label": 872156,
+        "duplicate_provenance_count": 872156,
+        "endpoint_overlap_with_b0": 872156,
+        "in_b0": 872156,
+        "is_primary_source": 872156,
+        "is_target_generic_relation": 872156,
+        "notes": 872156,
+        "path_group_id": 872156,
+        "path_group_score": 990,
+        "path_group_size": 990,
+        "path_role": 872156,
+        "provenance_type": 872156,
+        "relation_allocation_status": 872156,
+        "score": 990,
+        "source_artifact": 872156,
+        "source_event_type": 872156,
+        "source_record_index": 872156,
+        "source_sha256": 872156,
+        "source_stage": 872156
+      },
+      "score_or_provenance_field_names": [
+        "accepted",
+        "candidate_id",
+        "classification_label",
+        "duplicate_provenance_count",
+        "endpoint_overlap_with_b0",
+        "in_b0",
+        "is_primary_source",
+        "is_target_generic_relation",
+        "notes",
+        "path_group_id",
+        "path_group_score",
+        "path_group_size",
+        "path_role",
+        "provenance_type",
+        "relation_allocation_status",
+        "score",
+        "source_artifact",
+        "source_event_type",
+        "source_record_index",
+        "source_sha256",
+        "source_stage"
+      ]
+    },
+    "stage02_candidate_shards": {
+      "actual_score_field_counts": {
+        "genericity_score": 81958,
+        "hub_penalty": 81958,
+        "quality_score": 81958,
+        "shortcut_risk": 81958
+      },
+      "actual_score_field_names": [
+        "genericity_score",
+        "hub_penalty",
+        "quality_score",
+        "shortcut_risk"
+      ],
+      "example_score_rows": [
+        {
+          "fields": {
+            "genericity_score": 0.145271731478452,
+            "hub_penalty": 1.0,
+            "quality_score": 0.645946,
+            "shortcut_risk": 0.1,
+            "source_stage": "candidate_collection"
+          },
+          "line_number": 1,
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1001.jsonl"
+        },
+        {
+          "fields": {
+            "genericity_score": 0.145271731478452,
+            "hub_penalty": 1.0,
+            "quality_score": 0.645946,
+            "shortcut_risk": 0.1,
+            "source_stage": "candidate_collection"
+          },
+          "line_number": 2,
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1001.jsonl"
+        },
+        {
+          "fields": {
+            "genericity_score": 0.145271731478452,
+            "hub_penalty": 1.0,
+            "quality_score": 0.645946,
+            "shortcut_risk": 0.1,
+            "source_stage": "candidate_collection"
+          },
+          "line_number": 3,
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1001.jsonl"
+        },
+        {
+          "fields": {
+            "genericity_score": 0.145271731478452,
+            "hub_penalty": 1.0,
+            "quality_score": 0.645946,
+            "shortcut_risk": 0.1,
+            "source_stage": "candidate_collection"
+          },
+          "line_number": 4,
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1001.jsonl"
+        },
+        {
+          "fields": {
+            "genericity_score": 0.145271731478452,
+            "hub_penalty": 1.0,
+            "quality_score": 0.645946,
+            "shortcut_risk": 0.1,
+            "source_stage": "candidate_collection"
+          },
+          "line_number": 5,
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/P1001.jsonl"
+        }
+      ],
+      "field_names": [
+        "chunk_id",
+        "collection_mode",
+        "genericity_bucket",
+        "genericity_score",
+        "h",
+        "hub_penalty",
+        "ontology_ok",
+        "quality_score",
+        "query_id",
+        "query_limit",
+        "query_offset",
+        "r",
+        "retrieved_at",
+        "run_id",
+        "self_loop_flag",
+        "shortcut_risk",
+        "source_backend",
+        "source_stage",
+        "t",
+        "triple_id"
+      ],
+      "file_count": 139,
+      "files_scanned": 139,
+      "numeric_score_distribution": {
+        "genericity_score": {
+          "count": 81958,
+          "max": 0.7823097493280622,
+          "mean": 0.11808972830617369,
+          "min": 0.036626779777162
+        },
+        "hub_penalty": {
+          "count": 81958,
+          "max": 1.0,
+          "mean": 0.3349063250669318,
+          "min": 0.0003786444528587656
+        },
+        "quality_score": {
+          "count": 81958,
+          "max": 0.966883,
+          "mean": 0.8409813024231924,
+          "min": 0.343538
+        },
+        "shortcut_risk": {
+          "count": 81958,
+          "max": 0.8,
+          "mean": 0.13971546401815566,
+          "min": 0.1
+        }
+      },
+      "provenance_field_counts": {
+        "source_stage": 81958
+      },
+      "provenance_field_names": [
+        "source_stage"
+      ],
+      "rows_scanned": 81958,
+      "score_or_provenance_field_counts": {
+        "genericity_score": 81958,
+        "hub_penalty": 81958,
+        "quality_score": 81958,
+        "shortcut_risk": 81958,
+        "source_stage": 81958
+      },
+      "score_or_provenance_field_names": [
+        "genericity_score",
+        "hub_penalty",
+        "quality_score",
+        "shortcut_risk",
+        "source_stage"
+      ]
+    },
+    "stage04_core_graph": {
+      "actual_score_field_counts": {
+        "attachability_score": 37026,
+        "bridge_score": 37026,
+        "component_merge_score": 37026,
+        "first_realization_bonus": 37026,
+        "genericity_penalty": 37026,
+        "hub_penalty": 37026,
+        "noise_penalty": 37026,
+        "relation_need_score": 37026,
+        "score": 37026
+      },
+      "actual_score_field_names": [
+        "attachability_score",
+        "bridge_score",
+        "component_merge_score",
+        "first_realization_bonus",
+        "genericity_penalty",
+        "hub_penalty",
+        "noise_penalty",
+        "relation_need_score",
+        "score"
+      ],
+      "example_score_rows": [
+        {
+          "fields": {
+            "attachability_score": 0.1,
+            "bridge_score": 0.1,
+            "component_merge_score": 0.0,
+            "first_realization_bonus": 1.0,
+            "genericity_penalty": 0.037506,
+            "hub_penalty": 0.041667,
+            "noise_penalty": 0.045001,
+            "relation_need_score": 1.0,
+            "score": 11.234365755360084,
+            "selection_reason": "seed"
+          },
+          "line_number": 1,
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl"
+        },
+        {
+          "fields": {
+            "attachability_score": 0.1,
+            "bridge_score": 0.1,
+            "component_merge_score": 0.0,
+            "first_realization_bonus": 0.0,
+            "genericity_penalty": 0.037506,
+            "hub_penalty": 0.041667,
+            "noise_penalty": 0.045001,
+            "relation_need_score": 0.981481,
+            "score": 3.1788101998045315,
+            "selection_reason": "seed"
+          },
+          "line_number": 2,
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl"
+        },
+        {
+          "fields": {
+            "attachability_score": 0.1,
+            "bridge_score": 0.3,
+            "component_merge_score": 0.0,
+            "first_realization_bonus": 1.0,
+            "genericity_penalty": 0.050741,
+            "hub_penalty": 0.462963,
+            "noise_penalty": 0.174037,
+            "relation_need_score": 1.0,
+            "score": 10.824582473811683,
+            "selection_reason": "seed"
+          },
+          "line_number": 3,
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl"
+        },
+        {
+          "fields": {
+            "attachability_score": 0.1,
+            "bridge_score": 0.35,
+            "component_merge_score": 0.0,
+            "first_realization_bonus": 0.0,
+            "genericity_penalty": 0.050741,
+            "hub_penalty": 1.0,
+            "noise_penalty": 0.335148,
+            "relation_need_score": 0.982143,
+            "score": 1.8640667396846993,
+            "selection_reason": "seed"
+          },
+          "line_number": 4,
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl"
+        },
+        {
+          "fields": {
+            "attachability_score": 0.1,
+            "bridge_score": 0.15,
+            "component_merge_score": 0.0,
+            "first_realization_bonus": 1.0,
+            "genericity_penalty": 0.038912,
+            "hub_penalty": 1.0,
+            "noise_penalty": 0.332782,
+            "relation_need_score": 1.0,
+            "score": 9.535382438800939,
+            "selection_reason": "seed"
+          },
+          "line_number": 5,
+          "path": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/core_graph_triples.jsonl"
+        }
+      ],
+      "field_names": [
+        "attachability_score",
+        "bridge_score",
+        "component_merge_score",
+        "first_realization_bonus",
+        "genericity_penalty",
+        "h",
+        "hub_penalty",
+        "layer",
+        "noise_penalty",
+        "r",
+        "relation_need_score",
+        "score",
+        "selection_reason",
+        "structurally_weak",
+        "t",
+        "triple_id"
+      ],
+      "file_count": 2,
+      "files_scanned": 2,
+      "numeric_score_distribution": {
+        "attachability_score": {
+          "count": 37026,
+          "max": 1.0,
+          "mean": 0.48378436774158695,
+          "min": 0.1
+        },
+        "bridge_score": {
+          "count": 37026,
+          "max": 1.0,
+          "mean": 0.19825798087830174,
+          "min": 0.1
+        },
+        "component_merge_score": {
+          "count": 37026,
+          "max": 1.0,
+          "mean": 0.007076108680386755,
+          "min": 0.0
+        },
+        "first_realization_bonus": {
+          "count": 37026,
+          "max": 1.0,
+          "mean": 0.007508237454761519,
+          "min": 0.0
+        },
+        "genericity_penalty": {
+          "count": 37026,
+          "max": 0.78231,
+          "mean": 0.12790247707016691,
+          "min": 0.036627
+        },
+        "hub_penalty": {
+          "count": 37026,
+          "max": 1.0,
+          "mean": 0.28206234311024686,
+          "min": 0.000379
+        },
+        "noise_penalty": {
+          "count": 37026,
+          "max": 0.656462,
+          "mean": 0.14161623848106736,
+          "min": 0.033117
+        },
+        "relation_need_score": {
+          "count": 37026,
+          "max": 1.0,
+          "mean": 0.5145875264408794,
+          "min": 0.002137
+        },
+        "score": {
+          "count": 37026,
+          "max": 13.57495331970242,
+          "mean": 2.2291496202229157,
+          "min": -1.1990106851637823
+        }
+      },
+      "provenance_field_counts": {
+        "selection_reason": 37026
+      },
+      "provenance_field_names": [
+        "selection_reason"
+      ],
+      "rows_scanned": 37026,
+      "score_or_provenance_field_counts": {
+        "attachability_score": 37026,
+        "bridge_score": 37026,
+        "component_merge_score": 37026,
+        "first_realization_bonus": 37026,
+        "genericity_penalty": 37026,
+        "hub_penalty": 37026,
+        "noise_penalty": 37026,
+        "relation_need_score": 37026,
+        "score": 37026,
+        "selection_reason": 37026
+      },
+      "score_or_provenance_field_names": [
+        "attachability_score",
+        "bridge_score",
+        "component_merge_score",
+        "first_realization_bonus",
+        "genericity_penalty",
+        "hub_penalty",
+        "noise_penalty",
+        "relation_need_score",
+        "score",
+        "selection_reason"
+      ]
+    }
+  },
+  "stage4_selection_context": {
+    "h2_candidates_from_previously_unselected_candidate_space": 546,
+    "h2_candidates_selected_by_stage4": 0,
+    "h2_candidates_selected_into_b0": 0,
+    "stage4_core_graph_triples": 18513
+  },
+  "status": "read_only_score_provenance_audit"
+}
