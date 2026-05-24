@@ -1,0 +1,1433 @@
+{
+  "aggregate_counts": {
+    "allocated_synthetic_candidates": 0,
+    "candidate_already_observed_in_local_evidence": 0,
+    "classification_counts": {},
+    "deficit_neutral_synthetic_candidates": 0,
+    "feasibility_conclusion": "h3_not_promising_no_candidates",
+    "rejection_counts": {
+      "rejected_missing_observed_source_edges_composition_rules": 13,
+      "rejected_missing_observed_source_edges_inverse": 44,
+      "rejected_missing_observed_source_edges_symmetric": 18
+    },
+    "surplus_reducing_synthetic_candidates": 0,
+    "synthetic_candidates_by_pattern_type": {},
+    "threshold_counts": {
+      "below_fallback_or_low_confidence": 0,
+      "fallback": 0,
+      "preferred": 0
+    },
+    "total_candidates": 0,
+    "unallocated_synthetic_candidates": 0,
+    "underfilled_pattern_synthetic_candidates": 0
+  },
+  "audit_id": "H3_synthetic_pattern_feasibility",
+  "bridge_cut_context": {
+    "b0_entities": 21893,
+    "b0_unique_triples": 24683,
+    "baseline_pattern_deficits": {
+      "anti_symmetric": 29.24863345853373,
+      "composition": 0.0,
+      "inverse": 175.78250108152952,
+      "symmetric": 1378.902830802831
+    },
+    "baseline_pattern_level_expected_observed": [
+      {
+        "deficit": 29.24863345853373,
+        "expected_eta": 5000.0,
+        "observed_count_apportioned": 4970.751366541466,
+        "pattern": "anti_symmetric",
+        "surplus": 0.0
+      },
+      {
+        "deficit": 0.0,
+        "expected_eta": 5000.0,
+        "observed_count_apportioned": 11266.933965342894,
+        "pattern": "composition",
+        "surplus": 6266.933965342894
+      },
+      {
+        "deficit": 175.78250108152952,
+        "expected_eta": 5000.0,
+        "observed_count_apportioned": 4824.2174989184705,
+        "pattern": "inverse",
+        "surplus": 0.0
+      },
+      {
+        "deficit": 1378.902830802831,
+        "expected_eta": 5000.0,
+        "observed_count_apportioned": 3621.097169197169,
+        "pattern": "symmetric",
+        "surplus": 0.0
+      }
+    ],
+    "baseline_total_deficit": 2019.0,
+    "baseline_total_surplus": 6702.0,
+    "target_relations": [
+      "P131",
+      "P279",
+      "P31"
+    ],
+    "tested_cuts": 200
+  },
+  "comparison_context": {
+    "c4_local_cut_crossing_primary_result": "only_unallocated_cut_crossing_candidates_reduce_surplus",
+    "c5_h1_h2_h2_summary": {
+      "auxiliary_enables_prune_count": 546,
+      "auxiliary_unallocated_pairs_found": 546,
+      "best_examples": [
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q1056123",
+            "r": "P159",
+            "t": "Q100"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 0,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21886,
+          "line_number": 691209,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 7,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_cb251d6de66aa4bb7cf7e793",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "state_query_cache",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100",
+            "r": "P31",
+            "t": "Q1549591"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q1061122",
+            "r": "P159",
+            "t": "Q100"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 0,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21886,
+          "line_number": 175135,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 7,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_33a9c068c54740bc5816e108",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "state_query_cache",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100",
+            "r": "P31",
+            "t": "Q1549591"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q1335573",
+            "r": "P159",
+            "t": "Q100"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 0,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21886,
+          "line_number": 398085,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 7,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_7519540ce28f0b53acb084f7",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "state_query_cache",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100",
+            "r": "P31",
+            "t": "Q1549591"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q100",
+            "r": "P17",
+            "t": "Q30"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 0,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21886,
+          "line_number": 791437,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 7,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_e8ab8efcad19aee838622dfe",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "state_query_cache",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100",
+            "r": "P31",
+            "t": "Q1549591"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q100",
+            "r": "P190",
+            "t": "Q1492"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 0,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21886,
+          "line_number": 85242,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 7,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_1935453bda69c263672dfc18",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "state_query_cache",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100",
+            "r": "P31",
+            "t": "Q1549591"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q100",
+            "r": "P190",
+            "t": "Q1524"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 0,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21886,
+          "line_number": 373092,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 7,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_6dceed1f1046c4f42e4526ae",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "state_query_cache",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100",
+            "r": "P31",
+            "t": "Q1549591"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q1524",
+            "r": "P190",
+            "t": "Q100"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 0,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21886,
+          "line_number": 609883,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 7,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_b3453e14c2e4ec137571a369",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "state_query_cache",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100",
+            "r": "P31",
+            "t": "Q1549591"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q194121",
+            "r": "P276",
+            "t": "Q100"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 0,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21886,
+          "line_number": 690025,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 7,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_cacf62544cab201a96c0bf3b",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "state_query_cache",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100",
+            "r": "P31",
+            "t": "Q1549591"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q100",
+            "r": "P30",
+            "t": "Q49"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 0,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21886,
+          "line_number": 848887,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 7,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_f97d37e8091071725b7f5776",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "state_query_cache",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100",
+            "r": "P31",
+            "t": "Q1549591"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q1000022",
+            "r": "P17",
+            "t": "Q148"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 1,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21889,
+          "line_number": 105043,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 4,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_1f0bc2e666ea1ac60af55b0c",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q1000022",
+            "r": "P31",
+            "t": "Q5503"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q10946020",
+            "r": "P17",
+            "t": "Q148"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 1,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21889,
+          "line_number": 348079,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 4,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_667e06dac3ff7e930900f9d3",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q1000022",
+            "r": "P31",
+            "t": "Q5503"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q1001",
+            "r": "P27",
+            "t": "Q668"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 2,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21892,
+          "line_number": 770968,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 1,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_e2a422db41b02426bde862ee",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q1001",
+            "r": "P31",
+            "t": "Q5"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q1001",
+            "r": "P551",
+            "t": "Q668"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 2,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21892,
+          "line_number": 138941,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 1,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_290064d1487f6f430803a39b",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q1001",
+            "r": "P31",
+            "t": "Q5"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q1001",
+            "r": "P6886",
+            "t": "Q1860"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 2,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21892,
+          "line_number": 367241,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 1,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_6c167e2f2adbf1896704804c",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q1001",
+            "r": "P31",
+            "t": "Q5"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q100172",
+            "r": "P17",
+            "t": "Q36"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 3,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21887,
+          "line_number": 669883,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 6,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_c4d2715cf2bd1f718ca5b2ed",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100172",
+            "r": "P31",
+            "t": "Q4164871"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q11741983",
+            "r": "P17",
+            "t": "Q36"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 3,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21887,
+          "line_number": 461338,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 6,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_87ac02300b1be8d6377a49fb",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100172",
+            "r": "P31",
+            "t": "Q4164871"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q98964",
+            "r": "P276",
+            "t": "Q270"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 3,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21887,
+          "line_number": 638013,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 6,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_bb853ebae7366fa650107a43",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "state_query_cache",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100172",
+            "r": "P31",
+            "t": "Q4164871"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q15702752",
+            "r": "P1074",
+            "t": "Q107391611"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 5,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21890,
+          "line_number": 258028,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 3,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_4be2a120b288e90fbb9d6590",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100272953",
+            "r": "P31",
+            "t": "Q15702752"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q136780133",
+            "r": "P1552",
+            "t": "Q668136"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 5,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21890,
+          "line_number": 28194,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 3,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_084e2c3303cdd88c2747482d",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "state_query_cache",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100272953",
+            "r": "P31",
+            "t": "Q15702752"
+          }
+        },
+        {
+          "auxiliary_edges_used": 1,
+          "balance_effect": {
+            "add_relation": null,
+            "deficit_delta": 0.0,
+            "remove_relation": {
+              "deficit_delta": 0.0,
+              "expected_eta": 238.0,
+              "observed_after": 5956,
+              "observed_before": 5957,
+              "relation": "P31",
+              "surplus_delta": -1.0
+            },
+            "surplus_delta": -1.0
+          },
+          "candidate": {
+            "h": "Q136780169",
+            "r": "P1552",
+            "t": "Q668136"
+          },
+          "canonical_deficit_delta": 0.0,
+          "canonical_surplus_delta": -1.0,
+          "canonical_triples_after_prune": 24682,
+          "classification": "feasible_h2_auxiliary_enables_prune",
+          "connectivity_with_auxiliary": 1,
+          "connectivity_without_auxiliary": 2,
+          "cut_id": 5,
+          "edge_provenance": "auxiliary_unallocated_observed",
+          "edge_role": "auxiliary_connectivity_verified",
+          "full_triples_after_auxiliary": 24684,
+          "full_triples_after_auxiliary_and_prune": 24683,
+          "hard_constraints": {
+            "allocated_relations_observed": 139,
+            "duplicate_triple_count": 0,
+            "passes": true,
+            "weak_component_count": 1,
+            "zero_allocated_relations": 0
+          },
+          "hypothesis": "H2",
+          "larger_side_size": 21890,
+          "line_number": 123536,
+          "operation": "auxiliary_add_then_prune",
+          "pattern_total_delta": {
+            "composition": -1.0
+          },
+          "smaller_side_size": 3,
+          "source_id": "frozen_candidate_pools",
+          "source_metadata": {
+            "candidate_id": "c3poolv1_247eb14bbcab76f70ea81f1f",
+            "endpoint_overlap_with_b0": "both",
+            "provenance_type": "event_bridge_triples",
+            "relation_allocation_status": "unallocated",
+            "source_stage": "stage11"
+          },
+          "source_path": "artifacts/frozen_candidate_pools/C3_replacement_pool_v1/replacement_candidates.jsonl",
+          "target_edge": {
+            "h": "Q100272953",
+            "r": "P31",
+            "t": "Q15702752"
+          }
+        }
+      ],
+      "candidate_cut_pairs_tested": 546,
+      "classification_counts": {
+        "feasible_h2_auxiliary_enables_prune": 546
+      },
+      "feasible_count": 546
+    },
+    "c5_h2_marginal_decision": "diagnostic_evidence_only"
+  },
+  "inputs": {
+    "allocation": {
+      "exists": true,
+      "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+      "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+    },
+    "b0_parent_graph": {
+      "exists": true,
+      "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+      "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
+    },
+    "c4_local_cut_crossing_search": {
+      "exists": true,
+      "path": "experiments/graph_candidates/C4_bridge_aware_replace_add/reports/probe_only/local_cut_crossing_candidate_search.json",
+      "sha256": "95918bd28305f57542c777818766530ef6352ae0893dd8cff2d96dd1f335fe25"
+    },
+    "c5_h1_h2_probe": {
+      "exists": true,
+      "path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/reports/probe_only/c5_h1_h2_probe_report.json",
+      "sha256": "d3cc91be4c7575575e85717d0c8bcaf22f38f52f49e25a7431c3950b803aef60"
+    },
+    "c5_marginal_decision": {
+      "exists": true,
+      "path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/marginal_utility_decision.md"
+    },
+    "composition_verified_compact": {
+      "exists": true,
+      "path": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+      "sha256": "8fbc1db6847b7676c1f144521218b444e2768cb06345d1a6288afd58177df54e"
+    },
+    "hop_support": {
+      "exists": true,
+      "path": "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl",
+      "sha256": "9ff74a945575ccdbf3db45810da5970f01b18d499f304729d8edfb255acb23cf"
+    }
+  },
+  "limits": {
+    "max_examples": 200,
+    "max_target_edges": 200
+  },
+  "notes": [
+    "Every proposed triple is labelled synthetic_pattern_derived.",
+    "Synthetic pattern-derived triples are not observed Wikidata triples unless separately verified.",
+    "This audit uses frozen local evidence only.",
+    "No graph candidate was generated.",
+    "No WDQS query was made.",
+    "No LLM call was made.",
+    "candidate_registry.v1.json was not updated."
+  ],
+  "observed_evidence_scan": {
+    "observed_triples_loaded": 25670,
+    "relations_of_interest": 84,
+    "source_stats": {
+      "b0_parent_graph": {
+        "triples_loaded": 20518
+      },
+      "frozen_candidate_pools": {
+        "bytes_scanned": 657272253,
+        "files_scanned": 2,
+        "outside_b0_endpoint_scope": 221266,
+        "rows_scanned": 872156,
+        "triples_loaded": 5576,
+        "triples_with_relation_of_interest": 226842
+      },
+      "stage02_candidate_shards": {
+        "bytes_scanned": 48692812,
+        "files_scanned": 139,
+        "outside_b0_endpoint_scope": 47309,
+        "rows_scanned": 81958,
+        "triples_loaded": 13982,
+        "triples_with_relation_of_interest": 61291
+      },
+      "stage11_graph_output": {
+        "bytes_scanned": 1756236,
+        "files_scanned": 1,
+        "outside_b0_endpoint_scope": 19,
+        "rows_scanned": 24670,
+        "triples_loaded": 20478,
+        "triples_with_relation_of_interest": 20497
+      },
+      "stage12_graph_output": {
+        "bytes_scanned": 1739977,
+        "files_scanned": 1,
+        "outside_b0_endpoint_scope": 19,
+        "rows_scanned": 24715,
+        "triples_loaded": 20518,
+        "triples_with_relation_of_interest": 20537
+      }
+    }
+  },
+  "runtime": {
+    "elapsed_seconds": 7.86705,
+    "finished_on": "2026-05-24T19:27:15.279575+00:00",
+    "started_on": "2026-05-24T19:27:07.412524+00:00"
+  },
+  "schema_version": "h3-synthetic-pattern-feasibility-audit-v1",
+  "status": "read_only_feasibility_audit",
+  "top_examples": [],
+  "verified_pattern_rules": {
+    "counts": {
+      "composition_rules": 13,
+      "inverse_oriented_rules": 44,
+      "symmetric_rules": 18
+    },
+    "thresholds": {
+      "fallback": "not_generated; this audit uses canonical preferred verified rules only",
+      "preferred": {
+        "composition": {
+          "min_confidence": 0.6,
+          "min_examined": 50,
+          "min_shortcuts": 1,
+          "min_support": 50,
+          "use_wilson": false
+        },
+        "inverse": {
+          "min_confidence": 0.6,
+          "min_support": 50
+        },
+        "symmetric": {
+          "min_confidence": 0.6,
+          "min_support": 50
+        }
+      }
+    }
+  }
+}
