@@ -1,0 +1,2665 @@
+{
+  "candidate_id": "C5_connectivity_support_hypothesis_matrix",
+  "candidate_moves_available": 546,
+  "caps": [
+    25,
+    50,
+    100,
+    151
+  ],
+  "inputs": {
+    "cap_sweep_report": {
+      "path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/reports/cap_sweep/cap_sweep_report.json",
+      "sha256": "4ba2c46e5b1efbcd74ddd01587c8e1d2f73fa8a4884903fa3f238f95582e5b19"
+    },
+    "config": {
+      "path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/configs/config.template.json",
+      "sha256": "01566c4a9a35800271c4f7bb0ef19ce3531d046fc2b2f84252904568175359a3"
+    },
+    "generator": {
+      "path": "tools/graph_candidate_generation/c5_generate_h2_auxiliary_connectivity_candidate.py",
+      "sha256": "6c67b304284adf7de8ed8750e9981efc1e5d396d5804e4084e670233b7ce125b"
+    },
+    "policy": {
+      "path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/configs/h2_generator_policy.template.json",
+      "sha256": "0196c93d2deb0b64563a6b4010e55c003db4d987a1cc801abe3ec3ba37f2009b"
+    }
+  },
+  "notes": [
+    "No WDQS query was made.",
+    "No LLM call was made.",
+    "No synthetic triples were created.",
+    "candidate_registry.v1.json was not updated.",
+    "Per-strategy graphs are probe artifacts, not registry candidates."
+  ],
+  "parent_candidate_id": "B0",
+  "probe_id": "C5_H2_diversity_reranking",
+  "recommendation": {
+    "best_cap": 50,
+    "best_strategy": "relation_diversity_penalty_light",
+    "p17_reduction": 0.76,
+    "reason": "A diversity-aware strategy substantially reduces P17 concentration with acceptable surplus cost.",
+    "recommendation": "use_diversity_penalty_candidate",
+    "registry_update_supported": false,
+    "surplus_cost": 0.0
+  },
+  "rows": [
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 11,
+      "auxiliary_relation_distribution": {
+        "P1056": 1,
+        "P1412": 1,
+        "P1552": 1,
+        "P166": 1,
+        "P17": 14,
+        "P21": 1,
+        "P27": 1,
+        "P2853": 2,
+        "P30": 1,
+        "P360": 1,
+        "P915": 1
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 25,
+      "canonical_only_triples": 24658,
+      "canonical_only_weak_components": 24,
+      "canonical_surplus_delta": -25.0,
+      "cap": 25,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "f835dc6485fc5e3d8037da5d46791956b2cc9e059c6ae2a055ff8bfd23c4c636",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/baseline_current_ranking/cap_25/reports/manifest.json",
+      "p17_count": 14,
+      "p17_share": 0.56,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/baseline_current_ranking/cap_25/reports/report.json",
+      "selected_auxiliary_edges": 25,
+      "strategy": "baseline_current_ranking",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          14
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P1412",
+          1
+        ],
+        [
+          "P1552",
+          1
+        ],
+        [
+          "P166",
+          1
+        ],
+        [
+          "P21",
+          1
+        ],
+        [
+          "P27",
+          1
+        ],
+        [
+          "P30",
+          1
+        ],
+        [
+          "P360",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 11,
+      "auxiliary_relation_distribution": {
+        "P1056": 1,
+        "P1412": 1,
+        "P1552": 1,
+        "P166": 1,
+        "P17": 39,
+        "P21": 1,
+        "P27": 1,
+        "P2853": 2,
+        "P30": 1,
+        "P360": 1,
+        "P915": 1
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 50,
+      "canonical_only_triples": 24633,
+      "canonical_only_weak_components": 49,
+      "canonical_surplus_delta": -50.0,
+      "cap": 50,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "91f221e96401bf61eb449ca46467742d809d5589554b770fe9455a5de3d53480",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/baseline_current_ranking/cap_50/reports/manifest.json",
+      "p17_count": 39,
+      "p17_share": 0.78,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/baseline_current_ranking/cap_50/reports/report.json",
+      "selected_auxiliary_edges": 50,
+      "strategy": "baseline_current_ranking",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          39
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P1412",
+          1
+        ],
+        [
+          "P1552",
+          1
+        ],
+        [
+          "P166",
+          1
+        ],
+        [
+          "P21",
+          1
+        ],
+        [
+          "P27",
+          1
+        ],
+        [
+          "P30",
+          1
+        ],
+        [
+          "P360",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 17,
+      "auxiliary_relation_distribution": {
+        "P1056": 1,
+        "P137": 1,
+        "P140": 1,
+        "P1412": 1,
+        "P1552": 1,
+        "P166": 1,
+        "P17": 79,
+        "P21": 1,
+        "P27": 1,
+        "P2853": 2,
+        "P30": 1,
+        "P360": 5,
+        "P364": 1,
+        "P400": 1,
+        "P495": 1,
+        "P915": 1,
+        "P921": 1
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 100,
+      "canonical_only_triples": 24583,
+      "canonical_only_weak_components": 99,
+      "canonical_surplus_delta": -100.0,
+      "cap": 100,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "b3baaf6f2b2a367b1f7b0303b42994b100b648655b5630500d97d88636784e15",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/baseline_current_ranking/cap_100/reports/manifest.json",
+      "p17_count": 79,
+      "p17_share": 0.79,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/baseline_current_ranking/cap_100/reports/report.json",
+      "selected_auxiliary_edges": 100,
+      "strategy": "baseline_current_ranking",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          79
+        ],
+        [
+          "P360",
+          5
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P137",
+          1
+        ],
+        [
+          "P140",
+          1
+        ],
+        [
+          "P1412",
+          1
+        ],
+        [
+          "P1552",
+          1
+        ],
+        [
+          "P166",
+          1
+        ],
+        [
+          "P21",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 27,
+      "auxiliary_relation_distribution": {
+        "P105": 19,
+        "P1056": 1,
+        "P137": 1,
+        "P140": 1,
+        "P1411": 1,
+        "P1412": 1,
+        "P155": 1,
+        "P1552": 3,
+        "P156": 2,
+        "P166": 1,
+        "P17": 89,
+        "P21": 1,
+        "P27": 1,
+        "P272": 1,
+        "P2853": 2,
+        "P30": 1,
+        "P360": 6,
+        "P364": 3,
+        "P400": 1,
+        "P407": 2,
+        "P4224": 1,
+        "P47": 1,
+        "P495": 6,
+        "P5869": 1,
+        "P840": 1,
+        "P915": 1,
+        "P921": 2
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 151,
+      "canonical_only_triples": 24532,
+      "canonical_only_weak_components": 149,
+      "canonical_surplus_delta": -151.0,
+      "cap": 151,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "66dedc8a14b4d4f8b561d81fc6abd6910a2aea45c27b4e9917a3411ce2fe1ae9",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/baseline_current_ranking/cap_151/reports/manifest.json",
+      "p17_count": 89,
+      "p17_share": 0.5894039735099338,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/baseline_current_ranking/cap_151/reports/report.json",
+      "selected_auxiliary_edges": 151,
+      "strategy": "baseline_current_ranking",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          89
+        ],
+        [
+          "P105",
+          19
+        ],
+        [
+          "P360",
+          6
+        ],
+        [
+          "P495",
+          6
+        ],
+        [
+          "P1552",
+          3
+        ],
+        [
+          "P364",
+          3
+        ],
+        [
+          "P156",
+          2
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P407",
+          2
+        ],
+        [
+          "P921",
+          2
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 16,
+      "auxiliary_relation_distribution": {
+        "P1056": 1,
+        "P140": 2,
+        "P1412": 1,
+        "P1552": 1,
+        "P166": 1,
+        "P17": 6,
+        "P21": 1,
+        "P27": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 1,
+        "P364": 1,
+        "P400": 1,
+        "P495": 1,
+        "P915": 1,
+        "P921": 2
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 25,
+      "canonical_only_triples": 24658,
+      "canonical_only_weak_components": 24,
+      "canonical_surplus_delta": -25.0,
+      "cap": 25,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "589d1f2efb5c0314af512f94bd890b2c42f9985bce05689c0363dbba73cf8330",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_25_percent/cap_25/reports/manifest.json",
+      "p17_count": 6,
+      "p17_share": 0.24,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_25_percent/cap_25/reports/report.json",
+      "selected_auxiliary_edges": 25,
+      "strategy": "p17_cap_25_percent",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          6
+        ],
+        [
+          "P140",
+          2
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P30",
+          2
+        ],
+        [
+          "P921",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P1412",
+          1
+        ],
+        [
+          "P1552",
+          1
+        ],
+        [
+          "P166",
+          1
+        ],
+        [
+          "P21",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 25,
+      "auxiliary_relation_distribution": {
+        "P1056": 1,
+        "P1366": 2,
+        "P137": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P155": 1,
+        "P1552": 3,
+        "P166": 1,
+        "P17": 12,
+        "P190": 1,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 5,
+        "P364": 1,
+        "P3842": 1,
+        "P400": 1,
+        "P407": 1,
+        "P47": 3,
+        "P495": 1,
+        "P915": 1,
+        "P921": 3
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 50,
+      "canonical_only_triples": 24633,
+      "canonical_only_weak_components": 48,
+      "canonical_surplus_delta": -50.0,
+      "cap": 50,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "896971eddb41dbb4931df05e9d6c4cccbbcbf0d81d3b295ad18e63cc27fde092",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_25_percent/cap_50/reports/manifest.json",
+      "p17_count": 12,
+      "p17_share": 0.24,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_25_percent/cap_50/reports/report.json",
+      "selected_auxiliary_edges": 50,
+      "strategy": "p17_cap_25_percent",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          12
+        ],
+        [
+          "P360",
+          5
+        ],
+        [
+          "P1552",
+          3
+        ],
+        [
+          "P47",
+          3
+        ],
+        [
+          "P921",
+          3
+        ],
+        [
+          "P1366",
+          2
+        ],
+        [
+          "P140",
+          2
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P30",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 33,
+      "auxiliary_relation_distribution": {
+        "P105": 8,
+        "P1056": 1,
+        "P1366": 12,
+        "P137": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P155": 3,
+        "P1552": 3,
+        "P156": 2,
+        "P166": 1,
+        "P17": 25,
+        "P1830": 1,
+        "P190": 2,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P272": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 6,
+        "P364": 3,
+        "P3842": 1,
+        "P400": 1,
+        "P407": 2,
+        "P4224": 1,
+        "P47": 3,
+        "P495": 5,
+        "P5869": 1,
+        "P708": 1,
+        "P840": 1,
+        "P915": 1,
+        "P921": 3
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 100,
+      "canonical_only_triples": 24583,
+      "canonical_only_weak_components": 98,
+      "canonical_surplus_delta": -100.0,
+      "cap": 100,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "7b3b9df9c825aa03d4ea6009f7e464bb0a99e405147e018ca6533d3b17d7fa85",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_25_percent/cap_100/reports/manifest.json",
+      "p17_count": 25,
+      "p17_share": 0.25,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_25_percent/cap_100/reports/report.json",
+      "selected_auxiliary_edges": 100,
+      "strategy": "p17_cap_25_percent",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          25
+        ],
+        [
+          "P1366",
+          12
+        ],
+        [
+          "P105",
+          8
+        ],
+        [
+          "P360",
+          6
+        ],
+        [
+          "P495",
+          5
+        ],
+        [
+          "P155",
+          3
+        ],
+        [
+          "P1552",
+          3
+        ],
+        [
+          "P364",
+          3
+        ],
+        [
+          "P47",
+          3
+        ],
+        [
+          "P921",
+          3
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 32,
+      "auxiliary_relation_distribution": {
+        "P105": 19,
+        "P1056": 1,
+        "P1366": 10,
+        "P137": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P155": 3,
+        "P1552": 3,
+        "P156": 2,
+        "P166": 1,
+        "P17": 37,
+        "P1830": 1,
+        "P190": 2,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P272": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 6,
+        "P364": 3,
+        "P400": 1,
+        "P407": 2,
+        "P4224": 1,
+        "P47": 3,
+        "P495": 6,
+        "P5869": 1,
+        "P708": 1,
+        "P840": 1,
+        "P915": 1,
+        "P921": 3
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 121,
+      "canonical_only_triples": 24562,
+      "canonical_only_weak_components": 119,
+      "canonical_surplus_delta": -121.0,
+      "cap": 151,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "a22e5101f9e360215db77da225d6664c2b802a6c49e2719a28ed0d21251055b6",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_25_percent/cap_151/reports/manifest.json",
+      "p17_count": 37,
+      "p17_share": 0.30578512396694213,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_25_percent/cap_151/reports/report.json",
+      "selected_auxiliary_edges": 121,
+      "strategy": "p17_cap_25_percent",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          37
+        ],
+        [
+          "P105",
+          19
+        ],
+        [
+          "P1366",
+          10
+        ],
+        [
+          "P360",
+          6
+        ],
+        [
+          "P495",
+          6
+        ],
+        [
+          "P155",
+          3
+        ],
+        [
+          "P1552",
+          3
+        ],
+        [
+          "P364",
+          3
+        ],
+        [
+          "P47",
+          3
+        ],
+        [
+          "P921",
+          3
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 13,
+      "auxiliary_relation_distribution": {
+        "P1056": 1,
+        "P1412": 1,
+        "P1552": 1,
+        "P166": 1,
+        "P17": 10,
+        "P21": 1,
+        "P27": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 1,
+        "P364": 1,
+        "P915": 1,
+        "P921": 2
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 25,
+      "canonical_only_triples": 24658,
+      "canonical_only_weak_components": 24,
+      "canonical_surplus_delta": -25.0,
+      "cap": 25,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "aa6b1e5eddb3a7b836c9841c6b557a0544ff4f490cdf123dd992f1ae3318db00",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_40_percent/cap_25/reports/manifest.json",
+      "p17_count": 10,
+      "p17_share": 0.4,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_40_percent/cap_25/reports/report.json",
+      "selected_auxiliary_edges": 25,
+      "strategy": "p17_cap_40_percent",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          10
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P30",
+          2
+        ],
+        [
+          "P921",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P1412",
+          1
+        ],
+        [
+          "P1552",
+          1
+        ],
+        [
+          "P166",
+          1
+        ],
+        [
+          "P21",
+          1
+        ],
+        [
+          "P27",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 20,
+      "auxiliary_relation_distribution": {
+        "P1056": 1,
+        "P137": 1,
+        "P140": 2,
+        "P1412": 1,
+        "P155": 1,
+        "P1552": 2,
+        "P166": 1,
+        "P17": 20,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 5,
+        "P364": 1,
+        "P400": 1,
+        "P47": 3,
+        "P495": 1,
+        "P915": 1,
+        "P921": 2
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 50,
+      "canonical_only_triples": 24633,
+      "canonical_only_weak_components": 48,
+      "canonical_surplus_delta": -50.0,
+      "cap": 50,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "adaaebd7ecabbe700de3fa2197fed899242aa36ce9c3c62a3a236f61e7c2f299",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_40_percent/cap_50/reports/manifest.json",
+      "p17_count": 20,
+      "p17_share": 0.4,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_40_percent/cap_50/reports/report.json",
+      "selected_auxiliary_edges": 50,
+      "strategy": "p17_cap_40_percent",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          20
+        ],
+        [
+          "P360",
+          5
+        ],
+        [
+          "P47",
+          3
+        ],
+        [
+          "P140",
+          2
+        ],
+        [
+          "P1552",
+          2
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P30",
+          2
+        ],
+        [
+          "P921",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P137",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 32,
+      "auxiliary_relation_distribution": {
+        "P105": 4,
+        "P1056": 1,
+        "P1366": 7,
+        "P137": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P155": 3,
+        "P1552": 3,
+        "P156": 1,
+        "P166": 1,
+        "P17": 40,
+        "P1830": 1,
+        "P190": 2,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P272": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 6,
+        "P364": 2,
+        "P400": 1,
+        "P407": 2,
+        "P4224": 1,
+        "P47": 3,
+        "P495": 2,
+        "P5869": 1,
+        "P708": 1,
+        "P840": 1,
+        "P915": 1,
+        "P921": 3
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 100,
+      "canonical_only_triples": 24583,
+      "canonical_only_weak_components": 98,
+      "canonical_surplus_delta": -100.0,
+      "cap": 100,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "91d01705c87d180654ef5b6680ab57ba77a2b870a9043ec332909779f064eb1c",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_40_percent/cap_100/reports/manifest.json",
+      "p17_count": 40,
+      "p17_share": 0.4,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_40_percent/cap_100/reports/report.json",
+      "selected_auxiliary_edges": 100,
+      "strategy": "p17_cap_40_percent",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          40
+        ],
+        [
+          "P1366",
+          7
+        ],
+        [
+          "P360",
+          6
+        ],
+        [
+          "P105",
+          4
+        ],
+        [
+          "P155",
+          3
+        ],
+        [
+          "P1552",
+          3
+        ],
+        [
+          "P47",
+          3
+        ],
+        [
+          "P921",
+          3
+        ],
+        [
+          "P140",
+          2
+        ],
+        [
+          "P190",
+          2
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 31,
+      "auxiliary_relation_distribution": {
+        "P105": 19,
+        "P1056": 1,
+        "P137": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P155": 3,
+        "P1552": 3,
+        "P156": 2,
+        "P166": 1,
+        "P17": 60,
+        "P1830": 1,
+        "P190": 1,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P272": 1,
+        "P2853": 2,
+        "P30": 1,
+        "P360": 6,
+        "P364": 3,
+        "P400": 1,
+        "P407": 2,
+        "P4224": 1,
+        "P47": 3,
+        "P495": 6,
+        "P5869": 1,
+        "P708": 1,
+        "P840": 1,
+        "P915": 1,
+        "P921": 2
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 131,
+      "canonical_only_triples": 24552,
+      "canonical_only_weak_components": 129,
+      "canonical_surplus_delta": -131.0,
+      "cap": 151,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "402271d3f6d3d3bcfc6bc96a53cf2926d6701f03123e7898f51c259d2e1e23bf",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_40_percent/cap_151/reports/manifest.json",
+      "p17_count": 60,
+      "p17_share": 0.4580152671755725,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/p17_cap_40_percent/cap_151/reports/report.json",
+      "selected_auxiliary_edges": 131,
+      "strategy": "p17_cap_40_percent",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          60
+        ],
+        [
+          "P105",
+          19
+        ],
+        [
+          "P360",
+          6
+        ],
+        [
+          "P495",
+          6
+        ],
+        [
+          "P155",
+          3
+        ],
+        [
+          "P1552",
+          3
+        ],
+        [
+          "P364",
+          3
+        ],
+        [
+          "P47",
+          3
+        ],
+        [
+          "P140",
+          2
+        ],
+        [
+          "P156",
+          2
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 13,
+      "auxiliary_relation_distribution": {
+        "P1056": 1,
+        "P1412": 1,
+        "P1552": 1,
+        "P166": 1,
+        "P17": 10,
+        "P21": 1,
+        "P27": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 1,
+        "P364": 1,
+        "P915": 1,
+        "P921": 2
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 25,
+      "canonical_only_triples": 24658,
+      "canonical_only_weak_components": 24,
+      "canonical_surplus_delta": -25.0,
+      "cap": 25,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "aa6b1e5eddb3a7b836c9841c6b557a0544ff4f490cdf123dd992f1ae3318db00",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_10/cap_25/reports/manifest.json",
+      "p17_count": 10,
+      "p17_share": 0.4,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_10/cap_25/reports/report.json",
+      "selected_auxiliary_edges": 25,
+      "strategy": "max_per_aux_relation_10",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          10
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P30",
+          2
+        ],
+        [
+          "P921",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P1412",
+          1
+        ],
+        [
+          "P1552",
+          1
+        ],
+        [
+          "P166",
+          1
+        ],
+        [
+          "P21",
+          1
+        ],
+        [
+          "P27",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 25,
+      "auxiliary_relation_distribution": {
+        "P1056": 1,
+        "P1366": 4,
+        "P137": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P155": 1,
+        "P1552": 3,
+        "P166": 1,
+        "P17": 10,
+        "P190": 1,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 5,
+        "P364": 1,
+        "P3842": 1,
+        "P400": 1,
+        "P407": 1,
+        "P47": 3,
+        "P495": 1,
+        "P915": 1,
+        "P921": 3
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 50,
+      "canonical_only_triples": 24633,
+      "canonical_only_weak_components": 48,
+      "canonical_surplus_delta": -50.0,
+      "cap": 50,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "418a4ecfb07568e04cc3e49905bf44cbc663e137a8641782a9563ba10bbf5b90",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_10/cap_50/reports/manifest.json",
+      "p17_count": 10,
+      "p17_share": 0.2,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_10/cap_50/reports/report.json",
+      "selected_auxiliary_edges": 50,
+      "strategy": "max_per_aux_relation_10",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          10
+        ],
+        [
+          "P360",
+          5
+        ],
+        [
+          "P1366",
+          4
+        ],
+        [
+          "P1552",
+          3
+        ],
+        [
+          "P47",
+          3
+        ],
+        [
+          "P921",
+          3
+        ],
+        [
+          "P140",
+          2
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P30",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 34,
+      "auxiliary_relation_distribution": {
+        "P105": 10,
+        "P1056": 1,
+        "P1366": 10,
+        "P137": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P155": 3,
+        "P1552": 3,
+        "P156": 2,
+        "P166": 1,
+        "P17": 10,
+        "P1830": 1,
+        "P190": 2,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P272": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 6,
+        "P364": 3,
+        "P3842": 4,
+        "P400": 1,
+        "P407": 2,
+        "P4224": 1,
+        "P47": 3,
+        "P495": 6,
+        "P5869": 1,
+        "P703": 1,
+        "P708": 1,
+        "P840": 1,
+        "P915": 1,
+        "P921": 3
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 90,
+      "canonical_only_triples": 24593,
+      "canonical_only_weak_components": 88,
+      "canonical_surplus_delta": -90.0,
+      "cap": 100,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "202c11ef5f6c51cd6ad18504f112f13d9feff0335871848ffb97a34d63d9f2f6",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_10/cap_100/reports/manifest.json",
+      "p17_count": 10,
+      "p17_share": 0.1111111111111111,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_10/cap_100/reports/report.json",
+      "selected_auxiliary_edges": 90,
+      "strategy": "max_per_aux_relation_10",
+      "top_auxiliary_relations": [
+        [
+          "P105",
+          10
+        ],
+        [
+          "P1366",
+          10
+        ],
+        [
+          "P17",
+          10
+        ],
+        [
+          "P360",
+          6
+        ],
+        [
+          "P495",
+          6
+        ],
+        [
+          "P3842",
+          4
+        ],
+        [
+          "P155",
+          3
+        ],
+        [
+          "P1552",
+          3
+        ],
+        [
+          "P364",
+          3
+        ],
+        [
+          "P47",
+          3
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 34,
+      "auxiliary_relation_distribution": {
+        "P105": 10,
+        "P1056": 1,
+        "P1366": 10,
+        "P137": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P155": 3,
+        "P1552": 3,
+        "P156": 2,
+        "P166": 1,
+        "P17": 10,
+        "P1830": 1,
+        "P190": 2,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P272": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 6,
+        "P364": 3,
+        "P3842": 4,
+        "P400": 1,
+        "P407": 2,
+        "P4224": 1,
+        "P47": 3,
+        "P495": 6,
+        "P5869": 1,
+        "P703": 1,
+        "P708": 1,
+        "P840": 1,
+        "P915": 1,
+        "P921": 3
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 90,
+      "canonical_only_triples": 24593,
+      "canonical_only_weak_components": 88,
+      "canonical_surplus_delta": -90.0,
+      "cap": 151,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "202c11ef5f6c51cd6ad18504f112f13d9feff0335871848ffb97a34d63d9f2f6",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_10/cap_151/reports/manifest.json",
+      "p17_count": 10,
+      "p17_share": 0.1111111111111111,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_10/cap_151/reports/report.json",
+      "selected_auxiliary_edges": 90,
+      "strategy": "max_per_aux_relation_10",
+      "top_auxiliary_relations": [
+        [
+          "P105",
+          10
+        ],
+        [
+          "P1366",
+          10
+        ],
+        [
+          "P17",
+          10
+        ],
+        [
+          "P360",
+          6
+        ],
+        [
+          "P495",
+          6
+        ],
+        [
+          "P3842",
+          4
+        ],
+        [
+          "P155",
+          3
+        ],
+        [
+          "P1552",
+          3
+        ],
+        [
+          "P364",
+          3
+        ],
+        [
+          "P47",
+          3
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 11,
+      "auxiliary_relation_distribution": {
+        "P1056": 1,
+        "P1412": 1,
+        "P1552": 1,
+        "P166": 1,
+        "P17": 14,
+        "P21": 1,
+        "P27": 1,
+        "P2853": 2,
+        "P30": 1,
+        "P360": 1,
+        "P915": 1
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 25,
+      "canonical_only_triples": 24658,
+      "canonical_only_weak_components": 24,
+      "canonical_surplus_delta": -25.0,
+      "cap": 25,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "f835dc6485fc5e3d8037da5d46791956b2cc9e059c6ae2a055ff8bfd23c4c636",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_20/cap_25/reports/manifest.json",
+      "p17_count": 14,
+      "p17_share": 0.56,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_20/cap_25/reports/report.json",
+      "selected_auxiliary_edges": 25,
+      "strategy": "max_per_aux_relation_20",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          14
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P1412",
+          1
+        ],
+        [
+          "P1552",
+          1
+        ],
+        [
+          "P166",
+          1
+        ],
+        [
+          "P21",
+          1
+        ],
+        [
+          "P27",
+          1
+        ],
+        [
+          "P30",
+          1
+        ],
+        [
+          "P360",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 20,
+      "auxiliary_relation_distribution": {
+        "P1056": 1,
+        "P137": 1,
+        "P140": 2,
+        "P1412": 1,
+        "P155": 1,
+        "P1552": 2,
+        "P166": 1,
+        "P17": 20,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 5,
+        "P364": 1,
+        "P400": 1,
+        "P47": 3,
+        "P495": 1,
+        "P915": 1,
+        "P921": 2
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 50,
+      "canonical_only_triples": 24633,
+      "canonical_only_weak_components": 48,
+      "canonical_surplus_delta": -50.0,
+      "cap": 50,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "adaaebd7ecabbe700de3fa2197fed899242aa36ce9c3c62a3a236f61e7c2f299",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_20/cap_50/reports/manifest.json",
+      "p17_count": 20,
+      "p17_share": 0.4,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_20/cap_50/reports/report.json",
+      "selected_auxiliary_edges": 50,
+      "strategy": "max_per_aux_relation_20",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          20
+        ],
+        [
+          "P360",
+          5
+        ],
+        [
+          "P47",
+          3
+        ],
+        [
+          "P140",
+          2
+        ],
+        [
+          "P1552",
+          2
+        ],
+        [
+          "P2853",
+          2
+        ],
+        [
+          "P30",
+          2
+        ],
+        [
+          "P921",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P137",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 33,
+      "auxiliary_relation_distribution": {
+        "P105": 11,
+        "P1056": 1,
+        "P1366": 13,
+        "P137": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P155": 3,
+        "P1552": 3,
+        "P156": 2,
+        "P166": 1,
+        "P17": 20,
+        "P1830": 1,
+        "P190": 2,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P272": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 6,
+        "P364": 3,
+        "P3842": 1,
+        "P400": 1,
+        "P407": 2,
+        "P4224": 1,
+        "P47": 3,
+        "P495": 6,
+        "P5869": 1,
+        "P708": 1,
+        "P840": 1,
+        "P915": 1,
+        "P921": 3
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 100,
+      "canonical_only_triples": 24583,
+      "canonical_only_weak_components": 98,
+      "canonical_surplus_delta": -100.0,
+      "cap": 100,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "535d037609e131b65fa16ea857d9a549a9a8ecf378cac0db27073fe4f2b74ca0",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_20/cap_100/reports/manifest.json",
+      "p17_count": 20,
+      "p17_share": 0.2,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_20/cap_100/reports/report.json",
+      "selected_auxiliary_edges": 100,
+      "strategy": "max_per_aux_relation_20",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          20
+        ],
+        [
+          "P1366",
+          13
+        ],
+        [
+          "P105",
+          11
+        ],
+        [
+          "P360",
+          6
+        ],
+        [
+          "P495",
+          6
+        ],
+        [
+          "P155",
+          3
+        ],
+        [
+          "P1552",
+          3
+        ],
+        [
+          "P364",
+          3
+        ],
+        [
+          "P47",
+          3
+        ],
+        [
+          "P921",
+          3
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 33,
+      "auxiliary_relation_distribution": {
+        "P105": 19,
+        "P1056": 1,
+        "P1366": 13,
+        "P137": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P155": 3,
+        "P1552": 3,
+        "P156": 2,
+        "P166": 1,
+        "P17": 20,
+        "P1830": 1,
+        "P190": 2,
+        "P1923": 1,
+        "P21": 1,
+        "P27": 1,
+        "P272": 1,
+        "P2853": 2,
+        "P30": 2,
+        "P360": 6,
+        "P364": 3,
+        "P3842": 1,
+        "P400": 1,
+        "P407": 2,
+        "P4224": 1,
+        "P47": 3,
+        "P495": 6,
+        "P5869": 1,
+        "P708": 1,
+        "P840": 1,
+        "P915": 1,
+        "P921": 3
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 108,
+      "canonical_only_triples": 24575,
+      "canonical_only_weak_components": 106,
+      "canonical_surplus_delta": -108.0,
+      "cap": 151,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "7dd98e5a3d40e88d26e789381a07e5468455f2e91f71d45c1e43dc01258d1ed9",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_20/cap_151/reports/manifest.json",
+      "p17_count": 20,
+      "p17_share": 0.18518518518518517,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/max_per_aux_relation_20/cap_151/reports/report.json",
+      "selected_auxiliary_edges": 108,
+      "strategy": "max_per_aux_relation_20",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          20
+        ],
+        [
+          "P105",
+          19
+        ],
+        [
+          "P1366",
+          13
+        ],
+        [
+          "P360",
+          6
+        ],
+        [
+          "P495",
+          6
+        ],
+        [
+          "P155",
+          3
+        ],
+        [
+          "P1552",
+          3
+        ],
+        [
+          "P364",
+          3
+        ],
+        [
+          "P47",
+          3
+        ],
+        [
+          "P921",
+          3
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 25,
+      "auxiliary_relation_distribution": {
+        "P105": 1,
+        "P1056": 1,
+        "P1074": 1,
+        "P1269": 1,
+        "P12912": 1,
+        "P1365": 1,
+        "P1366": 1,
+        "P137": 1,
+        "P138": 1,
+        "P140": 1,
+        "P1411": 1,
+        "P1412": 1,
+        "P150": 1,
+        "P1532": 1,
+        "P155": 1,
+        "P1552": 1,
+        "P156": 1,
+        "P159": 1,
+        "P166": 1,
+        "P17": 1,
+        "P183": 1,
+        "P1830": 1,
+        "P190": 1,
+        "P1923": 1,
+        "P205": 1
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 25,
+      "canonical_only_triples": 24658,
+      "canonical_only_weak_components": 25,
+      "canonical_surplus_delta": -25.0,
+      "cap": 25,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "ce797e03550bbe47bf517f52712a6fe44fff2177da75d8a6a31dbea7879312d7",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_25/reports/manifest.json",
+      "p17_count": 1,
+      "p17_share": 0.04,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_25/reports/report.json",
+      "selected_auxiliary_edges": 25,
+      "strategy": "relation_diversity_penalty_light",
+      "top_auxiliary_relations": [
+        [
+          "P105",
+          1
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P1074",
+          1
+        ],
+        [
+          "P1269",
+          1
+        ],
+        [
+          "P12912",
+          1
+        ],
+        [
+          "P1365",
+          1
+        ],
+        [
+          "P1366",
+          1
+        ],
+        [
+          "P137",
+          1
+        ],
+        [
+          "P138",
+          1
+        ],
+        [
+          "P140",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 48,
+      "auxiliary_relation_distribution": {
+        "P105": 2,
+        "P1056": 1,
+        "P1074": 1,
+        "P1269": 1,
+        "P12912": 1,
+        "P1365": 2,
+        "P1366": 1,
+        "P137": 1,
+        "P138": 1,
+        "P140": 1,
+        "P1411": 1,
+        "P1412": 1,
+        "P150": 1,
+        "P1532": 1,
+        "P155": 1,
+        "P1552": 1,
+        "P156": 1,
+        "P159": 1,
+        "P166": 1,
+        "P17": 1,
+        "P183": 1,
+        "P1830": 1,
+        "P190": 1,
+        "P1923": 1,
+        "P205": 1,
+        "P206": 1,
+        "P27": 1,
+        "P272": 1,
+        "P276": 1,
+        "P2853": 1,
+        "P291": 1,
+        "P2936": 1,
+        "P30": 1,
+        "P360": 1,
+        "P364": 1,
+        "P3842": 1,
+        "P400": 1,
+        "P407": 1,
+        "P4224": 1,
+        "P47": 1,
+        "P495": 1,
+        "P5869": 1,
+        "P703": 1,
+        "P708": 1,
+        "P750": 1,
+        "P840": 1,
+        "P915": 1,
+        "P921": 1
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 50,
+      "canonical_only_triples": 24633,
+      "canonical_only_weak_components": 49,
+      "canonical_surplus_delta": -50.0,
+      "cap": 50,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "17c082efa49384f0f162b37551d7f7c8a221e73e2cdd7e726a1e018db8ead540",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/reports/manifest.json",
+      "p17_count": 1,
+      "p17_share": 0.02,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_50/reports/report.json",
+      "selected_auxiliary_edges": 50,
+      "strategy": "relation_diversity_penalty_light",
+      "top_auxiliary_relations": [
+        [
+          "P105",
+          2
+        ],
+        [
+          "P1365",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P1074",
+          1
+        ],
+        [
+          "P1269",
+          1
+        ],
+        [
+          "P12912",
+          1
+        ],
+        [
+          "P1366",
+          1
+        ],
+        [
+          "P137",
+          1
+        ],
+        [
+          "P138",
+          1
+        ],
+        [
+          "P140",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 48,
+      "auxiliary_relation_distribution": {
+        "P105": 13,
+        "P1056": 1,
+        "P1074": 1,
+        "P1269": 1,
+        "P12912": 1,
+        "P1365": 5,
+        "P1366": 5,
+        "P137": 1,
+        "P138": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P150": 1,
+        "P1532": 1,
+        "P155": 2,
+        "P1552": 2,
+        "P156": 2,
+        "P159": 1,
+        "P166": 1,
+        "P17": 13,
+        "P183": 1,
+        "P1830": 1,
+        "P190": 1,
+        "P1923": 1,
+        "P205": 1,
+        "P206": 1,
+        "P27": 1,
+        "P272": 1,
+        "P276": 1,
+        "P2853": 1,
+        "P291": 3,
+        "P2936": 1,
+        "P30": 1,
+        "P360": 3,
+        "P364": 2,
+        "P3842": 4,
+        "P400": 1,
+        "P407": 1,
+        "P4224": 1,
+        "P47": 2,
+        "P495": 6,
+        "P5869": 1,
+        "P703": 1,
+        "P708": 1,
+        "P750": 1,
+        "P840": 2,
+        "P915": 1,
+        "P921": 2
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 100,
+      "canonical_only_triples": 24583,
+      "canonical_only_weak_components": 98,
+      "canonical_surplus_delta": -100.0,
+      "cap": 100,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "2151f11e26889399ee80b1a6c7860697bdf8c38b4eaeab00702ca9ffdeb5065d",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_100/reports/manifest.json",
+      "p17_count": 13,
+      "p17_share": 0.13,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_100/reports/report.json",
+      "selected_auxiliary_edges": 100,
+      "strategy": "relation_diversity_penalty_light",
+      "top_auxiliary_relations": [
+        [
+          "P105",
+          13
+        ],
+        [
+          "P17",
+          13
+        ],
+        [
+          "P495",
+          6
+        ],
+        [
+          "P1365",
+          5
+        ],
+        [
+          "P1366",
+          5
+        ],
+        [
+          "P3842",
+          4
+        ],
+        [
+          "P291",
+          3
+        ],
+        [
+          "P360",
+          3
+        ],
+        [
+          "P140",
+          2
+        ],
+        [
+          "P155",
+          2
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 48,
+      "auxiliary_relation_distribution": {
+        "P105": 17,
+        "P1056": 1,
+        "P1074": 1,
+        "P1269": 1,
+        "P12912": 1,
+        "P1365": 5,
+        "P1366": 5,
+        "P137": 1,
+        "P138": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P150": 1,
+        "P1532": 1,
+        "P155": 2,
+        "P1552": 2,
+        "P156": 2,
+        "P159": 1,
+        "P166": 1,
+        "P17": 60,
+        "P183": 1,
+        "P1830": 1,
+        "P190": 1,
+        "P1923": 1,
+        "P205": 1,
+        "P206": 1,
+        "P27": 1,
+        "P272": 1,
+        "P276": 1,
+        "P2853": 1,
+        "P291": 3,
+        "P2936": 1,
+        "P30": 1,
+        "P360": 3,
+        "P364": 2,
+        "P3842": 4,
+        "P400": 1,
+        "P407": 1,
+        "P4224": 1,
+        "P47": 2,
+        "P495": 6,
+        "P5869": 1,
+        "P703": 1,
+        "P708": 1,
+        "P750": 1,
+        "P840": 2,
+        "P915": 1,
+        "P921": 2
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 151,
+      "canonical_only_triples": 24532,
+      "canonical_only_weak_components": 149,
+      "canonical_surplus_delta": -151.0,
+      "cap": 151,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "08c5880db6936c54604ea0b90f2ace5949d917223204388d5eb1f706e96fc2a2",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_151/reports/manifest.json",
+      "p17_count": 60,
+      "p17_share": 0.3973509933774834,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_light/cap_151/reports/report.json",
+      "selected_auxiliary_edges": 151,
+      "strategy": "relation_diversity_penalty_light",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          60
+        ],
+        [
+          "P105",
+          17
+        ],
+        [
+          "P495",
+          6
+        ],
+        [
+          "P1365",
+          5
+        ],
+        [
+          "P1366",
+          5
+        ],
+        [
+          "P3842",
+          4
+        ],
+        [
+          "P291",
+          3
+        ],
+        [
+          "P360",
+          3
+        ],
+        [
+          "P140",
+          2
+        ],
+        [
+          "P155",
+          2
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 25,
+      "auxiliary_relation_distribution": {
+        "P105": 1,
+        "P1056": 1,
+        "P1074": 1,
+        "P1269": 1,
+        "P12912": 1,
+        "P1365": 1,
+        "P1366": 1,
+        "P137": 1,
+        "P138": 1,
+        "P140": 1,
+        "P1411": 1,
+        "P1412": 1,
+        "P150": 1,
+        "P1532": 1,
+        "P155": 1,
+        "P1552": 1,
+        "P156": 1,
+        "P159": 1,
+        "P166": 1,
+        "P17": 1,
+        "P183": 1,
+        "P1830": 1,
+        "P190": 1,
+        "P1923": 1,
+        "P205": 1
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 25,
+      "canonical_only_triples": 24658,
+      "canonical_only_weak_components": 25,
+      "canonical_surplus_delta": -25.0,
+      "cap": 25,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "ce797e03550bbe47bf517f52712a6fe44fff2177da75d8a6a31dbea7879312d7",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_strong/cap_25/reports/manifest.json",
+      "p17_count": 1,
+      "p17_share": 0.04,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_strong/cap_25/reports/report.json",
+      "selected_auxiliary_edges": 25,
+      "strategy": "relation_diversity_penalty_strong",
+      "top_auxiliary_relations": [
+        [
+          "P105",
+          1
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P1074",
+          1
+        ],
+        [
+          "P1269",
+          1
+        ],
+        [
+          "P12912",
+          1
+        ],
+        [
+          "P1365",
+          1
+        ],
+        [
+          "P1366",
+          1
+        ],
+        [
+          "P137",
+          1
+        ],
+        [
+          "P138",
+          1
+        ],
+        [
+          "P140",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 48,
+      "auxiliary_relation_distribution": {
+        "P105": 2,
+        "P1056": 1,
+        "P1074": 1,
+        "P1269": 1,
+        "P12912": 1,
+        "P1365": 2,
+        "P1366": 1,
+        "P137": 1,
+        "P138": 1,
+        "P140": 1,
+        "P1411": 1,
+        "P1412": 1,
+        "P150": 1,
+        "P1532": 1,
+        "P155": 1,
+        "P1552": 1,
+        "P156": 1,
+        "P159": 1,
+        "P166": 1,
+        "P17": 1,
+        "P183": 1,
+        "P1830": 1,
+        "P190": 1,
+        "P1923": 1,
+        "P205": 1,
+        "P206": 1,
+        "P27": 1,
+        "P272": 1,
+        "P276": 1,
+        "P2853": 1,
+        "P291": 1,
+        "P2936": 1,
+        "P30": 1,
+        "P360": 1,
+        "P364": 1,
+        "P3842": 1,
+        "P400": 1,
+        "P407": 1,
+        "P4224": 1,
+        "P47": 1,
+        "P495": 1,
+        "P5869": 1,
+        "P703": 1,
+        "P708": 1,
+        "P750": 1,
+        "P840": 1,
+        "P915": 1,
+        "P921": 1
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 50,
+      "canonical_only_triples": 24633,
+      "canonical_only_weak_components": 49,
+      "canonical_surplus_delta": -50.0,
+      "cap": 50,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "17c082efa49384f0f162b37551d7f7c8a221e73e2cdd7e726a1e018db8ead540",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_strong/cap_50/reports/manifest.json",
+      "p17_count": 1,
+      "p17_share": 0.02,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_strong/cap_50/reports/report.json",
+      "selected_auxiliary_edges": 50,
+      "strategy": "relation_diversity_penalty_strong",
+      "top_auxiliary_relations": [
+        [
+          "P105",
+          2
+        ],
+        [
+          "P1365",
+          2
+        ],
+        [
+          "P1056",
+          1
+        ],
+        [
+          "P1074",
+          1
+        ],
+        [
+          "P1269",
+          1
+        ],
+        [
+          "P12912",
+          1
+        ],
+        [
+          "P1366",
+          1
+        ],
+        [
+          "P137",
+          1
+        ],
+        [
+          "P138",
+          1
+        ],
+        [
+          "P140",
+          1
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 48,
+      "auxiliary_relation_distribution": {
+        "P105": 13,
+        "P1056": 1,
+        "P1074": 1,
+        "P1269": 1,
+        "P12912": 1,
+        "P1365": 5,
+        "P1366": 5,
+        "P137": 1,
+        "P138": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P150": 1,
+        "P1532": 1,
+        "P155": 2,
+        "P1552": 2,
+        "P156": 2,
+        "P159": 1,
+        "P166": 1,
+        "P17": 13,
+        "P183": 1,
+        "P1830": 1,
+        "P190": 1,
+        "P1923": 1,
+        "P205": 1,
+        "P206": 1,
+        "P27": 1,
+        "P272": 1,
+        "P276": 1,
+        "P2853": 1,
+        "P291": 3,
+        "P2936": 1,
+        "P30": 1,
+        "P360": 3,
+        "P364": 2,
+        "P3842": 4,
+        "P400": 1,
+        "P407": 1,
+        "P4224": 1,
+        "P47": 2,
+        "P495": 6,
+        "P5869": 1,
+        "P703": 1,
+        "P708": 1,
+        "P750": 1,
+        "P840": 2,
+        "P915": 1,
+        "P921": 2
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 100,
+      "canonical_only_triples": 24583,
+      "canonical_only_weak_components": 98,
+      "canonical_surplus_delta": -100.0,
+      "cap": 100,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "2151f11e26889399ee80b1a6c7860697bdf8c38b4eaeab00702ca9ffdeb5065d",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_strong/cap_100/reports/manifest.json",
+      "p17_count": 13,
+      "p17_share": 0.13,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_strong/cap_100/reports/report.json",
+      "selected_auxiliary_edges": 100,
+      "strategy": "relation_diversity_penalty_strong",
+      "top_auxiliary_relations": [
+        [
+          "P105",
+          13
+        ],
+        [
+          "P17",
+          13
+        ],
+        [
+          "P495",
+          6
+        ],
+        [
+          "P1365",
+          5
+        ],
+        [
+          "P1366",
+          5
+        ],
+        [
+          "P3842",
+          4
+        ],
+        [
+          "P291",
+          3
+        ],
+        [
+          "P360",
+          3
+        ],
+        [
+          "P140",
+          2
+        ],
+        [
+          "P155",
+          2
+        ]
+      ]
+    },
+    {
+      "acceptance_classification": "c5_h2_candidate_passed_policy",
+      "auxiliary_relation_count": 48,
+      "auxiliary_relation_distribution": {
+        "P105": 17,
+        "P1056": 1,
+        "P1074": 1,
+        "P1269": 1,
+        "P12912": 1,
+        "P1365": 5,
+        "P1366": 5,
+        "P137": 1,
+        "P138": 1,
+        "P140": 2,
+        "P1411": 1,
+        "P1412": 1,
+        "P150": 1,
+        "P1532": 1,
+        "P155": 2,
+        "P1552": 2,
+        "P156": 2,
+        "P159": 1,
+        "P166": 1,
+        "P17": 60,
+        "P183": 1,
+        "P1830": 1,
+        "P190": 1,
+        "P1923": 1,
+        "P205": 1,
+        "P206": 1,
+        "P27": 1,
+        "P272": 1,
+        "P276": 1,
+        "P2853": 1,
+        "P291": 3,
+        "P2936": 1,
+        "P30": 1,
+        "P360": 3,
+        "P364": 2,
+        "P3842": 4,
+        "P400": 1,
+        "P407": 1,
+        "P4224": 1,
+        "P47": 2,
+        "P495": 6,
+        "P5869": 1,
+        "P703": 1,
+        "P708": 1,
+        "P750": 1,
+        "P840": 2,
+        "P915": 1,
+        "P921": 2
+      },
+      "canonical_deficit_delta": 0.0,
+      "canonical_edges_removed": 151,
+      "canonical_only_triples": 24532,
+      "canonical_only_weak_components": 149,
+      "canonical_surplus_delta": -151.0,
+      "cap": 151,
+      "classification": "passed_policy",
+      "full_graph_triples": 24683,
+      "full_weak_components": 1,
+      "graph_sha256": "08c5880db6936c54604ea0b90f2ace5949d917223204388d5eb1f706e96fc2a2",
+      "manifest_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_strong/cap_151/reports/manifest.json",
+      "p17_count": 60,
+      "p17_share": 0.3973509933774834,
+      "report_path": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/diversity_probe/relation_diversity_penalty_strong/cap_151/reports/report.json",
+      "selected_auxiliary_edges": 151,
+      "strategy": "relation_diversity_penalty_strong",
+      "top_auxiliary_relations": [
+        [
+          "P17",
+          60
+        ],
+        [
+          "P105",
+          17
+        ],
+        [
+          "P495",
+          6
+        ],
+        [
+          "P1365",
+          5
+        ],
+        [
+          "P1366",
+          5
+        ],
+        [
+          "P3842",
+          4
+        ],
+        [
+          "P291",
+          3
+        ],
+        [
+          "P360",
+          3
+        ],
+        [
+          "P140",
+          2
+        ],
+        [
+          "P155",
+          2
+        ]
+      ]
+    }
+  ],
+  "runtime": {
+    "elapsed_seconds": 278.014752,
+    "finished_on": "2026-05-24T18:39:08.472557+00:00",
+    "started_on": "2026-05-24T18:34:30.457805+00:00"
+  },
+  "schema_version": "c5-h2-diversity-reranking-probe-v1",
+  "status": "probe_only_no_registry_update",
+  "strategies": [
+    "baseline_current_ranking",
+    "p17_cap_25_percent",
+    "p17_cap_40_percent",
+    "max_per_aux_relation_10",
+    "max_per_aux_relation_20",
+    "relation_diversity_penalty_light",
+    "relation_diversity_penalty_strong"
+  ]
+}
