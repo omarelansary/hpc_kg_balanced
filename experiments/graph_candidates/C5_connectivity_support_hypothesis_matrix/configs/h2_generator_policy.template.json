@@ -1,0 +1,136 @@
+{
+  "schema_version": "c5-h2-generator-policy-v1",
+  "candidate_id": "C5_connectivity_support_hypothesis_matrix",
+  "parent_candidate_id": "B0",
+  "strategy": "auxiliary_unallocated_observed_connectivity_support",
+  "status": "policy_template_no_graph_generated",
+  "methodological_acceptance": {
+    "h2_accepted_as_experimental_auxiliary_branch": true,
+    "accepted_label": "auxiliary_unallocated_observed",
+    "canonical_benchmark_triples": false,
+    "auxiliary_connectivity_support": true,
+    "count_toward_canonical_allocation_surplus_deficit": false,
+    "include_in_full_graph_connectivity": true,
+    "requires_frozen_observed_local_evidence": true
+  },
+  "allowed_edge_classes": [
+    "canonical_allocated_observed",
+    "auxiliary_unallocated_observed"
+  ],
+  "disallowed_edge_classes": [
+    "synthetic_pattern_derived",
+    "live_verified_observed",
+    "synthetic_unverified"
+  ],
+  "ranking_terms": [
+    {
+      "priority": 1,
+      "term": "hard_constraint_feasibility",
+      "direction": "required",
+      "notes": "Candidate move must pass connectivity, duplicate, relation-coverage, and zero-allocated-relation constraints."
+    },
+    {
+      "priority": 2,
+      "term": "target_relation_surplus_reduction",
+      "direction": "maximize_surplus_reduction",
+      "notes": "Each selected move must reduce canonical surplus for the removed allocated edge."
+    },
+    {
+      "priority": 3,
+      "term": "candidate_crosses_bridge_cut",
+      "direction": "required",
+      "notes": "Auxiliary candidate must cross the bridge cut exposed by removing the target edge."
+    },
+    {
+      "priority": 4,
+      "term": "duplicate_provenance_count",
+      "direction": "descending",
+      "notes": "Use as provenance strength, not as an old Phase II construction score."
+    },
+    {
+      "priority": 5,
+      "term": "source_stage",
+      "direction": "stable_preference",
+      "notes": "Secondary provenance evidence from the frozen local source row."
+    },
+    {
+      "priority": 6,
+      "term": "provenance_type",
+      "direction": "stable_preference",
+      "notes": "Secondary provenance evidence from the frozen local source row."
+    },
+    {
+      "priority": 7,
+      "term": "smaller_auxiliary_footprint",
+      "direction": "ascending",
+      "notes": "Prefer fewer auxiliary edges for a given balance improvement."
+    },
+    {
+      "priority": 8,
+      "term": "avoid_reusing_target_edge",
+      "direction": "required_for_greedy_selection",
+      "notes": "A selected move set may not remove the same target edge more than once."
+    },
+    {
+      "priority": 9,
+      "term": "avoid_reusing_candidate_edge",
+      "direction": "required_for_greedy_selection",
+      "notes": "A selected move set may not reuse the same auxiliary edge more than once."
+    },
+    {
+      "priority": 10,
+      "term": "stable_tie_breakers",
+      "direction": "ascending",
+      "notes": "Use cut_id, target triple lexical order, and candidate triple lexical order."
+    }
+  ],
+  "do_not_rank_primarily_by": [
+    "old_stage2_score",
+    "old_stage4_score",
+    "old_phase2_score"
+  ],
+  "thresholds": {
+    "max_auxiliary_edges_probe_upper_bound": 151,
+    "max_auxiliary_edges_default": 50,
+    "require_surplus_delta_lt": 0,
+    "require_total_deficit_delta_le": 0,
+    "require_canonical_relation_coverage": 139,
+    "require_zero_allocated_relations": 0,
+    "require_duplicate_triples": 0,
+    "require_weak_components_with_auxiliary": 1,
+    "report_weak_components_without_auxiliary": true,
+    "require_no_registry_update_before_decision": true
+  },
+  "required_reports": [
+    "canonical_allocated_triple_count",
+    "auxiliary_unallocated_observed_edge_count",
+    "full_graph_triple_count",
+    "canonical_relation_coverage",
+    "canonical_surplus_deficit_over_allocated_relations_only",
+    "connectivity_with_auxiliary_edges",
+    "connectivity_after_removing_auxiliary_edges",
+    "unallocated_relation_count",
+    "auxiliary_relation_distribution",
+    "auxiliary_edges_list_and_sha256",
+    "removed_canonical_edges_list_and_sha256",
+    "standard_candidate_evaluator_report",
+    "decision_file_before_registry_update"
+  ],
+  "source_evidence": {
+    "c5_h1_h2_probe_report": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/reports/probe_only/c5_h1_h2_probe_report.json",
+    "c5_candidate_score_provenance_audit": "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/reports/probe_only/c5_candidate_score_provenance_audit.json",
+    "c4_2_local_cut_crossing_search": "experiments/graph_candidates/C4_bridge_aware_replace_add/reports/probe_only/local_cut_crossing_candidate_search.json"
+  },
+  "deferred_edge_classes": {
+    "synthetic_pattern_derived": "deferred_to_H3",
+    "live_verified_observed": "deferred_to_H4_until_frozen_and_audited",
+    "synthetic_unverified": "not_allowed"
+  },
+  "notes": [
+    "This policy does not generate a graph.",
+    "C5-H2 is an experimental auxiliary-connectivity branch, not a canonical allocation-faithful graph by itself.",
+    "Auxiliary unallocated observed edges are included in full connectivity but excluded from canonical allocation surplus and deficit.",
+    "Old Phase II scores are unavailable on H2 rows and must not be the primary ranking criterion.",
+    "candidate_registry.v1.json must not be updated until a graph, evaluator report, and human decision exist."
+  ]
+}
