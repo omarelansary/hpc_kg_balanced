@@ -1,0 +1,167 @@
+{
+  "schema_version": "final-endpoint-branch-synthesis-v1",
+  "synthesis_id": "final_endpoint_and_branch_synthesis",
+  "final_endpoint_decision": {
+    "selected_endpoint": "B0",
+    "status": "selected_connected_reference_baseline",
+    "replace_with_c5_h2": false,
+    "replace_with_h3": false,
+    "claim": "B0 remains the selected connected reference baseline, not an optimally balanced endpoint."
+  },
+  "b0_reference_metrics": {
+    "triples": 24683,
+    "allocated_relations_covered": 139,
+    "allocated_relations_total": 139,
+    "weak_components": 1,
+    "duplicate_free": true,
+    "total_surplus": 6702,
+    "total_deficit": 2019,
+    "composition_observed_total": 11267
+  },
+  "branch_decisions": [
+    {
+      "branch_id": "B0",
+      "branch_name": "Connected baseline",
+      "decision": "selected_endpoint",
+      "status": "selected_connected_reference_baseline",
+      "summary": "Connected, covers all 139 allocated relations, duplicate-free, frozen and audited. Selected as the best defensible endpoint under current evidence, with known balance limitations."
+    },
+    {
+      "branch_id": "balance_first_stress_test",
+      "branch_name": "Balance-first stress test",
+      "decision": "diagnostic_only",
+      "status": "not_usable_as_final_benchmark_endpoint",
+      "metrics": {
+        "triples": 17683,
+        "allocated_relations_covered": 139,
+        "allocated_relations_total": 139,
+        "weak_components": 5623,
+        "total_surplus": 105,
+        "total_deficit": 2422,
+        "composition_observed_total": 4703
+      },
+      "summary": "Deletion can improve allocation balance, but connectivity collapses into thousands of weak components."
+    },
+    {
+      "branch_id": "C4",
+      "branch_name": "Strict bridge-aware replacement",
+      "decision": "negative_probe_evidence",
+      "status": "closed_under_current_frozen_evidence",
+      "summary": "Strict allocated replacement did not find useful feasible replacements. No graph generation is justified under the current frozen evidence.",
+      "evidence_files": [
+        "docs/reconstruction/56_C4_branch_decision_audit.md"
+      ]
+    },
+    {
+      "branch_id": "C5_H2",
+      "branch_name": "Observed auxiliary connectivity",
+      "decision": "diagnostic_only",
+      "status": "not_registry_ready",
+      "metrics": {
+        "cap_50_surplus_reduction": 50,
+        "cap_50_surplus_reduction_ratio": 0.00746,
+        "cap_151_surplus_reduction": 151,
+        "cap_151_surplus_reduction_ratio": 0.02253,
+        "diversity_cap_50_p17_before": "39/50",
+        "diversity_cap_50_p17_after": "1/50"
+      },
+      "summary": "Observed unallocated auxiliary edges can preserve full connectivity and allow limited pruning. Diversity reranking fixes P17 concentration, but marginal utility remains weak and the branch remains auxiliary-dependent.",
+      "evidence_files": [
+        "docs/reconstruction/63_C5_H2_cap_sweep.md",
+        "docs/reconstruction/64_C5_H2_diversity_reranking_probe.md",
+        "docs/reconstruction/66_C5_H2_marginal_utility_decision_audit.md",
+        "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/marginal_utility_decision.md"
+      ]
+    },
+    {
+      "branch_id": "H3",
+      "branch_name": "Synthetic pattern-derived feasibility",
+      "decision": "no_graph_generation",
+      "status": "not_promising_under_bounded_frozen_audit",
+      "metrics": {
+        "tested_bridge_cuts": 200,
+        "symmetric_rules": 18,
+        "inverse_oriented_rules": 44,
+        "composition_rules": 13,
+        "synthetic_candidates_found": 0
+      },
+      "summary": "Verified symmetry, inverse, and composition rules produced no synthetic cut-crossing bridge alternatives in the bounded frozen audit.",
+      "evidence_files": [
+        "docs/reconstruction/67_H3_synthetic_pattern_feasibility_audit.md",
+        "experiments/graph_candidates/H3_synthetic_pattern_feasibility/reports/h3_synthetic_pattern_feasibility_report.json"
+      ]
+    }
+  ],
+  "answered_hypotheses": [
+    {
+      "hypothesis": "strict_allocated_replacement",
+      "answer": "not feasible under current frozen evidence"
+    },
+    {
+      "hypothesis": "auxiliary_observed_connectivity_support",
+      "answer": "mechanically feasible locally but weak at endpoint scale"
+    },
+    {
+      "hypothesis": "diversity_reranking",
+      "answer": "fixes C5-H2 P17 concentration but not auxiliary dependence"
+    },
+    {
+      "hypothesis": "synthetic_pattern_derived_feasibility_bounded",
+      "answer": "no synthetic candidates found under bounded frozen evidence"
+    }
+  ],
+  "unresolved_hypotheses": [
+    "broader H3 source scope or alternate bridge-cut target sets",
+    "live WDQS exploratory evidence, non-canonical until frozen and audited",
+    "downstream KGE effects",
+    "whether auxiliary edges should ever be included in final benchmark evaluation",
+    "future multi-objective construction jointly optimizing connectivity and balance"
+  ],
+  "safe_claims": [
+    "B0 is the selected connected reference baseline.",
+    "C5-H2 and H3 are diagnostic branches.",
+    "C5-H2 shows auxiliary observed edges can help locally but does not solve the global endpoint trade-off.",
+    "H3 found no synthetic pattern-derived bridge alternatives in the bounded frozen audit.",
+    "Full end-to-end reproducibility remains incomplete where live WDQS, LLM, or exact dashboard export sessions are missing."
+  ],
+  "unsafe_claims": [
+    "B0 is optimally balanced.",
+    "C5-H2 solves the construction problem.",
+    "H3 validates synthetic triples.",
+    "Auxiliary edges are canonical allocated triples.",
+    "Unobserved synthetic triples are Wikidata facts.",
+    "The registry should be updated for C5-H2 or H3 now."
+  ],
+  "registry_decision": {
+    "candidate_registry_should_change": false,
+    "b0_remains_selected": true,
+    "register_c5_h2_now": false,
+    "register_h3_now": false,
+    "notes": [
+      "candidate_registry.v1.json should remain unchanged.",
+      "Probe-only branches remain evidence, not selected graph candidates."
+    ]
+  },
+  "artifact_policy": {
+    "c5_h2_graph_artifacts": "local_external_or_git_lfs_until_explicit_preservation_decision",
+    "small_reports_docs_manifests": "eligible_for_git",
+    "runtime_probe_graph_outputs": "do_not_casually_commit"
+  },
+  "recommended_next_direction": {
+    "decision": "stop_endpoint_chasing_for_now",
+    "options": [
+      "downstream KGE evaluation using B0",
+      "thesis integration describing B0 as selected connected baseline with balance limitations",
+      "future-work design for multi-objective construction"
+    ],
+    "constraint": "Do not keep generating branches without a new testable hypothesis."
+  },
+  "guardrails": {
+    "wdqs_queried": false,
+    "llm_called": false,
+    "network_used": false,
+    "graph_generated": false,
+    "thesis_latex_edited": false,
+    "candidate_registry_modified": false
+  }
+}
