@@ -70,6 +70,6 @@ The execution slice writes:
 
 ## Boundary
 
-This slice does not run Stage2 candidate collection, Stage4 graph construction, Stage5 repair, Stage6 refinement, Stage7 eta-aware replacement, Stage11/Stage12 repair, or C1 Stage13. It does not submit SLURM jobs, query WDQS, call LLMs, update the candidate registry, or regenerate B0.
+This slice does not run Stage2 candidate collection, Stage5 repair, Stage6 refinement, Stage7 eta-aware replacement, Stage11/Stage12 repair, or C1 Stage13. It does not submit SLURM jobs, query WDQS, call LLMs, update the candidate registry, or regenerate B0.
 
-Stage4 remains blocked after this slice. B0 regeneration is still not safe through the runner until graph construction has a separate run-scoped wrapper and acceptance checks.
+Level 2 Slice 4 adds a separate run-scoped wrapper for Stage4 `construct-graph`; because that historical stage is long-running, it is guarded by `--execute-stage4`. B0 regeneration is still not safe through the runner after Stage4 because Stage5/6/7, Stage11/12, largest-component extraction, and final endpoint validation remain disabled.

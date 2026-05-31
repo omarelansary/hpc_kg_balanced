@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Iterable
 
 from .phase1_replay import load_phase1_replay_report, run_phase1_replay
-from .phase2_replay import run_phase2_stage1_execution, run_phase2_stage3_execution
+from .phase2_replay import run_phase2_stage1_execution, run_phase2_stage3_execution, run_phase2_stage4_execution
 from .pipeline_manifest import PipelineManifest, PipelineStage
 from .pipeline_state import PipelineState, default_run_id, latest_state_path
 
@@ -23,6 +23,9 @@ PHASE1_REPLAY_STAGE_IDS = {
 PHASE2_READINESS_STAGE_IDS = {
     "phase2_stage1_genericity_scoring",
     "phase2_stage3_candidate_audit",
+}
+PHASE2_STAGE4_EXECUTION_STAGE_IDS = {
+    "phase2_stage4_core_graph_construction",
 }
 
 
@@ -78,11 +81,12 @@ class PipelineRunner:
         *,
         allow_live: bool = False,
         allow_slurm: bool = False,
+        execute_stage4: bool = False,
         force_stage_ids: Iterable[str] = (),
     ) -> list[tuple[PipelineStage, str, str]]:
         force_set = set(force_stage_ids)
         return [
-            (stage, *self._stage_decision(stage, mode, allow_live, allow_slurm, force_set))
+            (stage, *self._stage_decision(stage, mode, allow_live, allow_slurm, execute_stage4, force_set))
             for stage in self.manifest.stages
         ]
 
@@ -92,11 +96,16 @@ class PipelineRunner:
         *,
         allow_live: bool = False,
         allow_slurm: bool = False,
+        execute_stage4: bool = False,
         force_stage_ids: Iterable[str] = (),
     ) -> str:
         lines = [f"mode={mode}", "stage_id\taction\treason"]
         for stage, action, reason in self.plan(
-            mode, allow_live=allow_live, allow_slurm=allow_slurm, force_stage_ids=force_stage_ids
+            mode,
+            allow_live=allow_live,
+            allow_slurm=allow_slurm,
+            execute_stage4=execute_stage4,
+            force_stage_ids=force_stage_ids,
         ):
             lines.append(f"{stage.stage_id}\t{action}\t{reason}")
         return "\n".join(lines)
@@ -108,6 +117,7 @@ class PipelineRunner:
         resume: bool = False,
         allow_live: bool = False,
         allow_slurm: bool = False,
+        execute_stage4: bool = False,
         force_stage_ids: Iterable[str] = (),
     ) -> PipelineState:
         if mode == "construct-candidates":
@@ -137,7 +147,7 @@ class PipelineRunner:
 
         force_set = set(force_stage_ids)
         for stage in self.manifest.stages:
-            action, reason = self._stage_decision(stage, mode, allow_live, allow_slurm, force_set)
+            action, reason = self._stage_decision(stage, mode, allow_live, allow_slurm, execute_stage4, force_set)
             current_status = state.data.get("stages", {}).get(stage.stage_id, {}).get("status")
             if resume and current_status == "passed" and stage.stage_id not in force_set:
                 state.set_stage(stage.stage_id, "skipped", message="already passed in resumed state")
@@ -158,8 +168,16 @@ class PipelineRunner:
         mode: str,
         allow_live: bool,
         allow_slurm: bool,
+        execute_stage4: bool,
         force_stage_ids: set[str],
     ) -> tuple[str, str]:
+        if stage.stage_id in PHASE2_STAGE4_EXECUTION_STAGE_IDS:
+            if mode != "replay-frozen":
+                return "skip", "Stage4 construct-graph is only available in replay-frozen with --execute-stage4"
+            if execute_stage4:
+                return "run", "explicit --execute-stage4 run-scoped graph construction stage"
+            return "skip", "Stage4 construct-graph is long-running and requires --execute-stage4"
+
         if stage.stage_id in force_stage_ids:
             if stage.execution_class in LIVE_CLASSES:
                 if not allow_live:
@@ -230,6 +248,9 @@ class PipelineRunner:
             return
         if stage.stage_id == "phase2_stage3_candidate_audit":
             self._run_phase2_stage3_readiness_stage(stage, state, run_dir, log_path)
+            return
+        if stage.stage_id == "phase2_stage4_core_graph_construction":
+            self._run_phase2_stage4_execution_stage(stage, state, run_dir, log_path)
             return
         command = [self._format_value(part, run_dir) for part in stage.command]
         env = os.environ.copy()
@@ -402,6 +423,40 @@ class PipelineRunner:
         state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=message)
         state.finalize()
         raise subprocess.CalledProcessError(1, ["internal", "phase2_stage3_run_scoped_execution"])
+
+    def _run_phase2_stage4_execution_stage(
+        self,
+        stage: PipelineStage,
+        state: PipelineState,
+        run_dir: Path,
+        log_path: Path,
+    ) -> None:
+        with log_path.open("w", encoding="utf-8") as log:
+            log.write(f"stage_id={stage.stage_id}\n")
+            log.write("internal=phase2_stage4_run_scoped_graph_construction\n\n")
+            try:
+                report = run_phase2_stage4_execution(self.repo_root, run_dir)
+            except Exception as exc:  # noqa: BLE001 - runner records arbitrary stage failures.
+                log.write(f"error={exc}\n")
+                state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=str(exc))
+                state.finalize()
+                raise subprocess.CalledProcessError(1, ["internal", "phase2_stage4_run_scoped_graph_construction"]) from exc
+            log.write(json.dumps(report, indent=2) + "\n")
+
+        if report.get("status") == "passed":
+            state.set_stage(
+                stage.stage_id,
+                "passed",
+                exit_code=0,
+                log_path=str(log_path),
+                message="Stage4 construct-graph executed in run-scoped directory",
+            )
+            return
+
+        message = "Phase II Stage4 core graph construction failed"
+        state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=message)
+        state.finalize()
+        raise subprocess.CalledProcessError(1, ["internal", "phase2_stage4_run_scoped_graph_construction"])
 
     def _write_resolved_manifest(self, run_dir: Path) -> None:
         run_dir.mkdir(parents=True, exist_ok=True)

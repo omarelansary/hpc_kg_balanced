@@ -17,6 +17,8 @@ REPORT_OUT_NAME = "stage1_stage3_replay_readiness_report.json"
 SUMMARY_OUT_NAME = "stage1_stage3_replay_readiness_summary.md"
 EXECUTION_REPORT_OUT_NAME = "stage1_stage3_execution_report.json"
 EXECUTION_SUMMARY_OUT_NAME = "stage1_stage3_execution_summary.md"
+STAGE4_REPORT_OUT_NAME = "stage4_core_graph_execution_report.json"
+STAGE4_SUMMARY_OUT_NAME = "stage4_core_graph_execution_summary.md"
 
 RELATION_PIPELINE_SCRIPT = Path("archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py")
 HISTORICAL_RUN_DIR = Path("archive/hetzner_version/runs/prod_refine_20260315_180520")
@@ -25,8 +27,10 @@ HISTORICAL_CONFIG_SNAPSHOT_PATH = HISTORICAL_RUN_DIR / "config_snapshot.yaml"
 HISTORICAL_STAGE1_OUTPUT_DIR = HISTORICAL_RUN_DIR / "stage01_genericity"
 HISTORICAL_STAGE2_SHARDS_DIR = HISTORICAL_RUN_DIR / "stage02_candidates/shards"
 HISTORICAL_STAGE3_OUTPUT_DIR = HISTORICAL_RUN_DIR / "stage03_candidate_audit"
+HISTORICAL_STAGE4_OUTPUT_DIR = HISTORICAL_RUN_DIR / "stage04_core_graph"
 ARCHIVE_ALLOCATION_PATH = Path("archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.json")
 CANONICAL_ALLOCATION_PATH = Path("src/Pruning graph/bidirectional_allocation_results5k.json")
+CANDIDATE_REGISTRY_PATH = Path("artifacts/final_graph/selected_final_graph/rebuild/candidate_registry.v1.json")
 ARCHIVE_SUPPORT_MATRIX_PATH = Path(
     "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
 )
@@ -104,6 +108,42 @@ def count_jsonl_rows(path: Path) -> int:
     return count
 
 
+def graph_jsonl_metrics(path: Path) -> dict[str, Any]:
+    triples: set[tuple[str | None, str | None, str | None]] = set()
+    relations: set[str] = set()
+    duplicate_count = 0
+    row_count = 0
+    if not path.is_file():
+        return {
+            "path": str(path),
+            "exists": False,
+            "triple_count": 0,
+            "relation_count": 0,
+            "duplicate_triple_count": 0,
+        }
+    with path.open(encoding="utf-8") as handle:
+        for line in handle:
+            if not line.strip():
+                continue
+            row_count += 1
+            rec = json.loads(line)
+            triple = (rec.get("h"), rec.get("r"), rec.get("t"))
+            if triple in triples:
+                duplicate_count += 1
+            else:
+                triples.add(triple)
+            if rec.get("r") is not None:
+                relations.add(str(rec["r"]))
+    return {
+        "path": str(path),
+        "exists": True,
+        "triple_count": row_count,
+        "unique_triple_count": len(triples),
+        "relation_count": len(relations),
+        "duplicate_triple_count": duplicate_count,
+    }
+
+
 def inspect_stage2_shards(repo_root: Path) -> dict[str, Any]:
     shards_dir = repo_root / HISTORICAL_STAGE2_SHARDS_DIR
     if not shards_dir.is_dir():
@@ -169,6 +209,7 @@ def _snapshot_historical_archive(repo_root: Path) -> dict[str, Any]:
         HISTORICAL_STAGE1_OUTPUT_DIR,
         HISTORICAL_STAGE2_SHARDS_DIR,
         HISTORICAL_STAGE3_OUTPUT_DIR,
+        HISTORICAL_STAGE4_OUTPUT_DIR,
     ]:
         full_path = repo_root / path
         if full_path.exists():
@@ -371,6 +412,8 @@ def _run_scoped_paths(run_dir: Path) -> dict[str, Path]:
         "stage2_shards_dir": historical_run_dir / "stage02_candidates" / "shards",
         "execution_report": replay_dir / EXECUTION_REPORT_OUT_NAME,
         "execution_summary": replay_dir / EXECUTION_SUMMARY_OUT_NAME,
+        "stage4_report": replay_dir / STAGE4_REPORT_OUT_NAME,
+        "stage4_summary": replay_dir / STAGE4_SUMMARY_OUT_NAME,
     }
 
 
@@ -491,6 +534,13 @@ def _stage_outputs(historical_run_dir: Path, stage: str) -> dict[str, Any]:
         paths = {
             "candidate_relation_audit": historical_run_dir / stage / "candidate_relation_audit.jsonl",
             "summary": historical_run_dir / stage / "summary.json",
+        }
+    elif stage == "stage04_core_graph":
+        paths = {
+            "core_graph_triples": historical_run_dir / stage / "core_graph_triples.jsonl",
+            "core_graph_selection_log": historical_run_dir / stage / "core_graph_selection_log.jsonl",
+            "core_graph_relation_counts": historical_run_dir / stage / "core_graph_relation_counts.json",
+            "core_graph_component_report": historical_run_dir / stage / "core_graph_component_report.json",
         }
     else:
         raise ValueError(f"unknown stage output set: {stage}")
@@ -637,6 +687,129 @@ def run_phase2_stage3_execution(repo_root: str | Path, run_dir: str | Path) -> d
     return report
 
 
+def _write_stage4_report(run_dir: Path, report: dict[str, Any]) -> None:
+    paths = _run_scoped_paths(run_dir)
+    write_json(paths["stage4_report"], report)
+    paths["stage4_summary"].write_text(_stage4_summary_markdown(report), encoding="utf-8")
+
+
+def _stage4_prechecks(repo_root: Path, run_dir: Path, execution_report: dict[str, Any]) -> dict[str, Any]:
+    environment = execution_report["environment"]
+    historical_run_dir = Path(environment["run_scoped_historical_run_dir"])
+    run_scoped_config = Path(environment["run_scoped_config_path"])
+    stage2_shards_dir = historical_run_dir / "stage02_candidates" / "shards"
+    stage3_outputs = _stage_outputs(historical_run_dir, "stage03_candidate_audit")
+    stage4_output_dir = historical_run_dir / "stage04_core_graph"
+    archive_stage4_output_dir = (repo_root / HISTORICAL_STAGE4_OUTPUT_DIR).resolve()
+    candidate_registry_before = input_status(repo_root, CANDIDATE_REGISTRY_PATH)
+    stage2_shard_count = len(list(stage2_shards_dir.glob("*.jsonl"))) if stage2_shards_dir.is_dir() else 0
+    checks = {
+        "stage1_report_exists_and_passed": execution_report.get("stage1", {}).get("passed") is True,
+        "stage3_report_exists_and_passed": execution_report.get("stage3", {}).get("passed") is True,
+        "run_scoped_config_exists": run_scoped_config.is_file(),
+        "run_scoped_stage2_shards_exist": stage2_shard_count > 0,
+        "run_scoped_stage2_shard_count": stage2_shard_count,
+        "run_scoped_stage3_outputs_exist": _outputs_exist(stage3_outputs),
+        "stage4_output_dir": str(stage4_output_dir),
+        "stage4_output_dir_is_historical_archive": stage4_output_dir.resolve() == archive_stage4_output_dir,
+        "candidate_registry_before": candidate_registry_before,
+        "wdqs_llm_slurm_flags_enabled": False,
+    }
+    checks["passed"] = (
+        checks["stage1_report_exists_and_passed"]
+        and checks["stage3_report_exists_and_passed"]
+        and checks["run_scoped_config_exists"]
+        and checks["run_scoped_stage2_shards_exist"]
+        and checks["run_scoped_stage3_outputs_exist"]
+        and not checks["stage4_output_dir_is_historical_archive"]
+        and candidate_registry_before.get("exists") is True
+        and checks["wdqs_llm_slurm_flags_enabled"] is False
+    )
+    return checks
+
+
+def run_phase2_stage4_execution(repo_root: str | Path, run_dir: str | Path) -> dict[str, Any]:
+    """Execute historical Stage4 core graph construction in the run-scoped directory only."""
+    repo_root = Path(repo_root).resolve()
+    run_dir = Path(run_dir)
+    stage1_stage3_report = load_phase2_stage1_stage3_execution_report(run_dir)
+    prechecks = _stage4_prechecks(repo_root, run_dir, stage1_stage3_report)
+    if not prechecks["passed"]:
+        raise RuntimeError("Stage4 prechecks failed; refusing graph construction")
+
+    environment = stage1_stage3_report["environment"]
+    historical_run_dir = Path(environment["run_scoped_historical_run_dir"])
+    historical_archive_before = _snapshot_historical_archive(repo_root)
+    command = [
+        "python",
+        str(RELATION_PIPELINE_SCRIPT),
+        "--config",
+        environment["run_scoped_config_path"],
+        "--run-dir",
+        environment["run_scoped_historical_run_dir"],
+        "construct-graph",
+    ]
+    command_result = _run_historical_command(repo_root, command)
+    outputs = _stage_outputs(historical_run_dir, "stage04_core_graph")
+    graph_path = historical_run_dir / "stage04_core_graph" / "core_graph_triples.jsonl"
+    graph_metrics = graph_jsonl_metrics(graph_path)
+    candidate_registry_after = input_status(repo_root, CANDIDATE_REGISTRY_PATH)
+    historical_archive_after = _snapshot_historical_archive(repo_root)
+    passed = command_result["exit_code"] == 0 and _outputs_exist(outputs)
+    paths = _run_scoped_paths(run_dir)
+    report = {
+        "schema_version": "phase2-stage4-core-graph-execution-report-v1",
+        "created_by": "src/kg_pipeline/orchestration/phase2_replay.py",
+        "mode": "replay-frozen",
+        "status": "passed" if passed else "failed",
+        "verified_stage4_subcommand": "construct-graph",
+        "verification_evidence": {
+            "script": str(RELATION_PIPELINE_SCRIPT),
+            "function": "stage_construct_graph",
+            "argparse_subcommand": "construct-graph",
+            "expected_stage_directory": "stage04_core_graph",
+        },
+        "prechecks": prechecks,
+        "command_result": command_result,
+        "output_directory": str(historical_run_dir / "stage04_core_graph"),
+        "output_files_detected": outputs,
+        "graph_metrics": graph_metrics,
+        "output_is_run_scoped": str(historical_run_dir).startswith(str(run_dir)),
+        "historical_archive_snapshot_before": historical_archive_before,
+        "historical_archive_snapshot_after": historical_archive_after,
+        "historical_archive_untouched": historical_archive_before == historical_archive_after,
+        "candidate_registry_after": candidate_registry_after,
+        "candidate_registry_unchanged": prechecks["candidate_registry_before"].get("sha256")
+        == candidate_registry_after.get("sha256"),
+        "safety_checks": {
+            "stage5_stage6_stage7_blocked": True,
+            "stage11_stage12_blocked": True,
+            "c1_stage13_blocked": True,
+            "wdqs_llm_slurm_used": False,
+            "b0_regeneration_remains_incomplete": True,
+        },
+        "conclusion": {
+            "stage4_executed": True,
+            "stage4_passed": passed,
+            "stage5_remains_blocked": True,
+            "b0_regeneration_safe_today": False,
+        },
+        "outputs": {
+            "report": str(paths["stage4_report"]),
+            "summary": str(paths["stage4_summary"]),
+        },
+    }
+    _write_stage4_report(run_dir, report)
+    return report
+
+
+def load_phase2_stage4_execution_report(run_dir: str | Path) -> dict[str, Any]:
+    report_path = Path(run_dir) / PHASE2_REPLAY_DIRNAME / STAGE4_REPORT_OUT_NAME
+    if not report_path.is_file():
+        raise FileNotFoundError(f"Phase II Stage4 execution report not found: {report_path}")
+    return load_json(report_path)
+
+
 def load_phase2_stage1_stage3_execution_report(run_dir: str | Path) -> dict[str, Any]:
     report_path = Path(run_dir) / PHASE2_REPLAY_DIRNAME / EXECUTION_REPORT_OUT_NAME
     if not report_path.is_file():
@@ -732,4 +905,46 @@ Stage4 graph construction, Stage5/6/7, Stage11/12 repair, C1 Stage13, WDQS, LLM,
 - Historical archive untouched: `{str(report.get('historical_archive_untouched')).lower()}`
 - Stage4 remains blocked: `{str(report['safety_checks']['stage4_remains_blocked']).lower()}`
 - B0 regeneration remains blocked: `{str(report['safety_checks']['b0_regeneration_remains_blocked']).lower()}`
+"""
+
+
+def _stage4_summary_markdown(report: dict[str, Any]) -> str:
+    result = report.get("command_result") or {}
+    metrics = report.get("graph_metrics") or {}
+    output_files = ", ".join(
+        row["path"] for row in report.get("output_files_detected", {}).values() if row.get("exists")
+    ) or "none"
+    return f"""# Phase II Stage4 Run-Scoped Core Graph Construction
+
+Status: `{report['status']}`
+
+## Execution Boundary
+
+Only historical Stage4 `construct-graph` was executed. The command targeted the run-scoped historical pipeline directory:
+
+```text
+{report['prechecks']['stage4_output_dir']}
+```
+
+Stage5/6/7, Stage11/12 repair, C1 Stage13, WDQS, LLM, and SLURM remain blocked. B0 regeneration remains incomplete.
+
+## Command
+
+- Verified subcommand: `{report['verified_stage4_subcommand']}`
+- Exit code: `{result.get('exit_code')}`
+- Command: `{' '.join(result.get('command', []))}`
+
+## Outputs
+
+- Output files: {output_files}
+- Graph triples: `{metrics.get('triple_count')}`
+- Relation count: `{metrics.get('relation_count')}`
+- Duplicate triples: `{metrics.get('duplicate_triple_count')}`
+
+## Safety Result
+
+- Output is run-scoped: `{str(report.get('output_is_run_scoped')).lower()}`
+- Historical archive untouched: `{str(report.get('historical_archive_untouched')).lower()}`
+- Candidate registry unchanged: `{str(report.get('candidate_registry_unchanged')).lower()}`
+- Stage5 remains blocked: `{str(report['conclusion']['stage5_remains_blocked']).lower()}`
 """

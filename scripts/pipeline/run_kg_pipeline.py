@@ -42,6 +42,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--list-stages", action="store_true")
     parser.add_argument("--allow-live", action="store_true", help="Required before live WDQS/LLM stages can run")
     parser.add_argument("--allow-slurm", action="store_true", help="Required before SLURM stages can run")
+    parser.add_argument(
+        "--execute-stage4",
+        action="store_true",
+        help="Allow run-scoped Phase II Stage4 construct-graph execution in replay-frozen mode.",
+    )
     parser.add_argument("--candidate-id", default=None, help="Candidate id for construct-candidates mode")
     parser.add_argument("--from-frozen", action="store_true", help="Package an existing frozen registered candidate")
     parser.add_argument("--generate", action="store_true", help="Reserved for future graph generation; blocked in Level 1")
@@ -143,6 +148,7 @@ def main() -> int:
                 args.mode,
                 allow_live=args.allow_live,
                 allow_slurm=args.allow_slurm,
+                execute_stage4=args.execute_stage4,
                 force_stage_ids=args.force_stage,
             )
         )
@@ -156,6 +162,7 @@ def main() -> int:
             resume=args.resume,
             allow_live=args.allow_live,
             allow_slurm=args.allow_slurm,
+            execute_stage4=args.execute_stage4,
             force_stage_ids=args.force_stage,
         )
     except NotImplementedError as exc:

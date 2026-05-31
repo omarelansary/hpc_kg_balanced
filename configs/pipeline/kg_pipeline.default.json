@@ -343,23 +343,29 @@
     {
       "stage_id": "phase2_stage4_core_graph_construction",
       "phase": "Phase II",
-      "description": "Construct historical Stage4 core graph from audited candidates.",
+      "description": "Run-scoped execution of historical Stage4 core graph construction after Stage1/Stage3 pass. Writes only under the pipeline run directory.",
       "command": [
-        "python",
-        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
-        "--stage",
-        "stage4"
+        "internal",
+        "phase2_stage4_run_scoped_graph_construction"
       ],
       "inputs": [
-        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage03_candidate_audit/"
+        "{run_dir}/phase2_replay/historical_relation_pipeline_run/stage01_genericity/relation_genericity.jsonl",
+        "{run_dir}/phase2_replay/historical_relation_pipeline_run/stage02_candidates/shards/",
+        "{run_dir}/phase2_replay/historical_relation_pipeline_run/stage03_candidate_audit/candidate_relation_audit.jsonl",
+        "archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.json"
       ],
       "outputs": [
-        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/"
+        "{run_dir}/phase2_replay/stage4_core_graph_execution_report.json",
+        "{run_dir}/phase2_replay/stage4_core_graph_execution_summary.md",
+        "{run_dir}/phase2_replay/historical_relation_pipeline_run/stage04_core_graph/core_graph_triples.jsonl",
+        "{run_dir}/phase2_replay/historical_relation_pipeline_run/stage04_core_graph/core_graph_selection_log.jsonl",
+        "{run_dir}/phase2_replay/historical_relation_pipeline_run/stage04_core_graph/core_graph_relation_counts.json",
+        "{run_dir}/phase2_replay/historical_relation_pipeline_run/stage04_core_graph/core_graph_component_report.json"
       ],
       "expected_hashes": {},
       "execution_class": "graph_construction",
       "default_enabled": false,
-      "rerun_policy": "never_by_default"
+      "rerun_policy": "allowed_in_replay"
     },
     {
       "stage_id": "phase2_stage5_repair",

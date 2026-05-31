@@ -24,11 +24,17 @@ Run frozen validation:
 python scripts/pipeline/run_kg_pipeline.py --mode validate-frozen
 ```
 
-Run the current Level 2 replay slices. This materializes Phase I allocation and genericity matrix exports under the run directory, then executes historical Phase II Stage1 `score-genericity` and Stage3 `audit-candidates` in a run-scoped directory. Historical graph construction remains blocked:
+Run the current Level 2 replay slices. This materializes Phase I allocation and genericity matrix exports under the run directory, then executes historical Phase II Stage1 `score-genericity` and Stage3 `audit-candidates` in a run-scoped directory. Stage4 `construct-graph` has a guarded wrapper but is long-running and requires `--execute-stage4` when intentionally testing it. Later graph repair/refinement stages remain blocked:
 
 ```bash
 python scripts/pipeline/run_kg_pipeline.py --mode replay-frozen --dry-run
 python scripts/pipeline/run_kg_pipeline.py --mode replay-frozen
+```
+
+Run the guarded Stage4 core-graph construction slice only when a long local run is intended:
+
+```bash
+python scripts/pipeline/run_kg_pipeline.py --mode replay-frozen --execute-stage4
 ```
 
 Show the latest run status:
@@ -69,7 +75,7 @@ Execution classes in `configs/pipeline/kg_pipeline.default.json`:
 - `graph_construction` — stages that build, repair, prune, or emit graph candidates.
 - `manual_ui_optional` — optional UI stages such as the Phase I Streamlit dashboard.
 
-In the current foundation, live WDQS/LLM execution, SLURM submission, and new graph generation are blocked. `replay-frozen` enables the safe Phase I run-scoped replay/export slice plus Phase II Stage1/Stage3 run-scoped execution. It writes `phase1_replay/allocation.replayed.json`, `phase1_replay/genericity_support_matrix.replayed.json`, `phase1_replay/phase1_replay_report.json`, `phase2_replay/stage1_stage3_replay_readiness_report.json`, and `phase2_replay/stage1_stage3_execution_report.json` under the pipeline run directory. Canonical Phase I artifacts and historical Stage2 shards are read or linked for comparison/execution only; the historical archive run directory is not targeted for output. `construct-candidates --from-frozen` can package existing registered frozen candidates into a pipeline run directory for inspection and evaluation. The manifest records blocked stages so users can inspect the A-to-Z workflow without accidentally rerunning driftable or expensive stages.
+In the current foundation, live WDQS/LLM execution, SLURM submission, and post-Stage4 graph repair/refinement are blocked. `replay-frozen` enables the safe Phase I run-scoped replay/export slice plus Phase II Stage1/Stage3 run-scoped execution. Stage4 run-scoped core graph construction is available only with `--execute-stage4` because the historical implementation repeatedly rescans frozen candidate shards and can be long-running. The runner writes `phase1_replay/allocation.replayed.json`, `phase1_replay/genericity_support_matrix.replayed.json`, `phase1_replay/phase1_replay_report.json`, `phase2_replay/stage1_stage3_replay_readiness_report.json`, and `phase2_replay/stage1_stage3_execution_report.json` under the pipeline run directory; with `--execute-stage4`, it also writes `phase2_replay/stage4_core_graph_execution_report.json`. Canonical Phase I artifacts and historical Stage2 shards are read or linked for comparison/execution only; the historical archive run directory is not targeted for output. Stage4 output is an intermediate run-scoped core graph, not a regenerated B0 endpoint. `construct-candidates --from-frozen` can package existing registered frozen candidates into a pipeline run directory for inspection and evaluation. The manifest records blocked stages so users can inspect the A-to-Z workflow without accidentally rerunning driftable or expensive stages.
 
 Detailed runner documentation: `docs/reconstruction/70_reusable_A_to_Z_pipeline_runner.md`
 
