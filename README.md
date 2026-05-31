@@ -30,6 +30,14 @@ Show the latest run status:
 python scripts/pipeline/run_kg_pipeline.py --status
 ```
 
+Reserved future modes parse cleanly but remain blocked in this foundation:
+
+```bash
+python scripts/pipeline/run_kg_pipeline.py --mode live-rerun --allow-live
+python scripts/pipeline/run_kg_pipeline.py --mode slurm-rerun --allow-slurm
+python scripts/pipeline/run_kg_pipeline.py --mode construct-candidates --candidate-id B0 --from-frozen
+```
+
 State, resolved manifests, and per-stage logs are written under:
 
 ```text

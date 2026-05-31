@@ -46,12 +46,15 @@ python scripts/pipeline/run_kg_pipeline.py --mode validate-frozen
 python scripts/pipeline/run_kg_pipeline.py --status
 python scripts/pipeline/run_kg_pipeline.py --mode replay-frozen --dry-run
 python scripts/pipeline/run_kg_pipeline.py --mode live-rerun --dry-run
+python scripts/pipeline/run_kg_pipeline.py --mode slurm-rerun --dry-run
 python scripts/pipeline/run_kg_pipeline.py --mode construct-candidates --dry-run
 ```
 
 `live-rerun` refuses execution unless `--allow-live` is provided. In this foundation implementation, live WDQS/LLM stages remain blocked even with `--allow-live`; the flag is reserved for a future audited implementation. The default manifest keeps live stages disabled because they are driftable and are not part of frozen validation.
 
-`construct-candidates` is intentionally not implemented yet. The runner can list graph-construction stages, but it does not generate graph candidates. SLURM submission is also listed in the manifest but blocked in this foundation implementation.
+`slurm-rerun` is accepted as a reserved mode and can inspect SLURM stages, but SLURM submission is blocked in this foundation implementation.
+
+`construct-candidates` is intentionally not implemented yet. The CLI accepts reserved future flags such as `--candidate-id`, `--from-frozen`, and `--generate`, but it does not generate graph candidates.
 
 The CLI runner is the canonical interface for non-interactive reproducibility. The Streamlit dashboard is represented only as an optional Phase I manual UI for inspecting evidence, selecting thresholds, and exporting allocation/config artifacts. Any Streamlit decision must be exported to a saved config or artifact before it becomes reproducible. Canonical pipeline runs consume saved configs and artifacts, not live UI state. HPC and SLURM stages should not depend on Streamlit.
 

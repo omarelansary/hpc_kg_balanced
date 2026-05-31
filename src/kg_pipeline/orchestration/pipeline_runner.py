@@ -97,6 +97,8 @@ class PipelineRunner:
             raise NotImplementedError("construct-candidates mode is not implemented yet")
         if mode == "live-rerun" and not allow_live:
             raise PermissionError("live-rerun refuses to run without --allow-live")
+        if mode == "slurm-rerun" and not allow_slurm:
+            raise PermissionError("slurm-rerun refuses to run without --allow-slurm")
 
         run_id = default_run_id()
         run_dir = Path(self.manifest.default_state_root) / run_id
@@ -176,6 +178,13 @@ class PipelineRunner:
                     return "block", "live stage requires --allow-live"
                 return "block", "live WDQS/LLM execution is not implemented in this foundation"
             return "skip", f"not a live stage ({stage.execution_class})"
+
+        if mode == "slurm-rerun":
+            if stage.execution_class == "slurm_expensive":
+                if not allow_slurm:
+                    return "block", "SLURM stage requires --allow-slurm"
+                return "block", "SLURM submission is not implemented in this foundation"
+            return "skip", f"not a SLURM stage ({stage.execution_class})"
 
         if mode == "construct-candidates":
             if stage.execution_class == "graph_construction":

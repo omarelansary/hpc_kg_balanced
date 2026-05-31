@@ -16,7 +16,7 @@ from src.kg_pipeline.orchestration.pipeline_manifest import load_manifest  # noq
 from src.kg_pipeline.orchestration.pipeline_runner import PipelineRunner  # noqa: E402
 
 DEFAULT_MANIFEST = Path("configs/pipeline/kg_pipeline.default.json")
-MODES = ["validate-frozen", "replay-frozen", "live-rerun", "construct-candidates"]
+MODES = ["validate-frozen", "replay-frozen", "live-rerun", "slurm-rerun", "construct-candidates"]
 
 
 def parse_args() -> argparse.Namespace:
@@ -31,6 +31,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--list-stages", action="store_true")
     parser.add_argument("--allow-live", action="store_true", help="Required before live WDQS/LLM stages can run")
     parser.add_argument("--allow-slurm", action="store_true", help="Required before SLURM stages can run")
+    parser.add_argument("--candidate-id", default=None, help="Reserved for future construct-candidates mode")
+    parser.add_argument("--from-frozen", action="store_true", help="Reserved for future candidate construction from frozen artifacts")
+    parser.add_argument("--generate", action="store_true", help="Reserved for future graph generation; blocked in this foundation")
     return parser.parse_args()
 
 
@@ -56,7 +59,15 @@ def main() -> int:
         )
         return 0
     if args.mode == "construct-candidates":
-        print("construct-candidates mode is not implemented yet")
+        details = []
+        if args.candidate_id:
+            details.append(f"candidate_id={args.candidate_id}")
+        if args.from_frozen:
+            details.append("from_frozen=true")
+        if args.generate:
+            details.append("generate=true")
+        suffix = f" ({', '.join(details)})" if details else ""
+        print(f"construct-candidates mode is not implemented yet{suffix}; no graph generated")
         return 2
 
     try:
