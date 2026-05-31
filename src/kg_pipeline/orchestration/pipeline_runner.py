@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Iterable
 
 from .phase1_replay import load_phase1_replay_report, run_phase1_replay
+from .phase2_replay import load_phase2_stage1_stage3_report, run_phase2_stage1_stage3_readiness
 from .pipeline_manifest import PipelineManifest, PipelineStage
 from .pipeline_state import PipelineState, default_run_id, latest_state_path
 
@@ -19,14 +20,24 @@ PHASE1_REPLAY_STAGE_IDS = {
     "phase1_allocation_export",
     "phase1_support_genericity_matrix_export",
 }
+PHASE2_READINESS_STAGE_IDS = {
+    "phase2_stage1_genericity_scoring",
+    "phase2_stage3_candidate_audit",
+}
 
 
 class PipelineRunner:
     """Execute or inspect stages from a pipeline manifest."""
 
-    def __init__(self, manifest: PipelineManifest, repo_root: str | Path | None = None) -> None:
+    def __init__(
+        self,
+        manifest: PipelineManifest,
+        repo_root: str | Path | None = None,
+        state_root: str | Path | None = None,
+    ) -> None:
         self.manifest = manifest
         self.repo_root = Path(repo_root or ".").resolve()
+        self.state_root = Path(state_root) if state_root is not None else Path(self.manifest.default_state_root)
 
     def list_stages(self) -> str:
         lines = ["stage_id\tphase\texecution_class\tdefault_enabled\trerun_policy\tdescription"]
@@ -46,7 +57,7 @@ class PipelineRunner:
         return "\n".join(lines)
 
     def status(self, state_path: str | Path | None = None) -> str:
-        chosen_path = Path(state_path) if state_path else latest_state_path(self.manifest.default_state_root)
+        chosen_path = Path(state_path) if state_path else latest_state_path(self.state_root)
         if chosen_path is None:
             return "No pipeline state found."
         state = PipelineState.load(chosen_path)
@@ -107,9 +118,9 @@ class PipelineRunner:
             raise PermissionError("slurm-rerun refuses to run without --allow-slurm")
 
         run_id = default_run_id()
-        run_dir = Path(self.manifest.default_state_root) / run_id
+        run_dir = self.state_root / run_id
         if resume:
-            latest = latest_state_path(self.manifest.default_state_root)
+            latest = latest_state_path(self.state_root)
             if latest is None:
                 raise FileNotFoundError("--resume requested, but no previous pipeline_state.json exists")
             state = PipelineState.load(latest)
@@ -172,6 +183,8 @@ class PipelineRunner:
                 return "run", "safe validation stage included in replay"
             if stage.stage_id in PHASE1_REPLAY_STAGE_IDS:
                 return "run", "safe Phase I run-scoped replay stage"
+            if stage.stage_id in PHASE2_READINESS_STAGE_IDS:
+                return "run", "safe Phase II Stage1/Stage3 readiness stage"
             if (
                 stage.execution_class == "deterministic_replay"
                 and stage.rerun_policy == "allowed_in_replay"
@@ -211,6 +224,12 @@ class PipelineRunner:
             return
         if stage.stage_id == "phase1_support_genericity_matrix_export":
             self._run_phase1_matrix_export_stage(stage, state, run_dir, log_path)
+            return
+        if stage.stage_id == "phase2_stage1_genericity_scoring":
+            self._run_phase2_stage1_readiness_stage(stage, state, run_dir, log_path)
+            return
+        if stage.stage_id == "phase2_stage3_candidate_audit":
+            self._run_phase2_stage3_readiness_stage(stage, state, run_dir, log_path)
             return
         command = [self._format_value(part, run_dir) for part in stage.command]
         env = os.environ.copy()
@@ -314,6 +333,75 @@ class PipelineRunner:
         state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=message)
         state.finalize()
         raise subprocess.CalledProcessError(1, ["internal", "phase1_run_scoped_matrix_replay_validation"])
+
+    def _run_phase2_stage1_readiness_stage(
+        self,
+        stage: PipelineStage,
+        state: PipelineState,
+        run_dir: Path,
+        log_path: Path,
+    ) -> None:
+        with log_path.open("w", encoding="utf-8") as log:
+            log.write(f"stage_id={stage.stage_id}\n")
+            log.write("internal=phase2_stage1_stage3_readiness\n\n")
+            try:
+                report = run_phase2_stage1_stage3_readiness(self.repo_root, run_dir)
+            except Exception as exc:  # noqa: BLE001 - runner records arbitrary stage failures.
+                log.write(f"error={exc}\n")
+                state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=str(exc))
+                state.finalize()
+                raise subprocess.CalledProcessError(1, ["internal", "phase2_stage1_stage3_readiness"]) from exc
+            log.write(json.dumps(report, indent=2) + "\n")
+
+        if report.get("status") == "passed" and report.get("stage1", {}).get("executed_now") is False:
+            state.set_stage(
+                stage.stage_id,
+                "passed",
+                exit_code=0,
+                log_path=str(log_path),
+                message="Stage1 inputs ready; historical script not executed",
+            )
+            return
+
+        message = "Phase II Stage1 readiness failed"
+        state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=message)
+        state.finalize()
+        raise subprocess.CalledProcessError(1, ["internal", "phase2_stage1_stage3_readiness"])
+
+    def _run_phase2_stage3_readiness_stage(
+        self,
+        stage: PipelineStage,
+        state: PipelineState,
+        run_dir: Path,
+        log_path: Path,
+    ) -> None:
+        with log_path.open("w", encoding="utf-8") as log:
+            log.write(f"stage_id={stage.stage_id}\n")
+            log.write("internal=phase2_stage3_readiness_validation\n\n")
+            try:
+                report = load_phase2_stage1_stage3_report(run_dir)
+            except Exception as exc:  # noqa: BLE001 - runner records arbitrary stage failures.
+                log.write(f"error={exc}\n")
+                state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=str(exc))
+                state.finalize()
+                raise subprocess.CalledProcessError(1, ["internal", "phase2_stage3_readiness_validation"]) from exc
+            log.write(json.dumps(report, indent=2) + "\n")
+
+        stage3 = report.get("stage3", {})
+        if report.get("status") == "passed" and stage3.get("executed_now") is False:
+            state.set_stage(
+                stage.stage_id,
+                "passed",
+                exit_code=0,
+                log_path=str(log_path),
+                message="Stage3 inputs ready; historical script not executed",
+            )
+            return
+
+        message = "Phase II Stage3 readiness failed"
+        state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=message)
+        state.finalize()
+        raise subprocess.CalledProcessError(1, ["internal", "phase2_stage3_readiness_validation"])
 
     def _write_resolved_manifest(self, run_dir: Path) -> None:
         run_dir.mkdir(parents=True, exist_ok=True)

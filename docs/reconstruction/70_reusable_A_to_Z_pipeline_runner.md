@@ -51,11 +51,15 @@ python scripts/pipeline/run_kg_pipeline.py --mode slurm-rerun --dry-run
 python scripts/pipeline/run_kg_pipeline.py --mode construct-candidates --dry-run
 ```
 
+Run state defaults to `outputs/pipeline_runs/`. Use `--state-root PATH` or `KG_PIPELINE_STATE_ROOT=PATH` when a restricted execution context needs to write run state elsewhere; this does not redirect canonical input artifacts or historical graph/data outputs.
+
 `live-rerun` refuses execution unless `--allow-live` is provided. In this foundation implementation, live WDQS/LLM stages remain blocked even with `--allow-live`; the flag is reserved for a future audited implementation. The default manifest keeps live stages disabled because they are driftable and are not part of frozen validation.
 
 `slurm-rerun` is accepted as a reserved mode and can inspect SLURM stages, but SLURM submission is blocked in this foundation implementation.
 
-`replay-frozen` implements the first Level 2 replay slice. It runs frozen validations plus the safe Phase I run-scoped replay/export stages: `phase1_symmetry_inverse_evidence`, `phase1_allocation_export`, and `phase1_support_genericity_matrix_export`. The replay writes `allocation.replayed.json`, `genericity_support_matrix.replayed.json`, `phase1_replay_report.json`, and `phase1_replay_summary.md` under `outputs/pipeline_runs/<run_id>/phase1_replay/`. It compares those outputs to `src/Pruning graph/bidirectional_allocation_results5k.json` and `archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json`; mismatches fail the relevant replay stage and never overwrite canonical files.
+`replay-frozen` implements the safe Level 2 replay slices that are currently enabled. It runs frozen validations plus the safe Phase I run-scoped replay/export stages: `phase1_symmetry_inverse_evidence`, `phase1_allocation_export`, and `phase1_support_genericity_matrix_export`. The replay writes `allocation.replayed.json`, `genericity_support_matrix.replayed.json`, `phase1_replay_report.json`, and `phase1_replay_summary.md` under `outputs/pipeline_runs/<run_id>/phase1_replay/`. It compares those outputs to `src/Pruning graph/bidirectional_allocation_results5k.json` and `archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json`; mismatches fail the relevant replay stage and never overwrite canonical files.
+
+`replay-frozen` also runs the Phase II Stage1/Stage3 readiness slice. It does not execute `relation_balanced_kg_pipeline.py`; instead, it validates that Stage1 inputs and frozen Stage2 candidate shards exist, records the corrected historical subcommands (`score-genericity` and `audit-candidates` with `--config` and `--run-dir`), and writes `stage1_stage3_replay_readiness_report.json` plus a summary under `outputs/pipeline_runs/<run_id>/phase2_replay/`. Stage4 graph construction, Stage5/6/7, Stage11/12 repair, and C1 Stage13 remain blocked.
 
 `construct-candidates` implements Level 1 packaging for existing frozen registered candidates. With `--candidate-id B0 --from-frozen` or `--candidate-id C1 --from-frozen`, it copies the existing registry graph into the pipeline run directory, verifies the graph hash, runs the standard evaluator, and writes a package manifest. It does not generate, prune, repair, or otherwise modify graph artifacts. The `--generate` flag remains blocked because graph generation is not implemented in Level 1.
 
@@ -76,8 +80,11 @@ The run directory contains:
 - `logs/<stage_id>.log`
 - `candidates/<candidate_id>/` for Level 1 frozen candidate packages
 - `phase1_replay/` for Level 2 Phase I run-scoped replay exports
+- `phase2_replay/` for Level 2 Phase II Stage1/Stage3 readiness reports
 
 State is written before and after each stage, so an interrupted run can be inspected. `--resume` loads the latest state file under `outputs/pipeline_runs/` and skips previously passed stages unless a stage is named with `--force-stage`.
+
+The state root may be overridden with `--state-root PATH` or `KG_PIPELINE_STATE_ROOT=PATH`. `--status` and `--resume` use the resolved state root unless a specific `--state` file is provided.
 
 ## Default Validate-Frozen Stages
 

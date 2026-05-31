@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -29,6 +30,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--mode", choices=MODES, default="validate-frozen")
     parser.add_argument("--status", action="store_true", help="Print latest run state and exit")
     parser.add_argument("--state", type=Path, default=None, help="Specific pipeline_state.json to inspect")
+    parser.add_argument(
+        "--state-root",
+        type=Path,
+        default=None,
+        help="Override the pipeline run root. Defaults to KG_PIPELINE_STATE_ROOT or the manifest default.",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Print execution plan without running stages")
     parser.add_argument("--resume", action="store_true", help="Resume latest run state")
     parser.add_argument("--force-stage", action="append", default=[], metavar="STAGE_ID")
@@ -41,7 +48,17 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def run_construct_candidates(args: argparse.Namespace, manifest) -> int:
+def resolve_state_root(args: argparse.Namespace, manifest) -> Path:
+    """Resolve the state root from CLI, environment, or manifest default."""
+    if args.state_root is not None:
+        return args.state_root
+    env_root = os.environ.get("KG_PIPELINE_STATE_ROOT")
+    if env_root:
+        return Path(env_root)
+    return Path(manifest.default_state_root)
+
+
+def run_construct_candidates(args: argparse.Namespace, manifest, state_root: Path) -> int:
     if args.generate:
         print("graph generation is not implemented in Level 1; no graph generated", file=sys.stderr)
         return 2
@@ -53,7 +70,7 @@ def run_construct_candidates(args: argparse.Namespace, manifest) -> int:
         return 2
 
     run_id = default_run_id()
-    run_dir = Path(manifest.default_state_root) / run_id
+    run_dir = state_root / run_id
     state = PipelineState.create(
         run_dir / "pipeline_state.json",
         run_id,
@@ -101,7 +118,7 @@ def run_construct_candidates(args: argparse.Namespace, manifest) -> int:
     state.finalize()
     print(f"run_id={run_id}")
     print(f"state={state.path}")
-    print(f"candidate_package=outputs/pipeline_runs/{run_id}/candidates/{args.candidate_id}")
+    print(f"candidate_package={run_dir / 'candidates' / args.candidate_id}")
     print(f"source_graph_sha256={result['source_graph_sha256']}")
     print(f"packaged_graph_sha256={result['packaged_graph_sha256']}")
     print(f"overall_status={state.data.get('overall_status')}")
@@ -111,7 +128,8 @@ def run_construct_candidates(args: argparse.Namespace, manifest) -> int:
 def main() -> int:
     args = parse_args()
     manifest = load_manifest(args.manifest)
-    runner = PipelineRunner(manifest, repo_root=REPO_ROOT)
+    state_root = resolve_state_root(args, manifest)
+    runner = PipelineRunner(manifest, repo_root=REPO_ROOT, state_root=state_root)
 
     if args.list_stages:
         print(runner.list_stages())
@@ -130,7 +148,7 @@ def main() -> int:
         )
         return 0
     if args.mode == "construct-candidates":
-        return run_construct_candidates(args, manifest)
+        return run_construct_candidates(args, manifest, state_root)
 
     try:
         state = runner.run(

@@ -265,22 +265,27 @@
     {
       "stage_id": "phase2_stage1_genericity_scoring",
       "phase": "Phase II",
-      "description": "Historical Stage1 genericity scoring for candidate graph construction.",
+      "description": "Run-scoped readiness validation for historical Stage1 genericity scoring. This records corrected subcommands and validates inputs without executing the historical script.",
       "command": [
-        "python",
-        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
-        "--stage",
-        "stage1"
+        "internal",
+        "phase2_stage1_stage3_readiness"
       ],
       "inputs": [
-        "archive/hetzner_version/src/kg_builder/input/"
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/manifest.json",
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/config_snapshot.yaml",
+        "archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.json",
+        "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
       ],
       "outputs": [
-        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage01_genericity/"
+        "{run_dir}/phase2_replay/stage1_stage3_replay_readiness_report.json",
+        "{run_dir}/phase2_replay/stage1_stage3_replay_readiness_summary.md"
       ],
-      "expected_hashes": {},
+      "expected_hashes": {
+        "archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.json": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+      },
       "execution_class": "deterministic_replay",
-      "default_enabled": false,
+      "default_enabled": true,
       "rerun_policy": "allowed_in_replay"
     },
     {
@@ -307,22 +312,24 @@
     {
       "stage_id": "phase2_stage3_candidate_audit",
       "phase": "Phase II",
-      "description": "Audit Stage2 candidate shards before graph construction.",
+      "description": "Run-scoped readiness validation for historical Stage3 candidate audit. This validates frozen Stage2 shards and records corrected subcommands without writing historical Stage3 outputs.",
       "command": [
-        "python",
-        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
-        "--stage",
-        "stage3"
+        "internal",
+        "phase2_stage3_readiness_validation"
       ],
       "inputs": [
-        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/"
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/",
+        "archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.json"
       ],
       "outputs": [
-        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage03_candidate_audit/"
+        "{run_dir}/phase2_replay/stage1_stage3_replay_readiness_report.json",
+        "{run_dir}/phase2_replay/stage1_stage3_replay_readiness_summary.md"
       ],
-      "expected_hashes": {},
+      "expected_hashes": {
+        "archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.json": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+      },
       "execution_class": "deterministic_replay",
-      "default_enabled": false,
+      "default_enabled": true,
       "rerun_policy": "allowed_in_replay"
     },
     {
