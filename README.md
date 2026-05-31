@@ -30,12 +30,18 @@ Show the latest run status:
 python scripts/pipeline/run_kg_pipeline.py --status
 ```
 
-Reserved future modes parse cleanly but remain blocked in this foundation:
+Level 1 candidate construction packages existing frozen registered candidates only; it does not generate graphs:
+
+```bash
+python scripts/pipeline/run_kg_pipeline.py --mode construct-candidates --candidate-id B0 --from-frozen
+python scripts/pipeline/run_kg_pipeline.py --mode construct-candidates --candidate-id C1 --from-frozen
+```
+
+Live and SLURM modes parse cleanly but remain blocked in this foundation:
 
 ```bash
 python scripts/pipeline/run_kg_pipeline.py --mode live-rerun --allow-live
 python scripts/pipeline/run_kg_pipeline.py --mode slurm-rerun --allow-slurm
-python scripts/pipeline/run_kg_pipeline.py --mode construct-candidates --candidate-id B0 --from-frozen
 ```
 
 State, resolved manifests, and per-stage logs are written under:
@@ -54,7 +60,7 @@ Execution classes in `configs/pipeline/kg_pipeline.default.json`:
 - `graph_construction` — stages that build, repair, prune, or emit graph candidates.
 - `manual_ui_optional` — optional UI stages such as the Phase I Streamlit dashboard.
 
-In the current foundation, live WDQS/LLM execution, SLURM submission, and graph construction are blocked. The manifest records them so users can inspect the A-to-Z workflow without accidentally rerunning driftable or expensive stages.
+In the current foundation, live WDQS/LLM execution, SLURM submission, and new graph generation are blocked. `construct-candidates --from-frozen` can package existing registered frozen candidates into a pipeline run directory for inspection and evaluation. The manifest records blocked stages so users can inspect the A-to-Z workflow without accidentally rerunning driftable or expensive stages.
 
 Detailed runner documentation: `docs/reconstruction/70_reusable_A_to_Z_pipeline_runner.md`
 

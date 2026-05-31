@@ -54,7 +54,7 @@ python scripts/pipeline/run_kg_pipeline.py --mode construct-candidates --dry-run
 
 `slurm-rerun` is accepted as a reserved mode and can inspect SLURM stages, but SLURM submission is blocked in this foundation implementation.
 
-`construct-candidates` is intentionally not implemented yet. The CLI accepts reserved future flags such as `--candidate-id`, `--from-frozen`, and `--generate`, but it does not generate graph candidates.
+`construct-candidates` implements Level 1 packaging for existing frozen registered candidates. With `--candidate-id B0 --from-frozen` or `--candidate-id C1 --from-frozen`, it copies the existing registry graph into the pipeline run directory, verifies the graph hash, runs the standard evaluator, and writes a package manifest. It does not generate, prune, repair, or otherwise modify graph artifacts. The `--generate` flag remains blocked because graph generation is not implemented in Level 1.
 
 The CLI runner is the canonical interface for non-interactive reproducibility. The Streamlit dashboard is represented only as an optional Phase I manual UI for inspecting evidence, selecting thresholds, and exporting allocation/config artifacts. Any Streamlit decision must be exported to a saved config or artifact before it becomes reproducible. Canonical pipeline runs consume saved configs and artifacts, not live UI state. HPC and SLURM stages should not depend on Streamlit.
 
@@ -71,6 +71,7 @@ The run directory contains:
 - `pipeline_state.json`
 - `manifest.resolved.json`
 - `logs/<stage_id>.log`
+- `candidates/<candidate_id>/` for Level 1 frozen candidate packages
 
 State is written before and after each stage, so an interrupted run can be inspected. `--resume` loads the latest state file under `outputs/pipeline_runs/` and skips previously passed stages unless a stage is named with `--force-stage`.
 
@@ -120,7 +121,7 @@ This foundation intentionally does not:
 - call LLMs;
 - submit SLURM jobs;
 - run Streamlit as part of canonical non-interactive execution;
-- generate graphs;
+- generate new graphs;
 - modify graph/data artifacts;
 - replace historical Phase II generator code;
 - solve live reproducibility drift.
