@@ -265,10 +265,10 @@
     {
       "stage_id": "phase2_stage1_genericity_scoring",
       "phase": "Phase II",
-      "description": "Run-scoped readiness validation for historical Stage1 genericity scoring. This records corrected subcommands and validates inputs without executing the historical script.",
+      "description": "Run-scoped execution of historical Stage1 genericity scoring after readiness checks. Writes only under the pipeline run directory.",
       "command": [
         "internal",
-        "phase2_stage1_stage3_readiness"
+        "phase2_stage1_run_scoped_execution"
       ],
       "inputs": [
         "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
@@ -279,7 +279,11 @@
       ],
       "outputs": [
         "{run_dir}/phase2_replay/stage1_stage3_replay_readiness_report.json",
-        "{run_dir}/phase2_replay/stage1_stage3_replay_readiness_summary.md"
+        "{run_dir}/phase2_replay/stage1_stage3_replay_readiness_summary.md",
+        "{run_dir}/phase2_replay/stage1_stage3_execution_report.json",
+        "{run_dir}/phase2_replay/stage1_stage3_execution_summary.md",
+        "{run_dir}/phase2_replay/historical_relation_pipeline_run/stage01_genericity/relation_genericity.jsonl",
+        "{run_dir}/phase2_replay/historical_relation_pipeline_run/stage01_genericity/summary.json"
       ],
       "expected_hashes": {
         "archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.json": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
@@ -312,10 +316,10 @@
     {
       "stage_id": "phase2_stage3_candidate_audit",
       "phase": "Phase II",
-      "description": "Run-scoped readiness validation for historical Stage3 candidate audit. This validates frozen Stage2 shards and records corrected subcommands without writing historical Stage3 outputs.",
+      "description": "Run-scoped execution of historical Stage3 candidate audit over frozen Stage2 shards after readiness checks. Writes only under the pipeline run directory.",
       "command": [
         "internal",
-        "phase2_stage3_readiness_validation"
+        "phase2_stage3_run_scoped_execution"
       ],
       "inputs": [
         "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/",
@@ -323,7 +327,11 @@
       ],
       "outputs": [
         "{run_dir}/phase2_replay/stage1_stage3_replay_readiness_report.json",
-        "{run_dir}/phase2_replay/stage1_stage3_replay_readiness_summary.md"
+        "{run_dir}/phase2_replay/stage1_stage3_replay_readiness_summary.md",
+        "{run_dir}/phase2_replay/stage1_stage3_execution_report.json",
+        "{run_dir}/phase2_replay/stage1_stage3_execution_summary.md",
+        "{run_dir}/phase2_replay/historical_relation_pipeline_run/stage03_candidate_audit/candidate_relation_audit.jsonl",
+        "{run_dir}/phase2_replay/historical_relation_pipeline_run/stage03_candidate_audit/summary.json"
       ],
       "expected_hashes": {
         "archive/hetzner_version/src/kg_builder/input/bidirectional_allocation_results5k.json": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"

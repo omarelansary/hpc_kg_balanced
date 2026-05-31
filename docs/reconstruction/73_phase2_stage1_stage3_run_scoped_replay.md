@@ -1,6 +1,6 @@
 # Phase II Stage1/Stage3 Run-Scoped Replay Readiness
 
-This document describes Level 2 Slice 2 in the reusable KG pipeline runner. The slice is a readiness check for historical Phase II Stage1 and Stage3 replay. It does not run graph construction, submit SLURM jobs, query WDQS, call LLMs, or write into historical run directories.
+This document describes Level 2 Slice 2 in the reusable KG pipeline runner. The slice introduced the readiness check for historical Phase II Stage1 and Stage3 replay. Level 2 Slice 3 now builds on this readiness layer and executes Stage1/Stage3 in a run-scoped directory only. Neither slice runs graph construction, submits SLURM jobs, queries WDQS, calls LLMs, or writes into historical run directories.
 
 ## Command
 
@@ -24,7 +24,7 @@ The runner now includes these Phase II readiness stages in `replay-frozen` mode:
 - `phase2_stage1_genericity_scoring`
 - `phase2_stage3_candidate_audit`
 
-Both stages are validation-only in this slice. The runner writes one shared readiness report under:
+The readiness report is still written before execution. The runner writes one shared readiness report under:
 
 ```text
 outputs/pipeline_runs/<run_id>/phase2_replay/
@@ -47,12 +47,12 @@ The readiness report records the corrected future command shape:
 
 ```bash
 python archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py \
-  --config outputs/pipeline_runs/<run_id>/phase2_replay/historical_relation_pipeline_run/config_snapshot.yaml \
+  --config outputs/pipeline_runs/<run_id>/phase2_replay/historical_relation_pipeline_run/config_snapshot.json \
   --run-dir outputs/pipeline_runs/<run_id>/phase2_replay/historical_relation_pipeline_run \
   score-genericity
 ```
 
-The command is recorded only. It is not executed in this slice.
+In Slice 2 the command was recorded only. In Slice 3 it is executed only after the run-scoped config and output directory guardrails pass.
 
 ## What Stage3 Readiness Checks
 
@@ -66,18 +66,18 @@ The report counts shard files, non-empty shard files, and candidate rows. It rec
 
 ```bash
 python archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py \
-  --config outputs/pipeline_runs/<run_id>/phase2_replay/historical_relation_pipeline_run/config_snapshot.yaml \
+  --config outputs/pipeline_runs/<run_id>/phase2_replay/historical_relation_pipeline_run/config_snapshot.json \
   --run-dir outputs/pipeline_runs/<run_id>/phase2_replay/historical_relation_pipeline_run \
   audit-candidates
 ```
 
-The command is recorded only. It is not executed in this slice.
+In Slice 2 the command was recorded only. In Slice 3 it is executed only after the Stage2 shards are materialized under the run-scoped historical pipeline directory.
 
 ## Historical Command Correction
 
 The manifest previously represented historical Phase II stages with pseudo `--stage` arguments. The historical script does not expose that interface. It requires `--config`, `--run-dir` or `--run-name`, and a subcommand such as `score-genericity` or `audit-candidates`.
 
-This slice corrects that mapping in the runner contract without enabling execution. A future replay implementation must create a fresh run directory under `outputs/pipeline_runs/<run_id>/phase2_replay/`, prepare a run-scoped config snapshot, and make Stage2 shards available under the run-scoped layout before executing the historical subcommands.
+This readiness layer corrects that mapping in the runner contract. Slice 3 creates a fresh run directory under `outputs/pipeline_runs/<run_id>/phase2_replay/`, prepares a run-scoped config snapshot, and makes Stage2 shards available under the run-scoped layout before executing the historical subcommands.
 
 ## Boundary
 

@@ -3,6 +3,10 @@
 from __future__ import annotations
 
 import json
+import os
+import shutil
+import subprocess
+import sys
 from hashlib import sha256
 from pathlib import Path
 from typing import Any
@@ -11,6 +15,8 @@ from typing import Any
 PHASE2_REPLAY_DIRNAME = "phase2_replay"
 REPORT_OUT_NAME = "stage1_stage3_replay_readiness_report.json"
 SUMMARY_OUT_NAME = "stage1_stage3_replay_readiness_summary.md"
+EXECUTION_REPORT_OUT_NAME = "stage1_stage3_execution_report.json"
+EXECUTION_SUMMARY_OUT_NAME = "stage1_stage3_execution_summary.md"
 
 RELATION_PIPELINE_SCRIPT = Path("archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py")
 HISTORICAL_RUN_DIR = Path("archive/hetzner_version/runs/prod_refine_20260315_180520")
@@ -43,6 +49,24 @@ def load_json(path: Path) -> Any:
 def write_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+
+def path_status(path: Path, *, expected_sha256: str | None = None) -> dict[str, Any]:
+    row: dict[str, Any] = {
+        "path": str(path),
+        "exists": path.exists(),
+        "is_file": path.is_file(),
+        "is_dir": path.is_dir(),
+        "size_bytes": path.stat().st_size if path.exists() and path.is_file() else None,
+        "sha256": None,
+        "expected_sha256": expected_sha256,
+        "hash_matches_expected": None,
+    }
+    if path.is_file():
+        row["sha256"] = sha256_file(path)
+        if expected_sha256 is not None:
+            row["hash_matches_expected"] = row["sha256"] == expected_sha256
+    return row
 
 
 def relpath(repo_root: Path, path: Path) -> str:
@@ -122,6 +146,68 @@ def _historical_manifest_config(repo_root: Path) -> dict[str, Any]:
     return config if isinstance(config, dict) else {}
 
 
+def _historical_config_snapshot_data(repo_root: Path) -> tuple[dict[str, Any], str]:
+    config_path = repo_root / HISTORICAL_CONFIG_SNAPSHOT_PATH
+    if config_path.is_file():
+        try:
+            import yaml  # type: ignore[import-not-found]
+
+            data = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                return data, str(HISTORICAL_CONFIG_SNAPSHOT_PATH)
+        except Exception:
+            pass
+    return _historical_manifest_config(repo_root), str(HISTORICAL_MANIFEST_PATH)
+
+
+def _snapshot_historical_archive(repo_root: Path) -> dict[str, Any]:
+    rows = {}
+    for path in [
+        HISTORICAL_RUN_DIR,
+        HISTORICAL_MANIFEST_PATH,
+        HISTORICAL_CONFIG_SNAPSHOT_PATH,
+        HISTORICAL_STAGE1_OUTPUT_DIR,
+        HISTORICAL_STAGE2_SHARDS_DIR,
+        HISTORICAL_STAGE3_OUTPUT_DIR,
+    ]:
+        full_path = repo_root / path
+        if full_path.exists():
+            stat = full_path.stat()
+            rows[str(path)] = {
+                "exists": True,
+                "is_file": full_path.is_file(),
+                "is_dir": full_path.is_dir(),
+                "size_bytes": stat.st_size if full_path.is_file() else None,
+                "mtime_ns": stat.st_mtime_ns,
+            }
+        else:
+            rows[str(path)] = {"exists": False}
+    return rows
+
+
+def _command_tail(text: str, *, max_lines: int = 60) -> list[str]:
+    lines = text.splitlines()
+    if len(lines) <= max_lines:
+        return lines
+    return lines[-max_lines:]
+
+
+def _run_historical_command(repo_root: Path, command: list[str]) -> dict[str, Any]:
+    completed = subprocess.run(
+        command,
+        cwd=repo_root,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        check=False,
+    )
+    return {
+        "command": command,
+        "exit_code": completed.returncode,
+        "output_tail": _command_tail(completed.stdout or ""),
+    }
+
+
 def run_phase2_stage1_stage3_readiness(repo_root: str | Path, run_dir: str | Path) -> dict[str, Any]:
     """Write a Stage1/Stage3 readiness report without executing historical stages."""
     repo_root = Path(repo_root).resolve()
@@ -130,7 +216,7 @@ def run_phase2_stage1_stage3_readiness(repo_root: str | Path, run_dir: str | Pat
     report_out = replay_dir / REPORT_OUT_NAME
     summary_out = replay_dir / SUMMARY_OUT_NAME
     future_run_dir = replay_dir / "historical_relation_pipeline_run"
-    future_config = future_run_dir / "config_snapshot.yaml"
+    future_config = future_run_dir / "config_snapshot.json"
 
     archive_allocation = input_status(repo_root, ARCHIVE_ALLOCATION_PATH, expected_sha256=EXPECTED_ALLOCATION_SHA256)
     canonical_allocation = input_status(repo_root, CANONICAL_ALLOCATION_PATH, expected_sha256=EXPECTED_ALLOCATION_SHA256)
@@ -275,6 +361,289 @@ def run_phase2_stage1_stage3_readiness(repo_root: str | Path, run_dir: str | Pat
     return report
 
 
+def _run_scoped_paths(run_dir: Path) -> dict[str, Path]:
+    replay_dir = run_dir / PHASE2_REPLAY_DIRNAME
+    historical_run_dir = replay_dir / "historical_relation_pipeline_run"
+    return {
+        "replay_dir": replay_dir,
+        "historical_run_dir": historical_run_dir,
+        "run_scoped_config": historical_run_dir / "config_snapshot.json",
+        "stage2_shards_dir": historical_run_dir / "stage02_candidates" / "shards",
+        "execution_report": replay_dir / EXECUTION_REPORT_OUT_NAME,
+        "execution_summary": replay_dir / EXECUTION_SUMMARY_OUT_NAME,
+    }
+
+
+def _prepare_run_scoped_execution_environment(
+    repo_root: Path,
+    run_dir: Path,
+    readiness_report: dict[str, Any],
+) -> dict[str, Any]:
+    paths = _run_scoped_paths(run_dir)
+    replay_dir = paths["replay_dir"]
+    historical_run_dir = paths["historical_run_dir"]
+    config_out = paths["run_scoped_config"]
+    run_scoped_stage2_shards = paths["stage2_shards_dir"]
+    historical_archive_dir = (repo_root / HISTORICAL_RUN_DIR).resolve()
+
+    replay_dir.mkdir(parents=True, exist_ok=True)
+    historical_run_dir.mkdir(parents=True, exist_ok=True)
+    if historical_run_dir.resolve() == historical_archive_dir:
+        raise RuntimeError(f"refusing to target historical archive run directory: {HISTORICAL_RUN_DIR}")
+
+    config_data, config_source = _historical_config_snapshot_data(repo_root)
+    if not config_data:
+        raise RuntimeError("historical config snapshot could not be loaded")
+
+    config_changes = []
+
+    def set_config_value(key: str, value: Any, reason: str) -> None:
+        old_value = config_data.get(key)
+        if old_value != value:
+            config_changes.append({"field": key, "old_value": old_value, "new_value": value, "reason": reason})
+            config_data[key] = value
+
+    set_config_value(
+        "run_root",
+        str(replay_dir),
+        "keep any run-root-derived outputs inside the pipeline run directory",
+    )
+    set_config_value(
+        "allocated_relations_path",
+        str(ARCHIVE_ALLOCATION_PATH),
+        "historical config path is absent in this repo; use frozen archive allocation",
+    )
+    set_config_value(
+        "support_matrix_path",
+        str(ARCHIVE_SUPPORT_MATRIX_PATH),
+        "historical config path is absent in this repo; use frozen archive support matrix",
+    )
+    set_config_value(
+        "candidate_source_mode",
+        "local",
+        "prevent accidental WDQS backend selection in the run-scoped config",
+    )
+    set_config_value(
+        "candidate_input_path",
+        str(run_scoped_stage2_shards),
+        "point any local candidate source at run-scoped frozen Stage2 shard links",
+    )
+    write_json(config_out, config_data)
+
+    manifest_path = historical_run_dir / "manifest.json"
+    if not manifest_path.exists():
+        write_json(
+            manifest_path,
+            {
+                "created_at": None,
+                "run_dir": str(historical_run_dir),
+                "seed": config_data.get("seed"),
+                "python_version": sys.version,
+                "config": config_data,
+                "stages": {},
+                "created_by": "src/kg_pipeline/orchestration/phase2_replay.py",
+                "source_historical_manifest": str(HISTORICAL_MANIFEST_PATH),
+            },
+        )
+
+    source_shards_dir = repo_root / HISTORICAL_STAGE2_SHARDS_DIR
+    run_scoped_stage2_shards.mkdir(parents=True, exist_ok=True)
+    shard_policy = "symlink"
+    linked = 0
+    copied = 0
+    for source_shard in sorted(source_shards_dir.glob("*.jsonl")):
+        dest = run_scoped_stage2_shards / source_shard.name
+        if dest.exists() or dest.is_symlink():
+            continue
+        try:
+            dest.symlink_to(os.path.relpath(source_shard, start=run_scoped_stage2_shards))
+            linked += 1
+        except OSError:
+            shard_policy = "copy"
+            shutil.copy2(source_shard, dest)
+            copied += 1
+
+    return {
+        "run_scoped_historical_run_dir": str(historical_run_dir),
+        "run_scoped_config_path": str(config_out),
+        "config_source": config_source,
+        "config_changes": config_changes,
+        "manifest_path": str(manifest_path),
+        "stage2_shards_dir": str(run_scoped_stage2_shards),
+        "stage2_shards_source": str(HISTORICAL_STAGE2_SHARDS_DIR),
+        "stage2_shard_materialization": {
+            "policy": shard_policy,
+            "linked": linked,
+            "copied": copied,
+            "available": len(list(run_scoped_stage2_shards.glob("*.jsonl"))),
+        },
+        "readiness_status": readiness_report.get("status"),
+    }
+
+
+def _stage_outputs(historical_run_dir: Path, stage: str) -> dict[str, Any]:
+    if stage == "stage01_genericity":
+        paths = {
+            "relation_genericity": historical_run_dir / stage / "relation_genericity.jsonl",
+            "summary": historical_run_dir / stage / "summary.json",
+        }
+    elif stage == "stage03_candidate_audit":
+        paths = {
+            "candidate_relation_audit": historical_run_dir / stage / "candidate_relation_audit.jsonl",
+            "summary": historical_run_dir / stage / "summary.json",
+        }
+    else:
+        raise ValueError(f"unknown stage output set: {stage}")
+    return {name: path_status(path) for name, path in paths.items()}
+
+
+def _outputs_exist(outputs: dict[str, Any]) -> bool:
+    return all(row.get("exists") and row.get("is_file") for row in outputs.values())
+
+
+def _base_execution_report(
+    repo_root: Path,
+    run_dir: Path,
+    readiness_report: dict[str, Any],
+    environment: dict[str, Any],
+) -> dict[str, Any]:
+    paths = _run_scoped_paths(run_dir)
+    historical_run_dir = Path(environment["run_scoped_historical_run_dir"])
+    historical_archive_before = _snapshot_historical_archive(repo_root)
+    return {
+        "schema_version": "phase2-stage1-stage3-execution-report-v1",
+        "created_by": "src/kg_pipeline/orchestration/phase2_replay.py",
+        "mode": "replay-frozen",
+        "status": "running",
+        "readiness_report": str(paths["replay_dir"] / REPORT_OUT_NAME),
+        "run_scoped_config_path": environment["run_scoped_config_path"],
+        "run_scoped_historical_run_dir": environment["run_scoped_historical_run_dir"],
+        "environment": environment,
+        "safety_checks": {
+            "readiness_status": readiness_report.get("status"),
+            "run_scoped_dir_is_historical_archive": historical_run_dir.resolve()
+            == (repo_root / HISTORICAL_RUN_DIR).resolve(),
+            "historical_archive_outputs_targeted": False,
+            "stage4_remains_blocked": True,
+            "b0_regeneration_remains_blocked": True,
+            "wdqs_llm_slurm_used": False,
+        },
+        "stage1": {
+            "stage_id": "phase2_stage1_genericity_scoring",
+            "command_result": None,
+            "outputs": _stage_outputs(historical_run_dir, "stage01_genericity"),
+            "passed": False,
+        },
+        "stage3": {
+            "stage_id": "phase2_stage3_candidate_audit",
+            "command_result": None,
+            "outputs": _stage_outputs(historical_run_dir, "stage03_candidate_audit"),
+            "passed": False,
+        },
+        "historical_archive_snapshot_before": historical_archive_before,
+        "historical_archive_snapshot_after": None,
+        "historical_archive_untouched": None,
+        "conclusion": None,
+        "outputs": {
+            "report": str(paths["execution_report"]),
+            "summary": str(paths["execution_summary"]),
+        },
+    }
+
+
+def _write_execution_report(run_dir: Path, report: dict[str, Any]) -> None:
+    paths = _run_scoped_paths(run_dir)
+    write_json(paths["execution_report"], report)
+    paths["execution_summary"].write_text(_execution_summary_markdown(report), encoding="utf-8")
+
+
+def run_phase2_stage1_execution(repo_root: str | Path, run_dir: str | Path) -> dict[str, Any]:
+    """Execute historical Stage1 only in the run-scoped historical pipeline directory."""
+    repo_root = Path(repo_root).resolve()
+    run_dir = Path(run_dir)
+    readiness_report = run_phase2_stage1_stage3_readiness(repo_root, run_dir)
+    if readiness_report.get("status") != "passed":
+        raise RuntimeError("Phase II Stage1/Stage3 readiness failed; refusing execution")
+    environment = _prepare_run_scoped_execution_environment(repo_root, run_dir, readiness_report)
+    report = _base_execution_report(repo_root, run_dir, readiness_report, environment)
+    command = [
+        "python",
+        str(RELATION_PIPELINE_SCRIPT),
+        "--config",
+        environment["run_scoped_config_path"],
+        "--run-dir",
+        environment["run_scoped_historical_run_dir"],
+        "score-genericity",
+    ]
+    command_result = _run_historical_command(repo_root, command)
+    historical_run_dir = Path(environment["run_scoped_historical_run_dir"])
+    stage1_outputs = _stage_outputs(historical_run_dir, "stage01_genericity")
+    report["stage1"]["command_result"] = command_result
+    report["stage1"]["outputs"] = stage1_outputs
+    report["stage1"]["passed"] = command_result["exit_code"] == 0 and _outputs_exist(stage1_outputs)
+    report["historical_archive_snapshot_after"] = _snapshot_historical_archive(repo_root)
+    report["historical_archive_untouched"] = (
+        report["historical_archive_snapshot_before"] == report["historical_archive_snapshot_after"]
+    )
+    report["status"] = "stage1_passed_stage3_pending" if report["stage1"]["passed"] else "failed"
+    report["conclusion"] = {
+        "stage1_executed": True,
+        "stage3_executed": False,
+        "stage4_graph_construction_remains_blocked": True,
+        "b0_regeneration_safe_today": False,
+    }
+    _write_execution_report(run_dir, report)
+    return report
+
+
+def run_phase2_stage3_execution(repo_root: str | Path, run_dir: str | Path) -> dict[str, Any]:
+    """Execute historical Stage3 only after Stage1 has passed in the run-scoped directory."""
+    repo_root = Path(repo_root).resolve()
+    run_dir = Path(run_dir)
+    paths = _run_scoped_paths(run_dir)
+    if not paths["execution_report"].is_file():
+        raise FileNotFoundError(f"Stage1 execution report not found: {paths['execution_report']}")
+    report = load_json(paths["execution_report"])
+    if not report.get("stage1", {}).get("passed"):
+        raise RuntimeError("Stage1 did not pass; refusing Stage3 execution")
+    environment = report["environment"]
+    command = [
+        "python",
+        str(RELATION_PIPELINE_SCRIPT),
+        "--config",
+        environment["run_scoped_config_path"],
+        "--run-dir",
+        environment["run_scoped_historical_run_dir"],
+        "audit-candidates",
+    ]
+    command_result = _run_historical_command(repo_root, command)
+    historical_run_dir = Path(environment["run_scoped_historical_run_dir"])
+    stage3_outputs = _stage_outputs(historical_run_dir, "stage03_candidate_audit")
+    report["stage3"]["command_result"] = command_result
+    report["stage3"]["outputs"] = stage3_outputs
+    report["stage3"]["passed"] = command_result["exit_code"] == 0 and _outputs_exist(stage3_outputs)
+    report["historical_archive_snapshot_after"] = _snapshot_historical_archive(repo_root)
+    report["historical_archive_untouched"] = (
+        report["historical_archive_snapshot_before"] == report["historical_archive_snapshot_after"]
+    )
+    report["status"] = "passed" if report["stage1"]["passed"] and report["stage3"]["passed"] else "failed"
+    report["conclusion"] = {
+        "stage1_executed": True,
+        "stage3_executed": True,
+        "stage4_graph_construction_remains_blocked": True,
+        "b0_regeneration_safe_today": False,
+    }
+    _write_execution_report(run_dir, report)
+    return report
+
+
+def load_phase2_stage1_stage3_execution_report(run_dir: str | Path) -> dict[str, Any]:
+    report_path = Path(run_dir) / PHASE2_REPLAY_DIRNAME / EXECUTION_REPORT_OUT_NAME
+    if not report_path.is_file():
+        raise FileNotFoundError(f"Phase II Stage1/Stage3 execution report not found: {report_path}")
+    return load_json(report_path)
+
+
 def load_phase2_stage1_stage3_report(run_dir: str | Path) -> dict[str, Any]:
     report_path = Path(run_dir) / PHASE2_REPLAY_DIRNAME / REPORT_OUT_NAME
     if not report_path.is_file():
@@ -316,4 +685,51 @@ No historical Phase II script was executed. This readiness slice validates local
 ## Conclusion
 
 Stage1 and Stage3 are prepared for a future run-scoped replay wrapper, but execution is not enabled in this slice. B0 regeneration is still not safe through the runner.
+"""
+
+
+def _execution_summary_markdown(report: dict[str, Any]) -> str:
+    stage1 = report["stage1"]
+    stage3 = report["stage3"]
+    stage1_result = stage1.get("command_result") or {}
+    stage3_result = stage3.get("command_result") or {}
+    stage1_outputs = ", ".join(
+        row["path"] for row in stage1.get("outputs", {}).values() if row.get("exists")
+    ) or "none"
+    stage3_outputs = ", ".join(
+        row["path"] for row in stage3.get("outputs", {}).values() if row.get("exists")
+    ) or "none"
+    return f"""# Phase II Stage1/Stage3 Run-Scoped Execution
+
+Status: `{report['status']}`
+
+## Execution Boundary
+
+Only historical Stage1 `score-genericity` and Stage3 `audit-candidates` were executed. Both commands targeted the run-scoped historical pipeline directory:
+
+```text
+{report['run_scoped_historical_run_dir']}
+```
+
+Stage4 graph construction, Stage5/6/7, Stage11/12 repair, C1 Stage13, WDQS, LLM, and SLURM remain blocked.
+
+## Stage1
+
+- Exit code: `{stage1_result.get('exit_code')}`
+- Passed: `{str(stage1.get('passed')).lower()}`
+- Command: `{' '.join(stage1_result.get('command', []))}`
+- Output files: {stage1_outputs}
+
+## Stage3
+
+- Exit code: `{stage3_result.get('exit_code')}`
+- Passed: `{str(stage3.get('passed')).lower()}`
+- Command: `{' '.join(stage3_result.get('command', []))}`
+- Output files: {stage3_outputs}
+
+## Safety Result
+
+- Historical archive untouched: `{str(report.get('historical_archive_untouched')).lower()}`
+- Stage4 remains blocked: `{str(report['safety_checks']['stage4_remains_blocked']).lower()}`
+- B0 regeneration remains blocked: `{str(report['safety_checks']['b0_regeneration_remains_blocked']).lower()}`
 """

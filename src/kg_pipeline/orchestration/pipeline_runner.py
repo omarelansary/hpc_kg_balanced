@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Iterable
 
 from .phase1_replay import load_phase1_replay_report, run_phase1_replay
-from .phase2_replay import load_phase2_stage1_stage3_report, run_phase2_stage1_stage3_readiness
+from .phase2_replay import run_phase2_stage1_execution, run_phase2_stage3_execution
 from .pipeline_manifest import PipelineManifest, PipelineStage
 from .pipeline_state import PipelineState, default_run_id, latest_state_path
 
@@ -184,7 +184,7 @@ class PipelineRunner:
             if stage.stage_id in PHASE1_REPLAY_STAGE_IDS:
                 return "run", "safe Phase I run-scoped replay stage"
             if stage.stage_id in PHASE2_READINESS_STAGE_IDS:
-                return "run", "safe Phase II Stage1/Stage3 readiness stage"
+                return "run", "safe Phase II Stage1/Stage3 run-scoped execution stage"
             if (
                 stage.execution_class == "deterministic_replay"
                 and stage.rerun_policy == "allowed_in_replay"
@@ -343,30 +343,30 @@ class PipelineRunner:
     ) -> None:
         with log_path.open("w", encoding="utf-8") as log:
             log.write(f"stage_id={stage.stage_id}\n")
-            log.write("internal=phase2_stage1_stage3_readiness\n\n")
+            log.write("internal=phase2_stage1_run_scoped_execution\n\n")
             try:
-                report = run_phase2_stage1_stage3_readiness(self.repo_root, run_dir)
+                report = run_phase2_stage1_execution(self.repo_root, run_dir)
             except Exception as exc:  # noqa: BLE001 - runner records arbitrary stage failures.
                 log.write(f"error={exc}\n")
                 state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=str(exc))
                 state.finalize()
-                raise subprocess.CalledProcessError(1, ["internal", "phase2_stage1_stage3_readiness"]) from exc
+                raise subprocess.CalledProcessError(1, ["internal", "phase2_stage1_run_scoped_execution"]) from exc
             log.write(json.dumps(report, indent=2) + "\n")
 
-        if report.get("status") == "passed" and report.get("stage1", {}).get("executed_now") is False:
+        if report.get("stage1", {}).get("passed") is True:
             state.set_stage(
                 stage.stage_id,
                 "passed",
                 exit_code=0,
                 log_path=str(log_path),
-                message="Stage1 inputs ready; historical script not executed",
+                message="Stage1 score-genericity executed in run-scoped directory",
             )
             return
 
         message = "Phase II Stage1 readiness failed"
         state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=message)
         state.finalize()
-        raise subprocess.CalledProcessError(1, ["internal", "phase2_stage1_stage3_readiness"])
+        raise subprocess.CalledProcessError(1, ["internal", "phase2_stage1_run_scoped_execution"])
 
     def _run_phase2_stage3_readiness_stage(
         self,
@@ -377,31 +377,31 @@ class PipelineRunner:
     ) -> None:
         with log_path.open("w", encoding="utf-8") as log:
             log.write(f"stage_id={stage.stage_id}\n")
-            log.write("internal=phase2_stage3_readiness_validation\n\n")
+            log.write("internal=phase2_stage3_run_scoped_execution\n\n")
             try:
-                report = load_phase2_stage1_stage3_report(run_dir)
+                report = run_phase2_stage3_execution(self.repo_root, run_dir)
             except Exception as exc:  # noqa: BLE001 - runner records arbitrary stage failures.
                 log.write(f"error={exc}\n")
                 state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=str(exc))
                 state.finalize()
-                raise subprocess.CalledProcessError(1, ["internal", "phase2_stage3_readiness_validation"]) from exc
+                raise subprocess.CalledProcessError(1, ["internal", "phase2_stage3_run_scoped_execution"]) from exc
             log.write(json.dumps(report, indent=2) + "\n")
 
         stage3 = report.get("stage3", {})
-        if report.get("status") == "passed" and stage3.get("executed_now") is False:
+        if report.get("status") == "passed" and stage3.get("passed") is True:
             state.set_stage(
                 stage.stage_id,
                 "passed",
                 exit_code=0,
                 log_path=str(log_path),
-                message="Stage3 inputs ready; historical script not executed",
+                message="Stage3 audit-candidates executed in run-scoped directory",
             )
             return
 
         message = "Phase II Stage3 readiness failed"
         state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=message)
         state.finalize()
-        raise subprocess.CalledProcessError(1, ["internal", "phase2_stage3_readiness_validation"])
+        raise subprocess.CalledProcessError(1, ["internal", "phase2_stage3_run_scoped_execution"])
 
     def _write_resolved_manifest(self, run_dir: Path) -> None:
         run_dir.mkdir(parents=True, exist_ok=True)
