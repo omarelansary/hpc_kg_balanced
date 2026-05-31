@@ -153,7 +153,7 @@
       "outputs": [],
       "expected_hashes": {},
       "execution_class": "deterministic_replay",
-      "default_enabled": false,
+      "default_enabled": true,
       "rerun_policy": "allowed_in_replay"
     },
     {
@@ -218,42 +218,48 @@
     {
       "stage_id": "phase1_allocation_export",
       "phase": "Phase I",
-      "description": "Export bidirectional allocation from Phase I pattern evidence.",
+      "description": "Replay/export bidirectional allocation from frozen Phase I pattern evidence into the pipeline run directory and compare to canonical allocation.",
       "command": [
-        "python",
-        "scripts/reconstruction/check_phase1_dashboard_extraction.py"
+        "internal",
+        "phase1_run_scoped_replay_export"
       ],
       "inputs": [
         "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl",
         "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl"
       ],
       "outputs": [
-        "src/Pruning graph/bidirectional_allocation_results5k.json"
+        "{run_dir}/phase1_replay/allocation.replayed.json",
+        "{run_dir}/phase1_replay/phase1_replay_report.json",
+        "{run_dir}/phase1_replay/phase1_replay_summary.md"
       ],
       "expected_hashes": {
         "src/Pruning graph/bidirectional_allocation_results5k.json": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
       },
       "execution_class": "deterministic_replay",
-      "default_enabled": false,
+      "default_enabled": true,
       "rerun_policy": "allowed_in_replay"
     },
     {
       "stage_id": "phase1_support_genericity_matrix_export",
       "phase": "Phase I",
-      "description": "Export genericity/support adjacency matrix from Phase I evidence.",
+      "description": "Replay/export the genericity/support adjacency matrix into the pipeline run directory and compare to the canonical matrix.",
       "command": [
-        "python",
-        "scripts/reconstruction/check_phase1_dashboard_extraction.py"
+        "internal",
+        "phase1_run_scoped_matrix_replay_validation"
       ],
       "inputs": [
+        "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl",
+        "src/Pruning graph/bidirectional_allocation_results5k.json",
         "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
       ],
       "outputs": [
-        "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
+        "{run_dir}/phase1_replay/genericity_support_matrix.replayed.json",
+        "{run_dir}/phase1_replay/phase1_replay_report.json",
+        "{run_dir}/phase1_replay/phase1_replay_summary.md"
       ],
       "expected_hashes": {},
       "execution_class": "deterministic_replay",
-      "default_enabled": false,
+      "default_enabled": true,
       "rerun_policy": "allowed_in_replay"
     },
     {

@@ -8,11 +8,17 @@ import subprocess
 from pathlib import Path
 from typing import Iterable
 
+from .phase1_replay import load_phase1_replay_report, run_phase1_replay
 from .pipeline_manifest import PipelineManifest, PipelineStage
 from .pipeline_state import PipelineState, default_run_id, latest_state_path
 
 SAFE_VALIDATE_CLASS = "frozen_validation"
 LIVE_CLASSES = {"driftable_live_wdqs", "driftable_live_llm"}
+PHASE1_REPLAY_STAGE_IDS = {
+    "phase1_symmetry_inverse_evidence",
+    "phase1_allocation_export",
+    "phase1_support_genericity_matrix_export",
+}
 
 
 class PipelineRunner:
@@ -164,6 +170,8 @@ class PipelineRunner:
         if mode == "replay-frozen":
             if stage.execution_class == SAFE_VALIDATE_CLASS and stage.default_enabled:
                 return "run", "safe validation stage included in replay"
+            if stage.stage_id in PHASE1_REPLAY_STAGE_IDS:
+                return "run", "safe Phase I run-scoped replay stage"
             if (
                 stage.execution_class == "deterministic_replay"
                 and stage.rerun_policy == "allowed_in_replay"
@@ -198,6 +206,12 @@ class PipelineRunner:
         logs_dir.mkdir(parents=True, exist_ok=True)
         log_path = logs_dir / f"{stage.stage_id}.log"
         state.set_stage(stage.stage_id, "running", log_path=str(log_path), message="running")
+        if stage.stage_id == "phase1_allocation_export":
+            self._run_phase1_allocation_export_stage(stage, state, run_dir, log_path)
+            return
+        if stage.stage_id == "phase1_support_genericity_matrix_export":
+            self._run_phase1_matrix_export_stage(stage, state, run_dir, log_path)
+            return
         command = [self._format_value(part, run_dir) for part in stage.command]
         env = os.environ.copy()
         env.update({key: self._format_value(value, run_dir) for key, value in stage.env.items()})
@@ -227,6 +241,79 @@ class PipelineRunner:
             )
             state.finalize()
             raise subprocess.CalledProcessError(completed.returncode, command)
+
+    def _run_phase1_allocation_export_stage(
+        self,
+        stage: PipelineStage,
+        state: PipelineState,
+        run_dir: Path,
+        log_path: Path,
+    ) -> None:
+        with log_path.open("w", encoding="utf-8") as log:
+            log.write(f"stage_id={stage.stage_id}\n")
+            log.write("internal=phase1_run_scoped_replay_export\n\n")
+            try:
+                report = run_phase1_replay(self.repo_root, run_dir)
+            except Exception as exc:  # noqa: BLE001 - runner records arbitrary stage failures.
+                log.write(f"error={exc}\n")
+                state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=str(exc))
+                state.finalize()
+                raise subprocess.CalledProcessError(1, ["internal", "phase1_run_scoped_replay_export"]) from exc
+            log.write(json.dumps(report, indent=2) + "\n")
+
+        if report.get("status") == "passed" and report.get("allocation", {}).get("matches_exactly") is True:
+            state.set_stage(
+                stage.stage_id,
+                "passed",
+                exit_code=0,
+                log_path=str(log_path),
+                message="run-scoped allocation replay matched canonical allocation",
+            )
+            return
+
+        message = "run-scoped allocation replay mismatch"
+        state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=message)
+        state.finalize()
+        raise subprocess.CalledProcessError(1, ["internal", "phase1_run_scoped_replay_export"])
+
+    def _run_phase1_matrix_export_stage(
+        self,
+        stage: PipelineStage,
+        state: PipelineState,
+        run_dir: Path,
+        log_path: Path,
+    ) -> None:
+        with log_path.open("w", encoding="utf-8") as log:
+            log.write(f"stage_id={stage.stage_id}\n")
+            log.write("internal=phase1_run_scoped_matrix_replay_validation\n\n")
+            try:
+                report = load_phase1_replay_report(run_dir)
+            except Exception as exc:  # noqa: BLE001 - runner records arbitrary stage failures.
+                log.write(f"error={exc}\n")
+                state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=str(exc))
+                state.finalize()
+                raise subprocess.CalledProcessError(1, ["internal", "phase1_run_scoped_matrix_replay_validation"]) from exc
+            log.write(json.dumps(report, indent=2) + "\n")
+
+        matrix_report = report.get("genericity_support_matrix", {})
+        if (
+            report.get("status") == "passed"
+            and matrix_report.get("relation_set_matches") is True
+            and matrix_report.get("content_matches") is True
+        ):
+            state.set_stage(
+                stage.stage_id,
+                "passed",
+                exit_code=0,
+                log_path=str(log_path),
+                message="run-scoped genericity matrix replay matched canonical matrix",
+            )
+            return
+
+        message = "run-scoped genericity matrix replay mismatch"
+        state.set_stage(stage.stage_id, "failed", exit_code=1, log_path=str(log_path), message=message)
+        state.finalize()
+        raise subprocess.CalledProcessError(1, ["internal", "phase1_run_scoped_matrix_replay_validation"])
 
     def _write_resolved_manifest(self, run_dir: Path) -> None:
         run_dir.mkdir(parents=True, exist_ok=True)

@@ -24,6 +24,13 @@ Run frozen validation:
 python scripts/pipeline/run_kg_pipeline.py --mode validate-frozen
 ```
 
+Run the first Level 2 replay slice. This materializes Phase I allocation and genericity matrix exports under the run directory and compares them to the frozen canonical files without overwriting them:
+
+```bash
+python scripts/pipeline/run_kg_pipeline.py --mode replay-frozen --dry-run
+python scripts/pipeline/run_kg_pipeline.py --mode replay-frozen
+```
+
 Show the latest run status:
 
 ```bash
@@ -60,7 +67,7 @@ Execution classes in `configs/pipeline/kg_pipeline.default.json`:
 - `graph_construction` — stages that build, repair, prune, or emit graph candidates.
 - `manual_ui_optional` — optional UI stages such as the Phase I Streamlit dashboard.
 
-In the current foundation, live WDQS/LLM execution, SLURM submission, and new graph generation are blocked. `construct-candidates --from-frozen` can package existing registered frozen candidates into a pipeline run directory for inspection and evaluation. The manifest records blocked stages so users can inspect the A-to-Z workflow without accidentally rerunning driftable or expensive stages.
+In the current foundation, live WDQS/LLM execution, SLURM submission, and new graph generation are blocked. `replay-frozen` currently enables only the safe Phase I run-scoped replay/export slice plus frozen validations. It writes `phase1_replay/allocation.replayed.json`, `phase1_replay/genericity_support_matrix.replayed.json`, and a replay report under `outputs/pipeline_runs/<run_id>/`; canonical Phase I artifacts are read for comparison only. `construct-candidates --from-frozen` can package existing registered frozen candidates into a pipeline run directory for inspection and evaluation. The manifest records blocked stages so users can inspect the A-to-Z workflow without accidentally rerunning driftable or expensive stages.
 
 Detailed runner documentation: `docs/reconstruction/70_reusable_A_to_Z_pipeline_runner.md`
 
