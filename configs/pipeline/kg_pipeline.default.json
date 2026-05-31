@@ -1,0 +1,487 @@
+{
+  "schema_version": "kg-pipeline-manifest-v1",
+  "name": "kg_pipeline_default",
+  "description": "Default A-to-Z KG pipeline manifest. Safe validation stages run by default; live, SLURM, and graph construction stages are listed but blocked or skipped unless future implementations enable them.",
+  "default_state_root": "outputs/pipeline_runs",
+  "stages": [
+    {
+      "stage_id": "validate_required_artifacts",
+      "phase": "frozen_validation",
+      "description": "Check the minimum frozen reconstruction artifact bundle without modifying artifacts.",
+      "command": [
+        "bash",
+        "scripts/reconstruction/check_required_artifacts.sh"
+      ],
+      "inputs": [
+        "artifacts/final_graph/selected_final_graph/rebuild/artifact_bundle_manifest.minimum.template.json"
+      ],
+      "outputs": [],
+      "expected_hashes": {},
+      "execution_class": "frozen_validation",
+      "default_enabled": true,
+      "rerun_policy": "never_by_default"
+    },
+    {
+      "stage_id": "validate_frozen_reconstruction",
+      "phase": "frozen_validation",
+      "description": "Run frozen-artifact reconstruction audit in validate-only mode.",
+      "command": [
+        "bash",
+        "scripts/reconstruction/run_frozen_artifact_reconstruction_audit.sh",
+        "--validate-only"
+      ],
+      "env": {
+        "RECON_AUDIT_MANIFEST_OUT": "{run_dir}/frozen_artifact_validate_only_manifest.json"
+      },
+      "inputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+        "src/Pruning graph/bidirectional_allocation_results5k.json"
+      ],
+      "outputs": [
+        "{run_dir}/frozen_artifact_validate_only_manifest.json"
+      ],
+      "expected_hashes": {
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+        "src/Pruning graph/bidirectional_allocation_results5k.json": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+      },
+      "execution_class": "frozen_validation",
+      "default_enabled": true,
+      "rerun_policy": "never_by_default"
+    },
+    {
+      "stage_id": "validate_candidate_registry",
+      "phase": "frozen_validation",
+      "description": "Validate candidate registry schema, hashes, and key historical report compatibility.",
+      "command": [
+        "python",
+        "scripts/reconstruction/check_candidate_registry.py"
+      ],
+      "inputs": [
+        "artifacts/final_graph/selected_final_graph/rebuild/candidate_registry.v1.json"
+      ],
+      "outputs": [],
+      "expected_hashes": {},
+      "execution_class": "frozen_validation",
+      "default_enabled": true,
+      "rerun_policy": "never_by_default"
+    },
+    {
+      "stage_id": "validate_candidate_evaluation_compatibility",
+      "phase": "frozen_validation",
+      "description": "Compare reusable evaluator metrics against historical candidate reports.",
+      "command": [
+        "python",
+        "scripts/reconstruction/check_candidate_evaluation_compatibility.py"
+      ],
+      "inputs": [
+        "docs/reconstruction/graph_candidate_reports/"
+      ],
+      "outputs": [],
+      "expected_hashes": {},
+      "execution_class": "frozen_validation",
+      "default_enabled": true,
+      "rerun_policy": "never_by_default"
+    },
+    {
+      "stage_id": "phase1_relation_metadata_universe",
+      "phase": "Phase I",
+      "description": "Load or reconstruct relation universe and property metadata from frozen exports or live WDQS.",
+      "command": [
+        "python",
+        "src/kg_building/fetch_relation_metadata.py"
+      ],
+      "inputs": [
+        "data/raw/wikidata_ontology.*.json"
+      ],
+      "outputs": [
+        "data/processed/relation_metadata.json"
+      ],
+      "expected_hashes": {},
+      "execution_class": "driftable_live_wdqs",
+      "default_enabled": false,
+      "rerun_policy": "requires_explicit_live_flag"
+    },
+    {
+      "stage_id": "phase1_hop_discovery",
+      "phase": "Phase I",
+      "description": "Discover candidate two-hop relation paths. Historical execution is SLURM-backed and may query live services depending on configuration.",
+      "command": [
+        "sbatch",
+        "scripts/slurm/hop_discovery_json.slurm"
+      ],
+      "inputs": [
+        "data/raw/wikidata_ontology.*.json"
+      ],
+      "outputs": [
+        "data/processed/hop_discovery_from_json.jsonl"
+      ],
+      "expected_hashes": {},
+      "execution_class": "slurm_expensive",
+      "default_enabled": false,
+      "rerun_policy": "requires_slurm_submit"
+    },
+    {
+      "stage_id": "phase1_hop_support",
+      "phase": "Phase I",
+      "description": "Compute hop-support evidence for relation pairs from frozen/local inputs.",
+      "command": [
+        "sbatch",
+        "scripts/slurm/hop_support_v3_sharded.slurm"
+      ],
+      "inputs": [
+        "data/processed/hop_discovery_from_json.jsonl"
+      ],
+      "outputs": [
+        "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl"
+      ],
+      "expected_hashes": {},
+      "execution_class": "slurm_expensive",
+      "default_enabled": false,
+      "rerun_policy": "requires_slurm_submit"
+    },
+    {
+      "stage_id": "phase1_symmetry_inverse_evidence",
+      "phase": "Phase I",
+      "description": "Build symmetry, anti-symmetry, and inverse empirical evidence tables from hop support outputs.",
+      "command": [
+        "python",
+        "scripts/reconstruction/check_phase1_dashboard_extraction.py"
+      ],
+      "inputs": [
+        "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl"
+      ],
+      "outputs": [],
+      "expected_hashes": {},
+      "execution_class": "deterministic_replay",
+      "default_enabled": false,
+      "rerun_policy": "allowed_in_replay"
+    },
+    {
+      "stage_id": "phase1_composition_verification",
+      "phase": "Phase I",
+      "description": "Verify sampled composition evidence from compact frozen outputs or historical SLURM jobs.",
+      "command": [
+        "sbatch",
+        "scripts/slurm/composition_range_domain_improved_min8_jsonl.slurm"
+      ],
+      "inputs": [
+        "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl"
+      ],
+      "outputs": [
+        "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl"
+      ],
+      "expected_hashes": {},
+      "execution_class": "slurm_expensive",
+      "default_enabled": false,
+      "rerun_policy": "requires_slurm_submit"
+    },
+    {
+      "stage_id": "phase1_llm_relation_profile_classification",
+      "phase": "Phase I",
+      "description": "Historical LLM relation/profile classification branch. Driftable and disabled by default.",
+      "command": [
+        "sbatch",
+        "scripts/slurm/llm_classification_inv.slurm"
+      ],
+      "inputs": [
+        "data/processed/hop_support_v3/"
+      ],
+      "outputs": [
+        "data/processed/llm_relation_profiles/"
+      ],
+      "expected_hashes": {},
+      "execution_class": "driftable_live_llm",
+      "default_enabled": false,
+      "rerun_policy": "requires_explicit_live_flag"
+    },
+    {
+      "stage_id": "phase1_interactive_streamlit_dashboard",
+      "phase": "Phase I",
+      "description": "Optional Streamlit UI for inspecting Phase I evidence, choosing confidence thresholds, and exporting allocation/config artifacts.",
+      "command": [
+        "streamlit",
+        "run",
+        "src/statistics/hop_pattern_analysis_dashboard.py"
+      ],
+      "inputs": [
+        "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl",
+        "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl"
+      ],
+      "outputs": [
+        "exported allocation/config artifacts, if manually exported"
+      ],
+      "expected_hashes": {},
+      "execution_class": "manual_ui_optional",
+      "default_enabled": false,
+      "rerun_policy": "manual_only"
+    },
+    {
+      "stage_id": "phase1_allocation_export",
+      "phase": "Phase I",
+      "description": "Export bidirectional allocation from Phase I pattern evidence.",
+      "command": [
+        "python",
+        "scripts/reconstruction/check_phase1_dashboard_extraction.py"
+      ],
+      "inputs": [
+        "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl",
+        "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl"
+      ],
+      "outputs": [
+        "src/Pruning graph/bidirectional_allocation_results5k.json"
+      ],
+      "expected_hashes": {
+        "src/Pruning graph/bidirectional_allocation_results5k.json": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+      },
+      "execution_class": "deterministic_replay",
+      "default_enabled": false,
+      "rerun_policy": "allowed_in_replay"
+    },
+    {
+      "stage_id": "phase1_support_genericity_matrix_export",
+      "phase": "Phase I",
+      "description": "Export genericity/support adjacency matrix from Phase I evidence.",
+      "command": [
+        "python",
+        "scripts/reconstruction/check_phase1_dashboard_extraction.py"
+      ],
+      "inputs": [
+        "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
+      ],
+      "outputs": [
+        "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
+      ],
+      "expected_hashes": {},
+      "execution_class": "deterministic_replay",
+      "default_enabled": false,
+      "rerun_policy": "allowed_in_replay"
+    },
+    {
+      "stage_id": "phase2_stage1_genericity_scoring",
+      "phase": "Phase II",
+      "description": "Historical Stage1 genericity scoring for candidate graph construction.",
+      "command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "--stage",
+        "stage1"
+      ],
+      "inputs": [
+        "archive/hetzner_version/src/kg_builder/input/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage01_genericity/"
+      ],
+      "expected_hashes": {},
+      "execution_class": "deterministic_replay",
+      "default_enabled": false,
+      "rerun_policy": "allowed_in_replay"
+    },
+    {
+      "stage_id": "phase2_stage2_candidate_collection",
+      "phase": "Phase II",
+      "description": "Historical Stage2 candidate collection. May be driftable when backed by live WDQS.",
+      "command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "--stage",
+        "stage2"
+      ],
+      "inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage01_genericity/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/"
+      ],
+      "expected_hashes": {},
+      "execution_class": "driftable_live_wdqs",
+      "default_enabled": false,
+      "rerun_policy": "requires_explicit_live_flag"
+    },
+    {
+      "stage_id": "phase2_stage3_candidate_audit",
+      "phase": "Phase II",
+      "description": "Audit Stage2 candidate shards before graph construction.",
+      "command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "--stage",
+        "stage3"
+      ],
+      "inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage03_candidate_audit/"
+      ],
+      "expected_hashes": {},
+      "execution_class": "deterministic_replay",
+      "default_enabled": false,
+      "rerun_policy": "allowed_in_replay"
+    },
+    {
+      "stage_id": "phase2_stage4_core_graph_construction",
+      "phase": "Phase II",
+      "description": "Construct historical Stage4 core graph from audited candidates.",
+      "command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "--stage",
+        "stage4"
+      ],
+      "inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage03_candidate_audit/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/"
+      ],
+      "expected_hashes": {},
+      "execution_class": "graph_construction",
+      "default_enabled": false,
+      "rerun_policy": "never_by_default"
+    },
+    {
+      "stage_id": "phase2_stage5_repair",
+      "phase": "Phase II",
+      "description": "Historical Stage5 graph repair.",
+      "command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "--stage",
+        "stage5"
+      ],
+      "inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage05_repair/"
+      ],
+      "expected_hashes": {},
+      "execution_class": "graph_construction",
+      "default_enabled": false,
+      "rerun_policy": "never_by_default"
+    },
+    {
+      "stage_id": "phase2_stage6_refinement",
+      "phase": "Phase II",
+      "description": "Historical Stage6 refinement.",
+      "command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "--stage",
+        "stage6"
+      ],
+      "inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage05_repair/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage06_refinement/"
+      ],
+      "expected_hashes": {},
+      "execution_class": "graph_construction",
+      "default_enabled": false,
+      "rerun_policy": "never_by_default"
+    },
+    {
+      "stage_id": "phase2_stage7_eta_aware_replacement",
+      "phase": "Phase II",
+      "description": "Eta-aware standalone Stage7 replacement/refinement branch.",
+      "command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/eta_aware_component_filter.py"
+      ],
+      "inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage06_refinement/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_eta_aware/"
+      ],
+      "expected_hashes": {},
+      "execution_class": "graph_construction",
+      "default_enabled": false,
+      "rerun_policy": "never_by_default"
+    },
+    {
+      "stage_id": "phase2_stage11_connectivity_repair",
+      "phase": "Phase II",
+      "description": "Stage11 eta-aware connectivity repair output used by B0 reconstruction.",
+      "command": [
+        "python",
+        "src/kg_building/repair_kg_connectivity.py"
+      ],
+      "inputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/"
+      ],
+      "outputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl"
+      ],
+      "expected_hashes": {
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl": "73bc624bf9147b0bba4962ab286648bcfeeb931a94a1d1a727839f160b35ada5"
+      },
+      "execution_class": "graph_construction",
+      "default_enabled": false,
+      "rerun_policy": "never_by_default"
+    },
+    {
+      "stage_id": "phase2_stage12_path_repair",
+      "phase": "Phase II",
+      "description": "Stage12 path repair output used by B0 largest-component extraction.",
+      "command": [
+        "python",
+        "src/kg_building/repair_kg_connectivity.py"
+      ],
+      "inputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl"
+      ],
+      "outputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl"
+      ],
+      "expected_hashes": {
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl": "89ec9bf9c8932962fd3d966073b51f76345666eda5ed5d9beb18659d02e294b0"
+      },
+      "execution_class": "graph_construction",
+      "default_enabled": false,
+      "rerun_policy": "never_by_default"
+    },
+    {
+      "stage_id": "phase2_B0_largest_component_extraction",
+      "phase": "Phase II",
+      "description": "B0 largest-component extraction/selection from Stage12 graph output.",
+      "command": [
+        "bash",
+        "scripts/reconstruction/01_audit_B0_final_graph.sh"
+      ],
+      "inputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl"
+      ],
+      "outputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv"
+      ],
+      "expected_hashes": {
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
+      },
+      "execution_class": "graph_construction",
+      "default_enabled": false,
+      "rerun_policy": "never_by_default"
+    },
+    {
+      "stage_id": "phase2_C1_stage13_pruning_candidate",
+      "phase": "Phase II",
+      "description": "C1 Stage13 pruning candidate evaluation if local artifacts are present.",
+      "command": [
+        "bash",
+        "scripts/run_stage13_branch_sweep.sh"
+      ],
+      "inputs": [
+        "docs/reconstruction/graph_candidate_reports/C1_stage13_aggressive.report.json"
+      ],
+      "outputs": [
+        "docs/reconstruction/graph_candidate_reports/C1_stage13_aggressive.report.json"
+      ],
+      "expected_hashes": {},
+      "execution_class": "graph_construction",
+      "default_enabled": false,
+      "rerun_policy": "never_by_default"
+    }
+  ]
+}
