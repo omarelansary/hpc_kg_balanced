@@ -1,0 +1,463 @@
+{
+  "schema_version": "level2-replay-design-audit-v1",
+  "created_by": "docs/reconstruction/71_level2_replay_design_audit.md",
+  "scope": "Historical B0/C1 generation replay design audit for the A-to-Z pipeline runner. This audit documents replay readiness only and does not run graph construction.",
+  "guardrails": {
+    "no_graph_construction_run": true,
+    "no_slurm_submission": true,
+    "no_wdqs_query": true,
+    "no_llm_call": true,
+    "no_candidate_registry_update": true,
+    "no_historical_artifact_modification_required": true
+  },
+  "summary": {
+    "selected_level2_posture": "do_not_enable_historical_b0_c1_regeneration_yet",
+    "level1_packaging_status": "B0/C1 frozen candidate packaging is safe today through construct-candidates --from-frozen",
+    "b0_regeneration_safe_today": false,
+    "first_level2_implementation_boundary": "Phase I read-only/run-scoped replay: materialize allocation and genericity matrix exports under outputs/pipeline_runs/<run_id>/phase1_replay/, then compare to frozen canonical artifacts without overwriting them.",
+    "safe_replay_candidates": [
+      "phase1_symmetry_inverse_evidence"
+    ],
+    "needs_read_only_wrapper": [
+      "phase1_allocation_export",
+      "phase1_support_genericity_matrix_export",
+      "phase2_B0_largest_component_extraction"
+    ],
+    "needs_run_directory_wrapper": [
+      "phase2_stage1_genericity_scoring",
+      "phase2_stage3_candidate_audit",
+      "phase2_stage4_core_graph_construction",
+      "phase2_stage5_repair",
+      "phase2_stage6_refinement",
+      "phase2_stage7_eta_aware_replacement"
+    ],
+    "needs_slurm_wrapper": [
+      "phase2_C1_stage13_pruning_candidate"
+    ],
+    "driftable_not_replayable": [
+      "phase2_stage11_connectivity_repair",
+      "phase2_stage12_path_repair"
+    ]
+  },
+  "classification_legend": {
+    "safe_replay_now": "Can be enabled as a read-only or run-scoped replay step with current code and no historical artifact writes.",
+    "needs_read_only_wrapper": "Needs a wrapper that validates or writes only run-scoped comparison outputs before it can be enabled.",
+    "needs_run_directory_wrapper": "Needs a wrapper that translates historical commands into fresh run directories and prevents writes to historical paths.",
+    "needs_slurm_wrapper": "Needs job submission, dependency, status, and run directory tracking before replay is safe.",
+    "driftable_not_replayable": "Current implementation can depend on live sources or driftable behavior and must remain frozen-only until redesigned.",
+    "historical_only_do_not_rerun": "Should remain evidence only; no stage in this audit requires this strongest classification once wrappers are built, but some are frozen-only for now."
+  },
+  "stage_assessments": [
+    {
+      "stage_id": "phase1_symmetry_inverse_evidence",
+      "classification": "safe_replay_now",
+      "current_command": [
+        "python",
+        "scripts/reconstruction/check_phase1_dashboard_extraction.py"
+      ],
+      "inputs": [
+        "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl"
+      ],
+      "outputs": [],
+      "output_path_scope": "none_read_only_check",
+      "overwrite_risk": "none",
+      "expected_runtime_risk": "low",
+      "dependency_risk": "low_local_python_only",
+      "can_run_without_wdqs_llm_slurm": true,
+      "can_run_without_modifying_historical_artifacts": true,
+      "required_wrapper_before_enabling": "none for validation; use a future run-scoped export wrapper only if materialized evidence tables are needed",
+      "recommended_level2_status": "enable_first_as_read_only_golden_master_validation",
+      "evidence": [
+        "configs/pipeline/kg_pipeline.default.json: phase1_symmetry_inverse_evidence",
+        "scripts/reconstruction/check_phase1_dashboard_extraction.py validates frozen Phase I counts without Streamlit, WDQS, or LLM calls"
+      ],
+      "notes": "This is not a materializing replay of dashboard exports; it is a deterministic check over frozen Phase I inputs."
+    },
+    {
+      "stage_id": "phase1_allocation_export",
+      "classification": "needs_read_only_wrapper",
+      "current_command": [
+        "python",
+        "scripts/reconstruction/check_phase1_dashboard_extraction.py"
+      ],
+      "inputs": [
+        "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl",
+        "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl"
+      ],
+      "outputs": [
+        "src/Pruning graph/bidirectional_allocation_results5k.json"
+      ],
+      "output_path_scope": "historical_global_canonical_artifact",
+      "overwrite_risk": "high_if_enabled_as_export_to_manifest_output",
+      "expected_runtime_risk": "low",
+      "dependency_risk": "low_local_python_only",
+      "can_run_without_wdqs_llm_slurm": true,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "write regenerated allocation to outputs/pipeline_runs/<run_id>/phase1_replay/ and compare to canonical hash a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb; never overwrite src/Pruning graph/bidirectional_allocation_results5k.json",
+      "recommended_level2_status": "next_safe_boundary_after_phase1_validation",
+      "evidence": [
+        "configs/pipeline/kg_pipeline.default.json: phase1_allocation_export expected_hashes",
+        "docs/reconstruction/46_phase1_extraction_implementation.md",
+        "scripts/reconstruction/check_phase1_dashboard_extraction.py golden-master allocation comparison"
+      ],
+      "notes": "The extracted Phase I modules make this plausible, but the manifest output is the canonical allocation artifact and must remain frozen."
+    },
+    {
+      "stage_id": "phase1_support_genericity_matrix_export",
+      "classification": "needs_read_only_wrapper",
+      "current_command": [
+        "python",
+        "scripts/reconstruction/check_phase1_dashboard_extraction.py"
+      ],
+      "inputs": [
+        "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
+      ],
+      "outputs": [
+        "archive/hetzner_version/src/kg_builder/input/genericity_support_matrix.adjacency_support.json"
+      ],
+      "output_path_scope": "historical_global_canonical_artifact",
+      "overwrite_risk": "high_if_enabled_as_export_to_manifest_output",
+      "expected_runtime_risk": "low",
+      "dependency_risk": "low_local_python_only",
+      "can_run_without_wdqs_llm_slurm": true,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "write regenerated genericity matrix to outputs/pipeline_runs/<run_id>/phase1_replay/ and compare relation set/content against the frozen canonical matrix; never overwrite archive input matrix",
+      "recommended_level2_status": "next_safe_boundary_after_phase1_validation",
+      "evidence": [
+        "configs/pipeline/kg_pipeline.default.json: phase1_support_genericity_matrix_export",
+        "scripts/reconstruction/check_phase1_dashboard_extraction.py verifies genericity matrix relation set"
+      ],
+      "notes": "Current manifest input and output are the same historical path, so direct replay is unsafe."
+    },
+    {
+      "stage_id": "phase2_stage1_genericity_scoring",
+      "classification": "needs_run_directory_wrapper",
+      "current_command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "--stage",
+        "stage1"
+      ],
+      "inputs": [
+        "archive/hetzner_version/src/kg_builder/input/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage01_genericity/"
+      ],
+      "output_path_scope": "historical_global_run_directory",
+      "overwrite_risk": "medium_to_high_if_historical_run_dir_is_reused",
+      "expected_runtime_risk": "medium",
+      "dependency_risk": "medium_config_and_run_context_required",
+      "can_run_without_wdqs_llm_slurm": true,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "correct the command to the historical subcommand score-genericity with --config and a fresh --run-dir under outputs/pipeline_runs/<run_id>/level2_replay/; verify inputs and compare output summaries to frozen historical evidence",
+      "recommended_level2_status": "do_not_enable_until_run_scoped_wrapper_exists",
+      "evidence": [
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py parse_args defines subcommands, not --stage",
+        "RunContext.create refuses existing run directories",
+        "ensure_stage_can_write_once guards stage outputs inside a run directory"
+      ],
+      "notes": "The manifest command is not the actual CLI shape; a wrapper must translate manifest stage IDs to historical subcommands."
+    },
+    {
+      "stage_id": "phase2_stage3_candidate_audit",
+      "classification": "needs_run_directory_wrapper",
+      "current_command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "--stage",
+        "stage3"
+      ],
+      "inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage03_candidate_audit/"
+      ],
+      "output_path_scope": "historical_global_run_directory",
+      "overwrite_risk": "high_if_historical_run_dir_is_reused",
+      "expected_runtime_risk": "medium",
+      "dependency_risk": "medium_requires_frozen_stage02_shards_and_pipeline_config",
+      "can_run_without_wdqs_llm_slurm": true,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "copy or reference frozen Stage2 candidate shards into a fresh run directory, call audit-candidates with --config/--run-dir, and write only run-scoped Stage3 outputs",
+      "recommended_level2_status": "enable_after_stage1_wrapper_or_as_stage3_only_replay_from_frozen_stage2_shards",
+      "evidence": [
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py stage_audit_candidates reads stage02_candidates/shards inside ctx.run_dir",
+        "Stage2 candidate collection is WDQS-backed and outside safe Level 2 replay"
+      ],
+      "notes": "Stage3 itself is local over frozen shards, but it assumes a run directory layout."
+    },
+    {
+      "stage_id": "phase2_stage4_core_graph_construction",
+      "classification": "needs_run_directory_wrapper",
+      "current_command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "--stage",
+        "stage4"
+      ],
+      "inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage03_candidate_audit/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/"
+      ],
+      "output_path_scope": "historical_global_run_directory",
+      "overwrite_risk": "high",
+      "expected_runtime_risk": "medium_to_high",
+      "dependency_risk": "medium_requires_stage02_shards_stage03_audit_config_and_allocation",
+      "can_run_without_wdqs_llm_slurm": true,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "fresh run directory wrapper with frozen Stage2/Stage3 inputs, explicit no-live policy, and output hash/report comparison; never target prod_refine_20260315_180520",
+      "recommended_level2_status": "blocked_until_run_scoped_graph_construction_wrapper_exists",
+      "evidence": [
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py stage_construct_graph writes stage04_core_graph/core_graph_triples.jsonl",
+        "configs/pipeline/kg_pipeline.default.json marks graph construction stages never_by_default"
+      ],
+      "notes": "This is graph generation and should remain disabled until wrapper isolation and validation are in place."
+    },
+    {
+      "stage_id": "phase2_stage5_repair",
+      "classification": "needs_run_directory_wrapper",
+      "current_command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "--stage",
+        "stage5"
+      ],
+      "inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage04_core_graph/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage05_repair/"
+      ],
+      "output_path_scope": "historical_global_run_directory",
+      "overwrite_risk": "high",
+      "expected_runtime_risk": "medium_to_high",
+      "dependency_risk": "medium_requires_stage04_and_frozen_candidate_shards",
+      "can_run_without_wdqs_llm_slurm": true,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "fresh run directory wrapper that consumes run-scoped Stage4 output and frozen candidate shards; compare repair summary to historical evidence",
+      "recommended_level2_status": "blocked_until_stage4_wrapper_exists",
+      "evidence": [
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py stage_repair_graph writes stage05_repair/repair_triples.jsonl"
+      ],
+      "notes": "Safe replay depends on a fully run-scoped upstream graph construction replay."
+    },
+    {
+      "stage_id": "phase2_stage6_refinement",
+      "classification": "needs_run_directory_wrapper",
+      "current_command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py",
+        "--stage",
+        "stage6"
+      ],
+      "inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage05_repair/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage06_refinement/"
+      ],
+      "output_path_scope": "historical_global_run_directory",
+      "overwrite_risk": "high",
+      "expected_runtime_risk": "medium_to_high",
+      "dependency_risk": "medium_requires_stage04_stage05_and_candidate_shards",
+      "can_run_without_wdqs_llm_slurm": true,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "fresh run directory wrapper and manifest correction: historical code writes stage06_refine_graph, while the current manifest names stage06_refinement",
+      "recommended_level2_status": "blocked_until_stage4_stage5_wrappers_exist_and_manifest_stage_name_is_corrected",
+      "evidence": [
+        "archive/hetzner_version/src/kg_builder/relation_balanced_kg_pipeline.py stage_refine_graph uses stage06_refine_graph/refined_graph_triples.jsonl",
+        "archive/hetzner_version/src/kg_builder/eta_aware_component_filter.py also expects stage06_refine_graph"
+      ],
+      "notes": "There is a manifest/code stage-name mismatch that must be resolved before replay orchestration."
+    },
+    {
+      "stage_id": "phase2_stage7_eta_aware_replacement",
+      "classification": "needs_run_directory_wrapper",
+      "current_command": [
+        "python",
+        "archive/hetzner_version/src/kg_builder/eta_aware_component_filter.py"
+      ],
+      "inputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage06_refinement/"
+      ],
+      "outputs": [
+        "archive/hetzner_version/runs/prod_refine_20260315_180520/stage07_eta_aware/"
+      ],
+      "output_path_scope": "historical_global_run_directory",
+      "overwrite_risk": "high_if_out_dir_targets_historical_run",
+      "expected_runtime_risk": "medium",
+      "dependency_risk": "medium_requires_run_dir_manifest_allocation_and_prefilter_graph",
+      "can_run_without_wdqs_llm_slurm": true,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "call eta_aware_component_filter.py with explicit --run_dir pointing at a fresh replay run and explicit --out_dir under outputs/pipeline_runs/<run_id>/level2_replay/; do not use --force except inside disposable run dirs",
+      "recommended_level2_status": "enable_after_stage6_run_scoped_replay_or_as_standalone_from_frozen_prefilter_copy",
+      "evidence": [
+        "archive/hetzner_version/src/kg_builder/eta_aware_component_filter.py requires --run_dir and supports --out_dir",
+        "prepare_output_dir refuses non-empty output unless --force"
+      ],
+      "notes": "This script is closer to wrapper-ready than Stage11/12 because it already supports explicit output directories and does not need live WDQS."
+    },
+    {
+      "stage_id": "phase2_stage11_connectivity_repair",
+      "classification": "driftable_not_replayable",
+      "current_command": [
+        "python",
+        "src/kg_building/repair_kg_connectivity.py"
+      ],
+      "inputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/"
+      ],
+      "outputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl"
+      ],
+      "output_path_scope": "historical_global_graph_artifact",
+      "overwrite_risk": "very_high",
+      "expected_runtime_risk": "high",
+      "dependency_risk": "high_live_wdqs_possible_and_run_state_required",
+      "can_run_without_wdqs_llm_slurm": false,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "run-specific output_dir wrapper plus an audited frozen-local candidate source mode that prevents WDQS queries; record manifest/state/events and compare output hash to 73bc624bf9147b0bba4962ab286648bcfeeb931a94a1d1a727839f160b35ada5",
+      "recommended_level2_status": "frozen_only_until_no_live_query_wrapper_exists",
+      "evidence": [
+        "src/kg_building/repair_kg_connectivity.py defines SPARQL_ENDPOINT and WDQS query helpers",
+        "repair_kg_connectivity.py requires --output_dir and manages run manifest/state/events",
+        "artifact bundle manifest treats Stage11 graph_output.jsonl as external frozen evidence"
+      ],
+      "notes": "The existing script can write to a fresh output_dir, but its candidate acquisition can be live and driftable; that blocks safe replay today."
+    },
+    {
+      "stage_id": "phase2_stage12_path_repair",
+      "classification": "driftable_not_replayable",
+      "current_command": [
+        "python",
+        "src/kg_building/repair_kg_connectivity.py"
+      ],
+      "inputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/graph_output.jsonl"
+      ],
+      "outputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl"
+      ],
+      "output_path_scope": "historical_global_graph_artifact",
+      "overwrite_risk": "very_high",
+      "expected_runtime_risk": "high",
+      "dependency_risk": "high_live_wdqs_possible_and_stage11_dependency_required",
+      "can_run_without_wdqs_llm_slurm": false,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "same as Stage11: fresh output_dir, no-live frozen-local candidate policy, strict input hash check on Stage11 output, and output comparison to 89ec9bf9c8932962fd3d966073b51f76345666eda5ed5d9beb18659d02e294b0",
+      "recommended_level2_status": "frozen_only_until_no_live_query_wrapper_exists",
+      "evidence": [
+        "src/kg_building/repair_kg_connectivity.py WDQS query helpers",
+        "artifact bundle manifest treats Stage12 graph_output.jsonl as external frozen evidence"
+      ],
+      "notes": "Stage12 is downstream of Stage11 and shares the same live-query and historical-output risks."
+    },
+    {
+      "stage_id": "phase2_B0_largest_component_extraction",
+      "classification": "needs_read_only_wrapper",
+      "current_command": [
+        "bash",
+        "scripts/reconstruction/01_audit_B0_final_graph.sh"
+      ],
+      "inputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/graph_output.jsonl"
+      ],
+      "outputs": [
+        "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv"
+      ],
+      "output_path_scope": "historical_global_graph_artifact_in_manifest; actual script writes rebuild audit reports",
+      "overwrite_risk": "high_for_actual_extraction; low_to_medium_for_current_audit_without_force",
+      "expected_runtime_risk": "low_for_audit_only; medium_for_actual_extraction",
+      "dependency_risk": "low_local_files_only_for_current_audit",
+      "can_run_without_wdqs_llm_slurm": true,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "separate validation from extraction: keep 01_audit_B0_final_graph.sh as frozen audit, and if extraction is needed create a run-scoped largest-component extractor that writes under outputs/pipeline_runs/<run_id>/ and compares hash c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+      "recommended_level2_status": "validate_only_now; actual extraction_not_enabled",
+      "evidence": [
+        "scripts/reconstruction/01_audit_B0_final_graph.sh performs B0 re-audit and writes rebuild report/summary with overwrite checks",
+        "configs/pipeline/kg_pipeline.default.json labels this as largest-component extraction but command points to audit wrapper"
+      ],
+      "notes": "The manifest stage label and command semantics are not aligned; today this is an audit, not a safe extraction replay."
+    },
+    {
+      "stage_id": "phase2_C1_stage13_pruning_candidate",
+      "classification": "needs_slurm_wrapper",
+      "current_command": [
+        "bash",
+        "scripts/run_stage13_branch_sweep.sh"
+      ],
+      "inputs": [
+        "docs/reconstruction/graph_candidate_reports/C1_stage13_aggressive.report.json"
+      ],
+      "outputs": [
+        "docs/reconstruction/graph_candidate_reports/C1_stage13_aggressive.report.json"
+      ],
+      "output_path_scope": "historical_or_timestamped_global_graph_directory",
+      "overwrite_risk": "medium_for_timestamped_sweep_dirs; high_without_explicit_output_root_policy",
+      "expected_runtime_risk": "high_expensive_batch_sweep",
+      "dependency_risk": "high_requires_slurm_and_downstream_summary_jobs",
+      "can_run_without_wdqs_llm_slurm": false,
+      "can_run_without_modifying_historical_artifacts": false,
+      "required_wrapper_before_enabling": "SLURM-aware wrapper with run-specific SWEEP_DIR under outputs/pipeline_runs/<run_id>/, submitted job IDs, dependency tracking, resume/status support, and no writes into historical graph directories by default",
+      "recommended_level2_status": "frozen_only_until_slurm_job_state_wrapper_exists",
+      "evidence": [
+        "scripts/run_stage13_branch_sweep.sh submits sbatch jobs and writes SWEEP_DIR under the Stage12 graph tree by default",
+        "configs/pipeline/kg_pipeline.default.json marks graph construction never_by_default"
+      ],
+      "notes": "C1 can be packaged in Level 1 from frozen artifacts, but replaying its pruning branch is not safe in the current runner."
+    }
+  ],
+  "required_answers": {
+    "deterministic_replay_stages_enabled_safely_first": [
+      "phase1_symmetry_inverse_evidence can be enabled immediately as a read-only golden-master validation.",
+      "phase1_allocation_export and phase1_support_genericity_matrix_export are the first materialized replay targets, but only after wrappers write under outputs/pipeline_runs/<run_id>/phase1_replay/ and compare to frozen canonical artifacts."
+    ],
+    "graph_construction_stages_dangerous_due_historical_paths": [
+      "phase2_stage4_core_graph_construction",
+      "phase2_stage5_repair",
+      "phase2_stage6_refinement",
+      "phase2_stage7_eta_aware_replacement",
+      "phase2_stage11_connectivity_repair",
+      "phase2_stage12_path_repair",
+      "phase2_B0_largest_component_extraction if implemented as actual extraction",
+      "phase2_C1_stage13_pruning_candidate"
+    ],
+    "stages_needing_run_specific_output_directories": [
+      "phase1_allocation_export",
+      "phase1_support_genericity_matrix_export",
+      "phase2_stage1_genericity_scoring",
+      "phase2_stage3_candidate_audit",
+      "phase2_stage4_core_graph_construction",
+      "phase2_stage5_repair",
+      "phase2_stage6_refinement",
+      "phase2_stage7_eta_aware_replacement",
+      "phase2_stage11_connectivity_repair",
+      "phase2_stage12_path_repair",
+      "phase2_B0_largest_component_extraction",
+      "phase2_C1_stage13_pruning_candidate"
+    ],
+    "stages_needing_slurm_job_state_tracking": [
+      "phase2_C1_stage13_pruning_candidate"
+    ],
+    "stages_that_must_remain_frozen_only_for_now": [
+      "phase2_stage11_connectivity_repair",
+      "phase2_stage12_path_repair",
+      "phase2_C1_stage13_pruning_candidate",
+      "phase2_stage4_core_graph_construction through phase2_stage7_eta_aware_replacement until run-scoped graph-construction wrappers exist"
+    ],
+    "can_b0_be_regenerated_safely_today_through_runner": false,
+    "can_b0_c1_be_packaged_safely_today_through_runner": true,
+    "first_level2_implementation_boundary": "Phase I read-only/run-scoped replay: materialize allocation and genericity matrix exports under outputs/pipeline_runs/<run_id>/phase1_replay/, then compare to frozen canonical artifacts without overwriting them."
+  },
+  "implementation_sequence": [
+    "Add a Phase I replay/export wrapper that writes allocation and genericity matrix artifacts under the pipeline run directory and compares them to canonical hashes/sets.",
+    "Correct manifest-to-historical-command translation for relation_balanced_kg_pipeline.py subcommands and create a dry-run/read-only validation wrapper for Stage1 and Stage3 layouts.",
+    "Only then add run-scoped wrappers for Stage4 through Stage7 graph construction, with output hash/report comparison and no writes to historical run directories.",
+    "Treat Stage11 and Stage12 separately because repair_kg_connectivity.py can query WDQS; require an audited frozen-local source mode before enabling.",
+    "Treat C1 Stage13 separately because it requires SLURM job-state tracking and run-scoped sweep directories."
+  ]
+}
