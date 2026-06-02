@@ -1,0 +1,8 @@
+strategy	selected_auxiliary_edge_count	removed_canonical_edge_count	canonical_surplus_delta	canonical_deficit_delta	composition_surplus_delta	remaining_total_surplus	remaining_total_deficit	full_graph_weak_components	canonical_only_weak_components	canonical_only_largest_component_ratio	auxiliary_relation_count	p17_count	p17_share	max_single_auxiliary_relation_share	surplus_reduction_percent_of_b0_surplus	auxiliary_cost_per_surplus_removed	stopping_reason	crosses_decision_thresholds
+baseline_current_ranking_no_cap	3650	3650	-3650	0	-3578.22916667	3052	2019	1	3478	0.086832412523	179	1726	0.472876712329	0.472876712329	54.4613548195	1	source_exhausted	false
+relation_diversity_penalty_light_no_cap	3643	3643	-3643	0	-3571.22916667	3059	2019	1	3471	0.0865101289134	240	1241	0.340653307713	0.340653307713	54.3569083856	1	source_exhausted	true
+relation_diversity_penalty_strong_no_cap	3643	3643	-3643	0	-3571.22916667	3059	2019	1	3471	0.0865101289134	240	1241	0.340653307713	0.340653307713	54.3569083856	1	source_exhausted	true
+max_per_aux_relation_10_no_cap	996	996	-996	0	-933.229166667	5706	2019	1	920	0.135451045105	207	10	0.0100401606426	0.0100401606426	14.8612354521	1	source_exhausted	true
+max_per_aux_relation_20_no_cap	1384	1384	-1384	0	-1320.22916667	5318	2019	1	1284	0.126422540382	201	20	0.014450867052	0.014450867052	20.650552074	1	source_exhausted	true
+p17_cap_25_percent_no_cap	2627	2627	-2627	0	-2557.22916667	4075	2019	1	2501	0.10259119728	194	296	0.112676056338	0.139703083365	39.1972545509	1	source_exhausted	true
+fragmentation_penalty_light_no_cap	3650	3650	-3650	0	-3578.22916667	3052	2019	1	3478	0.086832412523	179	1726	0.472876712329	0.472876712329	54.4613548195	1	source_exhausted	false
