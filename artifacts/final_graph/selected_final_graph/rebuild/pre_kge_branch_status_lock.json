@@ -1,0 +1,479 @@
+{
+  "schema_version": "pre-kge-branch-status-lock-v1",
+  "created_by": "manual_repository_audit",
+  "source_documents": [
+    "docs/reconstruction/12_C2_result_interpretation.md",
+    "docs/reconstruction/17_C3_feasibility_probe_result.md",
+    "docs/reconstruction/19_final_graph_selection_decision.md",
+    "docs/reconstruction/56_C4_branch_decision_audit.md",
+    "docs/reconstruction/57_C5_hypothesis_matrix_and_branch_spec.md",
+    "docs/reconstruction/58_C5_H1_H2_probe.md",
+    "docs/reconstruction/66_C5_H2_marginal_utility_decision_audit.md",
+    "docs/reconstruction/67_H3_synthetic_pattern_feasibility_audit.md",
+    "docs/reconstruction/68_final_endpoint_and_branch_synthesis.md",
+    "docs/reconstruction/69_B0_provisional_baseline_status_audit.md",
+    "docs/reconstruction/70_reusable_A_to_Z_pipeline_runner.md",
+    "docs/reconstruction/71_level2_replay_design_audit.md",
+    "docs/reconstruction/73_phase2_stage1_stage3_run_scoped_replay.md",
+    "docs/reconstruction/76_C5_H2_auxiliary_support_pre_kge_status.md",
+    "artifacts/final_graph/selected_final_graph/rebuild/final_endpoint_branch_synthesis.json",
+    "artifacts/final_graph/selected_final_graph/rebuild/level2_replay_design_audit.json"
+  ],
+  "global_status": {
+    "connected_realization_exists": true,
+    "connected_realization_id": "B0",
+    "connected_realization_status": "provisional_baseline_not_final_solution",
+    "relation_complete": true,
+    "allocated_relations_observed": 139,
+    "allocated_relations_total": 139,
+    "weak_components": 1,
+    "not_perfectly_balanced": true,
+    "b0_total_surplus": 6702,
+    "b0_total_deficit": 2019,
+    "no_clean_final_balanced_connected_candidate_yet": true,
+    "kge_interpretation_locked": false
+  },
+  "framework_status": [
+    {
+      "component": "frozen_validation",
+      "current_status": "done",
+      "evidence": [
+        "docs/reconstruction/70_reusable_A_to_Z_pipeline_runner.md",
+        "scripts/reconstruction/check_required_artifacts.sh"
+      ],
+      "limitation": "Requires restored frozen evidence artifacts.",
+      "next_action": "Keep as default guardrail."
+    },
+    {
+      "component": "phase1_replay_allocation_matrix",
+      "current_status": "done",
+      "evidence": [
+        "docs/reconstruction/70_reusable_A_to_Z_pipeline_runner.md",
+        "docs/reconstruction/72_phase1_run_scoped_replay.md"
+      ],
+      "limitation": "Safe replay covers run-scoped allocation/matrix export comparison, not live dashboard state.",
+      "next_action": "Use saved configs/artifacts; keep Streamlit manual-only."
+    },
+    {
+      "component": "stage1_stage3_replay",
+      "current_status": "partial",
+      "evidence": [
+        "docs/reconstruction/73_phase2_stage1_stage3_run_scoped_replay.md"
+      ],
+      "limitation": "Run-scoped Stage1/Stage3 slices exist, but do not regenerate B0.",
+      "next_action": "Keep as replay slice; do not promote to full graph regeneration."
+    },
+    {
+      "component": "stage4_wrapper",
+      "current_status": "partial",
+      "evidence": [
+        "docs/reconstruction/70_reusable_A_to_Z_pipeline_runner.md",
+        "docs/reconstruction/71_level2_replay_design_audit.md"
+      ],
+      "limitation": "Guarded, long-running, skipped by default; not a full B0 regeneration path.",
+      "next_action": "Keep disabled by default; require explicit objective and run-scoped outputs."
+    },
+    {
+      "component": "full_historical_kg_regeneration",
+      "current_status": "not_done",
+      "evidence": [
+        "docs/reconstruction/71_level2_replay_design_audit.md"
+      ],
+      "limitation": "Stage4-7 wrappers, Stage11/12 no-live wrappers, and Stage13 SLURM tracking are incomplete.",
+      "next_action": "Do not claim end-to-end regeneration."
+    },
+    {
+      "component": "new_kg_generation",
+      "current_status": "not_done",
+      "evidence": [
+        "docs/reconstruction/70_reusable_A_to_Z_pipeline_runner.md",
+        "docs/reconstruction/76_C5_H2_auxiliary_support_pre_kge_status.md"
+      ],
+      "limitation": "General new-candidate generation is not a reusable solved pathway.",
+      "next_action": "Define objective weights and edge provenance before any new generator."
+    },
+    {
+      "component": "packaging_of_candidates",
+      "current_status": "done",
+      "evidence": [
+        "docs/reconstruction/70_reusable_A_to_Z_pipeline_runner.md",
+        "artifacts/final_graph/selected_final_graph/rebuild/candidate_registry.v1.json"
+      ],
+      "limitation": "Packages existing frozen registered candidates only.",
+      "next_action": "Use for B0/C1 comparison and frozen candidate handoff."
+    },
+    {
+      "component": "kge_protocol",
+      "current_status": "not_done",
+      "evidence": [
+        "docs/reconstruction/76_C5_H2_auxiliary_support_pre_kge_status.md"
+      ],
+      "limitation": "Protocol, split, model, seed, metrics, commands, and result artifacts are not locked here.",
+      "next_action": "Lock KGE protocol before interpreting results."
+    }
+  ],
+  "branches": [
+    {
+      "branch_id": "B0",
+      "branch_name": "Connected realization",
+      "tested_question": "Can a frozen graph remain connected, relation-complete, duplicate-free, and auditable?",
+      "evidence_files": [
+        "docs/reconstruction/68_final_endpoint_and_branch_synthesis.md",
+        "docs/reconstruction/69_B0_provisional_baseline_status_audit.md",
+        "artifacts/final_graph/selected_final_graph/rebuild/final_endpoint_branch_synthesis.json"
+      ],
+      "output_or_result": "24,683 triples; 139/139 allocated relations; 1 weak component; surplus 6,702; deficit 2,019.",
+      "supported_conclusion": "B0 is the current frozen connected baseline.",
+      "not_supported": "B0 is not optimal, not final balanced, and not proof the construction problem is solved.",
+      "decision_state": "keep_as_reference",
+      "next_action": "Use as baseline only with limitations and KGE protocol lock."
+    },
+    {
+      "branch_id": "balance_first_stress_test",
+      "branch_name": "Connectivity-relaxed balance-first pruning",
+      "tested_question": "Can surplus be reduced by aggressive deletion?",
+      "evidence_files": [
+        "docs/reconstruction/68_final_endpoint_and_branch_synthesis.md",
+        "docs/reconstruction/69_B0_provisional_baseline_status_audit.md"
+      ],
+      "output_or_result": "Surplus reduced to 105, but weak components increased to 5,623.",
+      "supported_conclusion": "Balance can improve by deletion in the tested setup.",
+      "not_supported": "This does not prove no connected balanced alternative exists.",
+      "decision_state": "closed_for_now",
+      "next_action": "Keep as diagnostic stress evidence."
+    },
+    {
+      "branch_id": "C1",
+      "branch_name": "Guarded surplus pruning",
+      "tested_question": "Does Stage13 guarded pruning beat B0 enough to replace it?",
+      "evidence_files": [
+        "docs/reconstruction/19_final_graph_selection_decision.md",
+        "docs/reconstruction/graph_candidates.tsv",
+        "docs/reconstruction/graph_candidate_reports/C1_stage13_aggressive.report.json"
+      ],
+      "output_or_result": "C1 preserves connectivity and relation coverage; surplus improves from 6,702 to 6,582, but deficit worsens from 2,019 to 2,359.",
+      "supported_conclusion": "C1 is a valid comparison candidate.",
+      "not_supported": "C1 does not supersede B0 under the recorded final decision.",
+      "decision_state": "closed_for_now",
+      "next_action": "Keep as nonselected candidate evidence."
+    },
+    {
+      "branch_id": "C2",
+      "branch_name": "Targeted safe deletion",
+      "tested_question": "Can targeted deletion of generic surplus preserve hard constraints and beat the surplus threshold?",
+      "evidence_files": [
+        "docs/reconstruction/12_C2_result_interpretation.md",
+        "experiments/graph_candidates/C2_targeted_generic_pruning/reports/evaluator.report.json",
+        "experiments/graph_candidates/C2_targeted_generic_pruning/reports/prune_report.json"
+      ],
+      "output_or_result": "Preserved connectivity and coverage, but surplus was 6,675; only 27 removals accepted.",
+      "supported_conclusion": "Deletion-only pruning can be safe but too weak under current objective.",
+      "not_supported": "C2 is not a final candidate and does not solve balance.",
+      "decision_state": "closed_for_now",
+      "next_action": "Use as negative evidence against deletion-only next steps."
+    },
+    {
+      "branch_id": "C3_probe_v1",
+      "branch_name": "Remove-and-replace probe",
+      "tested_question": "Can eligible replacement pool v1 rescue connectivity-critical generic deletions?",
+      "evidence_files": [
+        "docs/reconstruction/17_C3_feasibility_probe_result.md",
+        "experiments/graph_candidates/C3_remove_replace_generic_connectivity/probe_v1/feasibility_probe_report.json"
+      ],
+      "output_or_result": "No graph generated; 0 feasible replacements for 473 connectivity-critical bridge-like targets.",
+      "supported_conclusion": "Eligible pool v1 did not solve the tested bridge-rescue problem.",
+      "not_supported": "C3 is not a generated graph and does not improve B0/C1/C2.",
+      "decision_state": "closed_for_now",
+      "next_action": "Reopen only with a new candidate source or changed operation policy."
+    },
+    {
+      "branch_id": "C4",
+      "branch_name": "Strict allocated bridge replacement",
+      "tested_question": "Can strict allocated replacements remove surplus bridge edges while preserving constraints?",
+      "evidence_files": [
+        "docs/reconstruction/56_C4_branch_decision_audit.md",
+        "experiments/graph_candidates/C4_bridge_aware_replace_add/reports/probe_only/probe_report.json"
+      ],
+      "output_or_result": "First 200 surplus target bridge edges had 0 feasible strict replacements.",
+      "supported_conclusion": "Strict C4 is not justified from current frozen evidence.",
+      "not_supported": "This does not prove all replacement methods fail globally.",
+      "decision_state": "closed_for_now",
+      "next_action": "Reopen only with allocated, cut-crossing, surplus-improving candidates."
+    },
+    {
+      "branch_id": "C4_1",
+      "branch_name": "Replacement-pool bridge-cut audit",
+      "tested_question": "Did eligible pool v1 cross the tested bridge cuts?",
+      "evidence_files": [
+        "docs/reconstruction/56_C4_branch_decision_audit.md",
+        "experiments/graph_candidates/C4_bridge_aware_replace_add/reports/probe_only/replacement_pool_bridge_cut_audit.json"
+      ],
+      "output_or_result": "990 rows loaded; 0 crossed any tested cut.",
+      "supported_conclusion": "The pool failed primarily on bridge-cut crossing coverage.",
+      "not_supported": "This does not prove future pools cannot cross cuts.",
+      "decision_state": "closed_for_now",
+      "next_action": "Build a new cut-aware pool only with explicit objective and frozen evidence."
+    },
+    {
+      "branch_id": "C4_2",
+      "branch_name": "Local cut-crossing search",
+      "tested_question": "Does broader frozen local evidence contain cut-crossing candidates?",
+      "evidence_files": [
+        "docs/reconstruction/56_C4_branch_decision_audit.md",
+        "experiments/graph_candidates/C4_bridge_aware_replace_add/reports/probe_only/local_cut_crossing_candidate_search.json"
+      ],
+      "output_or_result": "625 unique cut-crossing candidates found; 546 surplus-reducing candidate-cut pairs were unallocated.",
+      "supported_conclusion": "Cut-crossing evidence exists locally, but surplus-reducing evidence is unallocated.",
+      "not_supported": "It does not validate unallocated evidence as canonical allocated replacement.",
+      "decision_state": "open_bounded",
+      "next_action": "Feed auxiliary-labeled branches only; do not call it strict replacement success."
+    },
+    {
+      "branch_id": "C5_H1",
+      "branch_name": "Allocated support",
+      "tested_question": "Do allocated observed cut-crossing candidates improve balance?",
+      "evidence_files": [
+        "docs/reconstruction/58_C5_H1_H2_probe.md",
+        "experiments/graph_candidates/C5_connectivity_support_hypothesis_matrix/reports/probe_only/c5_h1_h2_probe_report.json"
+      ],
+      "output_or_result": "109 connectivity-preserving H1 moves; 0 balance-improving H1 moves.",
+      "supported_conclusion": "H1 has connectivity signal but no balance-improving signal.",
+      "not_supported": "A strict H1 generator is not justified.",
+      "decision_state": "closed_for_now",
+      "next_action": "Reopen only with new allocated candidates or changed objective."
+    },
+    {
+      "branch_id": "C5_H2",
+      "branch_name": "Auxiliary unallocated support",
+      "tested_question": "Can observed unallocated auxiliary edges preserve full connectivity while pruning surplus canonical bridge edges?",
+      "evidence_files": [
+        "docs/reconstruction/58_C5_H1_H2_probe.md",
+        "docs/reconstruction/66_C5_H2_marginal_utility_decision_audit.md",
+        "docs/reconstruction/76_C5_H2_auxiliary_support_pre_kge_status.md"
+      ],
+      "output_or_result": "Expanded package: 3,643 auxiliary edges, 3,643 canonical removals, surplus 6,702 -> 3,059, full WCC 1, canonical-only WCC 3,471.",
+      "supported_conclusion": "C5-H2 is structurally successful as an experimental auxiliary-support candidate.",
+      "not_supported": "It is not canonical-final and not a B0 replacement because connectivity depends on unallocated auxiliary edges.",
+      "decision_state": "continue_candidate",
+      "next_action": "Run KGE only after protocol lock and report auxiliary dependence explicitly."
+    },
+    {
+      "branch_id": "C5_H2_diversity",
+      "branch_name": "Diversity reranking",
+      "tested_question": "Can relation concentration be reduced without losing surplus benefit?",
+      "evidence_files": [
+        "docs/reconstruction/66_C5_H2_marginal_utility_decision_audit.md",
+        "docs/reconstruction/76_C5_H2_auxiliary_support_pre_kge_status.md"
+      ],
+      "output_or_result": "Cap-50 P17 concentration was reduced from 39/50 to 1/50; expanded strategy has P17 share about 0.341.",
+      "supported_conclusion": "Diversity can reduce concentration under tested policies.",
+      "not_supported": "Diversity does not remove auxiliary dependence or make the graph canonical-only connected.",
+      "decision_state": "open_bounded",
+      "next_action": "Keep diversity as a selection criterion for auxiliary candidates."
+    },
+    {
+      "branch_id": "H3",
+      "branch_name": "Bounded synthetic pattern-derived candidates",
+      "tested_question": "Can verified pattern rules synthesize bridge alternatives under bounded frozen evidence?",
+      "evidence_files": [
+        "docs/reconstruction/67_H3_synthetic_pattern_feasibility_audit.md",
+        "experiments/graph_candidates/H3_synthetic_pattern_feasibility/reports/h3_synthetic_pattern_feasibility_report.json"
+      ],
+      "output_or_result": "0 synthetic candidates found over 200 cuts.",
+      "supported_conclusion": "H3 graph generation is not justified from this bounded audit.",
+      "not_supported": "This does not prove all synthetic methods fail.",
+      "decision_state": "closed_for_now",
+      "next_action": "Reopen only with broader source scope or changed bridge-target definition."
+    },
+    {
+      "branch_id": "stage4_7_replay_full_regeneration",
+      "branch_name": "Stage4-7 replay/full regeneration",
+      "tested_question": "Can historical graph generation be safely replayed from frozen/local inputs?",
+      "evidence_files": [
+        "docs/reconstruction/70_reusable_A_to_Z_pipeline_runner.md",
+        "docs/reconstruction/71_level2_replay_design_audit.md",
+        "docs/reconstruction/73_phase2_stage1_stage3_run_scoped_replay.md"
+      ],
+      "output_or_result": "Stage1/Stage3 run-scoped slices exist; Stage4 wrapper is guarded; full B0 regeneration is not safe today.",
+      "supported_conclusion": "Some framework pieces exist.",
+      "not_supported": "Full historical regeneration is not yet reproducible or safe.",
+      "decision_state": "open_bounded",
+      "next_action": "Continue wrapper work only with run-scoped outputs and no-live guards."
+    },
+    {
+      "branch_id": "live_new_candidate_pool_expansion",
+      "branch_name": "Live/new candidate-pool expansion",
+      "tested_question": "Can a broader or live source find better cut-aware evidence?",
+      "evidence_files": [
+        "docs/reconstruction/56_C4_branch_decision_audit.md",
+        "docs/reconstruction/57_C5_hypothesis_matrix_and_branch_spec.md",
+        "docs/reconstruction/68_final_endpoint_and_branch_synthesis.md"
+      ],
+      "output_or_result": "Mentioned as future/non-canonical option; no locked local result.",
+      "supported_conclusion": "It remains a possible future branch.",
+      "not_supported": "No claim can be made until results are frozen, hashed, audited, and evaluated.",
+      "decision_state": "open_bounded",
+      "next_action": "Define source boundary and freeze policy before implementation."
+    },
+    {
+      "branch_id": "broader_synthetic_strategy",
+      "branch_name": "Broader synthetic strategy",
+      "tested_question": "Can synthetic/pattern-derived methods work beyond the bounded H3 audit?",
+      "evidence_files": [
+        "docs/reconstruction/57_C5_hypothesis_matrix_and_branch_spec.md",
+        "docs/reconstruction/67_H3_synthetic_pattern_feasibility_audit.md",
+        "docs/reconstruction/68_final_endpoint_and_branch_synthesis.md"
+      ],
+      "output_or_result": "Bounded H3 found zero candidates; broader synthetic scope is unresolved.",
+      "supported_conclusion": "Bounded H3 is negative evidence for that scope.",
+      "not_supported": "It does not globally rule out all synthetic methods.",
+      "decision_state": "open_bounded",
+      "next_action": "Define explicit rule source, thresholds, labels, and evaluation policy before any generation."
+    },
+    {
+      "branch_id": "KGE_evaluation_branch",
+      "branch_name": "KGE evaluation",
+      "tested_question": "Do graph variants improve downstream utility?",
+      "evidence_files": [],
+      "output_or_result": "No locked KGE protocol/result artifact in the inspected reconstruction docs.",
+      "supported_conclusion": "KGE can become decision evidence only after protocol and results are recorded.",
+      "not_supported": "No causal diagnosis of weakness is supported yet.",
+      "decision_state": "needs_protocol_lock",
+      "next_action": "Lock protocol and artifact hashes before interpreting results."
+    }
+  ],
+  "closed_for_now": [
+    {
+      "branch_id": "balance_first_stress_test",
+      "reason": "Tested endpoint fragmented into 5,623 weak components.",
+      "would_reopen_if": "A method preserves a documented connectivity/component policy while reducing surplus."
+    },
+    {
+      "branch_id": "C1",
+      "reason": "Reduced surplus modestly but increased total deficit relative to B0.",
+      "would_reopen_if": "Reporting objective explicitly prioritizes lower surplus/density over deficit and accepts Stage13."
+    },
+    {
+      "branch_id": "C2",
+      "reason": "Deletion-only pruning accepted only 27 removals and failed the surplus threshold.",
+      "would_reopen_if": "A non-deletion-only operation or new objective is defined."
+    },
+    {
+      "branch_id": "C3_probe_v1",
+      "reason": "Eligible pool v1 did not rescue tested connectivity-critical bridge-like deletions.",
+      "would_reopen_if": "A new replacement pool or explicit operation policy is defined."
+    },
+    {
+      "branch_id": "C4",
+      "reason": "Strict allocated replacement evidence did not produce feasible balance-improving replacements.",
+      "would_reopen_if": "Allocated, cut-crossing, surplus-improving candidates are produced under frozen evidence."
+    },
+    {
+      "branch_id": "C4_1",
+      "reason": "Eligible pool v1 did not cross tested bridge cuts.",
+      "would_reopen_if": "A cut-aware allocated pool is built and audited."
+    },
+    {
+      "branch_id": "C5_H1",
+      "reason": "Allocated cut-crossing moves preserved connectivity but did not improve balance.",
+      "would_reopen_if": "New allocated candidates or objective changes produce balance-improving moves."
+    },
+    {
+      "branch_id": "H3",
+      "reason": "Bounded synthetic-pattern audit found zero candidates.",
+      "would_reopen_if": "Broader source scope or revised target/rule definition is specified."
+    }
+  ],
+  "open_bounded": [
+    {
+      "branch_id": "C4_2",
+      "why_open": "Local cut-crossing evidence exists.",
+      "why_not_final": "Surplus-reducing evidence is unallocated and does not validate strict replacement.",
+      "minimal_next_test": "Determine whether a frozen allocated cut-aware pool can produce surplus-improving replacements."
+    },
+    {
+      "branch_id": "C5_H2",
+      "why_open": "Expanded auxiliary package is connected and reduces canonical surplus.",
+      "why_not_final": "Full connectivity depends on observed unallocated auxiliary edges; canonical-only graph is fragmented.",
+      "minimal_next_test": "Run locked KGE protocol on B0, full auxiliary graph, and optional canonical-only graph."
+    },
+    {
+      "branch_id": "C5_H2_diversity",
+      "why_open": "Diversity policies reduce relation concentration.",
+      "why_not_final": "Diversity does not remove auxiliary dependence.",
+      "minimal_next_test": "Compare KGE and relation-distribution effects under one protocol."
+    },
+    {
+      "branch_id": "live_new_candidate_pool_expansion",
+      "why_open": "Future candidate sources may produce new cut-aware evidence.",
+      "why_not_final": "No frozen, audited result exists.",
+      "minimal_next_test": "Define source boundary and freeze candidate artifacts with hashes."
+    },
+    {
+      "branch_id": "broader_synthetic_strategy",
+      "why_open": "Bounded H3 does not globally rule out synthetic approaches.",
+      "why_not_final": "No broader synthetic candidate artifact exists.",
+      "minimal_next_test": "Define pattern rules, confidence thresholds, labels, and evaluation policy."
+    },
+    {
+      "branch_id": "stage4_7_replay_full_regeneration",
+      "why_open": "Framework work can improve reproducibility.",
+      "why_not_final": "It is not a candidate-quality branch and full regeneration remains unsafe.",
+      "minimal_next_test": "Run-scoped Stage4-7 wrappers plus no-live Stage11/12 replay policy."
+    }
+  ],
+  "needs_protocol_lock": [
+    {
+      "branch_id": "KGE_evaluation_branch",
+      "required_fields": [
+        "KG artifact path and hash",
+        "train/valid/test split method",
+        "model(s)",
+        "loss",
+        "negative sampling",
+        "filtered versus unfiltered ranking",
+        "metric(s)",
+        "seed(s)",
+        "evaluation library/version",
+        "exact command",
+        "exact result artifact path",
+        "auxiliary/synthetic edge inclusion and labels"
+      ]
+    }
+  ],
+  "acceptance_criteria": [
+    "139/139 allocated relation coverage unless explicitly relaxed",
+    "duplicate-free triples",
+    "connectivity or a documented component policy",
+    "lower surplus and/or lower composition dominance",
+    "no hidden auxiliary or synthetic edges",
+    "provenance labels for canonical, auxiliary, and synthetic edges",
+    "KGE protocol compatibility",
+    "reproducible command or package manifest",
+    "improving one metric alone is not enough"
+  ],
+  "safe_claims": [
+    "The connected realization exists and is audited.",
+    "The connected realization is not perfectly balanced.",
+    "Balance-first deletion improves surplus but damages connectivity under the tested setup.",
+    "Some replacement and auxiliary branches have bounded evidence.",
+    "C5-H2 auxiliary support is promising as an experimental auxiliary branch but not canonical-final.",
+    "KGE interpretation requires protocol lock."
+  ],
+  "unsafe_claims": [
+    "B0 is optimal.",
+    "B0 is the final balanced benchmark.",
+    "All pruning fails.",
+    "All replacement fails.",
+    "All synthetic methods fail.",
+    "KGE weakness is caused by balance or sparsity without controlled protocol.",
+    "Auxiliary edges are canonical allocated evidence."
+  ],
+  "next_actions": [
+    "Lock this document and JSON.",
+    "Lock KGE protocol before interpreting KGE.",
+    "Decide whether the next KG candidate should be canonical-only or auxiliary-labelled.",
+    "If continuing C5-H2, define acceptance criteria before further generation.",
+    "If opening a new branch, define objective weights before implementation."
+  ]
+}
