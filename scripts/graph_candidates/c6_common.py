@@ -12,6 +12,7 @@ import hashlib
 import itertools
 import json
 import math
+import os
 import sys
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
@@ -57,6 +58,7 @@ DEFAULT_RELATION_FULFILLMENT = Path(
 )
 SCHEMA_VERSION = "c6-observed-canonical-densification-v1"
 GENERIC_RELATIONS = {"P31", "P279", "P131"}
+SUPPORTED_COMPOSITION_POLICIES = {"penalize_if_overfilled", "forbid_if_overfilled", "allow"}
 
 
 @dataclass(frozen=True)
@@ -117,6 +119,17 @@ def write_json(path: str | Path, data: dict[str, Any]) -> None:
 
 def load_json(path: str | Path) -> dict[str, Any]:
     return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def command_metadata(run_dir: str | Path, stage_id: str) -> dict[str, Any]:
+    return {
+        "command_line": list(sys.argv),
+        "working_directory": os.getcwd(),
+        "created_by": Path(sys.argv[0]).name if sys.argv else stage_id,
+        "run_id": Path(run_dir).name,
+        "run_mode": os.environ.get("C6_RUN_MODE", "manual"),
+        "stage_id": stage_id,
+    }
 
 
 def load_graph_records(path: str | Path, source: str = "canonical_existing") -> list[TripleRecord]:
@@ -518,7 +531,7 @@ def select_additions(
     base_triples: Sequence[Triple],
     allocation: dict[str, Any],
     config: dict[str, Any],
-) -> tuple[list[TripleRecord], dict[str, int]]:
+) -> tuple[list[TripleRecord], dict[str, int], dict[str, Any]]:
     relation_counts = count_relations(base_triples)
     pattern_map = relation_pattern_map(allocation)
     pattern_counts = aggregate_observed_by_pattern_integer(relation_counts, allocation)
@@ -532,8 +545,17 @@ def select_additions(
     allow_auxiliary = bool(config.get("allow_auxiliary", False))
     require_allocated = bool(config.get("require_allocated_relation", True))
     preserve_connected = bool(config.get("preserve_connected", True))
-    composition_policy = str(config.get("composition_addition_policy", "penalize_or_forbid_if_overfilled"))
+    composition_policy = str(config.get("composition_addition_policy", "forbid_if_overfilled"))
+    if composition_policy not in SUPPORTED_COMPOSITION_POLICIES:
+        raise ValueError(
+            "unsupported composition_addition_policy "
+            f"{composition_policy!r}; expected {sorted(SUPPORTED_COMPOSITION_POLICIES)}"
+        )
+    min_score = float(config.get("min_score", 0.0))
     allocated_relations = set(relation_eta_map(allocation))
+    accepted_scores: list[float] = []
+    accepted_negative_score_count = 0
+    accepted_composition_penalized_count = 0
 
     for row in sorted(census_rows, key=candidate_sort_key):
         if len(accepted) >= max_additions:
@@ -552,16 +574,24 @@ def select_additions(
         if relation not in allocated_relations and not allow_auxiliary:
             rejection_reasons["auxiliary_disallowed"] += 1
             continue
+        score = float(row.get("candidate_score", 0.0))
+        if score <= min_score:
+            rejection_reasons["score_below_threshold"] += 1
+            continue
         introduced = sum(1 for entity in (triple[0], triple[2]) if entity not in entities)
         if introduced > 0 and introduced > new_entity_budget:
             rejection_reasons["new_entity_budget"] += 1
             continue
-        if composition_policy == "forbid_if_overfilled":
-            if "composition" in pattern_map.get(relation, []) and pattern_counts.get("composition", 0) >= float(
-                pattern_expected_map(allocation).get("composition", math.inf)
-            ):
+        relation_patterns = pattern_map.get(relation, [])
+        composition_overfilled = "composition" in relation_patterns and pattern_counts.get("composition", 0) >= float(
+            pattern_expected_map(allocation).get("composition", math.inf)
+        )
+        if composition_overfilled:
+            if composition_policy == "forbid_if_overfilled":
                 rejection_reasons["composition_overfilled_forbidden"] += 1
                 continue
+            if composition_policy == "penalize_if_overfilled":
+                accepted_composition_penalized_count += 1
         tentative = list(current_triples) + [triple]
         if preserve_connected and graph_structural_metrics(tentative)["weak_component_count"] != 1:
             rejection_reasons["connectivity_not_preserved"] += 1
@@ -574,7 +604,7 @@ def select_additions(
                 "c6_observed_canonical_addition",
                 {
                     "candidate_class": row.get("candidate_class"),
-                    "candidate_score": float(row.get("candidate_score", 0.0)),
+                    "candidate_score": score,
                     "source_path": row.get("source_path"),
                     "source_line": row.get("source_line"),
                     "pattern_memberships": row.get("pattern_memberships"),
@@ -582,12 +612,23 @@ def select_additions(
                 },
             )
         )
+        accepted_scores.append(score)
+        if score < 0:
+            accepted_negative_score_count += 1
         current_triples.add(triple)
         relation_counts[relation] += 1
         entities.update([triple[0], triple[2]])
         pattern_counts = aggregate_observed_by_pattern_integer(relation_counts, allocation)
 
-    return accepted, dict(sorted(rejection_reasons.items()))
+    stats = {
+        "accepted_min_score": min(accepted_scores) if accepted_scores else None,
+        "accepted_negative_score_count": accepted_negative_score_count,
+        "accepted_composition_penalized_count": accepted_composition_penalized_count,
+        "rejected_score_below_threshold_count": rejection_reasons.get("score_below_threshold", 0),
+        "min_score": min_score,
+        "composition_addition_policy": composition_policy,
+    }
+    return accepted, dict(sorted(rejection_reasons.items())), stats
 
 
 def relation_surplus_map(metrics: dict[str, Any]) -> dict[str, float]:
@@ -612,16 +653,32 @@ def bridge_pairs(triples: Sequence[Triple]) -> set[tuple[str, str]]:
 def structurally_safe_to_remove(
     triples: Sequence[Triple],
     triple: Triple,
+    preserve_original_entities: bool = True,
+    original_entities: set[str] | None = None,
 ) -> bool:
+    original_entities = set(original_entities or {entity for h, _r, t in triples for entity in (h, t)})
     counts = pair_counts(triples)
-    if counts[canonical_pair(triple[0], triple[2])] > 1:
-        return True
     reduced = list(triples)
     try:
         reduced.remove(triple)
     except ValueError:
         return False
-    return graph_structural_metrics(reduced)["weak_component_count"] == 1
+    if preserve_original_entities:
+        reduced_entities = {entity for h, _r, t in reduced for entity in (h, t)}
+        if not original_entities <= reduced_entities:
+            return False
+    if counts[canonical_pair(triple[0], triple[2])] > 1:
+        return True
+    return weakly_connected(reduced, original_entities if preserve_original_entities else None)
+
+
+def weakly_connected(triples: Sequence[Triple], required_entities: set[str] | None = None) -> bool:
+    graph = build_nx_graph(triples)
+    if required_entities:
+        graph.add_nodes_from(required_entities)
+    if graph.number_of_nodes() == 0:
+        return False
+    return nx.is_connected(graph)
 
 
 def safe_deletion_rows(
@@ -682,12 +739,19 @@ def apply_safe_deletions(
     deletion_rows: Sequence[dict[str, Any]],
     allocation: dict[str, Any],
     max_deletions: int = 2000,
-) -> tuple[list[TripleRecord], list[dict[str, Any]], dict[str, int]]:
+    original_entities: set[str] | None = None,
+    preserve_original_entities: bool = True,
+    allow_unverified_safe_deletions: bool = False,
+    allow_deficit_increase: bool = False,
+) -> tuple[list[TripleRecord], list[dict[str, Any]], dict[str, int], dict[str, Any]]:
     current = list(added_records)
     current_triples = [record.triple for record in current]
     relation_counts = count_relations(current_triples)
     accepted: list[dict[str, Any]] = []
     rejections: Counter[str] = Counter()
+    original_entities = set(original_entities or {entity for h, _r, t in current_triples for entity in (h, t)})
+    current_metrics = compute_graph_metrics(current_triples, allocation)
+    current_deficit = float(current_metrics["total_deficit"])
     rows_sorted = sorted(
         deletion_rows,
         key=lambda row: (
@@ -702,6 +766,9 @@ def apply_safe_deletions(
     for row in rows_sorted:
         if len(accepted) >= max_deletions:
             break
+        if not allow_unverified_safe_deletions and not bool_from_csv(row.get("safe_after_additions", False)):
+            rejections["safe_after_additions_false"] += 1
+            continue
         triple = (str(row["h"]), str(row["r"]), str(row["t"]))
         if triple not in current_triples:
             rejections["already_absent"] += 1
@@ -712,20 +779,40 @@ def apply_safe_deletions(
             continue
         tentative = list(current_triples)
         tentative.remove(triple)
-        if graph_structural_metrics(tentative)["weak_component_count"] != 1:
+        tentative_entities = {entity for h, _r, t in tentative for entity in (h, t)}
+        if preserve_original_entities and not original_entities <= tentative_entities:
+            rejections["drops_original_entity"] += 1
+            continue
+        if not weakly_connected(tentative, original_entities if preserve_original_entities else None):
             rejections["would_disconnect"] += 1
             continue
         tentative_metrics = compute_graph_metrics(tentative, allocation)
         if tentative_metrics["allocated_relation_coverage_count"] != len(allocated_relations):
             rejections["would_drop_relation_coverage"] += 1
             continue
+        if not allow_deficit_increase and float(tentative_metrics["total_deficit"]) > current_deficit + 1e-9:
+            rejections["increases_total_deficit"] += 1
+            continue
         current_triples = tentative
+        current_deficit = float(tentative_metrics["total_deficit"])
         relation_counts[relation] -= 1
         current = [record for record in current if record.triple != triple]
         accepted_row = dict(row)
         accepted_row["accepted_order"] = len(accepted) + 1
         accepted.append(accepted_row)
-    return current, accepted, dict(sorted(rejections.items()))
+    final_entities = {entity for h, _r, t in current_triples for entity in (h, t)}
+    stats = {
+        "original_entity_count": len(original_entities),
+        "final_original_entities_present_count": len(original_entities & final_entities),
+        "dropped_original_entity_count": len(original_entities - final_entities),
+        "preserve_original_entities": preserve_original_entities,
+        "allow_unverified_safe_deletions": allow_unverified_safe_deletions,
+        "allow_deficit_increase": allow_deficit_increase,
+        "safe_after_additions_false_skipped_count": rejections.get("safe_after_additions_false", 0),
+        "drops_original_entity_rejected_count": rejections.get("drops_original_entity", 0),
+        "increases_total_deficit_rejected_count": rejections.get("increases_total_deficit", 0),
+    }
+    return current, accepted, dict(sorted(rejections.items())), stats
 
 
 def write_csv_rows(path: str | Path, rows: Sequence[dict[str, Any]], fieldnames: Sequence[str]) -> None:

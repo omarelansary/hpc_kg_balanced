@@ -12,6 +12,7 @@ from c6_common import (
     DEFAULT_ALLOCATION,
     DEFAULT_B0_GRAPH,
     SCHEMA_VERSION,
+    command_metadata,
     compute_graph_metrics,
     ensure_run_dir,
     load_allocation,
@@ -72,6 +73,7 @@ def main() -> int:
     write_csv_rows(run_dir / "c6_safe_deletion_candidates.csv", rows, FIELDNAMES)
     report = {
         "schema_version": f"{SCHEMA_VERSION}.redundancy-audit",
+        **command_metadata(run_dir, "c6_redundancy_audit"),
         "input_paths": {
             "b0_graph": args.graph,
             "added_graph": str(added_graph),
@@ -109,4 +111,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

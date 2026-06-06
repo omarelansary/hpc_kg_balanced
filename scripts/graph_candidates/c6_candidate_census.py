@@ -13,6 +13,7 @@ from c6_common import (
     DEFAULT_B0_GRAPH,
     DEFAULT_CANDIDATE_GLOB,
     SCHEMA_VERSION,
+    command_metadata,
     candidate_score,
     classify_candidate,
     common_neighbor_count,
@@ -220,6 +221,7 @@ def main() -> int:
         args.candidate_glob,
         max_candidates,
     )
+    summary.update(command_metadata(run_dir, "c6_candidate_census"))
     write_csv_rows(run_dir / "c6_candidate_census.csv", rows, FIELDNAMES)
     write_json(run_dir / "c6_candidate_census_summary.json", summary)
     print(
@@ -238,4 +240,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

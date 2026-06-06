@@ -14,6 +14,7 @@ from c6_common import (
     DEFAULT_B0_GRAPH,
     SCHEMA_VERSION,
     apply_safe_deletions,
+    command_metadata,
     compute_graph_metrics,
     ensure_run_dir,
     load_allocation,
@@ -35,6 +36,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--added-graph")
     parser.add_argument("--safe-deletion-candidates")
     parser.add_argument("--max-deletions", type=int, default=2000)
+    parser.add_argument("--allow_unverified_safe_deletions", action="store_true")
+    parser.add_argument("--preserve_original_entities", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--allow_deficit_increase", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
 
@@ -62,6 +66,9 @@ def main() -> int:
                     "added_graph": str(added_graph),
                     "safe_deletion_candidates": str(safe_path),
                     "max_deletions": args.max_deletions,
+                    "allow_unverified_safe_deletions": args.allow_unverified_safe_deletions,
+                    "preserve_original_entities": args.preserve_original_entities,
+                    "allow_deficit_increase": args.allow_deficit_increase,
                 },
                 indent=2,
             )
@@ -73,13 +80,18 @@ def main() -> int:
         raise FileNotFoundError(f"missing safe deletion candidates: {safe_path}")
     allocation = load_allocation(args.allocation)
     b0_records = load_graph_records(args.b0_graph)
+    original_entities = {entity for record in b0_records for entity in (record.h, record.t)}
     added_records = load_graph_records(added_graph, source="c6_added_graph")
     deletion_rows = read_deletion_rows(safe_path)
-    final_records, accepted_deletions, rejection_reasons = apply_safe_deletions(
+    final_records, accepted_deletions, rejection_reasons, deletion_stats = apply_safe_deletions(
         added_records,
         deletion_rows,
         allocation,
         max_deletions=args.max_deletions,
+        original_entities=original_entities,
+        preserve_original_entities=args.preserve_original_entities,
+        allow_unverified_safe_deletions=args.allow_unverified_safe_deletions,
+        allow_deficit_increase=args.allow_deficit_increase,
     )
     before_metrics = compute_graph_metrics([record.triple for record in b0_records], allocation)
     after_addition_metrics = compute_graph_metrics([record.triple for record in added_records], allocation)
@@ -104,8 +116,24 @@ def main() -> int:
             "surplus_reduction_score",
         ],
     )
+    if (
+        after_deletion_metrics["weak_component_count"] != 1
+        or after_deletion_metrics["allocated_relation_coverage_count"]
+        != before_metrics["allocated_relation_coverage_count"]
+        or deletion_stats["dropped_original_entity_count"] > 0
+    ):
+        final_decision = "failed_constraints"
+    elif (
+        after_deletion_metrics["total_surplus"] < before_metrics["total_surplus"]
+        and after_deletion_metrics["total_deficit"] <= before_metrics["total_deficit"]
+    ):
+        final_decision = "promoted_candidate"
+    else:
+        final_decision = "diagnostic_only"
+
     report = {
         "schema_version": f"{SCHEMA_VERSION}.add-then-safe-delete",
+        **command_metadata(run_dir, "c6_add_then_safe_delete"),
         "input_paths": {
             "b0_graph": args.b0_graph,
             "added_graph": str(added_graph),
@@ -119,20 +147,17 @@ def main() -> int:
             "allocation": sha256_file(args.allocation),
         },
         "max_deletions": args.max_deletions,
+        "allow_unverified_safe_deletions": args.allow_unverified_safe_deletions,
+        "preserve_original_entities": args.preserve_original_entities,
+        "allow_deficit_increase": args.allow_deficit_increase,
         "before_b0_metrics": before_metrics,
         "after_addition_metrics": after_addition_metrics,
         "after_deletion_metrics": after_deletion_metrics,
         "deletions_accepted": len(accepted_deletions),
         "deletions_rejected": rejection_reasons,
+        **deletion_stats,
         "deletions_by_relation": dict(sorted(by_relation.items())),
-        "final_decision": (
-            "promoted_candidate"
-            if after_deletion_metrics["weak_component_count"] == 1
-            and after_deletion_metrics["allocated_relation_coverage_count"]
-            == before_metrics["allocated_relation_coverage_count"]
-            and after_deletion_metrics["total_surplus"] < before_metrics["total_surplus"]
-            else "diagnostic_only"
-        ),
+        "final_decision": final_decision,
     }
     write_json(run_dir / "c6_add_delete_report.json", report)
     print(
@@ -154,4 +179,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

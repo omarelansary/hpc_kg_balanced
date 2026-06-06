@@ -128,11 +128,22 @@ Default config:
   "allow_synthetic": false,
   "preserve_connected": true,
   "preserve_relation_coverage": true,
-  "composition_addition_policy": "penalize_or_forbid_if_overfilled",
+  "composition_addition_policy": "forbid_if_overfilled",
+  "min_score": 0.0,
   "new_entity_budget": 0,
   "random_seed": 0
 }
 ```
+
+The composition policy is explicit. Supported values are:
+
+- `forbid_if_overfilled`: reject composition-pattern additions while composition is over target;
+- `penalize_if_overfilled`: allow those additions but keep the score penalty and report the accepted penalized count;
+- `allow`: do not apply a composition-overfill policy gate.
+
+The default smoke/safe mode uses `forbid_if_overfilled` and rejects candidates
+with `candidate_score <= min_score`. With the default `min_score = 0.0`, no
+negative-score addition can be accepted.
 
 Outputs:
 
@@ -197,6 +208,16 @@ connectivity, relation coverage, and duplicate-free status after each accepted
 deletion. It stops when no safe candidate remains or the configured deletion cap
 is reached.
 
+By default C6.4 considers only rows where `safe_after_additions == true`,
+preserves the original B0 entity universe, and rejects deletions that increase
+total deficit. The explicit escape hatches are:
+
+- `--allow_unverified_safe_deletions`;
+- `--no-preserve_original_entities`;
+- `--allow_deficit_increase`.
+
+Those options are not used by the default strict smoke run.
+
 ## Exact Mode and Global Optimality Limitation
 
 The real B0 graph is too large for exhaustive subset search. C6 therefore uses a
@@ -258,10 +279,13 @@ RUN_ID=c6_smoke_$(date -u +%Y%m%dT%H%M%SZ) \
 python -m json.tool experiments/graph_candidates/C6_observed_canonical_densification/runs/*/*.json
 ```
 
+`c6_run_sweep.sh` labels its default execution as `C6_RUN_MODE=smoke_bounded`
+and uses `MAX_DELETIONS=250` unless overridden. A full candidate attempt must
+set `C6_RUN_MODE=full_candidate_attempt` and an explicit deletion cap.
+
 ## Expected Outputs
 
 Each C6 run directory contains the census, addition, redundancy-audit, and
 add-delete artifacts. Generated graph JSONL/CSV files stay under the run
 directory and should not be committed as final graph artifacts without a
 separate artifact-preservation decision.
-

@@ -12,6 +12,7 @@ from c6_common import (
     DEFAULT_ALLOCATION,
     DEFAULT_B0_GRAPH,
     SCHEMA_VERSION,
+    command_metadata,
     compute_graph_metrics,
     ensure_run_dir,
     load_allocation,
@@ -35,7 +36,8 @@ DEFAULT_CONFIG = {
     "allow_synthetic": False,
     "preserve_connected": True,
     "preserve_relation_coverage": True,
-    "composition_addition_policy": "penalize_or_forbid_if_overfilled",
+    "composition_addition_policy": "forbid_if_overfilled",
+    "min_score": 0.0,
     "new_entity_budget": 0,
     "random_seed": 0,
 }
@@ -50,6 +52,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--census")
     parser.add_argument("--config")
     parser.add_argument("--max-additions", type=int)
+    parser.add_argument("--min_score", type=float)
     parser.add_argument("--mode")
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
@@ -69,6 +72,8 @@ def main() -> int:
     config = load_config(args.config)
     if args.max_additions is not None:
         config["max_additions"] = args.max_additions
+    if args.min_score is not None:
+        config["min_score"] = args.min_score
     if args.mode:
         config["mode"] = args.mode
         if args.mode == "internal_then_semi_internal":
@@ -86,7 +91,7 @@ def main() -> int:
     allocation = load_allocation(args.allocation)
     before_metrics = compute_graph_metrics(b0_triples, allocation)
     census_rows = read_census(census_path)
-    additions, rejection_reasons = select_additions(census_rows, b0_triples, allocation, config)
+    additions, rejection_reasons, selection_stats = select_additions(census_rows, b0_triples, allocation, config)
     added_records = list(b0_records) + additions
     added_triples = [record.triple for record in added_records]
     after_metrics = compute_graph_metrics(added_triples, allocation)
@@ -130,6 +135,7 @@ def main() -> int:
     )
     report = {
         "schema_version": f"{SCHEMA_VERSION}.controlled-addition",
+        **command_metadata(run_dir, "c6_controlled_addition"),
         "input_paths": {
             "graph": args.graph,
             "allocation": args.allocation,
@@ -146,6 +152,7 @@ def main() -> int:
         "candidates_considered": len(census_rows),
         "accepted_additions": len(additions),
         "rejection_reasons": rejection_reasons,
+        **selection_stats,
         "additions_by_relation": dict(sorted(by_relation.items())),
         "additions_by_pattern": dict(sorted(by_pattern.items())),
         "internal_additions": sum(1 for row in additions_csv if row["candidate_class"] == "internal"),
@@ -174,4 +181,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
