@@ -1,0 +1,251 @@
+{
+  "schema_version": "h4-labelled-rule-completion-opportunity-audit-v1",
+  "created_by": "manual_repository_audit",
+  "source_documents": [
+    "docs/reconstruction/77_pre_kge_branch_status_lock.md",
+    "artifacts/final_graph/selected_final_graph/rebuild/pre_kge_branch_status_lock.json",
+    "docs/reconstruction/78_C6_observed_canonical_densification_design.md",
+    "docs/reconstruction/79_C6_closure_sweep_result.md",
+    "artifacts/final_graph/selected_final_graph/rebuild/c6_closure_sweep_result.json",
+    "docs/reconstruction/67_H3_synthetic_pattern_feasibility_audit.md",
+    "docs/reconstruction/37_dashboard_empirical_pattern_logic_audit.md",
+    "docs/reconstruction/41_source_execution_map.md"
+  ],
+  "starting_graph": {
+    "candidate_id": "B0",
+    "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+    "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9",
+    "triples": 24683,
+    "entities": 21893,
+    "relations": 139,
+    "status": "current_frozen_connected_baseline"
+  },
+  "allocation": {
+    "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb",
+    "allocation_rows": 154,
+    "relations_universe": 1467,
+    "verified_pattern_group_counts": {
+      "symmetric": 18,
+      "anti_symmetric": 66,
+      "inverse": 44,
+      "composition": 26
+    }
+  },
+  "phase1_evidence_artifacts": {
+    "hop_support": {
+      "path": "data/processed/hop_support_v3/hop_support_v3_final_output_patched_from_v2.jsonl",
+      "sha256": "9ff74a945575ccdbf3db45810da5970f01b18d499f304729d8edfb255acb23cf"
+    },
+    "composition_verified_compact": {
+      "path": "data/processed/hop_support_v3/min8_hop_support_v3_with_compatible_targets_dom_rng_v1.composition_verified.compact.jsonl",
+      "sha256": "8fbc1db6847b7676c1f144521218b444e2768cb06345d1a6288afd58177df54e"
+    },
+    "stage2_candidate_shards": "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards/*.jsonl"
+  },
+  "evidence_regimes": [
+    {
+      "name": "canonical_observed",
+      "description": "Edge is already in the selected observed KG or accepted as an observed canonical allocated candidate.",
+      "h4_usage": "not the label for H4-created edges"
+    },
+    {
+      "name": "frozen_observed_candidate",
+      "description": "Edge appears in preserved local candidate evidence.",
+      "h4_usage": "comparison regime; C6 source evidence"
+    },
+    {
+      "name": "auxiliary_observed",
+      "description": "Observed but not canonical allocated support edge.",
+      "h4_usage": "not H4 rule completion"
+    },
+    {
+      "name": "synthetic_rule_completion",
+      "description": "Edge is derived from a verified pattern rule and observed base evidence, but the derived edge itself is not observed.",
+      "h4_usage": "required H4-generated edge label"
+    },
+    {
+      "name": "live_observed",
+      "description": "Edge collected from a live source such as WDQS after the frozen evidence cutoff.",
+      "h4_usage": "out of scope for H4.0"
+    },
+    {
+      "name": "LLM_suggested",
+      "description": "Edge suggested or ranked by an LLM.",
+      "h4_usage": "out of scope and not fact evidence"
+    }
+  ],
+  "h4_subcases": [
+    {
+      "subcase": "H4-A",
+      "name": "symmetric_reverse_completion",
+      "pattern_family": "symmetric",
+      "rule_form": "x --r--> y implies y --r--> x",
+      "target_deficit": "symmetric underfill and missing reverse edges",
+      "evidence_required": ["verified symmetric relation", "observed source edge", "duplicate check"],
+      "risk_level": "lowest_h4_risk_but_still_synthetic",
+      "can_generate_automatically": true,
+      "required_provenance_label": "synthetic_rule_completion:symmetric_reverse",
+      "current_status": "first_implementation_candidate"
+    },
+    {
+      "subcase": "H4-B",
+      "name": "inverse_pair_completion",
+      "pattern_family": "inverse",
+      "rule_form": "x --r1--> y implies y --r2--> x for verified inverse pair",
+      "target_deficit": "inverse underfill and missing reciprocal inverse edges",
+      "evidence_required": ["verified inverse pair confidence", "observed source edge", "pair orientation", "false-positive controls"],
+      "risk_level": "medium",
+      "can_generate_automatically": false,
+      "required_provenance_label": "synthetic_rule_completion:inverse_pair",
+      "current_status": "opportunity_computed_generation_deferred"
+    },
+    {
+      "subcase": "H4-C",
+      "name": "composition_shortcut_completion",
+      "pattern_family": "composition",
+      "rule_form": "x --r1--> y and y --r2--> z implies x --r3--> z",
+      "target_deficit": "composition or relation-specific shortcut underfill",
+      "evidence_required": ["verified composition rule", "observed chain", "rule confidence", "target compatibility"],
+      "risk_level": "high",
+      "can_generate_automatically": false,
+      "required_provenance_label": "synthetic_rule_completion:composition_shortcut",
+      "current_status": "opportunity_computed_generation_deferred"
+    },
+    {
+      "subcase": "H4-D",
+      "name": "combined_rule_completion_then_safe_delete",
+      "pattern_family": "post_completion_safe_delete",
+      "rule_form": "apply labelled completion, recompute structure, then test strict safe deletion",
+      "target_deficit": "surplus edge removability after added redundancy",
+      "evidence_required": ["completed H4-A/B/C labelled outputs", "locked safe-delete policy"],
+      "risk_level": "medium_to_high",
+      "can_generate_automatically": false,
+      "required_provenance_label": "mixed_preserve_rule_provenance",
+      "current_status": "planned_only"
+    }
+  ],
+  "h4_a_symmetric_opportunities": {
+    "status": "computed",
+    "total_b0_symmetric_relation_triples": 4051,
+    "total_reciprocal_pairs_already_present": 691,
+    "total_missing_reverse_triples": 2669,
+    "total_observed_reverse_in_frozen_candidates": 1,
+    "total_rule_completion_required": 2668,
+    "underfilled_symmetric_relations": 15,
+    "underfilled_rule_completion_required": 1709,
+    "deficit_capped_h4_a_additions_on_underfilled_relations": 129,
+    "relations": [
+      {"relation": "P2152", "eta_integer": 329, "b0_observed_count": 54, "deficit_integer": 275, "reciprocal_pairs_already_present": 27, "missing_reverse_triples": 0, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 0, "deficit_capped_additions": 0, "support": 54, "confidence": 1.0},
+      {"relation": "P1639", "eta_integer": 249, "b0_observed_count": 236, "deficit_integer": 13, "reciprocal_pairs_already_present": 37, "missing_reverse_triples": 162, "observed_reverse_in_frozen_candidates": 1, "rule_completion_required": 161, "deficit_capped_additions": 13, "support": 7600, "confidence": 0.994474},
+      {"relation": "P1322", "eta_integer": 261, "b0_observed_count": 249, "deficit_integer": 12, "reciprocal_pairs_already_present": 121, "missing_reverse_triples": 7, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 7, "deficit_capped_additions": 7, "support": 351, "confidence": 0.991453},
+      {"relation": "P5278", "eta_integer": 226, "b0_observed_count": 215, "deficit_integer": 11, "reciprocal_pairs_already_present": 0, "missing_reverse_triples": 215, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 215, "deficit_capped_additions": 11, "support": 16426, "confidence": 0.980153},
+      {"relation": "P4545", "eta_integer": 339, "b0_observed_count": 59, "deficit_integer": 280, "reciprocal_pairs_already_present": 27, "missing_reverse_triples": 5, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 5, "deficit_capped_additions": 5, "support": 58, "confidence": 0.965517},
+      {"relation": "P3403", "eta_integer": 236, "b0_observed_count": 225, "deficit_integer": 11, "reciprocal_pairs_already_present": 0, "missing_reverse_triples": 225, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 225, "deficit_capped_additions": 11, "support": 4795, "confidence": 0.958081},
+      {"relation": "P461", "eta_integer": 189, "b0_observed_count": 352, "deficit_integer": 0, "reciprocal_pairs_already_present": 21, "missing_reverse_triples": 310, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 310, "deficit_capped_additions": 0, "support": 50632, "confidence": 0.940077},
+      {"relation": "P2743", "eta_integer": 334, "b0_observed_count": 445, "deficit_integer": 0, "reciprocal_pairs_already_present": 102, "missing_reverse_triples": 241, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 241, "deficit_capped_additions": 0, "support": 4007, "confidence": 0.839531},
+      {"relation": "P13177", "eta_integer": 292, "b0_observed_count": 408, "deficit_integer": 0, "reciprocal_pairs_already_present": 0, "missing_reverse_triples": 408, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 408, "deficit_capped_additions": 0, "support": 26366, "confidence": 0.838428},
+      {"relation": "P8865", "eta_integer": 230, "b0_observed_count": 129, "deficit_integer": 101, "reciprocal_pairs_already_present": 62, "missing_reverse_triples": 5, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 5, "deficit_capped_additions": 5, "support": 150, "confidence": 0.826667},
+      {"relation": "P1560", "eta_integer": 208, "b0_observed_count": 198, "deficit_integer": 10, "reciprocal_pairs_already_present": 0, "missing_reverse_triples": 198, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 198, "deficit_capped_additions": 10, "support": 5173, "confidence": 0.818867},
+      {"relation": "P2959", "eta_integer": 199, "b0_observed_count": 197, "deficit_integer": 2, "reciprocal_pairs_already_present": 0, "missing_reverse_triples": 197, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 197, "deficit_capped_additions": 2, "support": 22453, "confidence": 0.760255},
+      {"relation": "P3032", "eta_integer": 243, "b0_observed_count": 232, "deficit_integer": 11, "reciprocal_pairs_already_present": 0, "missing_reverse_triples": 232, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 232, "deficit_capped_additions": 11, "support": 45951, "confidence": 0.755239},
+      {"relation": "P2155", "eta_integer": 318, "b0_observed_count": 207, "deficit_integer": 111, "reciprocal_pairs_already_present": 100, "missing_reverse_triples": 7, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 7, "deficit_capped_additions": 7, "support": 286, "confidence": 0.699301},
+      {"relation": "P6185", "eta_integer": 316, "b0_observed_count": 301, "deficit_integer": 15, "reciprocal_pairs_already_present": 86, "missing_reverse_triples": 129, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 129, "deficit_capped_additions": 15, "support": 1632, "confidence": 0.698529},
+      {"relation": "P1420", "eta_integer": 211, "b0_observed_count": 201, "deficit_integer": 10, "reciprocal_pairs_already_present": 0, "missing_reverse_triples": 201, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 201, "deficit_capped_additions": 10, "support": 7722, "confidence": 0.63222},
+      {"relation": "P514", "eta_integer": 497, "b0_observed_count": 38, "deficit_integer": 459, "reciprocal_pairs_already_present": 17, "missing_reverse_triples": 4, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 4, "deficit_capped_additions": 4, "support": 54, "confidence": 0.62963},
+      {"relation": "P399", "eta_integer": 323, "b0_observed_count": 305, "deficit_integer": 18, "reciprocal_pairs_already_present": 91, "missing_reverse_triples": 123, "observed_reverse_in_frozen_candidates": 0, "rule_completion_required": 123, "deficit_capped_additions": 18, "support": 7391, "confidence": 0.612908}
+    ]
+  },
+  "h4_b_inverse_opportunities": {
+    "status": "computed",
+    "reason_if_unresolved": null,
+    "verified_inverse_pairs": 22,
+    "oriented_rules": 44,
+    "total_missing_inverse_completion_opportunities": 3854,
+    "generation_readiness": "deferred_pending_orientation_policy_and_false_positive_controls",
+    "pairs": [
+      {"r1": "P7604", "r2": "P2098", "confidence": 0.988679, "support": 526, "b0_r1_count": 105, "b0_r2_count": 109, "missing_r1_to_r2": 18, "missing_r2_to_r1": 22, "estimated_additions_total": 40},
+      {"r1": "P4149", "r2": "P4147", "confidence": 0.984513, "support": 451, "b0_r1_count": 110, "b0_r2_count": 162, "missing_r1_to_r2": 5, "missing_r2_to_r1": 57, "estimated_additions_total": 62},
+      {"r1": "P2682", "r2": "P2681", "confidence": 0.97619, "support": 331, "b0_r1_count": 125, "b0_r2_count": 128, "missing_r1_to_r2": 0, "missing_r2_to_r1": 3, "estimated_additions_total": 3},
+      {"r1": "P1753", "r2": "P1754", "confidence": 0.973499, "support": 62322, "b0_r1_count": 87, "b0_r2_count": 92, "missing_r1_to_r2": 67, "missing_r2_to_r1": 72, "estimated_additions_total": 139},
+      {"r1": "P13177", "r2": "P2743", "confidence": 0.970518, "support": 2509, "b0_r1_count": 408, "b0_r2_count": 445, "missing_r1_to_r2": 354, "missing_r2_to_r1": 391, "estimated_additions_total": 745},
+      {"r1": "P4661", "r2": "P4792", "confidence": 0.969853, "support": 3653, "b0_r1_count": 113, "b0_r2_count": 116, "missing_r1_to_r2": 6, "missing_r2_to_r1": 9, "estimated_additions_total": 15},
+      {"r1": "P1445", "r2": "P1434", "confidence": 0.963656, "support": 1110, "b0_r1_count": 106, "b0_r2_count": 104, "missing_r1_to_r2": 105, "missing_r2_to_r1": 103, "estimated_additions_total": 208},
+      {"r1": "P2674", "r2": "P2673", "confidence": 0.959163, "support": 2884, "b0_r1_count": 226, "b0_r2_count": 214, "missing_r1_to_r2": 92, "missing_r2_to_r1": 80, "estimated_additions_total": 172},
+      {"r1": "P2388", "r2": "P2389", "confidence": 0.929261, "support": 31361, "b0_r1_count": 93, "b0_r2_count": 84, "missing_r1_to_r2": 88, "missing_r2_to_r1": 79, "estimated_additions_total": 167},
+      {"r1": "P167", "r2": "P1398", "confidence": 0.927995, "support": 3044, "b0_r1_count": 126, "b0_r2_count": 126, "missing_r1_to_r2": 43, "missing_r2_to_r1": 43, "estimated_additions_total": 86},
+      {"r1": "P1151", "r2": "P1204", "confidence": 0.907939, "support": 2162, "b0_r1_count": 113, "b0_r2_count": 113, "missing_r1_to_r2": 66, "missing_r2_to_r1": 66, "estimated_additions_total": 132},
+      {"r1": "P12764", "r2": "P694", "confidence": 0.897038, "support": 660, "b0_r1_count": 135, "b0_r2_count": 134, "missing_r1_to_r2": 16, "missing_r2_to_r1": 15, "estimated_additions_total": 31},
+      {"r1": "P1268", "r2": "P10607", "confidence": 0.889925, "support": 1446, "b0_r1_count": 271, "b0_r2_count": 95, "missing_r1_to_r2": 226, "missing_r2_to_r1": 50, "estimated_additions_total": 276},
+      {"r1": "P4329", "r2": "P9926", "confidence": 0.839462, "support": 4442, "b0_r1_count": 105, "b0_r2_count": 102, "missing_r1_to_r2": 63, "missing_r2_to_r1": 60, "estimated_additions_total": 123},
+      {"r1": "P3730", "r2": "P3729", "confidence": 0.813498, "support": 6997, "b0_r1_count": 143, "b0_r2_count": 147, "missing_r1_to_r2": 103, "missing_r2_to_r1": 107, "estimated_additions_total": 210},
+      {"r1": "P9234", "r2": "P406", "confidence": 0.803922, "support": 124, "b0_r1_count": 100, "b0_r2_count": 102, "missing_r1_to_r2": 95, "missing_r2_to_r1": 97, "estimated_additions_total": 192},
+      {"r1": "P568", "r2": "P567", "confidence": 0.75181, "support": 1515, "b0_r1_count": 222, "b0_r2_count": 223, "missing_r1_to_r2": 105, "missing_r2_to_r1": 106, "estimated_additions_total": 211},
+      {"r1": "P1403", "r2": "P12765", "confidence": 0.74048, "support": 33213, "b0_r1_count": 93, "b0_r2_count": 93, "missing_r1_to_r2": 93, "missing_r2_to_r1": 93, "estimated_additions_total": 186},
+      {"r1": "P6291", "r2": "P822", "confidence": 0.723343, "support": 300, "b0_r1_count": 106, "b0_r2_count": 104, "missing_r1_to_r2": 54, "missing_r2_to_r1": 52, "estimated_additions_total": 106},
+      {"r1": "P8058", "r2": "P163", "confidence": 0.714286, "support": 77, "b0_r1_count": 99, "b0_r2_count": 102, "missing_r1_to_r2": 96, "missing_r2_to_r1": 99, "estimated_additions_total": 195},
+      {"r1": "P1625", "r2": "P6439", "confidence": 0.713311, "support": 240, "b0_r1_count": 170, "b0_r2_count": 102, "missing_r1_to_r2": 170, "missing_r2_to_r1": 102, "estimated_additions_total": 272},
+      {"r1": "P5607", "r2": "P8289", "confidence": 0.684045, "support": 7353, "b0_r1_count": 180, "b0_r2_count": 105, "missing_r1_to_r2": 179, "missing_r2_to_r1": 104, "estimated_additions_total": 283}
+    ]
+  },
+  "h4_c_composition_opportunities": {
+    "status": "computed",
+    "reason_if_unresolved": null,
+    "verified_composition_rules": 13,
+    "total_shortcut_missing_opportunities_in_b0": 24,
+    "generation_readiness": "deferred_due_to_higher_risk_and_existing_composition_dominance",
+    "rules": [
+      {"r1": "P4353", "r2": "P131", "r3": "P1001", "confidence": 0.993939, "base_support": 165, "chain_pairs_examined": 165, "chain_pairs_with_shortcut": 164, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0},
+      {"r1": "P2670", "r2": "P16", "r3": "P16", "confidence": 0.990385, "base_support": 225, "chain_pairs_examined": 208, "chain_pairs_with_shortcut": 206, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0},
+      {"r1": "P5277", "r2": "P2670", "r3": "P31", "confidence": 0.966667, "base_support": 1999, "chain_pairs_examined": 300, "chain_pairs_with_shortcut": 290, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0},
+      {"r1": "P8308", "r2": "P461", "r3": "P8308", "confidence": 0.964286, "base_support": 56, "chain_pairs_examined": 56, "chain_pairs_with_shortcut": 54, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0},
+      {"r1": "P7209", "r2": "P279", "r3": "P793", "confidence": 0.955556, "base_support": 137, "chain_pairs_examined": 135, "chain_pairs_with_shortcut": 129, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0},
+      {"r1": "P2670", "r2": "P16", "r3": "P361", "confidence": 0.947115, "base_support": 225, "chain_pairs_examined": 208, "chain_pairs_with_shortcut": 197, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0},
+      {"r1": "P3833", "r2": "P12994", "r3": "P279", "confidence": 0.853403, "base_support": 191, "chain_pairs_examined": 191, "chain_pairs_with_shortcut": 163, "b0_chains_exact": 24, "shortcut_missing_opportunities_in_b0": 24, "estimated_additions": 24},
+      {"r1": "P2353", "r2": "P131", "r3": "P131", "confidence": 0.811321, "base_support": 212, "chain_pairs_examined": 212, "chain_pairs_with_shortcut": 172, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0},
+      {"r1": "P10374", "r2": "P279", "r3": "P31", "confidence": 0.752941, "base_support": 87, "chain_pairs_examined": 85, "chain_pairs_with_shortcut": 64, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0},
+      {"r1": "P1158", "r2": "P931", "r3": "P1158", "confidence": 0.714286, "base_support": 84, "chain_pairs_examined": 84, "chain_pairs_with_shortcut": 60, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0},
+      {"r1": "P466", "r2": "P1268", "r3": "P127", "confidence": 0.71, "base_support": 917, "chain_pairs_examined": 300, "chain_pairs_with_shortcut": 213, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0},
+      {"r1": "P814", "r2": "P1889", "r3": "P31", "confidence": 0.673333, "base_support": 4128, "chain_pairs_examined": 300, "chain_pairs_with_shortcut": 202, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0},
+      {"r1": "P13210", "r2": "P366", "r3": "P31", "confidence": 0.653333, "base_support": 2225, "chain_pairs_examined": 300, "chain_pairs_with_shortcut": 196, "b0_chains_exact": 0, "shortcut_missing_opportunities_in_b0": 0, "estimated_additions": 0}
+    ]
+  },
+  "h4_d_safe_delete": {
+    "status": "not_applicable_until_rule_completion_edges_exist",
+    "description": "H4-D can only run after labelled H4-A/B/C edges are generated and structure is recomputed. It should test whether rule completion creates enough redundancy to remove surplus canonical edges under strict connectivity, relation coverage, duplicate, and provenance constraints."
+  },
+  "acceptance_criteria": [
+    "weak_component_count_remains_1_unless_explicitly_relaxed",
+    "allocated_relation_coverage_remains_139_of_139",
+    "duplicate_triples_remain_0",
+    "every_rule_derived_edge_is_labelled",
+    "canonical_observed_and_rule_derived_edges_are_separable",
+    "no_hidden_synthetic_edges",
+    "all_generated_edges_have_base_evidence_and_rule_id",
+    "kge_split_policy_treats_rule_derived_edges_explicitly_if_kge_is_run",
+    "reduce_symmetric_deficit_or_other_underfilled_pattern_deficits",
+    "do_not_increase_composition_dominance_unless_composition_is_target_and_justified",
+    "after_completion_test_whether_safe_deletion_of_surplus_edges_becomes_possible"
+  ],
+  "risks": [
+    "empirical_pattern_confidence_is_not_logical_truth",
+    "domain_range_compatibility_is_not_fact_truth",
+    "synthetic_edges_can_inflate_kge_results",
+    "reverse_completion_may_add_false_facts_if_relation_is_not_truly_symmetric_in_all_cases",
+    "inverse_completion_requires_correct_pair_orientation_and_relation_specific_false_positive_controls",
+    "composition_shortcuts_are_higher_risk_than_symmetric_reverse_completion",
+    "h4_results_must_be_evaluated_separately_from_canonical_observed_graphs"
+  ],
+  "recommendation": {
+    "next_step": "implement_H4_A_symmetric_reverse_completion_first_as_labelled_deficit_aware_probe",
+    "reason": "H4-A has the strongest direct audit signal: 2669 missing reverse triples, only 1 observed reverse in frozen Stage2 candidates, and 2668 missing reverses requiring rule completion if this evidence regime is allowed. H4-B and H4-C have computable opportunity counts but need additional false-positive and orientation controls before generation.",
+    "h4_b_status": "defer_until_inverse_pair_controls_are_locked",
+    "h4_c_status": "defer_until_composition_shortcut_controls_are_locked",
+    "h4_d_status": "wait_until_labelled_rule_completion_edges_exist"
+  },
+  "no_graph_generated": true,
+  "registry_updated": false,
+  "wdqs_used": false,
+  "llm_used": false,
+  "kge_run": false
+}
