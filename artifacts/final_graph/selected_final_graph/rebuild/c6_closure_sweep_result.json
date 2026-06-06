@@ -1,0 +1,271 @@
+{
+  "schema_version": "c6-closure-sweep-result-v1",
+  "created_by": "manual_repository_audit",
+  "source_documents": [
+    "docs/reconstruction/77_pre_kge_branch_status_lock.md",
+    "docs/reconstruction/78_C6_observed_canonical_densification_design.md",
+    "artifacts/final_graph/selected_final_graph/rebuild/pre_kge_branch_status_lock.json"
+  ],
+  "run_root": "experiments/graph_candidates/C6_observed_canonical_densification/runs",
+  "b0_reference": {
+    "run_label": "B0",
+    "status": "provisional_connected_baseline",
+    "final_triples": 24683,
+    "total_entities": 21893,
+    "surplus": 6702.0,
+    "deficit": 2019.0,
+    "weak_component_count": 1,
+    "allocated_relation_coverage": 139,
+    "allocated_relation_total": 139,
+    "duplicate_triple_count": 0,
+    "composition_surplus": 6266.933965342894,
+    "symmetric_deficit": 1378.9028308028305,
+    "triples_per_entity": 1.1274379938793222,
+    "entities_per_triple": 0.8869667382408946
+  },
+  "runs": [
+    {
+      "run_label": "C6-A",
+      "label": "internal strict addition",
+      "mode": "strict internal addition only",
+      "run_path": "experiments/graph_candidates/C6_observed_canonical_densification/runs/c6_A_internal_strict_addition_20260606T000000Z",
+      "adds": 274,
+      "deletes": 0,
+      "final_triples": 24957,
+      "total_entities": 21893,
+      "surplus": 6959.0,
+      "delta_surplus_vs_b0": 257.0,
+      "deficit": 2002.0,
+      "delta_deficit_vs_b0": -17.0,
+      "weak_component_count": 1,
+      "allocated_relation_coverage": 139,
+      "allocated_relation_total": 139,
+      "duplicate_triple_count": 0,
+      "composition_surplus": 6266.933965342894,
+      "symmetric_deficit": 1377.9028308028305,
+      "triples_per_entity": 1.1399534097656785,
+      "entities_per_triple": 0.8772288335937813,
+      "decision": "addition_only",
+      "interpretation": "Diagnostic only; addition-only improves deficit but worsens surplus relative to B0.",
+      "top_added_relations": [
+        ["P4149", 49],
+        ["P3461", 44],
+        ["P527", 38],
+        ["P1312", 29],
+        ["P10624", 25]
+      ],
+      "additions_by_pattern": {
+        "anti_symmetric": 215,
+        "inverse": 69,
+        "symmetric": 1
+      }
+    },
+    {
+      "run_label": "C6-B",
+      "label": "strict add-delete cap 250",
+      "mode": "strict internal add then capped safe delete",
+      "run_path": "experiments/graph_candidates/C6_observed_canonical_densification/runs/c6_B_internal_strict_add_delete_20260606T000000Z",
+      "adds": 274,
+      "deletes": 250,
+      "final_triples": 24707,
+      "total_entities": 21893,
+      "surplus": 6709.0,
+      "delta_surplus_vs_b0": 7.0,
+      "deficit": 2002.0,
+      "delta_deficit_vs_b0": -17.0,
+      "weak_component_count": 1,
+      "allocated_relation_coverage": 139,
+      "allocated_relation_total": 139,
+      "duplicate_triple_count": 0,
+      "composition_surplus": 6172.933965342894,
+      "symmetric_deficit": 1377.9028308028305,
+      "triples_per_entity": 1.1285342346868863,
+      "entities_per_triple": 0.8861051523859635,
+      "decision": "diagnostic_only",
+      "interpretation": "Diagnostic only; capped deletion improved deficit and composition surplus but did not beat B0 total surplus.",
+      "top_added_relations": [
+        ["P4149", 49],
+        ["P3461", 44],
+        ["P527", 38],
+        ["P1312", 29],
+        ["P10624", 25]
+      ],
+      "top_deleted_relations": [
+        ["P1312", 37],
+        ["P10624", 25],
+        ["P1889", 24],
+        ["P131", 20],
+        ["P279", 20]
+      ],
+      "strict_deletion_guards": {
+        "preserve_original_entities": true,
+        "allow_deficit_increase": false,
+        "dropped_original_entity_count": 0,
+        "safe_after_additions_false_skipped_count": 8302,
+        "increases_total_deficit_rejected_count": 401
+      }
+    },
+    {
+      "run_label": "C6-C",
+      "label": "internal full deletion pass",
+      "mode": "strict internal add then full safe delete",
+      "run_path": "experiments/graph_candidates/C6_observed_canonical_densification/runs/c6_C_internal_full_delete_20260606T000000Z",
+      "adds": 274,
+      "deletes": 450,
+      "final_triples": 24507,
+      "total_entities": 21893,
+      "surplus": 6509.0,
+      "delta_surplus_vs_b0": -193.0,
+      "deficit": 2002.0,
+      "delta_deficit_vs_b0": -17.0,
+      "weak_component_count": 1,
+      "allocated_relation_coverage": 139,
+      "allocated_relation_total": 139,
+      "duplicate_triple_count": 0,
+      "composition_surplus": 6159.704798676228,
+      "symmetric_deficit": 1377.9028308028305,
+      "triples_per_entity": 1.1193988946238524,
+      "entities_per_triple": 0.8933365977067776,
+      "decision": "marginal_observed_variant",
+      "interpretation": "Best observed C6 configuration under the tested strict sweep; marginal observed-only variant, not automatically final.",
+      "top_added_relations": [
+        ["P4149", 49],
+        ["P3461", 44],
+        ["P527", 38],
+        ["P1312", 29],
+        ["P10624", 25]
+      ],
+      "top_deleted_relations": [
+        ["P527", 102],
+        ["P4149", 49],
+        ["P3461", 44],
+        ["P1312", 37],
+        ["P10624", 25]
+      ],
+      "strict_deletion_guards": {
+        "preserve_original_entities": true,
+        "allow_deficit_increase": false,
+        "dropped_original_entity_count": 0,
+        "safe_after_additions_false_skipped_count": 12370,
+        "increases_total_deficit_rejected_count": 1019
+      }
+    },
+    {
+      "run_label": "C6-D",
+      "label": "semi-internal bounded",
+      "mode": "semi-internal bounded add then capped safe delete",
+      "run_path": "experiments/graph_candidates/C6_observed_canonical_densification/runs/c6_D_semi_internal_bounded_20260606T000000Z",
+      "adds": 376,
+      "deletes": 250,
+      "final_triples": 24809,
+      "total_entities": 21993,
+      "surplus": 6805.0,
+      "delta_surplus_vs_b0": 103.0,
+      "deficit": 1996.0,
+      "delta_deficit_vs_b0": -23.0,
+      "weak_component_count": 1,
+      "allocated_relation_coverage": 139,
+      "allocated_relation_total": 139,
+      "duplicate_triple_count": 0,
+      "composition_surplus": 6172.933965342894,
+      "symmetric_deficit": 1277.5415254415252,
+      "triples_per_entity": 1.1280407402355295,
+      "entities_per_triple": 0.8864928050304325,
+      "decision": "diagnostic_only",
+      "interpretation": "Diagnostic only; improves deficit but worsens surplus and introduces new entities, making it less clean than C6-C.",
+      "new_entities_used": 100,
+      "internal_additions": 274,
+      "semi_internal_additions": 102,
+      "top_added_relations": [
+        ["P2959", 98],
+        ["P4149", 49],
+        ["P3461", 44],
+        ["P527", 38],
+        ["P1312", 29]
+      ],
+      "top_deleted_relations": [
+        ["P1312", 37],
+        ["P10624", 25],
+        ["P1889", 24],
+        ["P131", 20],
+        ["P279", 20]
+      ],
+      "additions_by_pattern": {
+        "anti_symmetric": 215,
+        "inverse": 71,
+        "symmetric": 103
+      },
+      "strict_deletion_guards": {
+        "preserve_original_entities": true,
+        "allow_deficit_increase": false,
+        "dropped_original_entity_count": 0,
+        "safe_after_additions_false_skipped_count": 8498,
+        "increases_total_deficit_rejected_count": 401
+      }
+    }
+  ],
+  "best_observed_c6_configuration": {
+    "run_label": "C6-C",
+    "decision": "marginal_observed_variant",
+    "reason": "C6-C is the only tested C6 run that improves both total surplus and total deficit versus B0 while preserving weak component count 1, 139/139 relation coverage, duplicate-free status, and the original B0 entity universe.",
+    "claim_boundary": "C6-C is the best observed C6 run, but only marginally improves allocation metrics; it is not final, not globally optimal, and not a synthetic completion branch."
+  },
+  "symmetric_reverse_audit": {
+    "b0_symmetric_relation_triples": 4051,
+    "missing_reverse_triples": 2669,
+    "missing_reverse_triples_found_in_frozen_stage2_candidates": 1,
+    "missing_reverse_triples_accepted_by_c6": 1,
+    "conclusion": "observed frozen reverse-completion evidence is insufficient; C6 cannot solve symmetric deficit under observed-only frozen constraints"
+  },
+  "safe_claims": [
+    "C6 infrastructure can perform controlled observed canonical additions and safe deletion.",
+    "C6-C is the best observed C6 run in this sweep.",
+    "C6-C modestly improves B0 surplus and deficit while preserving weak component count 1 and relation coverage 139/139.",
+    "Observed frozen reverse-completion evidence is insufficient for C6 to solve the symmetric deficit.",
+    "C6 does not solve exact balance."
+  ],
+  "unsafe_claims": [
+    "C6-C is globally optimal.",
+    "C6-C is the final benchmark KG.",
+    "C6 solves composition surplus completely.",
+    "C6 proves no better candidate exists.",
+    "C6 KGE behavior is known.",
+    "C6 tested H4 labelled rule-completion for underfilled verified patterns."
+  ],
+  "decision_recommendation": "close_C6_observed_only_for_now",
+  "next_direction": "H4_labelled_rule_completion_planning_for_underfilled_verified_patterns",
+  "planned_h4_subcases": [
+    {
+      "subcase": "H4-A",
+      "name": "symmetric_reverse_completion",
+      "priority": "first",
+      "reason": "largest directly audited missing reverse-completion bottleneck"
+    },
+    {
+      "subcase": "H4-B",
+      "name": "inverse_pair_completion",
+      "priority": "later",
+      "reason": "requires verified inverse-pair confidence and separate false-positive controls"
+    },
+    {
+      "subcase": "H4-C",
+      "name": "composition_shortcut_completion",
+      "priority": "later",
+      "reason": "higher-risk shortcut inference; requires rule confidence and conservative labelling"
+    },
+    {
+      "subcase": "H4-D",
+      "name": "combined_rule_completion_then_safe_delete",
+      "priority": "later",
+      "reason": "tests whether labelled rule-completion creates enough redundancy to safely remove surplus edges while preserving connectivity and relation coverage"
+    }
+  ],
+  "next_actions": [
+    "Commit C6 infrastructure/code only, if not already committed.",
+    "Keep generated run outputs uncommitted.",
+    "Do not promote C6-C unless a separate human artifact review explicitly decides to preserve and register it.",
+    "Open H4 labelled rule-completion for underfilled verified patterns if synthetic or rule-derived edges are allowed, starting with symmetric reverse-completion as the first and safest subcase.",
+    "Update docs/reconstruction/77_pre_kge_branch_status_lock.md only if a future candidate decision or H4 plan changes the branch map.",
+    "If any C6-derived graph is used for KGE, lock KG artifact path/hash and KGE protocol first."
+  ]
+}

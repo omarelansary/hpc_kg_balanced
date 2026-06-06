@@ -552,10 +552,12 @@ def select_additions(
             f"{composition_policy!r}; expected {sorted(SUPPORTED_COMPOSITION_POLICIES)}"
         )
     min_score = float(config.get("min_score", 0.0))
+    require_underfilled_relation_or_pattern = bool(config.get("require_underfilled_relation_or_pattern", False))
     allocated_relations = set(relation_eta_map(allocation))
     accepted_scores: list[float] = []
     accepted_negative_score_count = 0
     accepted_composition_penalized_count = 0
+    new_entities_used = 0
 
     for row in sorted(census_rows, key=candidate_sort_key):
         if len(accepted) >= max_additions:
@@ -578,8 +580,13 @@ def select_additions(
         if score <= min_score:
             rejection_reasons["score_below_threshold"] += 1
             continue
+        if require_underfilled_relation_or_pattern and not (
+            row.get("underfilled_relation_flag") or row.get("underfilled_pattern_flag")
+        ):
+            rejection_reasons["not_underfilled_relation_or_pattern"] += 1
+            continue
         introduced = sum(1 for entity in (triple[0], triple[2]) if entity not in entities)
-        if introduced > 0 and introduced > new_entity_budget:
+        if introduced > 0 and new_entities_used + introduced > new_entity_budget:
             rejection_reasons["new_entity_budget"] += 1
             continue
         relation_patterns = pattern_map.get(relation, [])
@@ -617,6 +624,7 @@ def select_additions(
             accepted_negative_score_count += 1
         current_triples.add(triple)
         relation_counts[relation] += 1
+        new_entities_used += introduced
         entities.update([triple[0], triple[2]])
         pattern_counts = aggregate_observed_by_pattern_integer(relation_counts, allocation)
 
@@ -627,6 +635,9 @@ def select_additions(
         "rejected_score_below_threshold_count": rejection_reasons.get("score_below_threshold", 0),
         "min_score": min_score,
         "composition_addition_policy": composition_policy,
+        "require_underfilled_relation_or_pattern": require_underfilled_relation_or_pattern,
+        "new_entities_used": new_entities_used,
+        "new_entity_budget": new_entity_budget,
     }
     return accepted, dict(sorted(rejection_reasons.items())), stats
 

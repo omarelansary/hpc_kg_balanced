@@ -9,7 +9,13 @@ branch also tests whether additions create enough structural redundancy to make
 some surplus composition-heavy B0 triples safely removable afterward.
 
 C6 does not query WDQS, call LLMs, run KGE, or use synthetic triples. It uses
-only frozen local evidence already present in the repository/worktree.
+only frozen local evidence already present in the repository/worktree. C6 is an
+observed-candidate reuse branch, not a synthesis or completion branch.
+
+Claim boundary: C6 can test whether frozen observed canonical additions and
+safe deletion improve B0. It cannot test H4 labelled rule-completion for
+underfilled verified patterns, live candidate expansion, or synthetic
+augmentation.
 
 ## Starting Point
 
@@ -47,6 +53,33 @@ Candidate classes:
 
 The default sweep runs `internal_only` so density and redundancy can improve
 without adding new entities.
+
+For symmetric relations, C6 may add a missing reverse triple only when that
+exact reverse triple is already present in the frozen observed Stage2 candidate
+shards and passes the configured candidate filters. If the reverse triple is
+not present in frozen observed evidence, adding it would be rule-completion or
+synthetic augmentation and belongs to a separate labelled branch, not C6. This
+means C6 is a branch for testing observed-only canonical densification and safe
+deletion, not a general completion method.
+
+The first H4 target should be symmetric reverse-completion because the C6 audit
+found `2,669` missing reverse triples and only `1` observed reverse in frozen
+Stage2 candidates. This motivates symmetry as the first and safest H4 subcase,
+not the whole H4 scope.
+
+H4 labelled rule-completion for underfilled verified patterns should separate
+pattern-specific operations:
+
+- Symmetry: possible reverse completion.
+- Inverse: possible inverse-pair completion.
+- Composition: possible shortcut completion.
+- Anti-symmetry: no automatic reverse completion; additions require observed
+  evidence or separate relation-specific justification.
+
+H4 must label every added edge by rule type and evidence regime. H4 edges are
+not canonical observed triples.
+
+A later H4-D configuration should test the sequential effect: apply labelled rule-completion first, recompute structure, then rerun strict safe deletion to check whether surplus edges become removable.
 
 ## Hard Constraints
 
@@ -240,6 +273,8 @@ C6 can claim:
 
 - observed canonical allocated additions were or were not found from frozen
   local candidate sources;
+- missing reverse triples for symmetric relations were or were not present in
+  the frozen observed candidate shards;
 - addition-only changed density, pattern totals, and relation surplus/deficit by
   the reported amounts;
 - add-then-safe-delete preserved or failed hard constraints in the generated
@@ -254,6 +289,9 @@ C6 cannot claim:
 - global optimality on the real graph;
 - all future candidate sources fail or succeed;
 - synthetic triples are valid;
+- H4 labelled rule-completion for underfilled verified patterns was tested;
+- missing reverse triples can be added unless they are present in frozen
+  observed candidate evidence;
 - auxiliary unallocated edges are canonical allocated triples;
 - live WDQS or LLM evidence was considered;
 - B0 is replaced unless a later human decision accepts and preserves the

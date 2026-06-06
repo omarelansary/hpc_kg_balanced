@@ -53,6 +53,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--config")
     parser.add_argument("--max-additions", type=int)
     parser.add_argument("--min_score", type=float)
+    parser.add_argument("--new_entity_budget", type=int)
+    parser.add_argument("--require_underfilled_relation_or_pattern", action="store_true")
     parser.add_argument("--mode")
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
@@ -74,6 +76,10 @@ def main() -> int:
         config["max_additions"] = args.max_additions
     if args.min_score is not None:
         config["min_score"] = args.min_score
+    if args.new_entity_budget is not None:
+        config["new_entity_budget"] = args.new_entity_budget
+    if args.require_underfilled_relation_or_pattern:
+        config["require_underfilled_relation_or_pattern"] = True
     if args.mode:
         config["mode"] = args.mode
         if args.mode == "internal_then_semi_internal":
