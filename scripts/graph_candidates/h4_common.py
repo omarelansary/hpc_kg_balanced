@@ -186,6 +186,7 @@ H4_GRAPH_FIELDNAMES = [
     "verification_source",
     "confidence",
     "confidence_type",
+    "confidence_source",
     "confidence_reason",
     "support",
     "observed_in_frozen_candidates",
