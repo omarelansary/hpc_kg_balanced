@@ -1,0 +1,163 @@
+{
+  "schema_version": "h4-a-labelled-symmetric-completion-result-v2",
+  "created_by": "manual_repository_audit",
+  "final_decision_state": "diagnostic_only",
+  "source_documents": [
+    "docs/reconstruction/80_H4_labelled_rule_completion_opportunity_audit.md",
+    "docs/reconstruction/78_C6_observed_canonical_densification_design.md",
+    "docs/reconstruction/79_C6_closure_sweep_result.md"
+  ],
+  "starting_graph": {
+    "candidate_id": "B0",
+    "path": "src/Pruning graph/stage11_eta_aware_connectivity_repair_full/stage12_path_repair_prod/largest_component.csv",
+    "sha256": "c443b124dd727976ca9c082dc91f1b8bb66d82ff117b05a926bc6ad21a5fe4b9"
+  },
+  "allocation": {
+    "path": "src/Pruning graph/bidirectional_allocation_results5k.json",
+    "sha256": "a0bb00a1e9b1e624c2ff6ee8fb215456b017b3aca679ef231f749ea796c310bb"
+  },
+  "evidence_regime": {
+    "generated_edge_source": "synthetic_rule_completion",
+    "rule_type": "symmetric_reverse_completion",
+    "canonical_observed_label_allowed_for_generated_edges": false,
+    "claim_boundary": "H4-A edges are rule-derived synthetic completion edges, not canonical observed triples and not verified Wikidata facts."
+  },
+  "runtime_note": {
+    "intended_run_root": "experiments/graph_candidates/H4_labelled_rule_completion/runs/{RUN_ID}/",
+    "actual_strict_validation_run_root": "/tmp/H4_labelled_rule_completion/runs/",
+    "run_location_status": "temporary_not_durable",
+    "reason": "The repository filesystem was read-only to normal runtime writes in this execution context. Generated graph outputs remain untracked and were not committed.",
+    "repo_graph_outputs_generated": false
+  },
+  "superseded_h4_a3_result": {
+    "status": "superseded",
+    "reason": "The original H4-A3 output deleted B0 base triples while retaining generated synthetic reverse edges.",
+    "deleted_base_triples_for_retained_synthetic_edges": 2396,
+    "usable_as_candidate": false
+  },
+  "strict_base_support_rerun": {
+    "run_path": "/tmp/H4_labelled_rule_completion/runs/h4_A3_add_all_safe_delete_h4_A_strict_base_support_20260606T180000Z",
+    "accepted_deletions": 425,
+    "rejected_base_support_deletions": 2668,
+    "deleted_base_support_triples": 0,
+    "weak_component_count": 1,
+    "allocated_relation_coverage": "139/139",
+    "surplus": 8754,
+    "deficit": 1828,
+    "symmetric_deficit": 0,
+    "decision": "diagnostic_only",
+    "run_location_status": "temporary_not_durable"
+  },
+  "comparison": [
+    {
+      "label": "B0",
+      "triples": 24683,
+      "entities": 21893,
+      "triples_per_entity": 1.1274379938793222,
+      "weak_component_count": 1,
+      "allocated_relation_coverage": "139/139",
+      "duplicate_triple_count": 0,
+      "total_surplus": 6702.0,
+      "total_deficit": 2019.0,
+      "symmetric_deficit": 1378.9028308028305,
+      "composition_surplus": 6266.933965342894,
+      "synthetic_edge_count": 0,
+      "synthetic_edge_ratio": 0.0
+    },
+    {
+      "label": "C6-C observed-only",
+      "triples": 24507,
+      "entities": 21893,
+      "triples_per_entity": 1.1193988946238524,
+      "weak_component_count": 1,
+      "allocated_relation_coverage": "139/139",
+      "duplicate_triple_count": 0,
+      "total_surplus": 6509.0,
+      "total_deficit": 2002.0,
+      "symmetric_deficit": 1377.9028308028305,
+      "composition_surplus": 6159.704798676228,
+      "synthetic_edge_count": 0,
+      "synthetic_edge_ratio": 0.0,
+      "decision_context": "marginal_observed_variant"
+    },
+    {
+      "label": "H4-A1 deficit-capped",
+      "triples": 24812,
+      "entities": 21893,
+      "triples_per_entity": 1.133330288219979,
+      "weak_component_count": 1,
+      "allocated_relation_coverage": "139/139",
+      "duplicate_triple_count": 0,
+      "total_surplus": 6702.0,
+      "total_deficit": 1890.0,
+      "symmetric_deficit": 1249.9028308028305,
+      "composition_surplus": 6266.933965342894,
+      "synthetic_edge_count": 129,
+      "synthetic_edge_ratio": 0.005199097211026922,
+      "decision_context": "diagnostic_completion_run"
+    },
+    {
+      "label": "H4-A2 add-all",
+      "triples": 27351,
+      "entities": 21893,
+      "triples_per_entity": 1.2493034303201938,
+      "weak_component_count": 1,
+      "allocated_relation_coverage": "139/139",
+      "duplicate_triple_count": 0,
+      "total_surplus": 9179.0,
+      "total_deficit": 1828.0,
+      "symmetric_deficit": 0.0,
+      "composition_surplus": 6418.5826139915425,
+      "synthetic_edge_count": 2668,
+      "synthetic_edge_ratio": 0.09754670761580929,
+      "decision_context": "diagnostic_upper_bound_stress_test"
+    },
+    {
+      "label": "H4-A3 strict base-support safe-delete",
+      "triples": 26926,
+      "entities": 21893,
+      "triples_per_entity": 1.2298908326862468,
+      "weak_component_count": 1,
+      "allocated_relation_coverage": "139/139",
+      "duplicate_triple_count": 0,
+      "total_surplus": 8754.0,
+      "total_deficit": 1828.0,
+      "symmetric_deficit": 0.0,
+      "composition_surplus": 6384.562617209047,
+      "synthetic_edge_count": 2668,
+      "synthetic_edge_ratio": 0.09908638490678155,
+      "decision_context": "diagnostic_only"
+    }
+  ],
+  "hard_constraints": {
+    "strict_h4_a3_passed": true,
+    "required_weak_component_count": 1,
+    "required_allocated_relation_coverage": "139/139",
+    "required_duplicate_triple_count": 0,
+    "deleted_base_support_triples_required": 0
+  },
+  "conclusions": {
+    "h4_a1": "Deficit-capped completion reduces symmetric and total deficit but does not reduce surplus.",
+    "h4_a2": "Add-all completion eliminates symmetric deficit but worsens total surplus and composition surplus.",
+    "h4_a3": "Strict base-support safe-delete preserves hard constraints and base support, but the result remains surplus-worse than B0 and is diagnostic only.",
+    "final_decision_state": "diagnostic_only"
+  },
+  "safe_claims": [
+    "H4-A generated labelled synthetic_rule_completion edges for verified symmetric relations.",
+    "Strict H4-A3 preserved WCC=1, 139/139 relation coverage, duplicate_triple_count=0, and base support for retained synthetic edges.",
+    "H4-A eliminates symmetric deficit in add-all mode.",
+    "Under strict base-support preservation, H4-A worsens total surplus relative to B0."
+  ],
+  "unsafe_claims": [
+    "H4-A generated canonical observed triples.",
+    "H4-A proves generated reverse triples are true Wikidata facts.",
+    "H4-A proves KGE behavior.",
+    "H4-A is a final KG.",
+    "H4-A is a registry candidate.",
+    "The superseded H4-A3 output is usable for artifact promotion."
+  ],
+  "registry_decision": {
+    "candidate_registry_updated": false,
+    "recommendation": "do_not_register_h4_a; preserve_as_diagnostic_evidence_only_unless_a_later_durable_run_changes_the_decision"
+  }
+}
