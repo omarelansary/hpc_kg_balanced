@@ -51,6 +51,10 @@ DEFAULT_H4_AUDIT = Path(
     "artifacts/final_graph/selected_final_graph/rebuild/"
     "h4_labelled_rule_completion_opportunity_audit.json"
 )
+DEFAULT_H4_B_AUDIT = Path(
+    "artifacts/final_graph/selected_final_graph/rebuild/"
+    "h4_b_inverse_completion_opportunity_audit.json"
+)
 DEFAULT_STAGE2_SHARD_DIR = Path(
     "archive/hetzner_version/runs/prod_refine_20260315_180520/stage02_candidates/shards"
 )
@@ -58,6 +62,7 @@ SCHEMA_VERSION = "h4-labelled-rule-completion-v1"
 SYNTHETIC_EDGE_SOURCE = "synthetic_rule_completion"
 CANONICAL_EDGE_SOURCE = "canonical_observed"
 SYMMETRIC_RULE_TYPE = "symmetric_reverse_completion"
+INVERSE_RULE_TYPE = "inverse_pair_completion"
 
 
 def now_run_id() -> str:
@@ -170,6 +175,8 @@ H4_GRAPH_FIELDNAMES = [
     "evidence_status",
     "rule_type",
     "source_relation",
+    "target_inverse_relation",
+    "orientation",
     "base_h",
     "base_r",
     "base_t",
@@ -178,8 +185,10 @@ H4_GRAPH_FIELDNAMES = [
     "generated_t",
     "verification_source",
     "confidence",
+    "confidence_type",
     "confidence_reason",
     "support",
+    "observed_in_frozen_candidates",
 ]
 
 
@@ -234,6 +243,37 @@ def stage2_observed_reverse_candidates(
     return observed
 
 
+def stage2_observed_candidates_for_triples(
+    missing_triples: Iterable[tuple[str, str, str]],
+    shard_dir: str | Path = DEFAULT_STAGE2_SHARD_DIR,
+) -> set[tuple[str, str, str]]:
+    """Return requested triples that are already present in frozen Stage2 shards."""
+    remaining = set(missing_triples)
+    observed: set[tuple[str, str, str]] = set()
+    if not remaining:
+        return observed
+    root = Path(shard_dir)
+    for path in sorted(root.glob("*.jsonl")):
+        if not remaining:
+            break
+        with path.open(encoding="utf-8") as handle:
+            for line in handle:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                triple = (str(row.get("h")), str(row.get("r")), str(row.get("t")))
+                if triple in remaining:
+                    observed.add(triple)
+                    remaining.remove(triple)
+                    if not remaining:
+                        break
+    return observed
+
+
 def _synthetic_record(base: TripleRecord, meta: dict[str, Any]) -> TripleRecord:
     confidence = meta.get("confidence")
     confidence_reason = None if confidence is not None else "confidence_not_available_in_h4_audit"
@@ -253,6 +293,106 @@ def _synthetic_record(base: TripleRecord, meta: dict[str, Any]) -> TripleRecord:
         "evidence_status": "rule_derived_not_observed",
     }
     return TripleRecord(base.t, base.r, base.h, SYNTHETIC_EDGE_SOURCE, provenance)
+
+
+def _synthetic_inverse_record(base: TripleRecord, rule: dict[str, Any]) -> TripleRecord:
+    target = str(rule["target_inverse_relation"])
+    confidence = rule.get("confidence")
+    provenance = {
+        "rule_type": INVERSE_RULE_TYPE,
+        "source_relation": base.r,
+        "target_inverse_relation": target,
+        "orientation": str(rule.get("orientation") or f"{base.r}_to_{target}"),
+        "base_h": base.h,
+        "base_r": base.r,
+        "base_t": base.t,
+        "generated_h": base.t,
+        "generated_r": target,
+        "generated_t": base.h,
+        "verification_source": "artifacts/final_graph/selected_final_graph/rebuild/h4_b_inverse_completion_opportunity_audit.json",
+        "confidence": confidence,
+        "confidence_type": "pair_level_if_orientation_specific_missing",
+        "confidence_source": rule.get("confidence_source"),
+        "support": rule.get("support"),
+        "observed_in_frozen_candidates": False,
+        "evidence_status": "rule_derived_not_observed",
+        "target_deficit": rule.get("target_deficit"),
+        "target_surplus": rule.get("target_surplus"),
+    }
+    return TripleRecord(base.t, target, base.h, SYNTHETIC_EDGE_SOURCE, provenance)
+
+
+def eligible_inverse_completion_edges(
+    b0_records: Sequence[TripleRecord],
+    oriented_rules: Sequence[dict[str, Any]],
+    observed_inverse_candidates: set[tuple[str, str, str]] | None = None,
+    confidence_threshold: float = 0.8,
+) -> tuple[list[TripleRecord], dict[str, int]]:
+    """Build H4-B rule-completion candidates before deficit cap selection."""
+    observed_inverse_candidates = set(observed_inverse_candidates or set())
+    b0_triples = {record.triple for record in b0_records}
+    records_by_relation: dict[str, list[TripleRecord]] = defaultdict(list)
+    for record in b0_records:
+        records_by_relation[record.r].append(record)
+
+    generated_seen: set[tuple[str, str, str]] = set()
+    eligible: list[TripleRecord] = []
+    stats: Counter[str] = Counter()
+    for rule in oriented_rules:
+        source = str(rule["source_relation"])
+        target = str(rule["target_inverse_relation"])
+        confidence = rule.get("confidence")
+        target_deficit = float(rule.get("target_deficit") or 0.0)
+        target_surplus = float(rule.get("target_surplus") or 0.0)
+        target_eta = float(rule.get("target_eta") or 0.0)
+        for base in sorted(records_by_relation.get(source, []), key=lambda record: (record.h, record.r, record.t)):
+            generated = (base.t, target, base.h)
+            if generated in b0_triples:
+                stats["already_present_in_b0"] += 1
+                continue
+            if generated in observed_inverse_candidates:
+                stats["already_frozen_observed"] += 1
+                continue
+            if confidence is None or float(confidence) < confidence_threshold:
+                stats["below_confidence_threshold"] += 1
+                continue
+            if target_eta <= 0:
+                stats["target_relation_not_allocated"] += 1
+                continue
+            if target_surplus > 0:
+                stats["target_relation_overfilled"] += 1
+                continue
+            if target_deficit <= 0:
+                stats["target_relation_no_deficit_room"] += 1
+                continue
+            if generated in generated_seen:
+                stats["duplicate_generated_candidate"] += 1
+                continue
+            generated_seen.add(generated)
+            eligible.append(_synthetic_inverse_record(base, rule))
+            stats["eligible_before_deficit_cap"] += 1
+    return eligible, dict(stats)
+
+
+def select_deficit_capped_inverse_edges(
+    eligible: Sequence[TripleRecord],
+) -> tuple[list[TripleRecord], dict[str, int]]:
+    """Select H4-B1 inverse candidates without exceeding target relation deficits."""
+    selected: list[TripleRecord] = []
+    by_target: Counter[str] = Counter()
+    stats: Counter[str] = Counter()
+    for record in eligible:
+        cap = int(float((record.provenance or {}).get("target_deficit") or 0.0))
+        if cap <= 0:
+            stats["target_relation_no_deficit_room"] += 1
+            continue
+        if by_target[record.r] >= cap:
+            stats["skipped_by_deficit_cap_after_ordering"] += 1
+            continue
+        selected.append(record)
+        by_target[record.r] += 1
+        stats["selected"] += 1
+    return selected, dict(stats)
 
 
 def eligible_symmetric_completion_edges(
@@ -320,10 +460,15 @@ def base_triples_for_retained_synthetic_edges(records: Sequence[TripleRecord]) -
 def compute_h4_metrics(records: Sequence[TripleRecord], allocation: dict[str, Any]) -> dict[str, Any]:
     metrics = compute_graph_metrics([record.triple for record in records], allocation)
     synthetic_count = synthetic_edge_count(records)
+    pattern_by_name = {row["pattern"]: row for row in metrics.get("pattern_level", [])}
     metrics["synthetic_edge_count"] = synthetic_count
     metrics["synthetic_edge_ratio"] = synthetic_count / metrics["total_triples"] if metrics["total_triples"] else 0.0
     metrics["canonical_observed_edge_count"] = metrics["total_triples"] - synthetic_count
+    metrics["rule_completion_edge_count"] = synthetic_count
     metrics["reciprocal_pairs_completed"] = synthetic_count
+    metrics["inverse_total"] = float(metrics.get("pattern_integer_totals", {}).get("inverse", 0.0))
+    metrics["inverse_deficit"] = float(pattern_by_name.get("inverse", {}).get("deficit", 0.0))
+    metrics["inverse_surplus"] = float(pattern_by_name.get("inverse", {}).get("surplus", 0.0))
     return metrics
 
 
